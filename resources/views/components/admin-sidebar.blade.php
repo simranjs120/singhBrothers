@@ -7,23 +7,42 @@
               <span class="menu-title">Dashboard</span>
             </a>
           </li>
-          <li class="nav-item nav-category">UI Elements</li>
+
+          <li class="nav-item nav-category">Inventory</li>
           <li class="nav-item">
-            <a class="nav-link" data-bs-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
-              <i class="menu-icon mdi mdi-floor-plan"></i>
-              <span class="menu-title">UI Elements</span>
-              <i class="menu-arrow"></i> 
+            <a class="nav-link" href="{{url('admin/inventory')}}">
+              <i class="mdi mdi-briefcase-check menu-icon"></i>
+              <span class="menu-title">Manage Inventory</span>
             </a>
-            <div class="collapse" id="ui-basic">
-              <ul class="nav flex-column sub-menu">
-                <li class="nav-item"> <a class="nav-link" href="pages/ui-features/buttons.html">Buttons</a></li>
-                <li class="nav-item"> <a class="nav-link" href="pages/ui-features/dropdowns.html">Dropdowns</a></li>
-                <li class="nav-item"> <a class="nav-link" href="pages/ui-features/typography.html">Typography</a></li>
-              </ul>
-            </div>
           </li>
-          <li class="nav-item nav-category">Forms and Datas</li>
           <li class="nav-item">
+            <a class="nav-link" href="">
+              <i class="mdi mdi-playlist-check menu-icon"></i>
+              <span class="menu-title">Category Management</span>
+            </a>
+          </li>
+
+          <li class="nav-item nav-category">Website Mangement</li>
+          <li class="nav-item">
+            <a class="nav-link" href="">
+              <i class="mdi mdi-floor-plan menu-icon"></i>
+              <span class="menu-title">Landing Section</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="">
+              <i class="mdi mdi-tag-multiple menu-icon"></i>
+              <span class="menu-title">Manage Offers</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="">
+              <i class="mdi mdi-view-dashboard menu-icon"></i>
+              <span class="menu-title">All Website Sections</span>
+            </a>
+          </li>
+
+          <!-- <li class="nav-item">
             <a class="nav-link" data-bs-toggle="collapse" href="#form-elements" aria-expanded="false" aria-controls="form-elements">
               <i class="menu-icon mdi mdi-card-text-outline"></i>
               <span class="menu-title">Form elements</span>
@@ -70,9 +89,24 @@
                 <li class="nav-item"> <a class="nav-link" href="pages/icons/mdi.html">Mdi icons</a></li>
               </ul>
             </div>
-          </li>
-          <li class="nav-item nav-category">pages</li>
+          </li> -->
+
+
+
+          <li class="nav-item nav-category">Form Data & Queries</li>
           <li class="nav-item">
+            <a class="nav-link" href="">
+              <i class="mdi mdi-barcode-scan menu-icon"></i>
+              <span class="menu-title">Product Queries</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="">
+              <i class="mdi mdi-format-float-left menu-icon"></i>
+              <span class="menu-title">Contact Form Queries</span>
+            </a>
+          </li>
+          <!-- <li class="nav-item">
             <a class="nav-link" data-bs-toggle="collapse" href="#auth" aria-expanded="false" aria-controls="auth">
               <i class="menu-icon mdi mdi-account-circle-outline"></i>
               <span class="menu-title">User Pages</span>
@@ -83,14 +117,7 @@
                 <li class="nav-item"> <a class="nav-link" href="pages/samples/login.html"> Login </a></li>
               </ul>
             </div>
-          </li>
-          <li class="nav-item nav-category">help</li>
-          <li class="nav-item">
-            <a class="nav-link" href="http://bootstrapdash.com/demo/star-admin2-free/docs/documentation.html">
-              <i class="menu-icon mdi mdi-file-document"></i>
-              <span class="menu-title">Documentation</span>
-            </a>
-          </li>
+          </li> -->
         </ul>
       </nav>
       <!-- partial -->

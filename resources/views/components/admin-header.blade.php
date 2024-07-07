@@ -5,12 +5,12 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Star Admin2 </title>
+    <title>Singh Brothers - Admin Panel</title>
     <!-- plugins:css -->
-    <link rel="stylesheet" href="vendors/feather/feather.css">
-    <link rel="stylesheet" href="vendors/mdi/css/materialdesignicons.min.css">
-    <link rel="stylesheet" href="vendors/ti-icons/css/themify-icons.css">
-    <link rel="stylesheet" href="vendors/typicons/typicons.css">
+    <link rel="stylesheet" href="{{Helper::props('admin/vendors/feather/feather.css')}}">
+    <link rel="stylesheet" href="{{Helper::props('admin/vendors/mdi/css/materialdesignicons.min.css')}}">
+    <link rel="stylesheet" href="{{Helper::props('admin/vendors/ti-icons/css/themify-icons.css')}}">
+    <link rel="stylesheet" href="{{Helper::props('admin/vendors/typicons/typicons.css')}}">
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script type="text/javascript" src="https://cdn.datatables.net/2.0.8/js/dataTables.min.js" defer></script>
@@ -18,8 +18,8 @@
 
 
    
-    <link rel="stylesheet" href="vendors/simple-line-icons/css/simple-line-icons.css">
-    <link rel="stylesheet" href="vendors/css/vendor.bundle.base.css">
+    <link rel="stylesheet" href="{{Helper::props('admin/vendors/simple-line-icons/css/simple-line-icons.css')}}">
+    <link rel="stylesheet" href="{{Helper::props('admin/vendors/css/vendor.bundle.base.css')}}">
 
     <!-- endinject -->
     <!-- Plugin css for this page -->
@@ -27,9 +27,9 @@
     <link rel="stylesheet" href="js/select.dataTables.min.css"> -->
     <!-- End plugin css for this page -->
     <!-- inject:css -->
-    <link rel="stylesheet" href="css/vertical-layout-light/style.css">
+    <link rel="stylesheet" href="{{Helper::props('admin/css/vertical-layout-light/style.css')}}">
     <!-- endinject -->
-    <link rel="shortcut icon" href="images/favicon.png" />
+    <link rel="shortcut icon" href="{{Helper::props('admin/images/favicon.png')}}" />
 </head>
 
 <body>
@@ -50,7 +50,7 @@
                         <!-- </marquee> -->
                     </a>
                     <a class="navbar-brand brand-logo-mini" href="index.html">
-                        <img src="images/logo-mini.svg" alt="logo" />
+                        <img src="{{Helper::props('admin/images/logo-mini.svg')}}" alt="logo" />
                     </a>
                 </div>
             </div>
@@ -58,12 +58,12 @@
                 <ul class="navbar-nav">
                     <li class="nav-item font-weight-semibold d-none d-lg-block ms-0">
                         <h1 class="welcome-text">Good Morning, <span class="text-black fw-bold">Satnam Singh</span></h1>
-                        <h3 class="welcome-sub-text">Wecome Back To The Admin Panel</h3>
+                        <h3 class="welcome-sub-text">Welcome Back To The Admin Panel</h3>
                     </li>
                 </ul>
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item dropdown d-none d-lg-block">
-                        <img src="images/logo.png" class="img-fluid" width="90%" height="auto" />
+                        <img src="{{Helper::props('admin/images/logo.png')}}" class="img-fluid" width="90%" height="auto" />
                     </li>
 
                     <li class="nav-item d-none d-lg-block">
@@ -92,7 +92,7 @@
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item preview-item">
                                 <div class="preview-thumbnail">
-                                    <img src="images/faces/face10.jpg" alt="image" class="img-sm profile-pic">
+                                    <img src="{{Helper::props('admin/images/faces/face10.jpg')}}" alt="image" class="img-sm profile-pic">
                                 </div>
                                 <div class="preview-item-content flex-grow py-2">
                                     <p class="preview-subject ellipsis font-weight-medium text-dark">Marian Garner </p>
@@ -101,7 +101,7 @@
                             </a>
                             <a class="dropdown-item preview-item">
                                 <div class="preview-thumbnail">
-                                    <img src="images/faces/face12.jpg" alt="image" class="img-sm profile-pic">
+                                    <img src="{{Helper::props('admin/images/faces/face12.jpg')}}" alt="image" class="img-sm profile-pic">
                                 </div>
                                 <div class="preview-item-content flex-grow py-2">
                                     <p class="preview-subject ellipsis font-weight-medium text-dark">David Grey </p>
@@ -110,7 +110,7 @@
                             </a>
                             <a class="dropdown-item preview-item">
                                 <div class="preview-thumbnail">
-                                    <img src="images/faces/face1.jpg" alt="image" class="img-sm profile-pic">
+                                    <img src="{{Helper::props('images/faces/face1.jpg')}}" alt="image" class="img-sm profile-pic">
                                 </div>
                                 <div class="preview-item-content flex-grow py-2">
                                     <p class="preview-subject ellipsis font-weight-medium text-dark">Travis Jenkins </p>
@@ -121,10 +121,10 @@
                     </li>
                     <li class="nav-item dropdown  d-lg-block user-dropdown">
                         <a class="nav-link" id="UserDropdown" href="#" data-bs-toggle="dropdown" aria-expanded="false">
-                            <img class="img-xs rounded-circle" src="images/faces/face8.jpg" alt="Profile image"> </a>
+                            <img class="img-xs rounded-circle" src="{{Helper::props('admin/images/faces/face8.jpg')}}" alt="Profile image"> </a>
                         <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="UserDropdown">
                             <div class="dropdown-header text-center">
-                                <img class="img-md rounded-circle" src="images/faces/face8.jpg" alt="Profile image">
+                                <img class="img-md rounded-circle" src="{{Helper::props('admin/images/faces/face8.jpg')}}" alt="Profile image">
                                 <p class="mb-1 mt-3 font-weight-semibold">Allen Moreno</p>
                                 <p class="fw-light text-muted mb-0">satnam@gmail.com</p>
                             </div>

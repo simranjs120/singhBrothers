@@ -16,11 +16,7 @@
   <!-- container-scroller -->
 
   <!-- plugins:js -->
-<<<<<<< HEAD
   <script src="{{Helper::props('admin/vendors/js/vendor.bundle.base.js')}}"></script>
-=======
-  <script src="vendors/js/vendor.bundle.base.js"></script>
->>>>>>> 0b765293180510367af46ffb968bbb99ca6d199e
   <!-- endinject -->
   <!-- Plugin js for this page -->
   <script src="{{Helper::props('admin/vendors/chart.js/Chart.min.js')}}"></script>

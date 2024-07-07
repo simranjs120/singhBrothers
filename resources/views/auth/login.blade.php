@@ -15,7 +15,6 @@
 
 <style>
 body{
-  background: url("../assets/img/home-bg.png") top center;
   background-size: cover;
   background-color: rgba(0, 0, 0, 0.6);
   background-blend-mode: darken;
@@ -54,7 +53,7 @@ input[type=password]{
 }
 </style>
 
-<body>
+<body background="{{Helper::props('assets/img/home-bg.png')}}">
     <div class="container">
         <div>
             <center>

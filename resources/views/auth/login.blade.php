@@ -11,6 +11,7 @@
     <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
     <link href="{{Helper::props('assets/vendor/aos/aos.css')}}" rel="stylesheet">
     <link href="{{Helper::props('assets/vendor/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet">
+    <link href="{{Helper::props('assets/img/favicon.png')}}" rel="icon">
 </head>
 
 <style>
@@ -51,6 +52,11 @@ input[type=password]{
     width: 100%;
     border-radius: 10px;
 }
+input[type=email] {
+        padding: 10px;
+        width: 100%;
+        border-radius: 10px;
+    }
 </style>
 
 <body background="{{Helper::props('assets/img/home-bg.png')}}">
@@ -68,7 +74,7 @@ input[type=password]{
             <!-- Email Address -->
             <div>
              <center>
-                    <input type="text" id="email" class="block mt-1 w-full" type="email" name="email" placeholder="Enter Your Email" :value="old('email')"
+                    <input id="email" class="block mt-1 w-full" type="email" name="email" placeholder="Enter Your Email" :value="old('email')"
                         required autofocus autocomplete="username" />
                     <x-input-error :messages="$errors->get('email')" class="mt-2" />
             </center>
@@ -77,7 +83,7 @@ input[type=password]{
             <!-- Password -->
             <div class="mt-4">
             <center>
-                <input type="password" id="password" class="block mt-1 w-full" type="password" placeholder="Enter Your Password" name="password" required
+                <input id="password" class="block mt-1 w-full" type="password" placeholder="Enter Your Password" name="password" required
                     autocomplete="current-password" />
                 <x-input-error :messages="$errors->get('password')" class="mt-2" />
                 </center>

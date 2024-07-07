@@ -1,7 +1,7 @@
 <x-guest-layout>
     <div>
         <a href="/">
-            <img class="img-fluid" src="{{URL::to('admin/images/logo.png')}}" />
+            <img class="img-fluid" src="{{Helper::props('admin/images/logo.png')}}" />
         </a>
     </div>
     <br>

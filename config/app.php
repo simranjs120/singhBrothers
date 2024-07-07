@@ -125,6 +125,7 @@ return [
 
     'aliases' => [
         'Helper' => App\Helpers\Helper::class,
+        'Route'     => "Illuminate\Support\Facades\Route",
     ],
 
 ];

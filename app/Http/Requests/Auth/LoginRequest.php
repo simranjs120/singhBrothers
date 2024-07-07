@@ -42,15 +42,12 @@ class LoginRequest extends FormRequest
         $this->ensureIsNotRateLimited();
 
         if (! Auth::attempt($this->only('email', 'password'), $this->boolean('remember'))) {
-
             # Rate limiter throttle disabled as of now
             // RateLimiter::hit($this->throttleKey());
-
             throw ValidationException::withMessages([
-                'email' => 'These credentials are incorrect, Try Again',
+                'email' => 'These credentials are incorrect, Please Try Again !!',
             ]);
         }
-
         // RateLimiter::clear($this->throttleKey());
     }
 

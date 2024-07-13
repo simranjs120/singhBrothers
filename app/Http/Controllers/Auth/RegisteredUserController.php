@@ -39,7 +39,7 @@ class RegisteredUserController extends Controller
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
-            'forgot_password_key'=>str_replace ('/', '', Hash::make($request->password))
+            'forgot_password_key'=>str_replace ('/', '', Hash::make($request->password)),
         ]);
 
         event(new Registered($user));

@@ -27,7 +27,7 @@ Route::middleware('guest')->group(function () {
     Route::get('forgot-password', [forgotPassword::class, 'create'])
                 ->name('password.request');
 
-    Route::post('forgot-password', [forgotPassword::class, 'action'])
+    Route::post('forgot-password', [forgotPassword::class, 'sendLink'])
                 ->name('password.email');
 
     Route::get('reset-password/{token}', [NewPasswordController::class, 'create'])

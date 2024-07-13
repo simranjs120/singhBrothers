@@ -79,7 +79,7 @@
 
 
     <div class="mb-4 text-sm text-gray-600">
-        {{ __('Forgot your password? No problem. Just let us know your email address and we will email you the password to your inbox, You can login & reset your password.') }}
+        {{ __('Forgot your password? No problem. Just enter your email address here & system will send you a password reset link, You can then reset your password.') }}
     </div>
 
     <form method="POST" action="{{ route('password.email') }}">
@@ -88,8 +88,15 @@
         <!-- Email Address -->
          <center>
         <div>
-            <input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" placeholder="Enter Your Email" required autofocus />
+            <input id="email" class="block mt-1 w-full" type="email" name="email" value="{{old('email')}}" placeholder="Enter Your Email" required autofocus />
             <x-input-error :messages="$errors->get('email')" class="mt-2" />
+            @if (Illuminate\Support\Facades\Session::has('success'))
+                <div class="alert alert-success">
+                    <ul>
+                        <li>{{Illuminate\Support\Facades\Session::pull('success')}}</li>
+                    </ul>
+                </div>
+            @endif
         </div>
         </center>
         <div class="flex items-center justify-end mt-4">

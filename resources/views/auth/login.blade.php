@@ -74,7 +74,7 @@ input[type=email] {
             <!-- Email Address -->
             <div>
              <center>
-                    <input id="email" class="block mt-1 w-full" type="email" name="email" placeholder="Enter Your Email" :value="old('email')"
+                    <input id="email" class="block mt-1 w-full" type="email" name="email" placeholder="Enter Your Email" value="{{old('email')}}"
                         required autofocus autocomplete="username" />
                     <x-input-error :messages="$errors->get('email')" class="mt-2" />
             </center>

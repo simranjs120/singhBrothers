@@ -40,7 +40,7 @@ class forgotPasswordController extends Controller
 
                 if ($emailer) {
                     Log::info('Reset password email sent successfully !!');
-                    return redirect()->back()->with('success', 'Password reset link has been sent to your email, Kindly check your Email`s Invox/Spam Folders.');
+                    return redirect()->back()->with('success', 'Password reset link has been sent to your email, Kindly check your Email`s Inbox/Spam Folders.');
                 } else {
                     Log::error('Emailer Failed Here...... ');
                     throw ValidationException::withMessages([

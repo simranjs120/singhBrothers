@@ -91,7 +91,7 @@
             <input id="email" class="block mt-1 w-full" type="email" name="email" value="{{old('email')}}" placeholder="Enter Your Email" required autofocus />
             <x-input-error :messages="$errors->get('email')" class="mt-2" />
             @if (Illuminate\Support\Facades\Session::has('success'))
-                <div class="alert alert-success">
+                <div class="alert alert-success mt-3">
                     <ul>
                         <li>{{Illuminate\Support\Facades\Session::pull('success')}}</li>
                     </ul>

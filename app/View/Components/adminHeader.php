@@ -11,9 +11,10 @@ class adminHeader extends Component
     /**
      * Create a new component instance.
      */
-    public function __construct()
+    public $profileData="";
+    public function __construct($profile)
     {
-        //
+        $this->profileData=$profile;
     }
 
     /**

@@ -2,15 +2,14 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\adminController as admin;
+use App\Http\Controllers\adminDashboardController as dashboard;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('index');
 });
 
-Route::get('admin/dashboard', function () {
-    return view('admin.dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('admin/dashboard',  [dashboard::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
 

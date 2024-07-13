@@ -54,10 +54,24 @@
                     </a>
                 </div>
             </div>
+            @php
+                date_default_timezone_set("Asia/Calcutta");
+                $time=date("H");
+                $salutation="a";
+                if($time>=4 && $time<12){
+                    $salutation="Good Morning";
+                } else if($time>=12 && $time<16){
+                    $salutation="Good Afternoon";
+                } else if($time>=16 && $time<20){
+                    $salutation="Good Evening";   
+                } else {
+                    $salutation="Nighty Night";
+                }
+            @endphp
             <div class="navbar-menu-wrapper d-flex align-items-top">
                 <ul class="navbar-nav">
                     <li class="nav-item font-weight-semibold d-none d-lg-block ms-0">
-                        <h1 class="welcome-text">Good Morning, <span class="text-black fw-bold">Satnam Singh</span></h1>
+                        <h1 class="welcome-text"><?php echo $salutation; ?>, <span class="text-black fw-bold">{{$profileData->name}}</span></h1>
                         <h3 class="welcome-sub-text">Welcome Back To The Admin Panel</h3>
                     </li>
                 </ul>

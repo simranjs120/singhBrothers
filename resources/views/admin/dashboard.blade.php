@@ -1,5 +1,4 @@
-<x-admin-header/>
-
+<x-admin-header :profile="$profile"/>
           <div class="row">
             <div class="col-sm-12">
               <div class="home-tab">

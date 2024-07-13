@@ -1,4 +1,4 @@
-<x-AdminHeader :profile="$profile"/>
+<x-Admin-header :profile="$profile"/>
           <div class="row">
             <div class="col-sm-12">
               <div class="home-tab">

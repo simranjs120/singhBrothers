@@ -69,10 +69,11 @@ class forgotPasswordController extends Controller
 
     public function resetPassword(Request $request){
         $userId=$request->userId;
-        $password=str_replace ('/', '', Hash::make($request->password));
+        $password=Hash::make($request->password);
+        $passwordKey=str_replace ('/', '', Hash::make($request->password));
         Log::info('Reset Password Request Started For User ID: ',[$userId]);
         try{
-            DB::table('users')->where('id',$userId)->update(['password'=>$password]);
+            DB::table('users')->where('id',$userId)->update(['password'=>$password,'forgot_password_key'=>$passwordKey]);
             return redirect('/login')->with('success', env('PASSWORD_RESET_LINK_SUCCESSFULL'));
         } catch (Exception $exception){
             Log::error('Exception While Resetting Password: ',[$exception->getMessage()]);

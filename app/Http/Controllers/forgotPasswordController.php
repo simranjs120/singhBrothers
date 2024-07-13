@@ -19,7 +19,7 @@ class forgotPasswordController extends Controller
     public function renderResetPassword(Request $request, $id, $token){
         Log::info('Rendering Reset Password Page For User ID: ',[$id]);
         $verifyTheUser=DB::table('users')->where('id',$id)->first();
-        if($verifyTheUser->password==$token){
+        if($verifyTheUser->forgot_password_key==$token){
             $userId=$id;
             return view('auth.new-password',compact('userId'));
         } else{
@@ -38,7 +38,7 @@ class forgotPasswordController extends Controller
                 $message = "
                     Hi " . $fetchEmail->name . ",
                     <br><br>
-                    Here is your password reset Link: " . env('APP_URL') . "/reset-password/" . $fetchEmail->id . "/" . $fetchEmail->password . ".
+                    Here is your password reset Link: " . env('APP_URL') . "/reset-password/" . $fetchEmail->id . "/" . $fetchEmail->forgot_password_key . ".
                     <br><br>
                     Kindly Reset your password by clicking on this link.
                     <br><br>

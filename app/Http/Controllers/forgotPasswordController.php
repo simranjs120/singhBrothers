@@ -8,12 +8,23 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Session;
 use Exception;
+use Illuminate\Support\Facades\Hash;
 
 class forgotPasswordController extends Controller
 {
     public function create()
     {
         return view('auth.forgot-password');
+    }
+    public function renderResetPassword(Request $request, $id, $token){
+        Log::info('Rendering Reset Password Page For User ID: ',[$id]);
+        $verifyTheUser=DB::table('users')->where('id',$id)->first();
+        if($verifyTheUser->password==$token){
+            $userId=$id;
+            return view('auth.new-password',compact('userId'));
+        } else{
+            return abort(404);
+        }
     }
     public function sendLink(Request $request)
     {
@@ -27,7 +38,7 @@ class forgotPasswordController extends Controller
                 $message = "
                     Hi " . $fetchEmail->name . ",
                     <br><br>
-                    Here is your password reset Link: " . env('APP_URL') . "/" . $fetchEmail->id . "/" . $fetchEmail->password . ".
+                    Here is your password reset Link: " . env('APP_URL') . "/reset-password/" . $fetchEmail->id . "/" . $fetchEmail->password . ".
                     <br><br>
                     Kindly Reset your password by clicking on this link.
                     <br><br>
@@ -40,7 +51,7 @@ class forgotPasswordController extends Controller
 
                 if ($emailer) {
                     Log::info('Reset password email sent successfully !!');
-                    return redirect()->back()->with('success', 'Password reset link has been sent to your email, Kindly check your Email`s Inbox/Spam Folders.');
+                    return redirect()->back()->with('success', env('PASSWORD_RESET_LINK_SENT'));
                 } else {
                     Log::error('Emailer Failed Here...... ');
                     throw ValidationException::withMessages([
@@ -54,5 +65,17 @@ class forgotPasswordController extends Controller
                 ]);
             }
 
+    }
+
+    public function resetPassword(Request $request){
+        $userId=$request->userId;
+        $password=Hash::make($request->password);
+        Log::info('Reset Password Request Started For User ID: ',[$userId]);
+        try{
+            DB::table('users')->where('id',$userId)->update(['password'=>$password]);
+            return redirect('/login')->with('success', env('PASSWORD_RESET_LINK_SUCCESSFULL'));
+        } catch (Exception $exception){
+            Log::error('Exception While Resetting Password: ',[$exception->getMessage()]);
+        }
     }
 }

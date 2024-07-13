@@ -88,7 +88,13 @@ input[type=email] {
                 <x-input-error :messages="$errors->get('password')" class="mt-2" />
                 </center>
             </div>
-
+            @if (Illuminate\Support\Facades\Session::has('success'))
+                <div class="alert alert-success mt-3">
+                    <ul>
+                        <li>{{Illuminate\Support\Facades\Session::pull('success')}}</li>
+                    </ul>
+                </div>
+            @endif
             <!-- Remember Me -->
             <div class="block mt-4">
                 <label for="remember_me" class="inline-flex items-center">

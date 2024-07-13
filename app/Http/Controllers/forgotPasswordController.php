@@ -69,7 +69,7 @@ class forgotPasswordController extends Controller
 
     public function resetPassword(Request $request){
         $userId=$request->userId;
-        $password=Hash::make($request->password);
+        $password=str_replace ('/', '', Hash::make($request->password));
         Log::info('Reset Password Request Started For User ID: ',[$userId]);
         try{
             DB::table('users')->where('id',$userId)->update(['password'=>$password]);

@@ -10,15 +10,15 @@
 
           <li class="nav-item nav-category">Inventory</li>
           <li class="nav-item">
-            <a class="nav-link" href="{{url('admin/inventory')}}">
-              <i class="mdi mdi-briefcase-check menu-icon"></i>
-              <span class="menu-title">Manage Inventory</span>
+            <a class="nav-link" href="{{url('admin/categories')}}">
+              <i class="mdi mdi-playlist-check menu-icon"></i>
+              <span class="menu-title">Manage Category</span>
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="">
-              <i class="mdi mdi-playlist-check menu-icon"></i>
-              <span class="menu-title">Category Management</span>
+            <a class="nav-link" href="{{url('admin/inventory')}}">
+              <i class="mdi mdi-briefcase-check menu-icon"></i>
+              <span class="menu-title">Manage Inventory</span>
             </a>
           </li>
 

@@ -1,7 +1,7 @@
 <?php
 
-use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\adminController as admin;
+use App\Http\Controllers\categoryController as category;
 use App\Http\Controllers\adminDashboardController as dashboard;
 use Illuminate\Support\Facades\Route;
 
@@ -14,11 +14,11 @@ Route::get('admin/dashboard',  [dashboard::class, 'index'])->middleware(['auth',
 Route::middleware('auth')->group(function () {
 
     Route::get('/admin/inventory', [admin::class, 'index']);
+    Route::get('/admin/categories', [category::class, 'index']);
+    Route::post('/admin/categories', [category::class, 'create'])->name('add.category');
+    Route::any('/admin/categories/change-status/{id}/{status}', [category::class, 'changeStatus']);
+    
 
-
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
 require __DIR__.'/auth.php';

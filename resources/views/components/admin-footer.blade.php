@@ -41,7 +41,7 @@
 
 <script type="text/javascript">
   $(document).ready(function(){
-    $('#inventory').DataTable({
+    $('#datatable').DataTable({
       "bFilter": true,
       "bInfo": false,
       "bLengthChange": true,
@@ -49,5 +49,9 @@
         sLengthMenu: "_MENU_",
       }
     });
+
+    setTimeout(function(){
+      $('.alert').hide();
+    },4000);
   });
 </script>

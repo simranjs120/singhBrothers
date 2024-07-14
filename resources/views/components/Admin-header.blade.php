@@ -139,8 +139,8 @@
                         <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="UserDropdown">
                             <div class="dropdown-header text-center">
                                 <img class="img-md rounded-circle" src="{{Helper::props('admin/images/faces/face8.jpg')}}" alt="Profile image">
-                                <p class="mb-1 mt-3 font-weight-semibold">Allen Moreno</p>
-                                <p class="fw-light text-muted mb-0">satnam@gmail.com</p>
+                                <p class="mb-1 mt-3 font-weight-semibold">{{$profile->name}}</p>
+                                <p class="fw-light text-muted mb-0">{{$profile->email}}</p>
                             </div>
                             <button type="submit" class="border-0 bg-transparent w-100">
                                 <a class="dropdown-item"><i

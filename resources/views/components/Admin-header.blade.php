@@ -142,8 +142,8 @@
                                 <p class="mb-1 mt-3 font-weight-semibold">{{$profile->name}}</p>
                                 <p class="fw-light text-muted mb-0">{{$profile->email}}</p>
                             </div>
-                            <button type="submit" class="border-0 bg-transparent w-100">
-                                <a class="dropdown-item"><i
+                            <button type="button" class="border-0 bg-transparent w-100">
+                                <a class="dropdown-item" href="{{url('/admin/my-profile')}}"><i
                                         class="dropdown-item-icon mdi mdi-account-outline text-primary me-2"></i> My
                                     Profile</a>
                             </button>

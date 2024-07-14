@@ -38,7 +38,7 @@
                         <div class="col-lg-6 col-md-6 col-sm-12">
                             <label class="mb-2">My Password:</label>
                             <input type="password" name="password" class="form-control"
-                                placeholder="Set you new password here..." maxlength="200" />
+                                placeholder="Set your new password here..." maxlength="200" />
                         </div>
                     </div>
                     <button type="submit" class="btn btn-success text-light mt-5">Update My Profile</button>

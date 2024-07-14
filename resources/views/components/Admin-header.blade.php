@@ -148,7 +148,7 @@
                                     Profile</a>
                             </button>
                             <button type="submit" class="border-0 bg-transparent w-100">
-                                <a class="dropdown-item"><i
+                                <a class="dropdown-item" href="{{url('/admin/add-user')}}"><i
                                         class="dropdown-item-icon mdi mdi-account-multiple-plus text-primary me-2"></i>
                                     Add New User</a>
                             </button>

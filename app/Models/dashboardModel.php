@@ -18,4 +18,18 @@ class dashboardModel extends Model
         }
         return false;
     }
+    static function getTracking10(){
+        $fetchTracking=DB::table("changes_tracker")->orderBy('id', 'DESC')->take(10)->get();
+        if($fetchTracking){
+            return $fetchTracking;
+        }
+        return false;
+    }
+    static function getTracking(){
+        $fetchTracking=DB::table("changes_tracker")->orderBy('id', 'DESC')->get();
+        if($fetchTracking){
+            return $fetchTracking;
+        }
+        return false;
+    }
 }

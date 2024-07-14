@@ -26,13 +26,14 @@ class categoryController extends Controller
                 $categoryName=$payload['category'];
                 $changer_name=$data['profile']->name;
                 $changer_email=$data['profile']->email;
-                $changer_title=$changer_name." just added a new category: ".$categoryName;
+                $changer_title=" just added a new category: ".$categoryName;
                 $trackIt=tracker::insert($changer_title, $changer_email, $changer_name);
                 if($trackIt){
                     Log::info('Addition to tracker table success');
                 } else {
                     Log::error('Addition to tracker table failed');
                 }
+                # Tracker End
                 return redirect()->back()->with('success','New category has been added to the system successfully !!');
             } else if($insertCategory==2) {
                 Log::error('Category Insertion failed, Record already exists');
@@ -52,9 +53,9 @@ class categoryController extends Controller
             $changer_name=$data['profile']->name;
             $changer_email=$data['profile']->email;
             if($status==0){
-                $changer_title=$changer_name." changed the status to In-Active for category ID: ".$id;
+                $changer_title=" changed the status to In-Active for category ID: ".$id;
             } else if($status==1) {
-                $changer_title=$changer_name." changed the status to Active for category ID: ".$id;
+                $changer_title=" changed the status to Active for category ID: ".$id;
             }
             $trackIt=tracker::insert($changer_title, $changer_email, $changer_name);
             if($trackIt){
@@ -79,7 +80,7 @@ class categoryController extends Controller
             # Entry for changes tracker
             $changer_name=$data['profile']->name;
             $changer_email=$data['profile']->email;
-                $changer_title=$changer_name." Just Deleted a category: ".$id;
+                $changer_title=" Just Deleted a category: ".$id;
             $trackIt=tracker::insert($changer_title, $changer_email, $changer_name);
             if($trackIt){
                 Log::info('Addition to tracker table success');

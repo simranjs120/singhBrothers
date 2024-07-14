@@ -14,7 +14,7 @@ Route::get('/', function () {
 Route::get('admin/dashboard',  [dashboard::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
-
+    Route::get('/admin/all-activity', [dashboard::class, 'allActivity']);
     Route::get('/admin/inventory', [admin::class, 'index']);
     Route::get('/admin/categories', [category::class, 'index']);
     Route::post('/admin/categories', [category::class, 'create'])->name('add.category');
@@ -23,6 +23,9 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/admin/my-profile', [userProfile::class, 'index']);
     Route::post('/admin/my-profile', [userProfile::class, 'updateProfile'])->name('update.profile');
+
+    Route::get('/admin/add-user', [userProfile::class, 'addNewUserRender']);
+    Route::post('/admin/add-user', [userProfile::class, 'addNewUser'])->name('add.newUser');
 });
 
 require __DIR__.'/auth.php';

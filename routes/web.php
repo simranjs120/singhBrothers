@@ -17,7 +17,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/admin/categories', [category::class, 'index']);
     Route::post('/admin/categories', [category::class, 'create'])->name('add.category');
     Route::any('/admin/categories/change-status/{id}/{status}', [category::class, 'changeStatus']);
-    
+    Route::any('/admin/categories/delete-category/{id}', [category::class, 'deleteCategory']);
 
 });
 

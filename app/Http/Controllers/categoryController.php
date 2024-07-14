@@ -62,11 +62,39 @@ class categoryController extends Controller
             } else {
                 Log::error('Addition to tracker table failed');
             }
+            # Tracker End
             Log::info('Status change successfull for category ID: ',[$id]);
             return redirect()->back()->with('success','Status Changed Successfully !!');
         } else {
             Log::error('Status change failed for category ID: ',[$id]);
-            return redirect()->back()->with('error','An error occured while adding the new category, Kindly contact Developer !!');
+            return redirect()->back()->with('error','An error occured, Kindly contact Developer !!');
+        }
+    }
+
+    public function deleteCategory($id){
+        $data['profile']=dashboard::fetchProfile();
+        Log::info('Category Deletion request for category ID: ',[$id]);
+        $changestatus=category::deleteCategory($id);
+        if($changestatus==1){
+            # Entry for changes tracker
+            $changer_name=$data['profile']->name;
+            $changer_email=$data['profile']->email;
+                $changer_title=$changer_name." Just Deleted a category: ".$id;
+            $trackIt=tracker::insert($changer_title, $changer_email, $changer_name);
+            if($trackIt){
+                Log::info('Addition to tracker table success');
+            } else {
+                Log::error('Addition to tracker table failed');
+            }
+            # Tracker End
+            Log::info('Deletion successfull for category ID: ',[$id]);
+            return redirect()->back()->with('success','Category Deleted Successfully !!');
+        } else if($changestatus==2){
+            Log::error('Deletion failed for category because sub-category exists, Category ID: ',[$id]);
+            return redirect()->back()->with('error','A sub-category exists for this category, Please delete sub-categories first !!');
+        } else if($changestatus==0){
+            Log::error('Deletion failed for category ID: ',[$id]);
+            return redirect()->back()->with('error','An error occured, Kindly contact Developer !!');
         }
     }
 

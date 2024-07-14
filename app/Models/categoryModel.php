@@ -35,4 +35,16 @@ class categoryModel extends Model
         }
         return false;
     }
+
+    static function deleteCategory($id){
+        $fetchSubcategories=DB::table('sub_category')->where(['category_id'=>$id])->first();
+        if($fetchSubcategories){
+            return 2;
+        }
+        $update=DB::table('category')->where(['id'=>$id])->delete();
+        if($update){
+            return 1;
+        }
+        return 0;
+    }
 }

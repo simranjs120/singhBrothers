@@ -26,6 +26,7 @@
                     <thead>
                         <tr>
                             <th scope="col">#</th>
+                            <th scope="col">Category ID</th>
                             <th scope="col">Category</th>
                             <th scope="col">Created On</th>
                             <th scope="col">Status</th>
@@ -36,6 +37,7 @@
                         @foreach($categoryData as $key=>$row)
                         <tr>
                             <td>{{$key+1}}</td>
+                            <td>{{$row->id}}</td>
                             <td>{{$row->category}}</td>
                             <td>{{$row->created_at}}</td>
                             <td>
@@ -52,7 +54,9 @@
                             </td>
                             <td>
                                 <button type="button" class="btn btn-success text-light">View</button>
-                                <button type="button" class="btn btn-danger text-light">Delete</button>
+                                <a href="{{url('admin/categories/delete-category/'.$row->id)}}">
+                                    <button type="button" class="btn btn-danger text-light" onclick="return confirm('Are you sure you want to delete this?')">Delete</button>
+                                </a>
                             </td>
                         </tr>
                         @endforeach

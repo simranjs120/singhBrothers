@@ -135,10 +135,10 @@
                     </li>
                     <li class="nav-item dropdown  d-lg-block user-dropdown">
                         <a class="nav-link" id="UserDropdown" href="#" data-bs-toggle="dropdown" aria-expanded="false">
-                            <img class="img-xs rounded-circle" src="{{Helper::props('admin/images/faces/face8.jpg')}}" alt="Profile image"> </a>
+                            <img class="img-xs rounded-circle" src="{{Helper::props('admin/images/admin.png')}}" alt="Profile image"> </a>
                         <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="UserDropdown">
                             <div class="dropdown-header text-center">
-                                <img class="img-md rounded-circle" src="{{Helper::props('admin/images/faces/face8.jpg')}}" alt="Profile image">
+                                <img class="img-md rounded-circle" src="{{Helper::props('admin/images/admin.png')}}" alt="Profile image">
                                 <p class="mb-1 mt-3 font-weight-semibold">{{$profile->name}}</p>
                                 <p class="fw-light text-muted mb-0">{{$profile->email}}</p>
                             </div>

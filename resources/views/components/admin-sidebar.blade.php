@@ -9,7 +9,7 @@
           </li>
 
           <li class="nav-item nav-category">Inventory</li>
-          <li class="nav-item">
+          <li class="nav-item nav-category-sidebar">
             <a class="nav-link" href="{{url('admin/categories')}}">
               <i class="mdi mdi-playlist-check menu-icon"></i>
               <span class="menu-title">Manage Category</span>

@@ -73,6 +73,33 @@ class categoryController extends Controller
         }
     }
 
+    public function changeHierarchyStatus($id,$status){
+        $data['profile']=dashboard::fetchProfile();
+        Log::info('Hierarchy Status change request for Hierarchy ID,Status: ',[$id,$status]);
+        $changestatus=category::changeHierarchyStatus($id,$status);
+        if($changestatus){
+            # Entry for changes tracker
+            $changer_name=$data['profile']->name;
+            $changer_email=$data['profile']->email;
+            if($status==0){
+                $changer_title=" changed the status to In-Active for Hierarchy ID: ".$id;
+            } else if($status==1) {
+                $changer_title=" changed the status to Active for Hierarchy ID: ".$id;
+            }
+            $trackIt=tracker::insert($changer_title, $changer_email, $changer_name);
+            if($trackIt){
+                Log::info('Addition to tracker table success');
+            } else {
+                Log::error('Addition to tracker table failed');
+            }
+            # Tracker End
+            Log::info('Status change successfull for Hierachy ID: ',[$id]);
+            return redirect()->back()->with('success','Status Changed Successfully !!');
+        } else {
+            Log::error('Status change failed for Hierachy ID: ',[$id]);
+            return redirect()->back()->with('error','An error occured, Kindly contact Developer !!');
+        }
+    }
     public function deleteCategory($id){
         $data['profile']=dashboard::fetchProfile();
         Log::info('Category Deletion request for category ID: ',[$id]);
@@ -96,6 +123,33 @@ class categoryController extends Controller
             return redirect()->back()->with('error','A sub-category exists for this category, Please delete sub-categories first !!');
         } else if($changestatus==0){
             Log::error('Deletion failed for category ID: ',[$id]);
+            return redirect()->back()->with('error','An error occured, Kindly contact Developer !!');
+        }
+    }
+
+    public function deleteHierarchy($id){
+        $data['profile']=dashboard::fetchProfile();
+        Log::info('Hierarchy Deletion request for category ID: ',[$id]);
+        $changestatus=category::deleteHierarchy($id);
+        if($changestatus==1){
+            # Entry for changes tracker
+            $changer_name=$data['profile']->name;
+            $changer_email=$data['profile']->email;
+                $changer_title=" Just Deleted a Hierarchy: ".$id;
+            $trackIt=tracker::insert($changer_title, $changer_email, $changer_name);
+            if($trackIt){
+                Log::info('Addition to tracker table success');
+            } else {
+                Log::error('Addition to tracker table failed');
+            }
+            # Tracker End
+            Log::info('Deletion successfull for Hierarchy ID: ',[$id]);
+            return redirect()->back()->with('success','Hierarchy Deleted Successfully !!');
+        } else if($changestatus==2){
+            Log::error('Deletion failed for category because sub-category exists, Category ID: ',[$id]);
+            return redirect()->back()->with('error','A sub-category exists for this category, Please delete sub-categories first !!');
+        } else if($changestatus==0){
+            Log::error('Deletion failed for Hierarchy ID: ',[$id]);
             return redirect()->back()->with('error','An error occured, Kindly contact Developer !!');
         }
     }
@@ -134,4 +188,65 @@ class categoryController extends Controller
         return redirect()->back()->with('error','An error occured while adding the new Sub-category, Kindly contact Developer !!');
     }
 
+    public function getHierarchies($id){
+        $data['profile']=dashboard::fetchProfile();
+        $data['categoryName']=category::getCategoryName($id);
+        $data['subCategoryData']=category::fetchSubCategoryData($id);
+        $data['hierachyData']=category::hierachyData($id);
+        $data['parent_id']=$id;
+        return view('admin.hierarchy',$data);
+    }
+
+    public function submitHierarchy(Request $request){
+        $category_id=$request->category_id;
+        $subcategory_id=$request->subcategory_id;
+        $category_name=$request->category_name;
+        $getSubcategoryById=category::getSubcategoryById($subcategory_id);
+        $breadcrumb=$category_name.'/'.$getSubcategoryById->sub_category;
+        $insert=category::submitHierarchy($category_id,$subcategory_id,$breadcrumb);
+        if($insert){
+            $data['profile']=dashboard::fetchProfile();
+            Log::info('Hierarchy First child Inserted Successfully',[$breadcrumb]);
+                # Entry for changes tracker
+                $changer_name=$data['profile']->name;
+                $changer_email=$data['profile']->email;
+                $changer_title=" just added a new First Child: ".$breadcrumb;
+                $trackIt=tracker::insert($changer_title, $changer_email, $changer_name);
+                if($trackIt){
+                    Log::info('Addition to tracker table success');
+                } else {
+                    Log::error('Addition to tracker table failed');
+                }
+                # Tracker End
+                return redirect()->back()->with('success','New First Child has been added to the system successfully !!');
+        }
+        Log::error('Hierarchy First child Insertion failed, Payload data: ',[$breadcrumb]);
+        return redirect()->back()->with('error','An error occured, Kindly contact Developer !!');
+    }
+    public function editHierarchy(Request $request){
+        $id=$request->id;
+        $prewritten=$request->prewritten;
+        $subcategory_id=$request->subcategory_id;
+        $getSubcategoryById=category::getSubcategoryById($subcategory_id);
+        $breadcrumb=$prewritten.'/'.$getSubcategoryById->sub_category;
+        $update=category::updateHierarchy($id,$breadcrumb);
+        if($update){
+            $data['profile']=dashboard::fetchProfile();
+            Log::info('Hierarchy First child updated Successfully',[$breadcrumb]);
+                # Entry for changes tracker
+                $changer_name=$data['profile']->name;
+                $changer_email=$data['profile']->email;
+                $changer_title=" just added a new First Child: ".$breadcrumb;
+                $trackIt=tracker::insert($changer_title, $changer_email, $changer_name);
+                if($trackIt){
+                    Log::info('Addition to tracker table success');
+                } else {
+                    Log::error('Addition to tracker table failed');
+                }
+                # Tracker End
+                return redirect()->back()->with('success','First Child has been updated successfully !!');
+        }
+        Log::error('Hierarchy First child Insertion failed, Payload data: ',[$breadcrumb]);
+        return redirect()->back()->with('error','An error occured, Kindly contact Developer !!');
+    }
 }

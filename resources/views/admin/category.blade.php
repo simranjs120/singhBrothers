@@ -78,7 +78,9 @@
                                             @endif
                                         </td>
                                         <td>
-                                            <button type="button" class="btn btn-success text-light">View Hierarchies</button>
+                                            <a href="{{url('admin/hierarchies/' . $row->id)}}">
+                                                <button type="button" class="btn btn-success text-light">View Hierarchies</button>
+                                            </a> 
                                             <a href="{{url('admin/categories/delete-category/' . $row->id)}}">
                                                 <button type="button" class="btn btn-danger text-light"
                                                     onclick="return confirm('Are you sure you want to delete this?')">Delete</button>
@@ -113,7 +115,7 @@
                                         <td>{{$data['sub_category']}}</td>
                                         <td>{{$data['created_at']}}</td>
                                         <td>
-                                            <a href="{{url('admin/categories/delete-category/' . $data['id'])}}">
+                                            <a href="{{url('' . $data['id'])}}">
                                                 <button type="button" class="btn btn-danger text-light"
                                                     onclick="return confirm('Are you sure you want to delete this?')">Delete</button>
                                             </a>
@@ -151,7 +153,7 @@
                         maxlength="100" placeholder="Start Typing...." />
             </div>
             <div class="modal-footer">
-                <button type="suubmit" class="btn btn-primary">Save changes</button>
+                <button type="submit" class="btn btn-primary">Save changes</button>
                 <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
             </div>
             </form>
@@ -176,7 +178,7 @@
                     <label>Select parent category from this dropdown: </label>
                     <select class="form-control" id="subCategoryModal" name="category_id"
                         style="color:black !important;" required>
-                        <option selected disabled>--- Select Category ---</option>
+                        <option selected disabled value="">--- Select Category ---</option>
                         @foreach($categoryData as $cat)
                             <option value="{{$cat->id}}">{{$cat->category}}</option>
                         @endforeach
@@ -187,7 +189,7 @@
                         maxlength="100" placeholder="Start Typing...." />
             </div>
             <div class="modal-footer">
-                <button type="suubmit" class="btn btn-primary" id="sub-category-submit">Save changes</button>
+                <button type="submit" class="btn btn-primary" id="sub-category-submit">Save changes</button>
                 <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
             </div>
             </form>

@@ -36,6 +36,30 @@ class categoryModel extends Model
         return false;
     }
 
+   static function changeHierarchyStatus($id, $status){
+        $update=DB::table('hierarchy')->where(['id'=>$id])->update(['status'=>$status]);
+        if($update){
+            return true;
+        }
+        return false;
+   }
+
+
+    static function getCategoryName($id){
+        $name=DB::table('category')->where(['id'=>$id])->first('category');
+        return $name;
+    }
+
+    static function getSubcategoryById($id){
+        $name=DB::table('sub_category')->where(['id'=>$id])->first('sub_category');
+        return $name;
+    }
+
+    static function hierachyData($id){
+        $data=DB::table('hierarchy')->where(['category_id'=>$id])->get();
+        return $data;
+    }
+
     static function deleteCategory($id){
         $fetchSubcategories=DB::table('sub_category')->where(['category_id'=>$id])->first();
         if($fetchSubcategories){
@@ -48,6 +72,14 @@ class categoryModel extends Model
         return 0;
     }
     
+    static function deleteHierarchy($id){
+        $update=DB::table('hierarchy')->where(['id'=>$id])->delete();
+        if($update){
+            return 1;
+        }
+        return 0;
+    }
+
     static function subCategoryCount($id){
         $count=DB::table('sub_category')->where(['category_id'=>$id])->count();
         if($count){
@@ -76,6 +108,34 @@ class categoryModel extends Model
     static function submitSubCategories($data){
         $insert=DB::table('sub_category')->insert($data);
         if($insert){
+            return true;
+        }
+        return false;
+    }
+
+    static function fetchSubCategoryData($id){
+        $data=DB::table('sub_category')->where('category_id',$id)->get();
+        if($data){
+            return $data;
+        }
+        return false;
+    }
+
+    static function submitHierarchy($category_id,$subcategory_id,$breadcrumb){
+        $insert=DB::table('hierarchy')->insert([
+            'category_id'=>$category_id,
+            'subcategory_id'=>$subcategory_id,
+            'breadcrumb'=>$breadcrumb
+        ]);
+        if($insert){
+            return true;
+        }
+        return false;
+    }
+
+    static function updateHierarchy($id,$breadcrumb){
+        $update=DB::table('hierarchy')->where('id',$id)->update(['breadcrumb'=>$breadcrumb]);
+        if($update){
             return true;
         }
         return false;

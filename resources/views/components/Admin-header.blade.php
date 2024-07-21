@@ -49,7 +49,7 @@
                         <h3 class="text-dark mt-1"><b><span class="text-primary">SB</span> Admin</b></h3>
                         <!-- </marquee> -->
                     </a>
-                    <a class="navbar-brand brand-logo-mini" href="index.html">
+                    <a class="navbar-brand brand-logo-mini" href="{{url('admin/dashboard')}}">
                         <img src="{{Helper::props('admin/images/logo-mini.svg')}}" alt="logo" />
                     </a>
                 </div>

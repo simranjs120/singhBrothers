@@ -47,4 +47,37 @@ class categoryModel extends Model
         }
         return 0;
     }
+    
+    static function subCategoryCount($id){
+        $count=DB::table('sub_category')->where(['category_id'=>$id])->count();
+        if($count){
+            return $count;
+        }
+        return 0;
+    }
+
+    static function fetchSubCategories(){
+        $data=DB::table('sub_category')->get();
+        $newarr=array();
+        foreach($data as $row){
+            $newarr['id']=$row->id;
+            $newarr['category_id']=DB::table('category')->where('id',$row->category_id)->first('category');
+            $newarr['sub_category']=$row->sub_category;
+            $newarr['status']=$row->status;
+            $newarr['created_at']=$row->created_at;
+            $results[]=$newarr;
+        }
+        if(!empty($results)){
+            return $results;
+        }
+        return false;
+    }
+
+    static function submitSubCategories($data){
+        $insert=DB::table('sub_category')->insert($data);
+        if($insert){
+            return true;
+        }
+        return false;
+    }
 }

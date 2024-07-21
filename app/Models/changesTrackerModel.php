@@ -20,8 +20,7 @@ class changesTrackerModel extends Model
             ]);
         if($insert){
             return true;
-        } else {
-            return false;
         }
+            return false;
     }
 }

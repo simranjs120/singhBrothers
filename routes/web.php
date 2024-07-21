@@ -26,6 +26,8 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/admin/add-user', [userProfile::class, 'addNewUserRender']);
     Route::post('/admin/add-user', [userProfile::class, 'addNewUser'])->name('add.newUser');
+
+    Route::post('/admin/submit-subcategories', [category::class, 'submitSubCategories'])->name('submit.sub-categories');
 });
 
 require __DIR__.'/auth.php';

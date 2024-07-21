@@ -11,6 +11,7 @@ class categoryController extends Controller
     public function index(Request $request){
         $data['profile']=dashboard::fetchProfile();
         $data['categoryData']=category::fetchCategories();
+        $data['subCategoryData']=category::fetchSubCategories();
         return view('admin.category', $data);
     }
 
@@ -21,7 +22,7 @@ class categoryController extends Controller
             Log::info('Category Name: ',[$payload['category']]);
             $insertCategory=category::insertCategory($payload);
             if($insertCategory==1){
-                Log::info('Category Inserted Successfully');
+                Log::info('Category Inserted Successfully',[$payload]);
                 # Entry for changes tracker
                 $categoryName=$payload['category'];
                 $changer_name=$data['profile']->name;
@@ -36,10 +37,10 @@ class categoryController extends Controller
                 # Tracker End
                 return redirect()->back()->with('success','New category has been added to the system successfully !!');
             } else if($insertCategory==2) {
-                Log::error('Category Insertion failed, Record already exists');
+                Log::error('Category Insertion failed, Record already exists',[$payload]);
                 return redirect()->back()->with('error','Cannot create, this category already exists in the system !!');
             } else if($insertCategory==0) {
-                Log::error('Category Insertion failed');
+                Log::error('Category Insertion failed',[$payload]);
                 return redirect()->back()->with('error','An error occured while adding the new category, Kindly contact Developer !!');
             }
     }
@@ -97,6 +98,40 @@ class categoryController extends Controller
             Log::error('Deletion failed for category ID: ',[$id]);
             return redirect()->back()->with('error','An error occured, Kindly contact Developer !!');
         }
+    }
+
+    public function fetchSubCategories(Request $request){
+        $id=$request->id;
+        $subCategoryCount=category::subCategoryCount($id);
+        $subCategoryData=category::fetchSubCategoryData($id);
+        return json_encode([
+            'count'=> $subCategoryCount,
+            'data'=>$subCategoryData
+        ]);
+    }
+    public function submitSubCategories(Request $request){
+        $data['profile']=dashboard::fetchProfile();
+        $data=$request->except(['_token']);
+        $action=category::submitSubCategories($data);
+        if($action){
+            $data['profile']=dashboard::fetchProfile();
+            Log::info('sub-Category Inserted Successfully',[$data]);
+                # Entry for changes tracker
+                $categoryName=$data['sub_category'];
+                $changer_name=$data['profile']->name;
+                $changer_email=$data['profile']->email;
+                $changer_title=" just added a new Sub-category: ".$categoryName;
+                $trackIt=tracker::insert($changer_title, $changer_email, $changer_name);
+                if($trackIt){
+                    Log::info('Addition to tracker table success');
+                } else {
+                    Log::error('Addition to tracker table failed');
+                }
+                # Tracker End
+                return redirect()->back()->with('success','New Sub-category has been added to the system successfully !!');
+        } 
+        Log::error('Sub-category Insertion failed, Payload data: ',[$data]);
+        return redirect()->back()->with('error','An error occured while adding the new Sub-category, Kindly contact Developer !!');
     }
 
 }

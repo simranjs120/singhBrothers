@@ -102,6 +102,10 @@
                                 </tr>
                             </thead>
                             <tbody>
+                            @php
+                                if (is_array($subCategoryData) || is_object($subCategoryData))
+                                {
+                                @endphp
                                 @foreach($subCategoryData as $key => $data)
                                     <tr>
                                         <td>{{$key + 1}}</td>
@@ -116,6 +120,9 @@
                                         </td>
                                     </tr>
                                 @endforeach
+                                @php 
+                                }
+                                @endphp
                             </tbody>
                         </table>
                     </div>

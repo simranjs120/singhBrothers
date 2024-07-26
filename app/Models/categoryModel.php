@@ -9,12 +9,12 @@ use Illuminate\Support\Facades\DB;
 class categoryModel extends Model
 {
     use HasFactory;
-    static function insertCategory($category){
+    static function insertCategory($category,$parent_id){
         $getCheck=DB::table("category")->where(['category'=>$category])->first();
         if($getCheck){
             return 2;
         } 
-            $insert=DB::table("category")->insert(['category'=>$category]);
+            $insert=DB::table("category")->insert(['category'=>$category,'parent_id'=>$parent_id]);
             if($insert){
                 return 1;
             } else {
@@ -24,6 +24,11 @@ class categoryModel extends Model
     }
 
     static function fetchCategories(){
+        $data=DB::table('category')->where('parent_id',0)->get();
+        return $data;
+    }
+
+    static function fetchAllCategoryData(){
         $data=DB::table('category')->get();
         return $data;
     }
@@ -36,14 +41,6 @@ class categoryModel extends Model
         return false;
     }
 
-   static function changeHierarchyStatus($id, $status){
-        $update=DB::table('hierarchy')->where(['id'=>$id])->update(['status'=>$status]);
-        if($update){
-            return true;
-        }
-        return false;
-   }
-
 
     static function getCategoryName($id){
         $name=DB::table('category')->where(['id'=>$id])->first('category');
@@ -55,25 +52,12 @@ class categoryModel extends Model
         return $name;
     }
 
-    static function hierachyData($id){
-        $data=DB::table('hierarchy')->where(['category_id'=>$id])->get();
-        return $data;
-    }
-
     static function deleteCategory($id){
-        $fetchSubcategories=DB::table('sub_category')->where(['category_id'=>$id])->first();
+        $fetchSubcategories=DB::table('category')->where(['parent_id'=>$id])->first();
         if($fetchSubcategories){
             return 2;
         }
         $update=DB::table('category')->where(['id'=>$id])->delete();
-        if($update){
-            return 1;
-        }
-        return 0;
-    }
-    
-    static function deleteHierarchy($id){
-        $update=DB::table('hierarchy')->where(['id'=>$id])->delete();
         if($update){
             return 1;
         }
@@ -89,12 +73,12 @@ class categoryModel extends Model
     }
 
     static function fetchSubCategories(){
-        $data=DB::table('sub_category')->get();
+        $data=DB::table('category')->where('parent_id','!=',0)->get();
         $newarr=array();
         foreach($data as $row){
             $newarr['id']=$row->id;
-            $newarr['category_id']=DB::table('category')->where('id',$row->category_id)->first('category');
-            $newarr['sub_category']=$row->sub_category;
+            $newarr['parent']=DB::table('category')->where('id',$row->parent_id)->first('category');
+            $newarr['sub_category']=$row->category;
             $newarr['status']=$row->status;
             $newarr['created_at']=$row->created_at;
             $results[]=$newarr;
@@ -106,7 +90,7 @@ class categoryModel extends Model
     }
 
     static function submitSubCategories($data){
-        $insert=DB::table('sub_category')->insert($data);
+        $insert=DB::table('category')->insert($data);
         if($insert){
             return true;
         }
@@ -114,30 +98,11 @@ class categoryModel extends Model
     }
 
     static function fetchSubCategoryData($id){
-        $data=DB::table('sub_category')->where('category_id',$id)->get();
+        $data=DB::table('category')->where('parent_id','!=',0)->get();
         if($data){
             return $data;
         }
         return false;
     }
 
-    static function submitHierarchy($category_id,$subcategory_id,$breadcrumb){
-        $insert=DB::table('hierarchy')->insert([
-            'category_id'=>$category_id,
-            'subcategory_id'=>$subcategory_id,
-            'breadcrumb'=>$breadcrumb
-        ]);
-        if($insert){
-            return true;
-        }
-        return false;
-    }
-
-    static function updateHierarchy($id,$breadcrumb){
-        $update=DB::table('hierarchy')->where('id',$id)->update(['breadcrumb'=>$breadcrumb]);
-        if($update){
-            return true;
-        }
-        return false;
-    }
 }

@@ -78,9 +78,9 @@
                                             @endif
                                         </td>
                                         <td>
-                                            <a href="{{url('admin/hierarchies/' . $row->id)}}">
+                                            <!-- <a href="{{url('')}}">
                                                 <button type="button" class="btn btn-success text-light">View Hierarchies</button>
-                                            </a> 
+                                            </a>  -->
                                             <a href="{{url('admin/categories/delete-category/' . $row->id)}}">
                                                 <button type="button" class="btn btn-danger text-light"
                                                     onclick="return confirm('Are you sure you want to delete this?')">Delete</button>
@@ -99,6 +99,8 @@
                                     <th scope="col">#</th>
                                     <th scope="col">Parent Category</th>
                                     <th scope="col">Sub-Category</th>
+                                    <th scope="col">Category ID</th>
+                                    <th scope="col">Status</th>
                                     <th scope="col">Created On</th>
                                     <th scope="col">Actions</th>
                                 </tr>
@@ -111,11 +113,26 @@
                                 @foreach($subCategoryData as $key => $data)
                                     <tr>
                                         <td>{{$key + 1}}</td>
-                                        <td>{{$data['category_id']->category}}</td>
+                                        <td>{{$data['parent']->category}}</td>
                                         <td>{{$data['sub_category']}}</td>
+                                        <td>{{$data['id']}}</td>
+                                        <td>
+                                            @if($data['status'] == 0)
+                                                <a href="{{url('admin/categories/change-status/' . $data['id'] . '/1')}}">
+                                                    <span class="badge badge-danger"
+                                                        onclick="return confirm('Do you want to switch this to active?')">In-Active</span>
+                                                </a>
+                                            @endif
+                                            @if($data['status'] == 1)
+                                                <a href="{{url('admin/categories/change-status/' . $data['id'] . '/0')}}">
+                                                    <span class="badge badge-success"
+                                                        onclick="return confirm('Do you want to switch this to In-active?')">Active</span>
+                                                </a>
+                                            @endif
+                                        </td>
                                         <td>{{$data['created_at']}}</td>
                                         <td>
-                                            <a href="{{url('' . $data['id'])}}">
+                                            <a href="{{url('admin/categories/delete-category/'.$data['id'])}}">
                                                 <button type="button" class="btn btn-danger text-light"
                                                     onclick="return confirm('Are you sure you want to delete this?')">Delete</button>
                                             </a>
@@ -176,16 +193,16 @@
                 <form action="{{route('submit.sub-categories')}}" method="POST">
                     @csrf
                     <label>Select parent category from this dropdown: </label>
-                    <select class="form-control" id="subCategoryModal" name="category_id"
+                    <select class="form-control" id="subCategoryModal" name="parent_id"
                         style="color:black !important;" required>
                         <option selected disabled value="">--- Select Category ---</option>
-                        @foreach($categoryData as $cat)
+                        @foreach($allCategoryData as $cat)
                             <option value="{{$cat->id}}">{{$cat->category}}</option>
                         @endforeach
                     </select>
                     <p class="mt-2 please-wait-msg"></p>
                     <label class="mt-2">Enter Your New Sub-Category: </label>
-                    <input type="text" name="sub_category" class="form-control mt-1 border border-dark" required
+                    <input type="text" name="category" class="form-control mt-1 border border-dark" required
                         maxlength="100" placeholder="Start Typing...." />
             </div>
             <div class="modal-footer">

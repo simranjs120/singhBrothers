@@ -78,9 +78,9 @@
                                             @endif
                                         </td>
                                         <td>
-                                            <!-- <a href="{{url('')}}">
-                                                <button type="button" class="btn btn-success text-light">View Hierarchies</button>
-                                            </a>  -->
+                                            <a href="{{url('admin/collections/' . $row->id)}}">
+                                                <button type="button" class="btn btn-success text-light">Collections</button>
+                                            </a> 
                                             <a href="{{url('admin/categories/delete-category/' . $row->id)}}">
                                                 <button type="button" class="btn btn-danger text-light"
                                                     onclick="return confirm('Are you sure you want to delete this?')">Delete</button>

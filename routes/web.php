@@ -33,7 +33,7 @@ Route::middleware('auth')->group(function () {
     Route::any('/admin/change-hierarchy-status/{id}/{status}', [category::class, 'changeHierarchyStatus']);
     Route::any('/admin/delete-hierarchy/{id}', [category::class, 'deleteHierarchy']);
     Route::post('/admin/edit-hierarchy', [category::class, 'editHierarchy'])->name('edit.hierarchy');
-    
+    Route::get('/admin/collections/{id}', [category::class, 'getCollections']);
 });
 
 require __DIR__.'/auth.php';

@@ -28,6 +28,11 @@ class categoryModel extends Model
         return $data;
     }
 
+    static function collectionData($id){
+        $data=DB::table('collections')->where('top_parent_id',$id)->get();
+        return $data;
+    }
+
     static function fetchAllCategoryData(){
         $data=DB::table('category')->get();
         return $data;
@@ -48,7 +53,7 @@ class categoryModel extends Model
     }
 
     static function getSubcategoryById($id){
-        $name=DB::table('sub_category')->where(['id'=>$id])->first('sub_category');
+        $name=DB::table('category')->where(['id'=>$id])->first('category');
         return $name;
     }
 
@@ -105,4 +110,63 @@ class categoryModel extends Model
         return false;
     }
 
+    static function checkIfTopParent($id){
+        $check=DB::table('category')->where('id',$id)->first();
+        if($check->parent_id==0){
+            return "top";
+        }
+        return $check->id;
+    }
+    static function getLastInsertedCategoryId(){
+        $data=DB::table('category')->orderBy('id', 'DESC')->first();
+        return $data;
+    }
+    static function createNewCollectionTopParent($parent_id,$breadcrumb, $sub_category_id){
+        $insert=DB::table('collections')->insert([
+            'collection'=>$breadcrumb,
+            'top_parent_id'=>$parent_id,
+            'sub_category_id'=>$sub_category_id
+        ]);
+        return true;
+    }
+
+    static function createNewCollectionChildParent($parent_id,$breadcrumb,$checkIfTopParent, $lastId){
+        $getPrevious=DB::table('collections')->where('sub_category_id',$parent_id)->first();
+        $old=$getPrevious->collection;
+        $full=$old.'/'.$breadcrumb;
+        $insert=DB::table('collections')->where('sub_category_id',$parent_id)->insert([
+            'collection'=>$full,
+            'sub_category_id'=>$lastId,
+            'top_parent_id'=>$getPrevious->top_parent_id
+        ]);
+        if($insert){
+            echo "Inserted";
+            return true;
+        } 
+        echo "Not Inserted";
+        return false;
+    }
+
+    static function deleteFromCollectionTopParent($id){
+        $fetchSubcategories=DB::table('category')->where(['parent_id'=>$id])->first();
+        if($fetchSubcategories){
+            return;
+        }
+        $delete=DB::table('collections')->where(['top_parent_id'=>$id])->delete();
+        if($delete){
+            return true;
+        }
+        return false;
+    }
+    static function deleteFromCollectionChildParent($id){
+        $fetchSubcategories=DB::table('category')->where(['parent_id'=>$id])->first();
+        if($fetchSubcategories){
+            return;
+        }
+        $delete=DB::table('collections')->where(['sub_category_id'=>$id])->delete();
+        if($delete){
+            return true;
+        }
+        return false;
+    }
 }

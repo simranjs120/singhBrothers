@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\adminController as admin;
+use App\Http\Controllers\inventoryController as inventory;
 use App\Http\Controllers\categoryController as category;
 use App\Http\Controllers\adminDashboardController as dashboard;
 use App\Http\Controllers\userProfileController as userProfile;
@@ -15,14 +15,16 @@ Route::get('admin/dashboard',  [dashboard::class, 'index'])->middleware(['auth',
 
 Route::middleware('auth')->group(function () {
     Route::get('/admin/all-activity', [dashboard::class, 'allActivity']);
-    Route::get('/admin/inventory', [admin::class, 'index']);
+
+
+    Route::get('/admin/inventory', [inventory::class, 'index']);
     
     Route::get('/admin/my-profile', [userProfile::class, 'index']);
     Route::post('/admin/my-profile', [userProfile::class, 'updateProfile'])->name('update.profile');
-    
     Route::get('/admin/add-user', [userProfile::class, 'addNewUserRender']);
     Route::post('/admin/add-user', [userProfile::class, 'addNewUser'])->name('add.newUser');
     
+    # All About Category Module
     Route::any('/admin/categories/delete-category/{id}', [category::class, 'deleteCategory']);
     Route::any('/admin/categories/change-status/{id}/{status}', [category::class, 'changeStatus']);
     Route::post('/admin/categories', [category::class, 'create'])->name('add.category');

@@ -11,7 +11,8 @@
     <link rel="stylesheet" href="{{Helper::props('admin/vendors/mdi/css/materialdesignicons.min.css')}}">
     <link rel="stylesheet" href="{{Helper::props('admin/vendors/ti-icons/css/themify-icons.css')}}">
     <link rel="stylesheet" href="{{Helper::props('admin/vendors/typicons/typicons.css')}}">
-
+    <link href="https://cdn.jsdelivr.net/npm/@sweetalert2/theme-dark@4/dark.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script type="text/javascript" src="https://cdn.datatables.net/2.0.8/js/dataTables.min.js" defer></script>
     <link rel="stylesheet" href="//cdn.datatables.net/2.0.8/css/dataTables.dataTables.min.css"/>

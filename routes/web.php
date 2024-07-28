@@ -18,6 +18,7 @@ Route::middleware('auth')->group(function () {
 
 
     Route::get('/admin/inventory', [inventory::class, 'index']);
+    Route::get('/admin/addInventory', [inventory::class, 'addInventory']);
     
     Route::get('/admin/my-profile', [userProfile::class, 'index']);
     Route::post('/admin/my-profile', [userProfile::class, 'updateProfile'])->name('update.profile');

@@ -26,6 +26,11 @@ class inventoryController extends Controller
     }
 
     public function submitInventory(Request $request){
+        // These 3 variables are for 3 product images, Product images are optional, So declaring them here as blank value to avoid null exception.
+        $imageName1="";
+        $imageName2="";
+        $imageName3="";
+
         Log::info('New Inventory Addition Request: ',[$request->except(['_token'])]);
 
         # Thumbnail Image 
@@ -37,7 +42,9 @@ class inventoryController extends Controller
             return redirect()->back()->with('error', 'Error: Request Rejected, Could not upload thumbnail image !!');
         }
         Log::info('Thumbnail added for Inventory Addition Request: ',[$request->except(['_token'])]);
-        if($moveThumbnailImg){
+
+
+        if($request->productimg1!=""){
             # Product Image 1
             $productImage1 = "product-img-1-" . time();
             $imageName1 = $productImage1 . '.' . $request->productimg1->extension();
@@ -49,7 +56,7 @@ class inventoryController extends Controller
             Log::info('Product Image 1 added for Inventory Addition Request: ',[$request->except(['_token'])]);
         }
 
-        if($moveProductImg1 && $moveThumbnailImg){
+        if($request->productimg2!=""){
             # Product Image 2
             $productImage2 = "product-img-2-" . time();
             $imageName2 = $productImage2 . '.' . $request->productimg2->extension();
@@ -61,7 +68,7 @@ class inventoryController extends Controller
             Log::info('Product Image 2 added for Inventory Addition Request: ',[$request->except(['_token'])]);
         }
 
-        if($moveProductImg1 && $moveProductImg2 && $moveThumbnailImg){
+        if($request->productimg3!=""){
             # Product Image 3
             $productImage3 = "product-img-3-" . time();
             $imageName3 = $productImage3 . '.' . $request->productimg3->extension();

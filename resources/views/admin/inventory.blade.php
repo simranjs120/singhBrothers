@@ -1,13 +1,18 @@
 <x-Admin-header :profile="$profile" />
-
+<style>
+    #image-popper:hover{
+        cursor:pointer;
+    }
+</style>
 <div class="row">
     <div class="card">
         <div class="col-sm-12">
-            <div class="home-tab" style="overflow-x:scroll !important;">
+            <div class="home-tab" >
                 <h4 class="card-title card-title-dash m-4">All Your Inventory</h4>
                 <a href="{{url('admin/addInventory')}}">
                     <button type="button" class="btn btn-success m-3 mt-0 text-light">+ New Inventory</button>
                 </a>
+                <div class="table-box" style="overflow-x:scroll !important;">
                 <table class="table" id="datatable" style="overflow-x:scroll !important;">
                     <thead>
                         <tr>
@@ -30,8 +35,8 @@
                             <tr>
                                 <td>{{$key + 1}}</td>
                                 <td>
-                                    <img src="{{Helper::props('admin/inventoryImages') . '/' . $row->thumbnailimg}}"
-                                        class="img-fluid" />
+                                    <img src="{{Helper::props('admin/inventoryImages') . '/' . $row->thumbnailimg}}" class="img-fluid" 
+                                    id="image-popper" onclick="popImage('{{Helper::props('admin/inventoryImages') . '/' . $row->thumbnailimg}}')"/>
                                 </td>
                                 <td>{{$row->itemName}}</td>
                                 <td>{{$row->strikerPrice}}</td>
@@ -63,8 +68,36 @@
                         @endforeach
                     </tbody>
                 </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Image Popper Modal -->
+<div class="modal fade" id="popImageModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Thumbnail Preview</h5>
+                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+            <img src="#" class="img-fluid" id="popElement" alt="Loading..."/>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
             </div>
         </div>
     </div>
 </div>
 <x-admin-footer />
+<script>
+    function popImage(path){
+        $('#popImageModal').modal('show');
+        $("#popElement").attr("src",path);
+    }
+</script>

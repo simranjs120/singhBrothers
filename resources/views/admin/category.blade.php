@@ -45,6 +45,7 @@
                 <div class="tab-content" id="nav-tabContent">
                     <div class="tab-pane fade show active" id="categories" role="tabpanel">
                         <h4 class="card-title card-title-dash mt-1 mb-2">Here's the list of all your categories</h4>
+                        <div class="table-box" style="overflow-x:scroll !important;">
                         <table class="table" id="datatable" style="overflow-x:scroll;">
                             <thead>
                                 <tr>
@@ -90,9 +91,11 @@
                                 @endforeach
                             </tbody>
                         </table>
+                        </div>
                     </div>
                     <div class="tab-pane fade" id="sub-categories" role="tabpanel">
                     <h4 class="card-title card-title-dash mt-1 mb-2">Here's the list of all your Sub-categories</h4>
+                    <div class="table-box" style="overflow-x:scroll !important;">
                         <table class="table" id="datatable-2" style="overflow-x:scroll; width:100%;">
                             <thead>
                                 <tr>
@@ -144,6 +147,7 @@
                                 @endphp
                             </tbody>
                         </table>
+                    </div>
                     </div>
                 </div>
             </div>

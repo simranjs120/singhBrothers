@@ -1,4 +1,23 @@
 <x-Admin-header :profile="$profile"/>
+<style>
+  @media(max-width:992px){
+    .dashboard-stats-glance{
+      margin-top:30px;
+    }
+    #mobile-agent{
+      display:block !important;
+    }
+    #pc-agent{
+    display:none !important;
+  }
+  }
+  #mobile-agent{
+    display:none;
+  }
+  #pc-agent{
+    display:block;
+  }
+</style>
           <div class="row">
             <div class="col-sm-12">
               <div class="home-tab">
@@ -33,36 +52,38 @@
                   <div class="tab-pane fade show active" id="overview" role="tabpanel" aria-labelledby="overview"> 
                     <div class="row">
                       <div class="col-sm-12">
-                        <div class="statistics-details d-flex align-items-center justify-content-between">
-                          <div>
+                        <div class="statistics-details align-items-center justify-content-between">
+                          <div class="row">
+                          <div class="col-lg-2 col-md-4 col-sm-6 col-xs-12 dashboard-stats-glance">
                             <p class="statistics-title">Total Inventory Items</p>
                             <h3 class="rate-percentage">100</h3>
                             <p class="text-danger d-flex"><span>0 Added Today</span></p>
                           </div>
-                          <div>
+                          <div class="col-lg-2 col-md-4 col-sm-6 col-xs-12 dashboard-stats-glance">
                             <p class="statistics-title">Total Categories</p>
                             <h3 class="rate-percentage">10</h3>
                             <p class="text-success d-flex"><i class="mdi mdi-menu-up"></i><span>+2 Today</span></p>
                           </div>
-                          <div>
+                          <div class="col-lg-2 col-md-4 col-sm-6 col-xs-12 dashboard-stats-glance">
                             <p class="statistics-title">Total Landing Searches</p>
                             <h3 class="rate-percentage">68</h3>
                             <p class="text-success d-flex"><i class="mdi mdi-menu-up"></i><span>+10 Today</span></p>
                           </div>
-                          <div class="d-none d-md-block">
+                          <div class="col-lg-2 col-md-4 col-sm-6 col-xs-12 dashboard-stats-glance">
                             <p class="statistics-title">Total Offers</p>
                             <h3 class="rate-percentage">50</h3>
                             <p class="text-danger d-flex"><span>0 Created Today</span></p>
                           </div>
-                          <div class="d-none d-md-block">
+                          <div class="col-lg-2 col-md-4 col-sm-6 col-xs-12 dashboard-stats-glance">
                             <p class="statistics-title">Product Queries</p>
                             <h3 class="rate-percentage">68</h3>
                             <p class="text-success d-flex"><i class="mdi mdi-menu-up"></i><span>+5 Today</span></p>
                           </div>
-                          <div class="d-none d-md-block">
+                          <div class="col-lg-2 col-md-4 col-sm-6 col-xs-12 dashboard-stats-glance">
                             <p class="statistics-title">Contact Form Queries</p>
                             <h3 class="rate-percentage">102</h3>
                             <p class="text-danger d-flex"><span>0 Today</span></p>
+                          </div>
                           </div>
                         </div>
                       </div>
@@ -124,8 +145,8 @@
                                   @foreach($tracking10 as $row)
                                   <li>
                                     <div class="d-flex justify-content-between">
-                                      <div><span class="text-light-green">{{$row->changer_name}}</span> {{$row->change_title}}</div>
-                                      <p>{{$row->created_at}}</p>
+                                      <div><span class="text-light-green">{{$row->changer_name}}</span> {{$row->change_title}} <p id="mobile-agent">{{$row->created_at}}</p></div>
+                                      <p id="pc-agent">{{$row->created_at}}</p>
                                     </div>
                                   </li>
                                   @endforeach

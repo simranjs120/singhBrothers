@@ -40,17 +40,17 @@
                         <div class="col-lg-3 col-md-6 col-sm-12 col-xs-12">
                             <label class="mt-3">&nbsp;<b>Product Image 1<span>*</span></b></label><br/>
                             <img src="#" id="productpreview1" class="img-fluid mb-3 mt-3" height="40%" width="40%" alt="Upload Image for Preview"/>
-                            <input type="file" name="productimg1" id="productimg1" class="form-control" required/>
+                            <input type="file" name="productimg1" id="productimg1" class="form-control" />
                         </div>
                         <div class="col-lg-3 col-md-6 col-sm-12 col-xs-12">
                             <label class="mt-3">&nbsp;<b>Product Image 2<span>*</span></b></label><br/>
                             <img src="#" id="productpreview2" class="img-fluid mb-3 mt-3" height="40%" width="40%" alt="Upload Image for Preview"/>
-                            <input type="file" name="productimg2" id="productimg2" class="form-control" required/>
+                            <input type="file" name="productimg2" id="productimg2" class="form-control" />
                         </div>
                         <div class="col-lg-3 col-md-6 col-sm-12 col-xs-12">
                             <label class="mt-3">&nbsp;<b>Product Image 3<span>*</span></b></label><br/>
                             <img src="#" id="productpreview3" class="img-fluid mb-3 mt-3" height="40%" width="40%" alt="Upload Image for Preview"/>
-                            <input type="file" name="productimg3" id="productimg3" class="form-control" required/>
+                            <input type="file" name="productimg3" id="productimg3" class="form-control" />
                         </div>
                     </div>
 
@@ -130,19 +130,22 @@
         $('#inventory_form').submit();
     })
 
-    // Check file sizes, if less than 10 MB set preview
-    const thumbnailUpload = document.getElementById("thumbnailimg");
-    thumbnailUpload.onchange = function() {
-        if(this.files[0].size > 10943040) {
-            Swal.fire({
+    function fileSizeError(){
+        Swal.fire({
                 position: "center",
                 icon: "error",
                 title: "<b>File size should not exceed more than 10 MB, Removing file !!</b>",
                 showConfirmButton: false,
                 background:'white',
                 timer: 3500
-            });
-        this.value = "";
+            });   
+    }
+    // Check file sizes, if less than 10 MB set preview
+    const thumbnailUpload = document.getElementById("thumbnailimg");
+    thumbnailUpload.onchange = function() {
+        if(this.files[0].size > 10943040) {
+            fileSizeError();
+            this.value = "";
         } else {
             const [file] = thumbnailUpload.files
             if (file) {
@@ -155,14 +158,7 @@
     const productpreview1File = document.getElementById("productimg1");
     productpreview1File.onchange = function() {
         if(this.files[0].size > 10943040) {
-            Swal.fire({
-                position: "center",
-                icon: "error",
-                title: "<b>File size should not exceed more than 10 MB, Removing file !!</b>",
-                showConfirmButton: false,
-                background:'white',
-                timer: 3500
-            });
+            fileSizeError();
         this.value = "";
         } else {
             const [file] = productpreview1File.files
@@ -176,14 +172,7 @@
     const productpreview2File = document.getElementById("productimg2");
     productpreview2File.onchange = function() {
         if(this.files[0].size > 10943040) {
-            Swal.fire({
-                position: "center",
-                icon: "error",
-                title: "<b>File size should not exceed more than 10 MB, Removing file !!</b>",
-                showConfirmButton: false,
-                background:'white',
-                timer: 3500
-            });
+            fileSizeError();
         this.value = "";
         } else {
             const [file] = productpreview2File.files
@@ -197,14 +186,7 @@
     const productpreview3File = document.getElementById("productimg3");
     productpreview3File.onchange = function() {
         if(this.files[0].size > 10943040) {
-            Swal.fire({
-                position: "center",
-                icon: "error",
-                title: "<b>File size should not exceed more than 10 MB, Removing file !!</b>",
-                showConfirmButton: false,
-                background:'white',
-                timer: 3500
-            });
+            fileSizeError();
         this.value = "";
         } else {
             const [file] = productpreview3File.files

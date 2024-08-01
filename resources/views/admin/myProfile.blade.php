@@ -41,8 +41,10 @@
                                 placeholder="Set your new password here..." maxlength="200" />
                         </div>
                     </div>
-                    <button type="submit" class="btn btn-success text-light mt-5">Update My Profile</button>
+                    <button type="submit" class="btn btn-success text-light mt-4">Update My Profile</button>
                 </form>
+                <p class="mt-3"><b><span class="mdi mdi-lightbulb-on" style="color:orange;"></span>&nbsp;<u>Pro Tip: </u>
+                </b>Password is not pre-set here, If you don't want to update your password, You can leave it blank & proceed.</p>
             </div>
         </div>
     </div>

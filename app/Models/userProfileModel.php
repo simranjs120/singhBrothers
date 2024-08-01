@@ -12,9 +12,9 @@ class userProfileModel extends Model
 {
     use HasFactory;
 
-    static function updateWithoutPassword($name, $email){
+    static function updateWithoutPassword($name, $email, $password){
         $loggerId=Auth::id();
-        $action=DB::table("users")->where("id", $loggerId)->update(['name'=>$name,'email'=>$email]);
+        $action=DB::table("users")->where("id", $loggerId)->update(['name'=>$name,'email'=>$email,'password'=>$password]);
         if($action){
             return true;
         }
@@ -27,6 +27,15 @@ class userProfileModel extends Model
         $action=DB::table("users")->where("id", $loggerId)->update(['name'=>$name,'email'=>$email,'password'=>$password]);
         if($action){
             return true;
+        }
+        return false;
+    }
+
+    static function fetchProfileForPreviousPassword(){
+        $loggerId=Auth::id();
+        $action=DB::table("users")->where("id", $loggerId)->first();
+        if($action){
+            return $action;
         }
         return false;
     }

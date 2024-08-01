@@ -32,7 +32,8 @@ class userProfileController extends Controller
             return redirect()->back()->with('error','An error occured, Please contact the developer !!');
         }
        } else{
-        $updateInfoWithoutPassword=userProfile::updateWithoutPassword($name, $email);
+        $fetchProfileForPreviousPassword=userProfile::fetchProfileForPreviousPassword();
+        $updateInfoWithoutPassword=userProfile::updateWithoutPassword($name, $email,$password=$fetchProfileForPreviousPassword->password);
         if($updateInfoWithoutPassword){
             Log::info('Profile Update Request Successfull for User ID: ',[Auth::id()]);
             return redirect()->back()->with('success','Your profile has been updated successfully !!');

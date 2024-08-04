@@ -31,4 +31,9 @@ class inventoryModel extends Model
         $data=DB::table('collections')->where('id',$collection_id)->first();
         return $data;
     }
+
+    static function getInventoryWithId($id){
+        $data=DB::table('inventory')->where('id',$id)->first();
+        return $data;
+    }
 }

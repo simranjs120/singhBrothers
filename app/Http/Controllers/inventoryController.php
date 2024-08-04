@@ -110,5 +110,11 @@ class inventoryController extends Controller
         Log::error('Error occured while creating inventory for payload: ',[$request->except(['_token'])]);
         return redirect()->back()->with('error', 'An error occured!! Please contact developer..');
     }
+
+    public function viewInventory($id){
+        $data['profile'] = dashboard::fetchProfile();
+        $data['inventory']=inventory::getInventoryWithId($id);
+        return view('admin.viewInventory',$data);
+    }
 }
 

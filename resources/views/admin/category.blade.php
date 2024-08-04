@@ -6,6 +6,25 @@
 </style>
 <div class="row">
     <div class="card">
+        <div class="row">
+            <div class="col-lg-6 breadcrumbs">
+                <h5 class="m-4">
+                    <a href="{{url('admin/categories')}}">Category</a> / 
+                    <span class="breadcrumbs-active">Manage Category</span>
+                </h5>
+            </div>
+            <div class="col-lg-6">
+                <button type="button" class="btn btn-success m-2 mt-2 text-light pull-right" data-bs-toggle="modal"
+                    data-bs-target="#categoryModal">+ New Category</button>
+                <button type="button" class="btn btn-primary m-2 mt-2 text-light pull-right" data-bs-toggle="modal"
+                    data-bs-target="#subCategoryModal">+ New Sub-Category</button>
+            </div>
+        </div>
+    </div>
+</div>
+<br/>
+<div class="row">
+    <div class="card">
         <div class="col-sm-12">
             <div class="home-tab">
                 <div class="mt-3 d-sm-flex align-items-center justify-content-between border-bottom">
@@ -21,14 +40,14 @@
                                 aria-selected="false">Sub-categories</a>
                         </li>
                     </ul>
-                    <div>
+                    <!-- <div>
                         <div class="btn-wrapper">
                             <button type="button" class="btn btn-success m-3 mt-0 text-light" data-bs-toggle="modal"
                                 data-bs-target="#categoryModal">+ New Category</button>
                             <button type="button" class="btn btn-primary m-3 mt-0 text-light" data-bs-toggle="modal"
                                 data-bs-target="#subCategoryModal">+ New Sub-Category</button>
                         </div>
-                    </div>
+                    </div> -->
 
                     <!-- End: Navigation Bar & Some Useful Buttons -->
                 </div>

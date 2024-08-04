@@ -20,6 +20,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/admin/inventory', [inventory::class, 'index']);
     Route::get('/admin/addInventory', [inventory::class, 'addInventory']);
     Route::post('/admin/submitInventory', [inventory::class, 'submitInventory'])->name('submit.inventory');
+    Route::get('/admin/view-inventory/{id}', [inventory::class, 'viewInventory']);
     
     Route::get('/admin/my-profile', [userProfile::class, 'index']);
     Route::post('/admin/my-profile', [userProfile::class, 'updateProfile'])->name('update.profile');

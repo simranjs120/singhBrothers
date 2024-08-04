@@ -6,12 +6,28 @@
 </style>
 <div class="row">
     <div class="card">
+        <div class="row">
+            <div class="col-lg-6 breadcrumbs">
+                <h5 class="m-4">
+                    <a href="{{url('admin/inventory')}}">Inventory</a> /
+                    <span class="breadcrumbs-active">List Inventory</span>
+                </h5>
+            </div>
+            <div class="col-lg-6">
+            <a href="{{url('admin/addInventory')}}">
+                    <button type="button" class="pull-right btn btn-success m-2 mt-2 text-light">+ New Inventory item</button>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+<br/>
+<div class="row">
+    <div class="card">
         <div class="col-sm-12">
             <div class="home-tab" >
                 <h4 class="card-title card-title-dash m-4">All Your Inventory</h4>
-                <a href="{{url('admin/addInventory')}}">
-                    <button type="button" class="btn btn-success m-3 mt-0 text-light">+ New Inventory</button>
-                </a>
+                
                 <div class="table-box" style="overflow-x:scroll !important;">
                 <table class="table" id="datatable" style="overflow-x:scroll !important;">
                     <thead>
@@ -61,7 +77,9 @@
                                     @endif
                                 </td>
                                 <td>
-                                    <button type="button" class="btn btn-success text-light">View</button>
+                                    <a href="{{url('admin/view-inventory/'.$row->id)}}">
+                                        <button type="button" class="btn btn-success text-light">View</button>
+                                    </a>
                                     <button type="button" class="btn btn-danger text-light">Del</button>
                                 </td>
                             </tr>

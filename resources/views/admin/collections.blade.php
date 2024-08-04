@@ -6,28 +6,43 @@
 </style>
 <div class="row">
     <div class="card">
+        <div class="row">
+            <div class="col-lg-6 breadcrumbs">
+                <h5 class="m-4">
+                    <a href="{{url('admin/categories')}}">Category</a> / <a href="{{url('admin/categories')}}">Manage Category</a> /  
+                    <span class="breadcrumbs-active">Collections</span>
+                </h5>
+            </div>
+        </div>
+    </div>
+</div>
+<br/>
+<div class="row">
+    <div class="card">
         <div class="col-sm-12">
             <div class="home-tab">
                     <div class="tab-pane fade show active" id="categories" role="tabpanel">
                         <h4 class="card-title card-title-dash p-3">Here's the list of all your collections</h4>
-                        <table class="table" id="datatable" style="overflow-x:scroll;">
-                            <thead>
-                                <tr>
-                                    <th scope="col">#</th>
-                                    <th scope="col">Collection</th>
-                                    <th scope="col">Created On</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach($collectionData as $key => $row)
+                        <div class="table-box" style="overflow-x:scroll !important;">
+                            <table class="table" id="datatable" style="overflow-x:scroll;">
+                                <thead>
                                     <tr>
-                                        <td>{{$key + 1}}</td>
-                                        <td>{{$row->collection}}</td>
-                                        <td>{{$row->created_at}}</td>
+                                        <th scope="col">#</th>
+                                        <th scope="col">Collection</th>
+                                        <th scope="col">Created On</th>
                                     </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
+                                </thead>
+                                <tbody>
+                                    @foreach($collectionData as $key => $row)
+                                        <tr>
+                                            <td>{{$key + 1}}</td>
+                                            <td>{{$row->collection}}</td>
+                                            <td>{{$row->created_at}}</td>
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
             </div>
         </div>

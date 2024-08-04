@@ -9,10 +9,27 @@
         /* width: 300px !important; */
         height: 150px !important;
     }
-    span{
+    .asterik{
         color:red;
     }
 </style>
+<div class="row">
+    <div class="card">
+        <div class="row">
+            <div class="col-lg-6 breadcrumbs">
+                <h5 class="m-4">
+                    <a href="{{url('admin/inventory')}}">Inventory</a> / <a href="{{url('admin/inventory')}}">List
+                        Inventory</a> /
+                    <span class="breadcrumbs-active">Add Inventory</span>
+                </h5>
+            </div>
+            <div class="col-lg-6">
+                <h5 class="pull-right mt-4"><b>Items marked with(<span class="asterik">*</span>) are mandatory !!</b></span></h5>
+            </div>
+        </div>
+    </div>
+</div>
+<br />
 <div class="row">
     <div class="card">
         <div class="col-sm-12">
@@ -33,22 +50,22 @@
                     <!-- Row 1 -->
                     <div class="row mb-4">
                         <div class="col-lg-3 col-md-6 col-sm-12 col-xs-12">
-                            <label class="mt-3" style="background-color:red; color:white;">&nbsp;<b>Add Thumbnail Image<span>*</span></b></label><br/>
+                            <label class="mt-3" style="background-color:red; color:white;">&nbsp;<b>Add Thumbnail Image</b></label><span class="asterik">*</span><br/>
                             <img src="#" id="thumbnailpreview" class="img-fluid mb-3 mt-3" height="40%" width="40%" alt="Upload Image for Preview"/>
                             <input type="file" name="thumbnailimg" id="thumbnailimg" class="form-control" required/>
                         </div>
                         <div class="col-lg-3 col-md-6 col-sm-12 col-xs-12">
-                            <label class="mt-3">&nbsp;<b>Product Image 1<span>*</span></b></label><br/>
+                            <label class="mt-3">&nbsp;<b>Product Image 1</b></label><br/>
                             <img src="#" id="productpreview1" class="img-fluid mb-3 mt-3" height="40%" width="40%" alt="Upload Image for Preview"/>
                             <input type="file" name="productimg1" id="productimg1" class="form-control" />
                         </div>
                         <div class="col-lg-3 col-md-6 col-sm-12 col-xs-12">
-                            <label class="mt-3">&nbsp;<b>Product Image 2<span>*</span></b></label><br/>
+                            <label class="mt-3">&nbsp;<b>Product Image 2</b></label><br/>
                             <img src="#" id="productpreview2" class="img-fluid mb-3 mt-3" height="40%" width="40%" alt="Upload Image for Preview"/>
                             <input type="file" name="productimg2" id="productimg2" class="form-control" />
                         </div>
                         <div class="col-lg-3 col-md-6 col-sm-12 col-xs-12">
-                            <label class="mt-3">&nbsp;<b>Product Image 3<span>*</span></b></label><br/>
+                            <label class="mt-3">&nbsp;<b>Product Image 3</b></label><br/>
                             <img src="#" id="productpreview3" class="img-fluid mb-3 mt-3" height="40%" width="40%" alt="Upload Image for Preview"/>
                             <input type="file" name="productimg3" id="productimg3" class="form-control" />
                         </div>
@@ -57,7 +74,7 @@
                     <!-- Row 2 -->
                      <div class="row mb-4">
                         <div class="col-lg-3 col-md-6 col-sm-12 col-xs-12">
-                            <label class="mt-3">&nbsp;<b>Item Name<span>*</span></b></label>
+                            <label class="mt-3">&nbsp;<b>Item Name<span class="asterik">*</span></b></label>
                             <input type="text" name="itemName" class="form-control" maxlength="180" required placeholder="Enter Item Name..." required/>
                         </div>
                         <div class="col-lg-3 col-md-6 col-sm-12 col-xs-12">
@@ -65,7 +82,7 @@
                             <input type="text" name="strikerPrice" class="form-control" maxlength="80" placeholder="₹ Only Enter Number Here..."/>
                         </div>
                         <div class="col-lg-3 col-md-6 col-sm-12 col-xs-12">
-                            <label class="mt-3">&nbsp;<b>Actual Price<span>*</span></b></label>
+                            <label class="mt-3">&nbsp;<b>Actual Price<span class="asterik">*</span></b></label>
                             <input type="text" name="actualPrice" class="form-control" maxlength="80" placeholder="₹ Only Enter Number Here..." required/>
                         </div>
                         <div class="col-lg-3 col-md-6 col-sm-12 col-xs-12">
@@ -73,19 +90,19 @@
                             <input type="text" name="offerBadge" class="form-control" maxlength="180" placeholder="Enter any type of offer..."/>
                         </div>
                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                            <label class="mt-3">&nbsp;<b>Item Description<span>*</span></b></label>
+                            <label class="mt-3">&nbsp;<b>Item Description<span class="asterik">*</span></b></label>
                             <textarea name="itemDescription" class="form-control" maxlength="1400"  placeholder="Enter Item Description..." required></textarea>
                         </div>
                         <div class="col-lg-3 col-md-6 col-sm-12 col-xs-12">
-                            <label class="mt-3">&nbsp;<b>Dimensions (200x150)<span>*</span></b></label>
+                            <label class="mt-3">&nbsp;<b>Dimensions (200x150)<span class="asterik">*</span></b></label>
                             <input type="text" name="dimensions" class="form-control" maxlength="80" placeholder="Enter like: 20x30..." required/>
                         </div>
                         <div class="col-lg-3 col-md-6 col-sm-12 col-xs-12">
-                            <label class="mt-3">&nbsp;<b>Size (cm/inches)<span>*</span></b></label>
+                            <label class="mt-3">&nbsp;<b>Size (cm/inches)<span class="asterik">*</span></b></label>
                             <input type="text" name="size" class="form-control" maxlength="80" placeholder="Enter like: 20 cm/20 Inches..." required/>
                         </div>
                         <div class="col-lg-3 col-md-6 col-sm-12 col-xs-12">
-                            <label class="mt-3">&nbsp;<b>Quantity<span>*</span></b></label>
+                            <label class="mt-3">&nbsp;<b>Quantity<span class="asterik">*</span></b></label>
                             <input type="text" name="quantity" class="form-control" maxlength="80" placeholder="Enter only number here..." required/>
                         </div>
                         <div class="col-lg-3 col-md-6 col-sm-12 col-xs-12">
@@ -97,7 +114,7 @@
                             <input type="text" name="importantNote" class="form-control" maxlength="500" placeholder="Any important note for customer..."/>
                         </div>
                         <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
-                            <label class="mt-3">&nbsp;<b>Select Collection<span>*</span></b></label>
+                            <label class="mt-3">&nbsp;<b>Select Collection<span class="asterik">*</span></b></label>
                             <select class="form-control" name="collection_id" style="color:black !important;" required>
                                 <option selected disabled value="">--Select--</option>
                                 @foreach($collections as $row)

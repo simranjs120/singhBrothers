@@ -32,7 +32,27 @@
     <!-- endinject -->
     <link rel="shortcut icon" href="{{Helper::props('admin/images/favicon.png')}}" />
 </head>
-
+<style>
+    .breadcrumbs{
+        color:black;
+    }
+    .breadcrumbs-active{
+        color:blue;
+    }
+    .breadcrumbs:hover{
+        cursor:pointer;
+    }
+    .breadcrumbs-active:hover{
+        cursor:pointer;
+    }
+    .pull-right{
+        float: right;
+    }
+    a{
+        text-decoration:none;
+        color:black;
+    }
+</style>
 <body>
     <div class="container-scroller">
         <!-- partial:partials/_navbar.html -->

@@ -4,19 +4,20 @@ use App\Http\Controllers\inventoryController as inventory;
 use App\Http\Controllers\categoryController as category;
 use App\Http\Controllers\adminDashboardController as dashboard;
 use App\Http\Controllers\userProfileController as userProfile;
+use App\Http\Controllers\landingSectionController as landingSection;
+use App\Http\Controllers\indexController as index;
 
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('index');
-});
+
+Route::get('/', [index::class, 'index']);
 
 Route::get('admin/dashboard',  [dashboard::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::get('/admin/all-activity', [dashboard::class, 'allActivity']);
 
-
+    # The inventory module
     Route::get('/admin/inventory', [inventory::class, 'index']);
     Route::get('/admin/add-inventory', [inventory::class, 'addInventory']);
     Route::get('/admin/edit-inventory/{id}', [inventory::class, 'editInventory']);
@@ -26,12 +27,18 @@ Route::middleware('auth')->group(function () {
     Route::get('/admin/change-inventory-status/{status}/{id}', [inventory::class, 'changeInventoryStatus']);
     Route::get('/admin/delete-inventory/{id}', [inventory::class, 'deleteInventory']);
     
+    # Profile module
     Route::get('/admin/my-profile', [userProfile::class, 'index']);
     Route::post('/admin/my-profile', [userProfile::class, 'updateProfile'])->name('update.profile');
     Route::get('/admin/add-user', [userProfile::class, 'addNewUserRender']);
     Route::post('/admin/add-user', [userProfile::class, 'addNewUser'])->name('add.newUser');
     
-    # All About Category Module
+    # Landing Section Module
+    Route::get('/admin/landing-section', [landingSection::class, 'index']);
+    Route::post('/admin/configureNavTab', [landingSection::class, 'configureNavTab'])->name('configure.tab');
+    Route::post('/admin/configureLandingHeadings', [landingSection::class, 'configureLandingHeadings'])->name('configure.headings');
+
+    # Category Module
     Route::any('/admin/categories/delete-category/{id}', [category::class, 'deleteCategory']);
     Route::any('/admin/categories/change-status/{id}/{status}', [category::class, 'changeStatus']);
     Route::post('/admin/categories', [category::class, 'create'])->name('add.category');

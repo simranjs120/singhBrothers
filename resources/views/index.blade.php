@@ -1,4 +1,4 @@
-<x-header/>
+<x-header :web="$web"/>
 
   <!-- ======= Hero Section ======= -->
   <section id="hero" class="d-flex align-items-center justify-content-center">
@@ -6,8 +6,8 @@
 
       <div class="row justify-content-center landing-content" data-aos="fade-up" data-aos-delay="60">
         <div class="col-xl-10 col-lg-10">
-          <h1>Frame beautiful memories in timeless <span>Photo Frames</span></h1>
-          <h2>All Kinds Of Photo Frames & Framing Materials</h2>
+          <h1>{{$web->title}} <span>{{$web->title_color}}</span></h1>
+          <h2>{{$web->tagline}}</h2>
         </div>
       </div>
 
@@ -44,7 +44,7 @@
           </div>
         </div> -->
         <div class="searchpanelbase">
-          <h4>What Brings You Here Today?</h4>
+          <h4>{{$web->search_line}}</h4>
           <div id="search-container">
           <i class="ri-search-line"></i>
             <input type="text" class="form-control" placeholder="Search here..."/>

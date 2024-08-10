@@ -24,7 +24,7 @@
 
           <li class="nav-item nav-category">Website Mangement</li>
           <li class="nav-item">
-            <a class="nav-link" href="">
+            <a class="nav-link" href="{{url('admin/landing-section')}}">
               <i class="mdi mdi-floor-plan menu-icon"></i>
               <span class="menu-title">Landing Section</span>
             </a>

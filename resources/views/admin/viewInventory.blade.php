@@ -15,7 +15,7 @@
                 </h5>
             </div>
             <div class="col-lg-6">
-                <a href="{{url('admin/editInventory')}}">
+                <a href="{{url('admin/edit-inventory/'.$inventoryId)}}">
                     <button type="button" class="pull-right btn btn-success m-2 mt-2 text-light">Edit this item</button>
                 </a>
             </div>
@@ -42,7 +42,7 @@
                 <div class="row">
                     <div class="col-lg-5">
                         <img src="{{Helper::props('admin/inventoryImages') . '/' . $inventory->thumbnailimg}}"
-                            class="img-fluid" alt="Image Could Not Be Loaded Due To Some Error"/>
+                            class="img-fluid" alt="Image Could Not Be Loaded"/>
                     </div>
                     <div class="col-lg-7">
                         <h2 class=""><b>{{$inventory->itemName}}</b></h2><br />
@@ -89,15 +89,15 @@
             @if($inventory->productimg1 != "" || $inventory->productimg2 != "" || $inventory->productimg3 != "")
                 <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12">
                     <img src="{{Helper::props('admin/inventoryImages') . '/' . $inventory->productimg1}}"
-                        class="img-fluid mt-3" alt="Image Could Not Be Loaded Due To Some Error"/><br/><br/>
+                        class="img-fluid mt-3" alt="Image Could Not Be Loaded"/><br/><br/>
                 </div>
                 <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12">
                     <img src="{{Helper::props('admin/inventoryImages') . '/' . $inventory->productimg2}}"
-                        class="img-fluid mt-3" alt="Image Could Not Be Loaded Due To Some Error"/><br/><br/>
+                        class="img-fluid mt-3" alt="Image Could Not Be Loaded"/><br/><br/>
                 </div>
                 <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12 ">
                     <img src="{{Helper::props('admin/inventoryImages') . '/' . $inventory->productimg3}}"
-                        class="img-fluid mt-3" alt="Image Could Not Be Loaded Due To Some Error"/><br/><br/>
+                        class="img-fluid mt-3" alt="Image Could Not Be Loaded"/><br/><br/>
                 </div>
             @else
                 <h5 class="mt-5 mb-5 text-center" style="color:red;">There are no images added as of now</h5>

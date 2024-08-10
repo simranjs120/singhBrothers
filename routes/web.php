@@ -18,9 +18,13 @@ Route::middleware('auth')->group(function () {
 
 
     Route::get('/admin/inventory', [inventory::class, 'index']);
-    Route::get('/admin/addInventory', [inventory::class, 'addInventory']);
+    Route::get('/admin/add-inventory', [inventory::class, 'addInventory']);
+    Route::get('/admin/edit-inventory/{id}', [inventory::class, 'editInventory']);
+    Route::post('/admin/edit-inventory', [inventory::class, 'submitInventoryChanges'])->name('edit.inventory');
     Route::post('/admin/submitInventory', [inventory::class, 'submitInventory'])->name('submit.inventory');
     Route::get('/admin/view-inventory/{id}', [inventory::class, 'viewInventory']);
+    Route::get('/admin/change-inventory-status/{status}/{id}', [inventory::class, 'changeInventoryStatus']);
+    Route::get('/admin/delete-inventory/{id}', [inventory::class, 'deleteInventory']);
     
     Route::get('/admin/my-profile', [userProfile::class, 'index']);
     Route::post('/admin/my-profile', [userProfile::class, 'updateProfile'])->name('update.profile');

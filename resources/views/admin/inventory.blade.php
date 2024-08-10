@@ -14,7 +14,7 @@
                 </h5>
             </div>
             <div class="col-lg-6">
-            <a href="{{url('admin/addInventory')}}">
+            <a href="{{url('admin/add-inventory')}}">
                     <button type="button" class="pull-right btn btn-success m-2 mt-2 text-light">+ New Inventory item</button>
                 </a>
             </div>
@@ -27,7 +27,16 @@
         <div class="col-sm-12">
             <div class="home-tab" >
                 <h4 class="card-title card-title-dash m-4">All Your Inventory</h4>
-                
+                @if (Illuminate\Support\Facades\Session::has('success'))
+                    <div class="alert alert-success mt-2" style="background-color:#58ad2e;">
+                        <h5 class="text-light">{{Illuminate\Support\Facades\Session::pull('success')}}</h5>
+                    </div><br/>
+                @endif
+                @if (Illuminate\Support\Facades\Session::has('error'))
+                    <div class="alert alert-danger mt-2" style="background-color:#d22a1f;">
+                        <h5 class="text-light">{{Illuminate\Support\Facades\Session::pull('error')}}</h5>
+                    </div><br/>
+                @endif
                 <div class="table-box" style="overflow-x:scroll !important;">
                 <table class="table" id="datatable" style="overflow-x:scroll !important;">
                     <thead>
@@ -55,7 +64,7 @@
                                     id="image-popper" onclick="popImage('{{Helper::props('admin/inventoryImages') . '/' . $row->thumbnailimg}}')"/>
                                 </td>
                                 <td>{{$row->itemName}}</td>
-                                <td>{{$row->strikerPrice}}</td>
+                                <td><s>{{$row->strikerPrice}}</s></td>
                                 <td>{{$row->actualPrice}}</td>
                                 <td>{{$row->offerBadge}}</td>
                                 <td>{{$row->dimensions}}</td>
@@ -64,13 +73,13 @@
                                 <td>{{$row->collection_name}}</td>
                                 <td>
                                     @if($row->status == 0)
-                                        <a href="{{url('')}}">
+                                        <a href="{{url('admin/change-inventory-status/1/'.$row->id)}}">
                                             <span class="badge badge-danger"
                                                 onclick="return confirm('Do you want to switch this to active?')">In-Active</span>
                                         </a>
                                     @endif
                                     @if($row->status == 1)
-                                        <a href="{{url('')}}">
+                                        <a href="{{url('admin/change-inventory-status/0/'.$row->id)}}">
                                             <span class="badge badge-success"
                                                 onclick="return confirm('Do you want to switch this to In-active?')">Active</span>
                                         </a>
@@ -80,7 +89,9 @@
                                     <a href="{{url('admin/view-inventory/'.$row->id)}}">
                                         <button type="button" class="btn btn-success text-light">View</button>
                                     </a>
-                                    <button type="button" class="btn btn-danger text-light">Del</button>
+                                    <a href="{{url('/admin/delete-inventory/'.$row->id)}}" onclick="return confirm('Are you sure you want to delete this item?')">
+                                        <button type="button" class="btn btn-danger text-light">Del</button>
+                                    </a>
                                 </td>
                             </tr>
                         @endforeach

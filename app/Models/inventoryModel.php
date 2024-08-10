@@ -27,6 +27,14 @@ class inventoryModel extends Model
         return false;
     }
 
+    static function updateInventory($id,$data){
+        $update=DB::table('inventory')->where('id',$id)->update($data);
+        if($update){
+            return true;
+        }
+        return false;
+    }
+
     static function getcateAndSubCat($collection_id){
         $data=DB::table('collections')->where('id',$collection_id)->first();
         return $data;
@@ -35,5 +43,20 @@ class inventoryModel extends Model
     static function getInventoryWithId($id){
         $data=DB::table('inventory')->where('id',$id)->first();
         return $data;
+    }
+
+    static function deleteInventory($id){
+        $delete=DB::table('inventory')->where('id',$id)->delete();
+        if($delete){
+            return true;
+        }
+        return false;
+    }
+    static function changeInventoryStatus($status,$id){
+        $update=DB::table('inventory')->where('id',$id)->update(['status'=>$status]);
+        if($update){
+            return true;
+        }
+        return false;
     }
 }

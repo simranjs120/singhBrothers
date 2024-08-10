@@ -52,7 +52,7 @@ class categoryController extends Controller
             return redirect()->back()->with('error', 'Cannot create, this category already exists in the system !!');
         } else if ($insertCategory == 0) {
             Log::error('Category Insertion failed', [$payload]);
-            return redirect()->back()->with('error', 'An error occured while adding the new category, Kindly contact Developer !!');
+            return redirect()->back()->with('error', 'An error occured !! Please try again !!');
         }
     }
 
@@ -83,7 +83,7 @@ class categoryController extends Controller
             return redirect()->back()->with('success', 'Status Changed Successfully !!');
         } else {
             Log::error('Status change failed for category ID: ', [$id]);
-            return redirect()->back()->with('error', 'An error occured, Kindly contact Developer !!');
+            return redirect()->back()->with('error', 'An error occured !! Please try again !!');
         }
     }
 
@@ -123,7 +123,7 @@ class categoryController extends Controller
             return redirect()->back()->with('error', 'A sub-category exists for this category, Please delete sub-categories first !!');
         } else if ($changestatus == 0) {
             Log::error('Deletion failed for category ID: ', [$id]);
-            return redirect()->back()->with('error', 'An error occured, Kindly contact Developer !!');
+            return redirect()->back()->with('error', 'An error occured !! Please try again !!');
         }
     }
 
@@ -168,6 +168,6 @@ class categoryController extends Controller
             return redirect()->back()->with('success', 'New Sub-category has been added to the system successfully !!');
         }
         Log::error('Sub-category Insertion failed, Payload data: ', [$data]);
-        return redirect()->back()->with('error', 'An error occured while adding the new Sub-category, Kindly contact Developer !!');
+        return redirect()->back()->with('error', 'An error occured !! Please try again !!');
     }
 }

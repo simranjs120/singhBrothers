@@ -29,7 +29,7 @@ class userProfileController extends Controller
             return redirect()->back()->with('success','Your profile has been updated successfully !!');
         } else {
             Log::error('Profile Update Request Failed For User ID: ',[Auth::id()]);
-            return redirect()->back()->with('error','An error occured, Please contact the developer !!');
+            return redirect()->back()->with('error','An error occured !! Please try again !!');
         }
        } else{
         $fetchProfileForPreviousPassword=userProfile::fetchProfileForPreviousPassword();
@@ -39,7 +39,7 @@ class userProfileController extends Controller
             return redirect()->back()->with('success','Your profile has been updated successfully !!');
         } else {
             Log::error('Profile Update Request Failed For User ID: ',[Auth::id()]);
-            return redirect()->back()->with('error','An error occured, Please contact the developer !!');
+            return redirect()->back()->with('error','An error occured !! Please try again !!');
         }
        } 
     }
@@ -75,7 +75,7 @@ class userProfileController extends Controller
             return redirect()->back()->with('success','New User has been created successfully !!');
         } else {
             Log::error('New user creation request failed by User ID: ',[Auth::id()]);
-            return redirect()->back()->with('error','An error occured, Please contact the developer !!');
+            return redirect()->back()->with('error','An error occured !! Please try again !!');
         }
     }
 }

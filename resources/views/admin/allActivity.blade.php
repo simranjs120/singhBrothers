@@ -24,8 +24,8 @@
                                                 <li>
                                                     <div class="d-flex justify-content-between">
                                                         <div><span class="text-light-green">{{$row->changer_name}}</span>
-                                                            {{$row->change_title}}</div>
-                                                        <p>{{$row->created_at}}</p>
+                                                            {{$row->change_title}} <p id="mobile-agent">{{$row->created_at}}</p></div>
+                                                        <p id="pc-agent">{{$row->created_at}}</p>
                                                     </div>
                                                 </li>
                                             @endforeach

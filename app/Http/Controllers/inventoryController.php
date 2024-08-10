@@ -157,7 +157,7 @@ class inventoryController extends Controller
             return redirect()->back()->with('success', 'Inventory Item has been updated successfully');
         }
         Log::error('Error occured while updating inventory for payload: ',[$request->except(['_token'])]);
-        return redirect()->back()->with('error', 'An error occured !!');
+        return redirect()->back()->with('error', 'An error occured !! Please try again !!');
 
     }
 
@@ -256,7 +256,7 @@ class inventoryController extends Controller
             return redirect()->back()->with('success', 'New Inventory Item has been created successfully');
         }
         Log::error('Error occured while creating inventory for payload: ',[$request->except(['_token'])]);
-        return redirect()->back()->with('error', 'An error occured!! Please contact developer..');
+        return redirect()->back()->with('error', 'An error occured !! Please try again !!');
     }
 
     public function changeInventoryStatus($status,$id){
@@ -283,7 +283,7 @@ class inventoryController extends Controller
             return redirect()->back()->with('success', 'Inventory Item status has been updated successfully');
         }
         Log::error('Error occured while updating status for inventory ID: ',[$id]);
-        return redirect()->back()->with('error', 'An error occured!! Please contact developer..');
+        return redirect()->back()->with('error', 'An error occured !! Please try again !!');
     }
 
     public function deleteInventory($id){
@@ -313,7 +313,7 @@ class inventoryController extends Controller
             return redirect()->back()->with('success', 'Inventory Item has been deleted successfully');
         }
         Log::error('Error occured while deleting for inventory ID: ',[$id]);
-        return redirect()->back()->with('error', 'An error occured!! Please contact developer..');
+        return redirect()->back()->with('error', 'An error occured !! Please try again !!');
     }
 
     public function viewInventory($id){

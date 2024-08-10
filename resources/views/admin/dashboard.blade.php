@@ -1,23 +1,4 @@
 <x-Admin-header :profile="$profile"/>
-<style>
-  @media(max-width:992px){
-    .dashboard-stats-glance{
-      margin-top:30px;
-    }
-    #mobile-agent{
-      display:block !important;
-    }
-    #pc-agent{
-    display:none !important;
-  }
-  }
-  #mobile-agent{
-    display:none;
-  }
-  #pc-agent{
-    display:block;
-  }
-</style>
           <div class="row">
             <div class="col-sm-12">
               <div class="home-tab">

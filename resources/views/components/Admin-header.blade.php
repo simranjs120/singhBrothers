@@ -52,6 +52,23 @@
         text-decoration:none;
         color:black;
     }
+    @media(max-width:992px){
+    .dashboard-stats-glance{
+      margin-top:30px;
+    }
+    #mobile-agent{
+      display:block !important;
+    }
+    #pc-agent{
+    display:none !important;
+  }
+  }
+  #mobile-agent{
+    display:none;
+  }
+  #pc-agent{
+    display:block;
+  }
 </style>
 <body>
     <div class="container-scroller">

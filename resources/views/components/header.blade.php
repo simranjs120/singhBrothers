@@ -42,12 +42,12 @@
 
       <nav id="navbar" class="navbar order-last order-lg-0">
         <ul>
-          @if($web->nav_tab_1!="")<li><a class="nav-link scrollto" href="{{$web->nav_tab_1_link}}">Home</a></li>@endif
-          @if($web->nav_tab_2!="")<li><a class="nav-link scrollto" href="{{$web->nav_tab_2_link}}">About</a></li>@endif
-          @if($web->nav_tab_3!="")<li><a class="nav-link scrollto" href="{{$web->nav_tab_3_link}}">Services</a></li>@endif
-          @if($web->nav_tab_4!="")<li><a class="nav-link scrollto " href="{{$web->nav_tab_4_link}}">Portfolio</a></li>@endif
-          @if($web->nav_tab_5!="")<li><a class="nav-link scrollto" href="{{$web->nav_tab_5_link}}">Team</a></li>@endif
-          @if($web->nav_tab_6!="")<li><a class="nav-link scrollto" href="{{$web->nav_tab_6_link}}">Contact</a></li>@endif
+          @if($web->nav_tab_1!="")<li><a class="nav-link scrollto" href="{{$web->nav_tab_1_link}}">{{$web->nav_tab_1}}</a></li>@endif
+          @if($web->nav_tab_2!="")<li><a class="nav-link scrollto" href="{{$web->nav_tab_2_link}}">{{$web->nav_tab_2}}</a></li>@endif
+          @if($web->nav_tab_3!="")<li><a class="nav-link scrollto" href="{{$web->nav_tab_3_link}}">{{$web->nav_tab_3}}</a></li>@endif
+          @if($web->nav_tab_4!="")<li><a class="nav-link scrollto " href="{{$web->nav_tab_4_link}}">{{$web->nav_tab_4}}</a></li>@endif
+          @if($web->nav_tab_5!="")<li><a class="nav-link scrollto" href="{{$web->nav_tab_5_link}}">{{$web->nav_tab_5}}</a></li>@endif
+          @if($web->nav_tab_6!="")<li><a class="nav-link scrollto" href="{{$web->nav_tab_6_link}}">{{$web->nav_tab_6}}</a></li>@endif
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
       </nav><!-- .navbar -->

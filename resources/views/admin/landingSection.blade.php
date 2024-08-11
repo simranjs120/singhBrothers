@@ -13,7 +13,7 @@
     <div class="card">
         <div class="row">
             <div class="col-lg-12">
-                <h5 class="m-4">Update Navigation Links</h5>
+                <h4 class="m-4"><b>Update Navigation Links</b></h4>
                 @if (Illuminate\Support\Facades\Session::has('success'))
                     <div class="alert alert-success mt-2" style="background-color:#58ad2e;">
                         <h5 class="text-light">{{Illuminate\Support\Facades\Session::pull('success')}}</h5>
@@ -83,7 +83,7 @@
     <div class="card">
         <div class="row">
             <div class="col-lg-12">
-                <h5 class="m-4">Update Headings</h5>
+                <h4 class="m-4"><b>Update Headings</b></h4>
                 <form action="{{route('configure.headings')}}" method="POST">
                     @csrf
                     <label>Enter Title: </label>

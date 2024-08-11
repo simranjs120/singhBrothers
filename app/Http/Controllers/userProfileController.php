@@ -46,10 +46,12 @@ class userProfileController extends Controller
 
     public function addNewUserRender(){
         $data['profile']=dashboard::fetchProfile();
+         $data['fetchUsers']=dashboard::fetchUsers();
         return view('admin.addUser', $data);
     }
 
     public function addNewUser(Request $request){
+        date_default_timezone_set('Asia/Kolkata');
         Log::info('Request to create a new user by User ID: ',[Auth::id()]);
         $user = User::create([
             'name' => $request->name,

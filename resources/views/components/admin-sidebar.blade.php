@@ -30,7 +30,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="">
+            <a class="nav-link" href="{{url('admin/offers')}}">
               <i class="mdi mdi-tag-multiple menu-icon"></i>
               <span class="menu-title">Manage Offers</span>
             </a>

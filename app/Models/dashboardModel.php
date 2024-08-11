@@ -18,6 +18,11 @@ class dashboardModel extends Model
         }
         return false;
     }
+
+    static function fetchUsers(){
+        $data=DB::table("users")->get();
+        return $data;        
+    }
     static function getTracking10(){
         $fetchTracking=DB::table("changes_tracker")->orderBy('id', 'DESC')->take(10)->get();
         if($fetchTracking){

@@ -45,5 +45,34 @@
         </div>
     </div>
 </div>
-
+<br/>
+<div class="row">
+    <div class="card">
+    <h4 class="card-title card-title-dash m-4">Here are other people who share this application with you</h4>
+        <div class="col-12">
+            <div class="table-box">
+            <table class="table" id="datatable" style="overflow-x:scroll !important;">
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Name</th>
+                            <th scope="col">Email</th>
+                            <th scope="col">Created Date/Time</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach($fetchUsers as $key => $row)
+                            <tr>
+                                <td>{{$key + 1}}</td>
+                                <td>{{$row->name}}</td>
+                                <td>{{$row->email}}</td>
+                                <td>{{$row->created_at}}</td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
 <x-admin-footer />

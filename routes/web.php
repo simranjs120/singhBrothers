@@ -5,6 +5,7 @@ use App\Http\Controllers\categoryController as category;
 use App\Http\Controllers\adminDashboardController as dashboard;
 use App\Http\Controllers\userProfileController as userProfile;
 use App\Http\Controllers\landingSectionController as landingSection;
+use App\Http\Controllers\offersController as offers;
 use App\Http\Controllers\indexController as index;
 
 use Illuminate\Support\Facades\Route;
@@ -27,6 +28,9 @@ Route::middleware('auth')->group(function () {
     Route::get('/admin/change-inventory-status/{status}/{id}', [inventory::class, 'changeInventoryStatus']);
     Route::get('/admin/delete-inventory/{id}', [inventory::class, 'deleteInventory']);
     
+    # Offers Module
+    Route::get('/admin/offers', [offers::class, 'index']);
+
     # Profile module
     Route::get('/admin/my-profile', [userProfile::class, 'index']);
     Route::post('/admin/my-profile', [userProfile::class, 'updateProfile'])->name('update.profile');

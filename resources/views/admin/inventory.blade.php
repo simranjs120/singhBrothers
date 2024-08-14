@@ -51,6 +51,7 @@
                             <th scope="col">Size</th>
                             <th scope="col">Stock</th>
                             <th scope="col">Collection</th>
+                            <th scope="col">Created On</th>
                             <th scope="col">Status</th>
                             <th scope="col">Actions</th>
                         </tr>
@@ -71,6 +72,7 @@
                                 <td>{{$row->size}}</td>
                                 <td>{{$row->quantity}}</td>
                                 <td>{{$row->collection_name}}</td>
+                                <td>{{$row->created_at}}</td>
                                 <td>
                                     @if($row->status == 0)
                                         <a href="{{url('admin/change-inventory-status/1/'.$row->id)}}">

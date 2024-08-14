@@ -130,7 +130,14 @@ class categoryController extends Controller
     public function submitSubCategories(Request $request)
     {
         $data['profile'] = dashboard::fetchProfile();
-        $data = $request->except(['_token']);
+        date_default_timezone_set(env('APPLICATION_TIMEZONE'));
+        $str = date("Y/m/d H:i:s");
+        // $data = $request->except(['_token']);
+        $data=[
+            'parent_id'=>$request->parent_id,
+            'category'=>$request->category,
+            'created_at'=>date('d/F/Y H:i', strtotime($str))
+        ];
         $action = category::submitSubCategories($data);
         if ($action) {
             $lastInsertedId = category::getLastInsertedCategoryId();

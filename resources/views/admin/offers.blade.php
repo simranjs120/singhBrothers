@@ -22,7 +22,64 @@
     </div>
 </div>
 <br/>
-
+<div class="row">
+    <div class="card">
+        <div class="row">
+        <div class="col-sm-12">
+            <div class="home-tab" >
+                <h4 class="card-title card-title-dash m-4">All Offers</h4>
+                @if (Illuminate\Support\Facades\Session::has('success'))
+                    <div class="alert alert-success mt-2" style="background-color:#58ad2e;">
+                        <h5 class="text-light">{{Illuminate\Support\Facades\Session::pull('success')}}</h5>
+                    </div><br/>
+                @endif
+                @if (Illuminate\Support\Facades\Session::has('error'))
+                    <div class="alert alert-danger mt-2" style="background-color:#d22a1f;">
+                        <h5 class="text-light">{{Illuminate\Support\Facades\Session::pull('error')}}</h5>
+                    </div><br/>
+                @endif
+                <div class="table-box" style="overflow-x:scroll !important;">
+                <table class="table" id="datatable" style="overflow-x:scroll !important;">
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Offer Image</th>
+                            <th scope="col">Offer Title</th>
+                            <th scope="col">Offer Text</th>
+                            <th scope="col">Offer URL</th>
+                            <th scope="col">Auto enable on</th>
+                            <th scope="col">Auto disable on</th>
+                            <th scope="col">Offer Type</th>
+                            <th scope="col">Status</th>
+                            <th scope="col">Created On</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        
+                            <tr>
+                                <td></td>
+                                <td>
+                                    <img src="{{Helper::props('admin/inventoryImages') . '/' . 'a'}}" class="img-fluid" 
+                                    id="image-popper" onclick="popImage('{{Helper::props('admin/inventoryImages') . '/' . 'a'}}')"/>
+                                </td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                        
+                    </tbody>
+                </table>
+                </div>
+            </div>
+        </div>
+        </div>
+    </div>
+</div>
 
 <!-- Image Popper Modal -->
 <div class="modal fade" id="popImageModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"

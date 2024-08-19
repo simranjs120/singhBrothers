@@ -69,6 +69,16 @@
   #pc-agent{
     display:block;
   }
+  .badge-success{
+    background-color:green;
+    color:white;
+    border:1px solid green;
+  }
+  .badge-danger{
+    background-color:red;
+    color:white;
+    border:1px solid red;
+  }
 </style>
 <body>
     <div class="container-scroller">

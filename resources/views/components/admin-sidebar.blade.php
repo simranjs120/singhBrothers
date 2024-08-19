@@ -15,6 +15,12 @@
               <span class="menu-title">Manage Category</span>
             </a>
           </li>
+          <li class="nav-item nav-category-sidebar">
+            <a class="nav-link" href="{{url('')}}">
+              <i class="mdi mdi-more menu-icon"></i>
+              <span class="menu-title">Manage Labels</span>
+            </a>
+          </li>
           <li class="nav-item nav-category-inventory">
             <a class="nav-link" href="{{url('admin/inventory')}}">
               <i class="mdi mdi-briefcase-check menu-icon"></i>

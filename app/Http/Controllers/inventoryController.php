@@ -244,7 +244,7 @@ class inventoryController extends Controller
         $insert=inventory::createInventory($payload);
         if($insert){
             Log::info('Inventory creation success for payload: ',[$request->except(['_token'])]);
-            # Entry for changes tracker
+            # Entry for changes tracker start
             $data['profile'] = dashboard::fetchProfile();
             $changer_name = $data['profile']->name;
             $changer_email = $data['profile']->email;
@@ -255,7 +255,7 @@ class inventoryController extends Controller
             } else {
                 Log::error('Addition to tracker table failed');
             }
-
+            # Enter for changes tracker end
             return redirect()->back()->with('success', 'New Inventory Item has been created successfully');
         }
         Log::error('Error occured while creating inventory for payload: ',[$request->except(['_token'])]);
@@ -266,7 +266,7 @@ class inventoryController extends Controller
         $updateStatus=inventory::changeInventoryStatus($status,$id);
         $previousData=inventory::getInventoryWithId($id);
         if($updateStatus){
-             # Entry for changes tracker
+             # Entry for changes tracker start
              $data['profile'] = dashboard::fetchProfile();
              $changer_name = $data['profile']->name;
              $changer_email = $data['profile']->email;
@@ -281,7 +281,7 @@ class inventoryController extends Controller
              } else {
                  Log::error('Addition to tracker table failed');
              }
-             # Tracker End
+             # Enter for changes tracker end
             Log::info('Status update for inventory ID: ',[$id]);
             return redirect()->back()->with('success', 'Inventory Item status has been updated successfully');
         }

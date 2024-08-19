@@ -30,6 +30,12 @@ Route::middleware('auth')->group(function () {
     
     # Offers Module
     Route::get('/admin/offers', [offers::class, 'index']);
+    Route::post('/admin/submitOffers', [offers::class, 'submitOffers'])->name('submit.offers');
+    Route::post('/admin/editOffers', [offers::class, 'editOffers'])->name('edit.offers');
+    Route::get('admin/change-offer-status/{status}/{id}', [offers::class, 'changeOfferStatus']);
+    Route::get('admin/delete-offers/{id}', [offers::class, 'deleteOffers']);
+    Route::get('admin/autoEnable', [offers::class, 'autoEnable']);
+    Route::get('admin/autoDisable', [offers::class, 'autoDisable']);
 
     # Profile module
     Route::get('/admin/my-profile', [userProfile::class, 'index']);
@@ -48,11 +54,6 @@ Route::middleware('auth')->group(function () {
     Route::post('/admin/categories', [category::class, 'create'])->name('add.category');
     Route::get('/admin/categories', [category::class, 'index']);
     Route::post('/admin/submit-subcategories', [category::class, 'submitSubCategories'])->name('submit.sub-categories');
-    Route::get('/admin/hierarchies/{id}', [category::class, 'getHierarchies']);
-    Route::post('/admin/submit-hierarchy', [category::class, 'submitHierarchy'])->name('add.hierarchy');
-    Route::any('/admin/change-hierarchy-status/{id}/{status}', [category::class, 'changeHierarchyStatus']);
-    Route::any('/admin/delete-hierarchy/{id}', [category::class, 'deleteHierarchy']);
-    Route::post('/admin/edit-hierarchy', [category::class, 'editHierarchy'])->name('edit.hierarchy');
     Route::get('/admin/collections/{id}', [category::class, 'getCollections']);
 });
 

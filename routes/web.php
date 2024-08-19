@@ -15,6 +15,9 @@ Route::get('/', [index::class, 'index']);
 
 Route::get('admin/dashboard',  [dashboard::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard');
 
+Route::get('/autoEnable', [offers::class, 'autoEnable']);
+Route::get('/autoDisable', [offers::class, 'autoDisable']);
+
 Route::middleware('auth')->group(function () {
     Route::get('/admin/all-activity', [dashboard::class, 'allActivity']);
 
@@ -34,8 +37,6 @@ Route::middleware('auth')->group(function () {
     Route::post('/admin/editOffers', [offers::class, 'editOffers'])->name('edit.offers');
     Route::get('admin/change-offer-status/{status}/{id}', [offers::class, 'changeOfferStatus']);
     Route::get('admin/delete-offers/{id}', [offers::class, 'deleteOffers']);
-    Route::get('admin/autoEnable', [offers::class, 'autoEnable']);
-    Route::get('admin/autoDisable', [offers::class, 'autoDisable']);
 
     # Profile module
     Route::get('/admin/my-profile', [userProfile::class, 'index']);

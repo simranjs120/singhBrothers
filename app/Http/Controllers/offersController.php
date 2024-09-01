@@ -12,6 +12,7 @@ use App\Models\User;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\File;
+use App\Helpers\Helper;
 
 class offersController extends Controller
 {
@@ -25,8 +26,6 @@ class offersController extends Controller
     public function submitOffers(Request $request)
     {
         Log::info('New offer creation request by User ID: ', [Auth::id()]);
-        date_default_timezone_set(env('APPLICATION_TIMEZONE'));
-        $str = date("Y/m/d H:i:s");
         # Offer Image 
         $imageName = "";
         if ($request->image != "") {
@@ -48,7 +47,7 @@ class offersController extends Controller
             "auto_disable" => $request->auto_disable,
             "type" => $request->type,
             "status" => 1,
-            "created_at" => date('d/F/Y H:i', strtotime($str))
+            "created_at" => Helper::timeStamp()
         ];
 
         $insert = offers::submitOffers($data);
@@ -106,8 +105,6 @@ class offersController extends Controller
     {
         Log::info('offer edit request by User ID: ', [Auth::id()]);
         $previousData = offers::getOfferWithId($request->id);
-        date_default_timezone_set(env('APPLICATION_TIMEZONE'));
-        $str = date("Y/m/d H:i:s");
         # Offer Image 
         $imageName = $previousData->image;
         if ($request->image != "") {
@@ -129,8 +126,7 @@ class offersController extends Controller
             "auto_enable" => $request->auto_enable,
             "auto_disable" => $request->auto_disable,
             "type" => $request->type,
-            "status" => $previousData->status,
-            "created_at" => date('d/F/Y H:i', strtotime($str))
+            "status" => $previousData->status
         ];
         $update = offers::editInventory($request->id, $data);
         if ($update) {
@@ -170,7 +166,7 @@ class offersController extends Controller
             } else {
                 Log::error('Addition to tracker table failed');
             }
-            # Enter for changes tracker end
+            # Entry for changes tracker end
             Log::info('Offer deleted successfully for request: ', [$previousData->title]);
             return redirect()->back()->with('success', 'Offer has been deleted successfully');
         }

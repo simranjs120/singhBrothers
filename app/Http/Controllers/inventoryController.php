@@ -8,7 +8,7 @@ use App\Models\dashboardModel as dashboard;
 use App\Models\inventoryModel as inventory;
 use App\Models\changesTrackerModel as tracker;
 use App\Models\categoryModel as category;
-use App\Helpers\Helper as Helper;
+use App\Helpers\Helper;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\File;
 
@@ -217,8 +217,6 @@ class inventoryController extends Controller
         }
 
         $getcateAndSubCat=inventory::getcateAndSubCat($request->collection_id);
-        date_default_timezone_set(env('APPLICATION_TIMEZONE'));
-        $str = date("Y/m/d H:i:s");
         $payload=[
             'thumbnailimg'=>$imageName,
             'productimg1'=>$imageName1,
@@ -239,7 +237,7 @@ class inventoryController extends Controller
             'category_id'=>$getcateAndSubCat->top_parent_id,
             'sub_category_id'=>$getcateAndSubCat->sub_category_id,
             'status'=>1,
-            'created_at'=>date('d/F/Y H:i', strtotime($str))
+            'created_at'=>Helper::timeStamp()
         ];
         $insert=inventory::createInventory($payload);
         if($insert){

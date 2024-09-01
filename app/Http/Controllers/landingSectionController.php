@@ -8,7 +8,7 @@ use App\Models\inventoryModel as inventory;
 use App\Models\landingSectionModel as landingSection;
 use App\Models\changesTrackerModel as tracker;
 use App\Models\categoryModel as category;
-use App\Helpers\Helper as Helper;
+use App\Helpers\Helper;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\File;
 

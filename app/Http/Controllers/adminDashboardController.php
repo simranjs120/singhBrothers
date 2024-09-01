@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\dashboardModel as dashboard;
+use App\Helpers\Helper;
 
 class adminDashboardController extends Controller
 {

@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Log;
 use Session;
 use Exception;
 use Illuminate\Support\Facades\Hash;
+use App\Helpers\Helper;
 
 class forgotPasswordController extends Controller
 {

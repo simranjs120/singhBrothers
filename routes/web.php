@@ -7,6 +7,7 @@ use App\Http\Controllers\userProfileController as userProfile;
 use App\Http\Controllers\landingSectionController as landingSection;
 use App\Http\Controllers\offersController as offers;
 use App\Http\Controllers\indexController as index;
+use App\Http\Controllers\labelsController as labels;
 
 use Illuminate\Support\Facades\Route;
 
@@ -48,6 +49,13 @@ Route::middleware('auth')->group(function () {
     Route::get('/admin/landing-section', [landingSection::class, 'index']);
     Route::post('/admin/configureNavTab', [landingSection::class, 'configureNavTab'])->name('configure.tab');
     Route::post('/admin/configureLandingHeadings', [landingSection::class, 'configureLandingHeadings'])->name('configure.headings');
+
+    # Label section Module
+    Route::get('/admin/labels', [labels::class, 'index']);
+    Route::post('/admin/submit-labels', [labels::class, 'submitLabels'])->name('submit.labels');
+    Route::post('/admin/edit-labels', [labels::class, 'editLabel'])->name('edit.labels');
+    Route::get('/admin/change-label-status/{status}/{id}', [labels::class, 'changeLabelStatus']);
+    Route::get('/admin/delete-label/{id}', [labels::class, 'deleteLabel']);
 
     # Category Module
     Route::any('/admin/categories/delete-category/{id}', [category::class, 'deleteCategory']);

@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Support\Facades\Hash;
+use App\Helpers\Helper;
 
 class userProfileController extends Controller
 {
@@ -51,15 +52,24 @@ class userProfileController extends Controller
     }
 
     public function addNewUser(Request $request){
-        date_default_timezone_set('Asia/Kolkata');
         Log::info('Request to create a new user by User ID: ',[Auth::id()]);
-        $user = User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => Hash::make($request->password),
-            'forgot_password_key'=>str_replace ('/', '', Hash::make($request->password)),
-        ]);
-        $create=event(new Registered($user));
+        try {
+            $user = User::create([
+                'name' => $request->name,
+                'email' => $request->email,
+                'password' => Hash::make($request->password),
+                'forgot_password_key'=>str_replace ('/', '', Hash::make($request->password)),
+                'created_at'=>Helper::timeStamp(),
+            ]);
+            $create=event(new Registered($user));    
+         } catch (\Exception $e) { 
+            if ($e->getCode() == 23000) {
+                // Deal with duplicate key error  
+                Log::error('New user creation request failed, Email already exists -> by User ID: ',[Auth::id()]);
+                return redirect()->back()->with('error','Request Rejected, This email already exists !!');
+            }
+         }
+        
         if($create){
             Log::info('New User created successfully by User ID: ',[Auth::id()]);
             # Entry for changes tracker

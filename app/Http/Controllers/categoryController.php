@@ -7,6 +7,7 @@ use App\Models\changesTrackerModel as tracker;
 use App\Models\categoryModel as category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
+use App\Helpers\Helper;
 
 class categoryController extends Controller
 {
@@ -130,13 +131,11 @@ class categoryController extends Controller
     public function submitSubCategories(Request $request)
     {
         $data['profile'] = dashboard::fetchProfile();
-        date_default_timezone_set(env('APPLICATION_TIMEZONE'));
-        $str = date("Y/m/d H:i:s");
         // $data = $request->except(['_token']);
         $data=[
             'parent_id'=>$request->parent_id,
             'category'=>$request->category,
-            'created_at'=>date('d/F/Y H:i', strtotime($str))
+            'created_at'=>Helper::timeStamp()
         ];
         $action = category::submitSubCategories($data);
         if ($action) {

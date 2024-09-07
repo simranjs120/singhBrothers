@@ -56,6 +56,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/admin/edit-labels', [labels::class, 'editLabel'])->name('edit.labels');
     Route::get('/admin/change-label-status/{status}/{id}', [labels::class, 'changeLabelStatus']);
     Route::get('/admin/delete-label/{id}', [labels::class, 'deleteLabel']);
+    Route::post('/admin/fetch-id-specific-records', [labels::class, 'fetchAjax']);
 
     # Category Module
     Route::any('/admin/categories/delete-category/{id}', [category::class, 'deleteCategory']);

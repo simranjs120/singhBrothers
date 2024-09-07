@@ -57,4 +57,12 @@ class labelsModel extends Model
         }
         return false;
     }
+
+    static function selectedForId($id){
+        $data=DB::table('label_inventory')->where('inventory_id',$id)->get();
+        if($data){
+            return $data;
+        }
+        return false;
+    }
 }

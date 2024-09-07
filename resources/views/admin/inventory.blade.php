@@ -69,7 +69,7 @@
                                         <a href="{{url('admin/edit-inventory/' . $row->id)}}">
                                             <button type="button" class="btn btn-dark text-light"><span class="mdi mdi-pencil"></span></button>
                                         </a>
-                                            <button type="button" class="btn btn-primary text-light" onclick="popLabel()">Labels</button>
+                                            <button type="button" class="btn btn-primary text-light" onclick="popLabel('{{$row->itemName}}','{{$row->id}}')">Labels</button>
                                     </td>
                                     <td>
                                         <img src="{{Helper::props('admin/inventoryImages') . '/' . $row->thumbnailimg}}"
@@ -142,25 +142,27 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Assign Labels</h5>
+                <h5 class="modal-title" id="elename"></h5>
                 <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <div class="modal-body">
-                <div class="row">
-                    @foreach($labels as $label)
-                    <div class="col-12">
-                        <input type="checkbox" id="vehicle3" name="vehicle3" value="Boat">
-                        <label for="vehicle3">{{$label->name}}</label>
+            <form action="" method="POST">
+                @csrf
+                <div class="modal-body">
+                    <div class="row">
+                        <input type="hidden" id="itemId" name="itemId"/>
+                        <p id="loader"></p>
+                        <div class="html-render">
+                            
+                        </div>
                     </div>
-                    @endforeach
                 </div>
-            </div>
-            <div class="modal-footer">
-                <button type="submit" class="btn btn-success">Assign</button>
-                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
-            </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-success">Assign</button>
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                </div>
+            </form>
         </div>
     </div>
 </div>
@@ -170,8 +172,39 @@
         $('#popImageModal').modal('show');
         $("#popElement").attr("src", path);
     }
-    function popLabel(path) {
+    function popLabel(elename,itemId) {
         $('#popLabelModal').modal('show');
-        // $("#popElement").attr("src", path);
+        $("#elename").text("Assign labels to "+elename);
+        $("#itemId").val(itemId);
+        $("#loader").text("Loading...");
+        $.ajax({
+          url: "{{url('admin/fetch-id-specific-records')}}",
+          method: 'POST',
+          dataType: 'json',
+          data: {
+            id: itemId,
+            _token: '{{csrf_token()}}'
+          },
+          success: function (response) {
+            $("#loader").text("");
+            // Response format is here in this alert //Uncomment this and use.....
+            // alert(JSON.stringify(response));
+            var count=response.countOfTotalLabels;
+            for(let i=0;i<=count-1;i++){ // -1 to reduce an extra index, coz array starts from 0. Initiating i from 0 did not work :(
+                // Check if we have this label_id in label_inventory table with this inventory Id, If yes then this option is already selected.
+                if(response.selected[i].label_id==response.allLabels[i].id){
+                    var checkboxes="<div class='col-12'><input type='checkbox' name='vehicle' value='"+response.allLabels[i].id+"' checked/> <label for='vehicle'>"+response.allLabels[i].name+"</label></div>";
+                } else {
+                    var checkboxes="<div class='col-12'><input type='checkbox' name='vehicle' value='"+response.allLabels[i].id+"'/> <label for='vehicle'>"+response.allLabels[i].name+"</label></div>";
+                }
+                $('.html-render').append(checkboxes);
+            }
+            
+          },
+          error: function (error) {
+            // alert(JSON.stringify(error));
+            alert("Fatal Error: Could not load label options, Please try again !!");
+          }
+        });
     }
 </script>

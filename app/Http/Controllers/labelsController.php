@@ -20,6 +20,17 @@ class labelsController extends Controller
         return view('admin.labels',$data);
     }
 
+    public function fetchAjax(Request $request){
+        $id=$request->id;
+        $label=labels::fetchLabels();
+        $selectedForId=labels::selectedForId($id);
+        return json_encode([
+            'allLabels'=>$label,
+            'selected'=>$selectedForId,
+            'countOfTotalLabels'=>count($label)
+        ]);
+
+    }
     public function submitLabels(Request $request){
         Log::info('New Label creation request by user ID: ',[Auth::id()]);
         $name=$request->name;

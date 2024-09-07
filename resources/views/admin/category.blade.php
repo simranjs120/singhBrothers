@@ -82,7 +82,7 @@
                                         <td>{{$key + 1}}</td>
                                         <td>{{$row->id}}</td>
                                         <td>{{$row->category}}</td>
-                                        <td>{{$row->created_at}}</td>
+                                        <td>{{App\Helpers\Helper::timeStampProcessed($row->created_at)}}</td>
                                         <td>
                                             @if($row->status == 0)
                                                 <a href="{{url('admin/categories/change-status/' . $row->id . '/1')}}">
@@ -152,7 +152,7 @@
                                                 </a>
                                             @endif
                                         </td>
-                                        <td>{{$data['created_at']}}</td>
+                                        <td>{{App\Helpers\Helper::timeStampProcessed($data['created_at'])}}</td>
                                         <td>
                                             <a href="{{url('admin/categories/delete-category/'.$data['id'])}}">
                                                 <button type="button" class="btn btn-danger text-light"

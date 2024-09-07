@@ -66,7 +66,7 @@
                                 <td>{{$key + 1}}</td>
                                 <td>{{$row->name}}</td>
                                 <td>{{$row->email}}</td>
-                                <td>{{$row->created_at}}</td>
+                                <td>{{App\Helpers\Helper::timeStampProcessed($row->created_at)}}</td>
                             </tr>
                         @endforeach
                     </tbody>

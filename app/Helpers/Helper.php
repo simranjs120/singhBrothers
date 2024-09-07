@@ -10,10 +10,16 @@ class Helper
         return app('url')->asset($path, $secure);
     }
 
+    # Return the current date in Database Timestamp format according to the set Timezone from .env
     public static function timeStamp(){
         date_default_timezone_set(env('APPLICATION_TIMEZONE'));
-        $str = date("Y/m/d H:i:s");
-        $result=date('F d, Y h:i A', strtotime($str));
+        $result=date("Y-m-d H:i:s");
+        return $result;
+    }
+
+    # Takes the current incoming DB timestamp & converts in into a pretty format as defined.
+    public static function timeStampProcessed($timestamp){
+        $result=date('F d, Y h:i A', strtotime($timestamp));
         return $result;
     }
 }

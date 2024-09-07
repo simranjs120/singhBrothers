@@ -73,7 +73,7 @@
                                                 </a>
                                             @endif
                                         </td>
-                                        <td>{{$row->created_at}}</td>
+                                        <td>{{App\Helpers\Helper::timeStampProcessed($row->created_at)}}</td>
                                         <td>
                                             <a href="{{url('/admin/delete-label/' . $row->id)}}"
                                                 onclick="return confirm('Are you sure you want to delete this item?')">

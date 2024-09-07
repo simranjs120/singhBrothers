@@ -15,7 +15,7 @@
               <span class="menu-title">Manage Category</span>
             </a>
           </li>
-          <li class="nav-item nav-category-sidebar">
+          <li class="nav-item nav-category-label">
             <a class="nav-link" href="{{url('admin/labels')}}">
               <i class="mdi mdi-more menu-icon"></i>
               <span class="menu-title">Manage Labels</span>

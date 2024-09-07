@@ -5,18 +5,16 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
-
+use App\Helpers\Helper;
 class categoryModel extends Model
 {
     use HasFactory;
     static function insertCategory($category,$parent_id){
-        date_default_timezone_set(env('APPLICATION_TIMEZONE'));
-        $str = date("Y/m/d H:i:s");
         $getCheck=DB::table("category")->where(['category'=>$category])->first();
         if($getCheck){
             return 2;
         } 
-            $insert=DB::table("category")->insert(['category'=>$category,'parent_id'=>$parent_id,'created_at'=>date('d/F/Y H:i', strtotime($str))]);
+            $insert=DB::table("category")->insert(['category'=>$category,'parent_id'=>$parent_id,'created_at'=>Helper::timeStamp()]);
             if($insert){
                 return 1;
             } else {
@@ -124,13 +122,11 @@ class categoryModel extends Model
         return $data;
     }
     static function createNewCollectionTopParent($parent_id,$breadcrumb, $sub_category_id){
-        date_default_timezone_set(env('APPLICATION_TIMEZONE'));
-        $str = date("Y/m/d H:i:s");
         $insert=DB::table('collections')->insert([
             'collection'=>$breadcrumb,
             'top_parent_id'=>$parent_id,
             'sub_category_id'=>$sub_category_id,
-            'created_at'=>date('d/F/Y H:i', strtotime($str))
+            'created_at'=>Helper::timeStamp()
         ]);
         return true;
     }

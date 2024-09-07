@@ -64,8 +64,12 @@
                                     <td>{{$key + 1}}</td>
                                     <td>
                                         <a href="{{url('admin/view-inventory/' . $row->id)}}">
-                                            <button type="button" class="btn btn-success text-light">View</button>
+                                            <button type="button" class="btn btn-success text-light"><span class="mdi mdi-eye"></span></button>
                                         </a>
+                                        <a href="{{url('admin/edit-inventory/' . $row->id)}}">
+                                            <button type="button" class="btn btn-dark text-light"><span class="mdi mdi-pencil"></span></button>
+                                        </a>
+                                            <button type="button" class="btn btn-primary text-light" onclick="popLabel()">Labels</button>
                                     </td>
                                     <td>
                                         <img src="{{Helper::props('admin/inventoryImages') . '/' . $row->thumbnailimg}}"
@@ -80,7 +84,7 @@
                                     <td>{{$row->size}}</td>
                                     <td>{{$row->quantity}}</td>
                                     <td>{{$row->collection_name}}</td>
-                                    <td>{{$row->created_at}}</td>
+                                    <td>{{App\Helpers\Helper::timeStampProcessed($row->created_at)}}</td>
                                     <td>
                                         @if($row->status == 0)
                                             <a href="{{url('admin/change-inventory-status/1/' . $row->id)}}">
@@ -131,10 +135,43 @@
         </div>
     </div>
 </div>
+
+<!-- Label Popper Modal -->
+<div class="modal fade" id="popLabelModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Assign Labels</h5>
+                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    @foreach($labels as $label)
+                    <div class="col-12">
+                        <input type="checkbox" id="vehicle3" name="vehicle3" value="Boat">
+                        <label for="vehicle3">{{$label->name}}</label>
+                    </div>
+                    @endforeach
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-success">Assign</button>
+                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
 <x-admin-footer />
 <script>
     function popImage(path) {
         $('#popImageModal').modal('show');
         $("#popElement").attr("src", path);
+    }
+    function popLabel(path) {
+        $('#popLabelModal').modal('show');
+        // $("#popElement").attr("src", path);
     }
 </script>

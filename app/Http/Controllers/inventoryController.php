@@ -11,12 +11,15 @@ use App\Models\categoryModel as category;
 use App\Helpers\Helper;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\File;
+use App\Models\labelsModel as labels;
+
 
 class inventoryController extends Controller
 {
     public function index(Request $request){
         $data['profile'] = dashboard::fetchProfile();
         $data['inventory']=inventory::getInventory();
+        $data['labels']=labels::fetchLabels();
         return view('admin.inventory',$data);
     }
 

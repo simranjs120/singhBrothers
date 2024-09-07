@@ -68,8 +68,8 @@
                                         </td>
                                         <td>{{$row->title}}</td>
                                         <td>{{$row->url}}</td>
-                                        <td>{{str_replace('T','   ',$row->auto_enable)}}</td>
-                                        <td>{{str_replace('T','   ',$row->auto_disable)}}</td>
+                                        <td>{{App\Helpers\Helper::timeStampProcessed(str_replace('T','   ',$row->auto_enable))}}</td>
+                                        <td>{{App\Helpers\Helper::timeStampProcessed(str_replace('T','   ',$row->auto_disable))}}</td>
                                         @if($row->type == "top")
                                             <td>Top Bar</td>
                                         @elseif($row->type == "pop")
@@ -91,7 +91,7 @@
                                                 </a>
                                             @endif
                                         </td>
-                                        <td>{{$row->created_at}}</td>
+                                        <td>{{App\Helpers\Helper::timeStampProcessed($row->created_at)}}</td>
                                         <td>
                                             <a href="{{url('/admin/delete-offers/' . $row->id)}}"
                                                 onclick="return confirm('Are you sure you want to delete this item?')">

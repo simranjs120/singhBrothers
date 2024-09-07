@@ -37,7 +37,7 @@
                                         <tr>
                                             <td>{{$key + 1}}</td>
                                             <td>{{$row->collection}}</td>
-                                            <td>{{$row->created_at}}</td>
+                                            <td>{{App\Helpers\Helper::timeStampProcessed($row->created_at)}}</td>
                                         </tr>
                                     @endforeach
                                 </tbody>

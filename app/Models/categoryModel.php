@@ -138,7 +138,8 @@ class categoryModel extends Model
         $insert=DB::table('collections')->where('sub_category_id',$parent_id)->insert([
             'collection'=>$full,
             'sub_category_id'=>$lastId,
-            'top_parent_id'=>$getPrevious->top_parent_id
+            'top_parent_id'=>$getPrevious->top_parent_id,
+            'created_at'=>Helper::timeStamp()
         ]);
         if($insert){
             echo "Inserted";

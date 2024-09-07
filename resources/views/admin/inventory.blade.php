@@ -192,7 +192,7 @@
             var count=response.countOfTotalLabels;
             for(let i=0;i<=count-1;i++){ // -1 to reduce an extra index, coz array starts from 0. Initiating i from 0 did not work :(
                 // Check if we have this label_id in label_inventory table with this inventory Id, If yes then this option is already selected.
-                if(response.selected[i].label_id==response.allLabels[i].id){
+                if(response.selected[i].label_id!=NULL && response.selected[i].label_id==response.allLabels[i].id){
                     var checkboxes="<div class='col-12'><input type='checkbox' name='vehicle' value='"+response.allLabels[i].id+"' checked/> <label for='vehicle'>"+response.allLabels[i].name+"</label></div>";
                 } else {
                     var checkboxes="<div class='col-12'><input type='checkbox' name='vehicle' value='"+response.allLabels[i].id+"'/> <label for='vehicle'>"+response.allLabels[i].name+"</label></div>";

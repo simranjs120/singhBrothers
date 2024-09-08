@@ -42,9 +42,9 @@
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="">
+            <a class="nav-link" href="{{url('admin/inner-sections')}}">
               <i class="mdi mdi-view-dashboard menu-icon"></i>
-              <span class="menu-title">All Website Sections</span>
+              <span class="menu-title">Inner Sections</span>
             </a>
           </li>
 

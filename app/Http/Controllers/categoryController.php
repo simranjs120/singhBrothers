@@ -39,7 +39,7 @@ class categoryController extends Controller
             $categoryName = $payload;
             $changer_name = $data['profile']->name;
             $changer_email = $data['profile']->email;
-            $changer_title = " just added a new category: " . $categoryName;
+            $changer_title = " added a new category: " . $categoryName;
             $trackIt = tracker::insert($changer_title, $changer_email, $changer_name);
             if ($trackIt) {
                 Log::info('Addition to tracker table success');
@@ -69,9 +69,9 @@ class categoryController extends Controller
             $changer_name = $data['profile']->name;
             $changer_email = $data['profile']->email;
             if ($status == 0) {
-                $changer_title = " changed the status to In-Active for category ID/Name: " . $id . '/' . $categoryName;
+                $changer_title = " changed the status to In-Active for category Name: ".$categoryName;
             } else if ($status == 1) {
-                $changer_title = " changed the status to Active for category ID/Name: " . $id . '/' . $categoryName;
+                $changer_title = " changed the status to Active for category Name: ".$categoryName;
             }
             $trackIt = tracker::insert($changer_title, $changer_email, $changer_name);
             if ($trackIt) {
@@ -109,7 +109,7 @@ class categoryController extends Controller
             # Entry for changes tracker
             $changer_name = $data['profile']->name;
             $changer_email = $data['profile']->email;
-            $changer_title = " Just Deleted a category: " . $categoryName;
+            $changer_title = " deleted a category: " . $categoryName;
             $trackIt = tracker::insert($changer_title, $changer_email, $changer_name);
             if ($trackIt) {
                 Log::info('Addition to tracker table success');
@@ -163,7 +163,7 @@ class categoryController extends Controller
             $categoryName = $data['category'];
             $changer_name = $data['profile']->name;
             $changer_email = $data['profile']->email;
-            $changer_title = " just added a new Sub-category: " . $categoryName;
+            $changer_title = " added a new Sub-category: " . $categoryName;
             $trackIt = tracker::insert($changer_title, $changer_email, $changer_name);
             if ($trackIt) {
                 Log::info('Addition to tracker table success');

@@ -38,7 +38,7 @@ class labelsController extends Controller
         $status=$request->status;
         $data=[
             'name'=>$name,
-            'url'=>str_replace('/public',"",Helper::props(base64_encode(time()))),
+            'url'=>str_replace('/public',"",Helper::props('/label/'.base64_encode(time()))),
             'unique_hash'=> time(),
             'status'=>$status,
             'created_at'=>Helper::timeStamp()
@@ -99,9 +99,9 @@ class labelsController extends Controller
              $changer_name = $data['profile']->name;
              $changer_email = $data['profile']->email;
              if ($status == 0) {
-                 $changer_title = " changed the status to In-Active for label ID/Name: " . $id . '/' . $previousData->name;
+                 $changer_title = " changed the status to In-Active for label Name: ".$previousData->name;
              } else if ($status == 1) {
-                 $changer_title = " changed the status to Active for label ID/Name: " . $id . '/' . $previousData->name;
+                 $changer_title = " changed the status to Active for label Name: ".$previousData->name;
              }
              $trackIt = tracker::insert($changer_title, $changer_email, $changer_name);
              if ($trackIt) {
@@ -126,7 +126,7 @@ class labelsController extends Controller
              $data['profile'] = dashboard::fetchProfile();
              $changer_name = $data['profile']->name;
              $changer_email = $data['profile']->email;
-             $changer_title = " delete the label ID/Name: " . $id . '/' . $previousData->name;
+             $changer_title = " delete the label Name: ".$previousData->name;
              $trackIt = tracker::insert($changer_title, $changer_email, $changer_name);
              if ($trackIt) {
                  Log::info('Addition to tracker table success');

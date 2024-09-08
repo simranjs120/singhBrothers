@@ -88,7 +88,7 @@ class landingSectionController extends Controller
             $data['profile'] = dashboard::fetchProfile();
             $changer_name = $data['profile']->name;
             $changer_email = $data['profile']->email;
-            $changer_title = " just changed headings";
+            $changer_title = " changed headings";
             $trackIt = tracker::insert($changer_title, $changer_email, $changer_name);
             if ($trackIt) {
                 Log::info('Addition to tracker table success');

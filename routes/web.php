@@ -8,6 +8,7 @@ use App\Http\Controllers\landingSectionController as landingSection;
 use App\Http\Controllers\offersController as offers;
 use App\Http\Controllers\indexController as index;
 use App\Http\Controllers\labelsController as labels;
+use App\Http\Controllers\innerSectionController as innerSection;
 
 use Illuminate\Support\Facades\Route;
 
@@ -58,6 +59,14 @@ Route::middleware('auth')->group(function () {
     Route::get('/admin/delete-label/{id}', [labels::class, 'deleteLabel']);
     Route::post('/admin/fetch-id-specific-records', [labels::class, 'fetchAjax']);
     Route::post('/admin/assign-labels', [labels::class, 'assignLabels'])->name('assign.labels');
+
+    # Inner Sections
+    Route::get('/admin/inner-sections', [innerSection::class, 'index']);
+    Route::post('/admin/submit-section', [innerSection::class, 'submitSection'])->name('submit.section');
+    Route::post('/admin/edit-section', [innerSection::class, 'editSection'])->name('edit.section');
+    Route::get('/admin/change-section-status/{status}/{id}', [innerSection::class, 'editStatusSection']);
+    Route::get('/admin/delete-section/{id}', [innerSection::class, 'deleteSection']);
+
 
     # Category Module
     Route::any('/admin/categories/delete-category/{id}', [category::class, 'deleteCategory']);

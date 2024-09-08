@@ -43,7 +43,7 @@
                         <thead>
                             <tr>
                                 <th scope="col">#</th>
-                                <th scope="col">View</th>
+                                <th scope="col">View/Edit/Labelling</th>
                                 <th scope="col">Image</th>
                                 <th scope="col">Item Name</th>
                                 <th scope="col">Striker Price</th>

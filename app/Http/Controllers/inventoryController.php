@@ -149,7 +149,7 @@ class inventoryController extends Controller
             $data['profile'] = dashboard::fetchProfile();
             $changer_name = $data['profile']->name;
             $changer_email = $data['profile']->email;
-            $changer_title = " just updated inventory item named as: " . $request->itemName;
+            $changer_title = " updated inventory item named as: " . $request->itemName;
             $trackIt = tracker::insert($changer_title, $changer_email, $changer_name);
             if ($trackIt) {
                 Log::info('Addition to tracker table success');

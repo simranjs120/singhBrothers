@@ -57,7 +57,7 @@ class offersController extends Controller
             $data['profile'] = dashboard::fetchProfile();
             $changer_name = $data['profile']->name;
             $changer_email = $data['profile']->email;
-            $changer_title = " just created a new offer: " . $request->title;
+            $changer_title = " created a new offer: " . $request->title;
             $trackIt = tracker::insert($changer_title, $changer_email, $changer_name);
             if ($trackIt) {
                 Log::info('Addition to tracker table success');
@@ -83,9 +83,9 @@ class offersController extends Controller
             $changer_name = $data['profile']->name;
             $changer_email = $data['profile']->email;
             if ($status == 0) {
-                $changer_title = " changed the status to In-Active for offer ID/Name: " . $id . '/' . $previousData->title;
+                $changer_title = " changed the status to In-Active for offer Name: ".$previousData->title;
             } else if ($status == 1) {
-                $changer_title = " changed the status to Active for offer ID/Name: " . $id . '/' . $previousData->title;
+                $changer_title = " changed the status to Active for offer Name: ".$previousData->title;
             }
             $trackIt = tracker::insert($changer_title, $changer_email, $changer_name);
             if ($trackIt) {

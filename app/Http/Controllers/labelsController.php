@@ -148,8 +148,7 @@ class labelsController extends Controller
         Log::info('Payload for label assign: ',[$labels]);
         Log::info('Inventory ID for this assingment: ',[$inventoryId]);
         $count=count($labels);
-        $deletePrevious=labels::erasePreviousAssingment($inventoryId);
-        if($deletePrevious){
+        labels::erasePreviousAssingment($inventoryId);
             try{
                 for($i=0;$i<$count;$i++){
                     labels::newAssignment($labels[$i],$inventoryId);
@@ -158,7 +157,6 @@ class labelsController extends Controller
                 Log::error('Error occured while creating new label assingment');
                 return redirect()->back()->with('error', 'An error occured !! Please try again !!');
             }
-        }
         # Entry for changes tracker start
         $inventoryGet=inventory::getInventoryWithId($inventoryId);
         $data['profile'] = dashboard::fetchProfile();

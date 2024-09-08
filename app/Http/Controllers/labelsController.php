@@ -27,7 +27,8 @@ class labelsController extends Controller
         return json_encode([
             'allLabels'=>$label,
             'selected'=>$selectedForId,
-            'countOfTotalLabels'=>count($label)
+            'countOfTotalLabels'=>count($label),
+            'countOfSelectedLabels'=>count($selectedForId)
         ]);
 
     }

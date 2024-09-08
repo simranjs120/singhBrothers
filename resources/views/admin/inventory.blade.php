@@ -138,12 +138,12 @@
 
 <!-- Label Popper Modal -->
 <div class="modal fade" id="popLabelModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-    aria-hidden="true">
+    aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="elename"></h5>
-                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                <button type="button" class="close" data-bs-dismiss="modal" onclick="erase()" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
@@ -160,7 +160,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="submit" class="btn btn-success">Assign</button>
-                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal" onclick="erase()">Close</button>
                 </div>
             </form>
         </div>
@@ -173,10 +173,13 @@
         $("#popElement").attr("src", path);
     }
     function popLabel(elename,itemId) {
+        // Clicking outside of modal is disabled to handle the ajax data removal...
         $('#popLabelModal').modal('show');
         $("#elename").text("Assign labels to "+elename);
         $("#itemId").val(itemId);
         $("#loader").text("Loading...");
+        
+        // Fetch the labels & process the selected labels for this particular inventory item with this ajax request.
         $.ajax({
           url: "{{url('admin/fetch-id-specific-records')}}",
           method: 'POST',
@@ -186,25 +189,33 @@
             _token: '{{csrf_token()}}'
           },
           success: function (response) {
-            $("#loader").text("");
+            $("#loader").text("Autofilling...");
             // Response format is here in this alert //Uncomment this and use.....
-            // alert(JSON.stringify(response));
+            // console.log(JSON.stringify(response));
             var count=response.countOfTotalLabels;
-            for(let i=0;i<=count-1;i++){ // -1 to reduce an extra index, coz array starts from 0. Initiating i from 0 did not work :(
-                // Check if we have this label_id in label_inventory table with this inventory Id, If yes then this option is already selected.
-                if(response.selected!="" && response.selected[i].label_id==response.allLabels[i].id){
-                    var checkboxes="<div class='col-12'><input type='checkbox' name='vehicle' value='"+response.allLabels[i].id+"' checked/> <label for='vehicle'>"+response.allLabels[i].name+"</label></div>";
-                } else {
-                    var checkboxes="<div class='col-12'><input type='checkbox' name='vehicle' value='"+response.allLabels[i].id+"'/> <label for='vehicle'>"+response.allLabels[i].name+"</label></div>";
-                }
+            for(let i=0;i<=count-1;i++){ // -1 to reduce an extra index, coz array starts from 0. Initiating i from 0 did not work.
+                // Append labels
+                var checkboxes="<div class='col-12'><input type='checkbox' name='vehicle' id='name_"+response.allLabels[i].id+"' value='"+response.allLabels[i].id+"'/> <label for='vehicle'>"+response.allLabels[i].name+"</label></div>";
                 $('.html-render').append(checkboxes);
             }
-            
+
+            for(let i=0;i<=response.countOfSelectedLabels-1;i++){
+                if(response.countOfSelectedLabels!=0 || response.countOfSelectedLabels!=undefined){
+                    // Where label_id from selected table matches the ID of label, Set that select box checked.
+                    $('#name_'+response.selected[i].label_id).prop('checked', true);
+                }
+            }
+            $("#loader").text("");
           },
           error: function (error) {
             // alert(JSON.stringify(error));
             alert("Fatal Error: Could not load label options, Please try again !!");
           }
         });
+    }
+
+    // Handling condition: Everytime button is clicked without refreshing, Ajax re-renders the same checkboxes again
+    function erase(){
+        $('.html-render').html("");
     }
 </script>

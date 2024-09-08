@@ -24,7 +24,7 @@
 
     <!-- endinject -->
     <!-- Plugin css for this page -->
-    <link rel="stylesheet" href="vendors/datatables.net-bs4/dataTables.bootstrap4.css">
+    <!-- <link rel="stylesheet" href="vendors/datatables.net-bs4/dataTables.bootstrap4.css"> -->
     <link rel="stylesheet" href="js/select.dataTables.min.css">
     <!-- End plugin css for this page -->
     <!-- inject:css -->
@@ -153,27 +153,27 @@
                             </a>
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item preview-item">
-                                <div class="preview-thumbnail">
+                                <!-- <div class="preview-thumbnail">
                                     <img src="{{Helper::props('admin/images/faces/face10.jpg')}}" alt="image" class="img-sm profile-pic">
-                                </div>
+                                </div> -->
                                 <div class="preview-item-content flex-grow py-2">
                                     <p class="preview-subject ellipsis font-weight-medium text-dark">Marian Garner </p>
                                     <p class="fw-light small-text mb-0"> The meeting is cancelled </p>
                                 </div>
                             </a>
                             <a class="dropdown-item preview-item">
-                                <div class="preview-thumbnail">
+                                <!-- <div class="preview-thumbnail">
                                     <img src="{{Helper::props('admin/images/faces/face12.jpg')}}" alt="image" class="img-sm profile-pic">
-                                </div>
+                                </div> -->
                                 <div class="preview-item-content flex-grow py-2">
                                     <p class="preview-subject ellipsis font-weight-medium text-dark">David Grey </p>
                                     <p class="fw-light small-text mb-0"> The meeting is cancelled </p>
                                 </div>
                             </a>
                             <a class="dropdown-item preview-item">
-                                <div class="preview-thumbnail">
+                                <!-- <div class="preview-thumbnail">
                                     <img src="{{Helper::props('images/faces/face1.jpg')}}" alt="image" class="img-sm profile-pic">
-                                </div>
+                                </div> -->
                                 <div class="preview-item-content flex-grow py-2">
                                     <p class="preview-subject ellipsis font-weight-medium text-dark">Travis Jenkins </p>
                                     <p class="fw-light small-text mb-0"> The meeting is cancelled </p>

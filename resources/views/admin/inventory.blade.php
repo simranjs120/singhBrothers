@@ -15,7 +15,7 @@
             </div>
             <div class="col-lg-6">
                 <a href="{{url('admin/add-inventory')}}">
-                    <button type="button" class="pull-right btn btn-success m-2 mt-2 text-light">+ New Inventory
+                    <button type="button" class="pull-right btn btn-success m-2 mt-2 text-light" title="Create New Inventory Item">+ New Inventory
                         item</button>
                 </a>
             </div>
@@ -64,12 +64,12 @@
                                     <td>{{$key + 1}}</td>
                                     <td>
                                         <a href="{{url('admin/view-inventory/' . $row->id)}}">
-                                            <button type="button" class="btn btn-success text-light"><span class="mdi mdi-eye"></span></button>
+                                            <button type="button" class="btn btn-success text-light" title="View Item"><span class="mdi mdi-eye"></span></button>
                                         </a>
                                         <a href="{{url('admin/edit-inventory/' . $row->id)}}">
-                                            <button type="button" class="btn btn-dark text-light"><span class="mdi mdi-pencil"></span></button>
+                                            <button type="button" class="btn btn-dark text-light" title="Edit Item"><span class="mdi mdi-pencil"></span></button>
                                         </a>
-                                            <button type="button" class="btn btn-primary text-light" onclick="popLabel('{{$row->itemName}}','{{$row->id}}')">Labels</button>
+                                            <button type="button" class="btn btn-primary text-light" title="Assign Labels To Item" onclick="popLabel('{{$row->itemName}}','{{$row->id}}')">Labels</button>
                                     </td>
                                     <td>
                                         <img src="{{Helper::props('admin/inventoryImages') . '/' . $row->thumbnailimg}}"
@@ -143,24 +143,22 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="elename"></h5>
-                <button type="button" class="close" data-bs-dismiss="modal" onclick="erase()" aria-label="Close">
+                <button type="button" class="close" data-bs-dismiss="modal" onclick="erase()" aria-label="Close" title="Close Popup">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form action="" method="POST">
+            <form action="{{route('assign.labels')}}" method="POST">
                 @csrf
                 <div class="modal-body">
                     <div class="row">
                         <input type="hidden" id="itemId" name="itemId"/>
                         <p id="loader"></p>
-                        <div class="html-render">
-                            
-                        </div>
+                        <div class="html-render"></div>
                     </div>
                 </div>
                 <div class="modal-footer">
                     <button type="submit" class="btn btn-success">Assign</button>
-                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal" onclick="erase()">Close</button>
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal" onclick="erase()" title="Close Popup">Close</button>
                 </div>
             </form>
         </div>
@@ -195,7 +193,7 @@
             var count=response.countOfTotalLabels;
             for(let i=0;i<=count-1;i++){ // -1 to reduce an extra index, coz array starts from 0. Initiating i from 0 did not work.
                 // Append labels
-                var checkboxes="<div class='col-12'><input type='checkbox' name='vehicle' id='name_"+response.allLabels[i].id+"' value='"+response.allLabels[i].id+"'/> <label for='vehicle'>"+response.allLabels[i].name+"</label></div>";
+                var checkboxes="<div class='col-12'><input type='checkbox' name='labels[]' id='name_"+response.allLabels[i].id+"' value='"+response.allLabels[i].id+"'/> <label for='vehicle'>"+response.allLabels[i].name+"</label></div>";
                 $('.html-render').append(checkboxes);
             }
 

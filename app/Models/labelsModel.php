@@ -65,4 +65,20 @@ class labelsModel extends Model
         }
         return false;
     }
+
+    static function erasePreviousAssingment($id){
+        $delete=DB::table('label_inventory')->where('inventory_id',$id)->delete();
+        if($delete){
+            return true;
+        }
+        return false;
+    }
+
+    static function newAssignment($payload,$id){
+        $insert=DB::table('label_inventory')->insert(['label_id'=>$payload,'inventory_id'=>$id]);
+        if($insert){
+            return true;
+        }
+        return false; 
+    }
 }

@@ -140,4 +140,39 @@ class labelsController extends Controller
         Log::error('Error occured while deleting Label ID: ',[$id]);
         return redirect()->back()->with('error', 'An error occured !! Please try again !!');
     }
+
+    public function assignLabels(Request $request){
+        Log::info('Assign Label delete request by user ID: ',[Auth::id()]);
+        $labels=$request->labels;
+        $inventoryId=$request->itemId;
+        Log::info('Payload for label assign: ',[$labels]);
+        Log::info('Inventory ID for this assingment: ',[$inventoryId]);
+        $count=count($labels);
+        $deletePrevious=labels::erasePreviousAssingment($inventoryId);
+        if($deletePrevious){
+            try{
+                for($i=0;$i<$count;$i++){
+                    labels::newAssignment($labels[$i],$inventoryId);
+                }
+            } catch(\Exception $e){
+                Log::error('Error occured while creating new label assingment');
+                return redirect()->back()->with('error', 'An error occured !! Please try again !!');
+            }
+        }
+        # Entry for changes tracker start
+        $inventoryGet=inventory::getInventoryWithId($inventoryId);
+        $data['profile'] = dashboard::fetchProfile();
+        $changer_name = $data['profile']->name;
+        $changer_email = $data['profile']->email;
+        $changer_title = " assigned new labels to inventory item: " .$inventoryGet->itemName;
+        $trackIt = tracker::insert($changer_title, $changer_email, $changer_name);
+        if ($trackIt) {
+            Log::info('Addition to tracker table success');
+        } else {
+            Log::error('Addition to tracker table failed');
+        }
+        # Enter for changes tracker end
+        Log::info('New label assingment created');
+        return redirect()->back()->with('success', 'Labels assigned to inventory items successfully');
+    }
 }

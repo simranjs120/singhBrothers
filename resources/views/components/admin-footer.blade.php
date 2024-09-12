@@ -43,22 +43,21 @@
 <script type="text/javascript">
   $('#sub-category-submit').attr("disabled",'disabled');
   $(document).ready(function () {
-    $('#datatable').DataTable({
-      "bFilter": true,
-      "bInfo": false,
-      "bLengthChange": true,
-      oLanguage: {
+    new DataTable('#datatable', {
+    responsive: true,
+    bLengthChange: true,
+    oLanguage: {
         sLengthMenu: "_MENU_",
-      }
-    });
-    $('#datatable-2').DataTable({
-      "bFilter": true,
-      "bInfo": false,
-      "bLengthChange": true,
-      oLanguage: {
+    },
+});
+
+new DataTable('#datatable-2', {
+    responsive: true,
+    bLengthChange: true,
+    oLanguage: {
         sLengthMenu: "_MENU_",
-      }
-    });
+    },
+});
 
     setTimeout(function () {
       $('.alert').hide();

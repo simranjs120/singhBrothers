@@ -38,14 +38,13 @@
                         <h5 class="text-light">{{Illuminate\Support\Facades\Session::pull('error')}}</h5>
                     </div><br />
                 @endif
-                <div class="table-box" style="overflow-x:scroll !important;">
-                    <table class="table" id="datatable" style="overflow-x:scroll !important;">
+                <div class="table-responsive">
+                    <table class="table table-striped" id="datatable" width="100%">
                         <thead>
                             <tr>
                                 <th scope="col">#</th>
-                                <th scope="col">View/Edit/Labelling</th>
-                                <th scope="col">Image</th>
                                 <th scope="col">Item Name</th>
+                                <th scope="col">Image</th>
                                 <th scope="col">Striker Price</th>
                                 <th scope="col">Actual Price</th>
                                 <th scope="col">Offer Badge</th>
@@ -55,6 +54,7 @@
                                 <th scope="col">Collection</th>
                                 <th scope="col">Created On</th>
                                 <th scope="col">Status</th>
+                                <th scope="col">View/Edit/Labelling</th>
                                 <th scope="col">Delete</th>
                             </tr>
                         </thead>
@@ -62,21 +62,12 @@
                             @foreach($inventory as $key => $row)
                                 <tr>
                                     <td>{{$key + 1}}</td>
-                                    <td>
-                                        <a href="{{url('admin/view-inventory/' . $row->id)}}">
-                                            <button type="button" class="btn btn-success text-light" title="View Item"><span class="mdi mdi-eye"></span></button>
-                                        </a>
-                                        <a href="{{url('admin/edit-inventory/' . $row->id)}}">
-                                            <button type="button" class="btn btn-dark text-light" title="Edit Item"><span class="mdi mdi-pencil"></span></button>
-                                        </a>
-                                            <button type="button" class="btn btn-primary text-light" title="Assign Labels To Item" onclick="popLabel('{{$row->itemName}}','{{$row->id}}')">Labels</button>
-                                    </td>
+                                    <td>{{$row->itemName}}</td>
                                     <td>
                                         <img src="{{Helper::props('admin/inventoryImages') . '/' . $row->thumbnailimg}}"
                                             class="img-fluid" id="image-popper"
                                             onclick="popImage('{{Helper::props('admin/inventoryImages') . '/' . $row->thumbnailimg}}')" />
                                     </td>
-                                    <td>{{$row->itemName}}</td>
                                     <td><s>{{$row->strikerPrice}}</s></td>
                                     <td>{{$row->actualPrice}}</td>
                                     <td>{{$row->offerBadge}}</td>
@@ -98,6 +89,15 @@
                                                     onclick="return confirm('Do you want to switch this to In-active?')">Active</span>
                                             </a>
                                         @endif
+                                    </td>
+                                    <td>&nbsp;
+                                        <a href="{{url('admin/view-inventory/' . $row->id)}}">
+                                            <button type="button" class="btn btn-success text-light" title="View Item"><span class="mdi mdi-eye"></span></button>
+                                        </a>
+                                        <a href="{{url('admin/edit-inventory/' . $row->id)}}">
+                                            <button type="button" class="btn btn-dark text-light" title="Edit Item"><span class="mdi mdi-pencil"></span></button>
+                                        </a>
+                                            <button type="button" class="btn btn-primary text-light" title="Assign Labels To Item" onclick="popLabel('{{$row->itemName}}','{{$row->id}}')">Labels</button>
                                     </td>
                                     <td>
                                         <a href="{{url('/admin/delete-inventory/' . $row->id)}}"

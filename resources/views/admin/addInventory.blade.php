@@ -9,9 +9,6 @@
         /* width: 300px !important; */
         height: 150px !important;
     }
-    .asterik{
-        color:red;
-    }
 </style>
 <div class="row">
     <div class="card">

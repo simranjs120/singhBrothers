@@ -8,43 +8,55 @@
             </a>
           </li>
 
-          <li class="nav-item nav-category">Inventory</li>
+          <li class="nav-item nav-category">Configuration</li>
           <li class="nav-item nav-category-sidebar">
             <a class="nav-link" href="{{url('admin/categories')}}">
               <i class="mdi mdi-playlist-check menu-icon"></i>
-              <span class="menu-title">Manage Category</span>
+              <span class="menu-title">Categories & Collections</span>
             </a>
           </li>
           <li class="nav-item nav-category-label">
             <a class="nav-link" href="{{url('admin/labels')}}">
               <i class="mdi mdi-more menu-icon"></i>
-              <span class="menu-title">Manage Labels</span>
+              <span class="menu-title">Inventory Labelling</span>
             </a>
           </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{{url('admin/offers')}}">
+              <i class="mdi mdi-tag-multiple menu-icon"></i>
+              <span class="menu-title">Offers Management</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{{url('admin/landing-section')}}">
+              <i class="mdi mdi-floor-plan menu-icon"></i>
+              <span class="menu-title">Configure Landing Section</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{{url('admin/inner-sections')}}">
+              <i class="mdi mdi-view-dashboard menu-icon"></i>
+              <span class="menu-title">Dynamic Inner Sections</span>
+            </a>
+          </li>
+
+          <li class="nav-item nav-category">Website Mangement</li>
           <li class="nav-item nav-category-inventory">
             <a class="nav-link" href="{{url('admin/inventory')}}">
               <i class="mdi mdi-briefcase-check menu-icon"></i>
               <span class="menu-title">Manage Inventory</span>
             </a>
           </li>
-
-          <li class="nav-item nav-category">Website Mangement</li>
           <li class="nav-item">
-            <a class="nav-link" href="{{url('admin/landing-section')}}">
-              <i class="mdi mdi-floor-plan menu-icon"></i>
-              <span class="menu-title">Landing Section</span>
+            <a class="nav-link" href="">
+              <i class="mdi mdi-barcode-scan menu-icon"></i>
+              <span class="menu-title">Product Queries</span>
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="{{url('admin/offers')}}">
-              <i class="mdi mdi-tag-multiple menu-icon"></i>
-              <span class="menu-title">Manage Offers</span>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="{{url('admin/inner-sections')}}">
-              <i class="mdi mdi-view-dashboard menu-icon"></i>
-              <span class="menu-title">Inner Sections</span>
+            <a class="nav-link" href="">
+              <i class="mdi mdi-format-float-left menu-icon"></i>
+              <span class="menu-title">Contact Form Queries</span>
             </a>
           </li>
 
@@ -99,19 +111,7 @@
 
 
 
-          <li class="nav-item nav-category">Form Data & Queries</li>
-          <li class="nav-item">
-            <a class="nav-link" href="">
-              <i class="mdi mdi-barcode-scan menu-icon"></i>
-              <span class="menu-title">Product Queries</span>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="">
-              <i class="mdi mdi-format-float-left menu-icon"></i>
-              <span class="menu-title">Contact Form Queries</span>
-            </a>
-          </li>
+
           <!-- <li class="nav-item">
             <a class="nav-link" data-bs-toggle="collapse" href="#auth" aria-expanded="false" aria-controls="auth">
               <i class="menu-icon mdi mdi-account-circle-outline"></i>

@@ -43,6 +43,7 @@
                                     <th scope="col">#</th>
                                     <th scope="col">Edit/Assign</th>
                                     <th scope="col">Section Name</th>
+                                    <th scope="col">Section Description</th>
                                     <th scope="col">Type</th>
                                     <th scope="col">Button</th>
                                     <th scope="col">URL</th>
@@ -56,10 +57,15 @@
                                     <tr>
                                         <td>{{$key + 1}}</td>
                                         <td> 
-                                            <button type="button" class="btn btn-primary text-light mt-1" onclick="editModal('{{$row->id}}','{{$row->name}}','{{$row->type}}','{{$row->button}}','{{$row->url}}','{{$row->button}}')">Edit</button>
+                                            <button type="button" class="btn btn-primary text-light mt-1" onclick="editModal('{{$row->id}}','{{$row->name}}','{{$row->type}}','{{$row->button}}','{{$row->url}}','{{$row->button}}','{{$row->description}}')">Edit</button>
                                             <button type="button" class="btn btn-dark text-light mt-1" title="Assign Inventory Items">Assign Inventory</button>
                                         </td>
                                         <td>{{$row->name}}</td>
+                                        @if($row->description!="")
+                                        <td>{{$row->description}}</td>
+                                        @else
+                                        <td>N/A</td>
+                                        @endif
                                         <td>{{$row->type}}</td>
                                         @if($row->button==1)
                                             <td>Yes</td>
@@ -118,11 +124,14 @@
                 @csrf
                 <div class="modal-body">
                     <input type="hidden" name="created_at" value="{{App\Helpers\Helper::timeStamp()}}"/>
-                    <label>Enter the section name</label>
+                    <label>Enter the section name <span class="asterik">*</span></label>
                     <input type="text" class="form-control border border-dark mb-2" maxlength="99" name="name"
                         required placeholder="Start Typing..."/>
+                    <label>Enter the section Description (If Any)</label>
+                    <input type="text" class="form-control border border-dark mb-2" maxlength="99" name="description"
+                        placeholder="Start Typing..."/>
 
-                    <label class="mt-2">Select section type</label>
+                    <label class="mt-2">Select section type <span class="asterik">*</span></label>
                     <select class="form-control" style="color:black !important;" name="type" required>
                         <option value="" selected disabled>--Select--</option>
                         <option value="star">Star</option>
@@ -130,7 +139,7 @@
                         <option value="nebula">Nebula</option>
                     </select>
 
-                    <label class="mt-2">Need a button?</label>
+                    <label class="mt-2">Need a button? <span class="asterik">*</span></label>
                     <select class="form-control" style="color:black !important;" name="button" id="button-submit" required>
                         <option value="" selected disabled>--Select--</option>
                         <option value="1">Yes</option>
@@ -170,12 +179,15 @@
             <form action="{{route('edit.section')}}" method="POST">
                 @csrf
                 <div class="modal-body">
-                <label>Enter the section name</label>
+                <label>Enter the section name <span class="asterik">*</span></label>
                 <input type="hidden" name="id" id="id"/>
                     <input type="text" class="form-control border border-dark mb-2" maxlength="99" name="name"
                         required id="name" placeholder="Start Typing..."/>
+                <label>Enter the section description</label>
+                    <input type="text" class="form-control border border-dark mb-2" maxlength="99" name="description"
+                        id="description" placeholder="Start Typing..."/>
 
-                    <label class="mt-2">Select section type</label>
+                    <label class="mt-2">Select section type <span class="asterik">*</span></label>
                     <select class="form-control" style="color:black !important;" name="type" id="type" required>
                         <option value="" selected disabled>--Select--</option>
                         <option value="star">Star</option>
@@ -209,11 +221,12 @@
         $('#popModal').modal('show');
     }
 
-    function editModal(id,name,type,button,url,button) {
+    function editModal(id,name,type,button,url,button,description) {
         $('#editModal').modal('show');
         $('#id').val(id);
         $('#name').val(name);
         $('#url').val(url);
+        $('#description').val(description);
         $("#type").val(type).change();
         $("#button").val(button).change();
     }

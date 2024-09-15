@@ -57,4 +57,27 @@ class innerSectionModel extends Model
         }
         return false;
     }
+    
+    static function selectedForId($id){
+        $data=DB::table('inventory_section')->where('section_id',$id)->get();
+        if($data){
+            return $data;
+        }
+        return false;
+    }
+
+    static function erasePreviousAssingment($id){
+        $delete=DB::table('inventory_section')->where('section_id',$id)->delete();
+        if($delete){
+            return true;
+        }
+        return false;
+    }
+    static function newAssignment($payload,$id){
+        $insert=DB::table('inventory_section')->insert(['inventory_id'=>$payload,'section_id'=>$id]);
+        if($insert){
+            return true;
+        }
+        return false; 
+    }
 }

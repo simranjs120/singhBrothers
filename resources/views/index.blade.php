@@ -47,7 +47,8 @@
           <h4>{{$web->search_line}}</h4>
           <div id="search-container">
           <i class="ri-search-line"></i>
-            <input type="text" class="form-control" id="search-tool" placeholder="Search here..."/>
+            <input type="text" class="form-control" id="search-tool" 
+             placeholder="Search here..."/>
           </div>
           <button type="button" class="btn btn-success btn-lg">Search</button>
         </div>
@@ -506,8 +507,11 @@ function run() {
         "{{$web->search_tool_line_2}}",
         "{{$web->search_tool_line_3}}"
     ];
-
-    printPhrases(phrases, $('#search-tool'));
+if(phrases.includes("")){
+  $('#search-tool').attr('placeholder','Search Here...')
+} else {
+  printPhrases(phrases, $('#search-tool'));
+}
 }
 $(document).ready(function(){
   run();

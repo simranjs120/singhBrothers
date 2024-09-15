@@ -68,6 +68,8 @@ Route::middleware('auth')->group(function () {
     Route::post('/admin/edit-section', [innerSection::class, 'editSection'])->name('edit.section');
     Route::get('/admin/change-section-status/{status}/{id}', [innerSection::class, 'editStatusSection']);
     Route::get('/admin/delete-section/{id}', [innerSection::class, 'deleteSection']);
+    Route::post('admin/fetch-inventory-to-assign/', [innerSection::class, 'fetchToAssign']);
+    Route::post('admin/assign-inventory/', [innerSection::class, 'assignInventory'])->name('assign.inventory');
 
     # Logo Module
     Route::get('/admin/logo', [logo::class, 'index']);

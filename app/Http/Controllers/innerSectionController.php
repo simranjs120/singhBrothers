@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use App\Models\dashboardModel as dashboard;
 use App\Models\innerSectionModel as innerSection;
+use App\Models\inventoryModel as inventory;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Http\Request;
@@ -115,5 +116,47 @@ class innerSectionController extends Controller
         }
         Log::error('Error, could not delete the section for request: ', [$previousData->name]);
         return redirect()->back()->with('error', 'An error occured, Please try again !!');
+    }
+    public function fetchToAssign(Request $request){
+        $id=$request->id;
+        $data = inventory::getInventory();
+        $selectedForId=innerSection::selectedForId($id);
+        return json_encode([
+            'data'=>$data,
+            'selected'=>$selectedForId,
+            'countOfTotalInventoryItems'=>count($data)
+        ]);
+    }
+    public function assignInventory(Request $request){
+        Log::info('Assign inventory to inner sections request by user ID: ',[Auth::id()]);
+        $inventory=$request->inventory;
+        $sectionId=$request->itemId;
+        Log::info('Payload for inventory assign: ',[$inventory]);
+        Log::info('Section ID for this assingment: ',[$sectionId]);
+        $count=count((array)$inventory);
+        innerSection::erasePreviousAssingment($sectionId);
+            try{
+                for($i=0;$i<$count;$i++){
+                    innerSection::newAssignment($inventory[$i],$sectionId);
+                }
+            } catch(\Exception $e){
+                Log::error('Error occured while creating new inner section inventory assingment');
+                return redirect()->back()->with('error', 'An error occured !! Please try again !!');
+            }
+        # Entry for changes tracker start
+        $inventoryGet=innerSection::getSectionWithId($sectionId);
+        $data['profile'] = dashboard::fetchProfile();
+        $changer_name = $data['profile']->name;
+        $changer_email = $data['profile']->email;
+        $changer_title = " assigned new inventory items to inner section: " .$inventoryGet->name;
+        $trackIt = tracker::insert($changer_title, $changer_email, $changer_name);
+        if ($trackIt) {
+            Log::info('Addition to tracker table success');
+        } else {
+            Log::error('Addition to tracker table failed');
+        }
+        # Enter for changes tracker end
+        Log::info('New inner section inventory assingment created');
+        return redirect()->back()->with('success', 'Inventory items assigned to inner sections successfully');
     }
 }

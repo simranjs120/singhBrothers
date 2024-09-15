@@ -142,12 +142,12 @@ class labelsController extends Controller
     }
 
     public function assignLabels(Request $request){
-        Log::info('Assign Label delete request by user ID: ',[Auth::id()]);
+        Log::info('Assign Label request by user ID: ',[Auth::id()]);
         $labels=$request->labels;
         $inventoryId=$request->itemId;
         Log::info('Payload for label assign: ',[$labels]);
         Log::info('Inventory ID for this assingment: ',[$inventoryId]);
-        $count=count($labels);
+        $count=count((array)$labels);
         labels::erasePreviousAssingment($inventoryId);
             try{
                 for($i=0;$i<$count;$i++){

@@ -58,7 +58,7 @@
                                         <td>{{$key + 1}}</td>
                                         <td> 
                                             <button type="button" class="btn btn-primary text-light mt-1" onclick="editModal('{{$row->id}}','{{$row->name}}','{{$row->type}}','{{$row->button}}','{{$row->url}}','{{$row->button}}','{{$row->description}}')">Edit</button>
-                                            <button type="button" class="btn btn-dark text-light mt-1" title="Assign Inventory Items">Assign Inventory</button>
+                                            <button type="button" class="btn btn-dark text-light mt-1" title="Assign Inventory Items" onclick="popToAssign('{{$row->name}}',{{$row->id}})">Assign Inventory</button>
                                         </td>
                                         <td>{{$row->name}}</td>
                                         @if($row->description!="")
@@ -68,9 +68,9 @@
                                         @endif
                                         <td>{{$row->type}}</td>
                                         @if($row->button==1)
-                                            <td>Yes</td>
+                                            <td class="text-success"><b>Yes</b></td>
                                         @else
-                                            <td>No</td>
+                                            <td class="text-danger"><b>No</b></td>
                                         @endif
                                         @if($row->url!="")
                                             <td>{{$row->url}}</td>
@@ -215,6 +215,37 @@
     </div>
 </div>
 
+
+<!-- Assign Inventory Popper Modal -->
+<div class="modal fade" id="popAssignModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="elename"></h5>
+                <button type="button" class="close" data-bs-dismiss="modal" onclick="erase()" aria-label="Close" title="Close Popup">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form action="{{route('assign.inventory')}}" method="POST">
+                @csrf
+                <div class="modal-body">
+                    <div class="row">
+                        <input type="hidden" id="itemId" name="itemId"/>
+                        <p id="loader"></p>
+                        <div class="html-render"></div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-success">Assign</button>
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal" onclick="erase()" title="Close Popup">Close</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
 <x-admin-footer />
 <script>
     function popModal(path) {
@@ -252,4 +283,51 @@
             $('#url').removeAttr("required", "false");
         }
     });
+
+    function popToAssign(elename,itemId) {
+        // Clicking outside of modal is disabled to handle the ajax data removal...
+        $('#popAssignModal').modal('show');
+        $("#elename").text("Assign inventory to "+elename);
+        $("#itemId").val(itemId);
+        $("#loader").text("Loading...");
+        
+        // Fetch the labels & process the selected labels for this particular inventory item with this ajax request.
+        $.ajax({
+          url: "{{url('admin/fetch-inventory-to-assign')}}",
+          method: 'POST',
+          dataType: 'json',
+          data: {
+            id:itemId,
+            _token: '{{csrf_token()}}'
+          },
+          success: function (response) {
+            $("#loader").text("Autofilling...");
+            // Response format is here in this alert //Uncomment this and use.....
+            // console.log(JSON.stringify(response));
+            var count=response.countOfTotalInventoryItems;
+            for(let i=0;i<=count-1;i++){ // -1 to reduce an extra index, coz array starts from 0. Initiating i from 0 did not work.
+                // Append labels
+                var checkboxes="<div class='col-12'><input type='checkbox' name='inventory[]' id='name_"+response.data[i].id+"' value='"+response.data[i].id+"'/> <label for='vehicle'>"+response.data[i].itemName+"</label></div>";
+                $('.html-render').append(checkboxes);
+            }
+
+            for(let i=0;i<=response.selected.length-1;i++){
+                if(response.countOfTotalInventoryItems!=0 || response.countOfTotalInventoryItems!=undefined){
+                    // Where label_id from selected table matches the ID of label, Set that select box checked.
+                    $('#name_'+response.selected[i].inventory_id).prop('checked', true);
+                }
+            }
+            $("#loader").text("");
+          },
+          error: function (error) {
+            // alert(JSON.stringify(error));
+            alert("Fatal Error: Could not load label options, Please try again !!");
+          }
+        });
+    }
+
+    // Handling condition: Everytime button is clicked without refreshing, Ajax re-renders the same checkboxes again
+    function erase(){
+        $('.html-render').html("");
+    }
 </script>

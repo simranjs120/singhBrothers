@@ -121,6 +121,18 @@ class landingSectionController extends Controller
             $hero_bg = 'home-bg.' . $request->hero_bg->extension();
             $move4=$request->hero_bg->move(public_path('assets/img'), $hero_bg);
         }
+        # Entry for changes tracker
+        $data['profile'] = dashboard::fetchProfile();
+        $changer_name = $data['profile']->name;
+        $changer_email = $data['profile']->email;
+        $changer_title = " updated the background image of landing section";
+        $trackIt = tracker::insert($changer_title, $changer_email, $changer_name);
+        if ($trackIt) {
+            Log::info('Addition to tracker table success');
+        } else {
+            Log::error('Addition to tracker table failed');
+        }
+        # Tracker end
         Log::error("Background change request success");
         return redirect()->back()->with('success', 'Background image updated successfully.');
     }

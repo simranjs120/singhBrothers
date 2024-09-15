@@ -9,6 +9,7 @@ use App\Http\Controllers\offersController as offers;
 use App\Http\Controllers\indexController as index;
 use App\Http\Controllers\labelsController as labels;
 use App\Http\Controllers\innerSectionController as innerSection;
+use App\Http\Controllers\logoController as logo;
 
 use Illuminate\Support\Facades\Route;
 
@@ -67,6 +68,9 @@ Route::middleware('auth')->group(function () {
     Route::get('/admin/change-section-status/{status}/{id}', [innerSection::class, 'editStatusSection']);
     Route::get('/admin/delete-section/{id}', [innerSection::class, 'deleteSection']);
 
+    # Logo Module
+    Route::get('/admin/logo', [logo::class, 'index']);
+    Route::post('/admin/submit-logo', [logo::class, 'submit'])->name('submit.logos');
 
     # Category Module
     Route::any('/admin/categories/delete-category/{id}', [category::class, 'deleteCategory']);

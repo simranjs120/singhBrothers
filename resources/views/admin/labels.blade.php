@@ -26,6 +26,7 @@
             <div class="col-sm-12">
                 <div class="home-tab">
                     <h4 class="card-title card-title-dash m-4">All Labels</h4>
+                    <p class="m-3"><b><span class="mdi mdi-lightbulb-on" style="color:orange;"></span>&nbsp;<u>Pro Tip: </u></b>You can create labels from here like "Fresh Arrivals", "Mega Sale" & later assign these to intended inventory items. Assigned inventory will show up in the link generated below.</p>
                     @if (Illuminate\Support\Facades\Session::has('success'))
                         <div class="alert alert-success mt-2" style="background-color:#58ad2e;">
                             <h5 class="text-light">{{Illuminate\Support\Facades\Session::pull('success')}}</h5>

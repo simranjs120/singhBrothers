@@ -2,8 +2,8 @@
 <div class="row">
     <div class="card">
         <div class="row">
-            <div class="col-lg-6 breadcrumbs">
-                <h4 class="card-title card-title-dash m-4">Update landing section from here</h4>
+            <div class="col-lg-12 breadcrumbs">
+            <p class="m-3"><b><span class="mdi mdi-lightbulb-on" style="color:orange;"></span>&nbsp;<u>Pro Tip: </u></b>You can create new Navigation links from here named "Fresh Arrivals" & put the "Fresh Arrivals" label's Link from "Inventory Labelling" here in "Tab Link", This way customers will be able to navigate on your freshly arrived items.</p>
             </div>
         </div>
     </div>
@@ -13,7 +13,7 @@
     <div class="card">
         <div class="row">
             <div class="col-lg-12">
-                <h4 class="m-4"><b>Update Navigation Links</b></h4>
+                <h4 class="card-title card-title-dash m-4"><b>Update Navigation Links</b></h4>
                 @if (Illuminate\Support\Facades\Session::has('success'))
                     <div class="alert alert-success mt-2" style="background-color:#58ad2e;">
                         <h5 class="text-light">{{Illuminate\Support\Facades\Session::pull('success')}}</h5>
@@ -128,7 +128,7 @@
                         <input type="text" name="tabLink" class="form-control mt-1 border border-dark"
                         maxlength="100" placeholder="Enter Tab Name" />
             </div>
-            <p class="mt-1 p-1"><b><span class="mdi mdi-lightbulb-on" style="color:orange;"></span>&nbsp;<u>Pro Tip: </u></b>If you want to remove this tab, Submit this blank.</p>
+            <p class="" style="margin: -20px 0px 20px 20px;"><b><span class="mdi mdi-lightbulb-on" style="color:orange;"></span>&nbsp;<u>Pro Tip: </u></b>If you want to remove this tab, Submit this blank.</p>
             <div class="modal-footer">
                 <button type="submit" class="btn btn-primary">Save changes</button>
                 <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>

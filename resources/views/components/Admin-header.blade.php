@@ -39,7 +39,7 @@
     <!-- inject:css -->
     <link rel="stylesheet" href="{{Helper::props('admin/css/vertical-layout-light/style.css')}}">
     <!-- endinject -->
-    <link rel="shortcut icon" href="{{Helper::props('admin/images/favicon.png')}}" />
+    <link rel="shortcut icon" href="{{Helper::props('assets/img/favicon.png')}}" />
 </head>
 <style>
     .asterik{
@@ -115,24 +115,24 @@
                 </div>
             </div>
             @php
-                date_default_timezone_set("Asia/Calcutta");
+                date_default_timezone_set(env('APPLICATION_TIMEZONE'));
                 $time=date("H");
                 $salutation="a";
                 if($time>=4 && $time<12){
-                    $salutation="Good Morning";
+                    $salutation="🌅Good Morning";
                 } else if($time>=12 && $time<16){
-                    $salutation="Good Afternoon";
+                    $salutation="🏞️Good Afternoon";
                 } else if($time>=16 && $time<20){
-                    $salutation="Good Evening";   
+                    $salutation="🌄Good Evening";  
                 } else {
-                    $salutation="Nighty Night";
+                    $salutation="🌌Nighty Night";
                 }
             @endphp
             <div class="navbar-menu-wrapper d-flex align-items-top">
                 <ul class="navbar-nav">
                     <li class="nav-item font-weight-semibold d-none d-lg-block ms-0">
                         <h1 class="welcome-text"><?php echo $salutation; ?>, <span class="text-black fw-bold">{{$profile->name}}</span></h1>
-                        <h3 class="welcome-sub-text">Welcome Back To The Admin Panel</h3>
+                        <h3 class="welcome-sub-text">You're fully synced with your customers😎</h3>
                     </li>
                 </ul>
                 <ul class="navbar-nav ms-auto">
@@ -193,12 +193,15 @@
                             </a>
                         </div>
                     </li>
+                    <?php
+                        $letter=ucfirst(substr($profile->name,0,1)); 
+                    ?>
                     <li class="nav-item dropdown  d-lg-block user-dropdown">
                         <a class="nav-link" id="UserDropdown" href="#" data-bs-toggle="dropdown" aria-expanded="false">
-                            <img class="img-xs rounded-circle" src="{{Helper::props('admin/images/admin.png')}}" alt="Profile image"> </a>
+                            <img class="img-xs rounded-circle" src="{{Helper::props('admin/images/dp/'.$letter.'.png')}}" alt="Profile image"> </a>
                         <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="UserDropdown">
                             <div class="dropdown-header text-center">
-                                <img class="img-md rounded-circle" src="{{Helper::props('admin/images/admin.png')}}" alt="Profile image">
+                                <img class="img-md rounded-circle" src="{{Helper::props('admin/images/dp/'.$letter.'.png')}}" alt="Profile image">
                                 <p class="mb-1 mt-3 font-weight-semibold">{{$profile->name}}</p>
                                 <p class="fw-light text-muted mb-0">{{$profile->email}}</p>
                             </div>

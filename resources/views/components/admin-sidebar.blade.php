@@ -7,8 +7,25 @@
               <span class="menu-title">Dashboard</span>
             </a>
           </li>
-
           <li class="nav-item nav-category">Configuration</li>
+          <li class="nav-item nav-category-sidebar">
+            <a class="nav-link" href="{{url('admin/logo')}}">
+              <i class="mdi mdi-picture-in-picture-top-right menu-icon"></i>
+              <span class="menu-title">Site Logo</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{{url('admin/landing-section')}}">
+              <i class="mdi mdi-floor-plan menu-icon"></i>
+              <span class="menu-title">Configure Landing Section</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{{url('admin/inner-sections')}}">
+              <i class="mdi mdi-view-dashboard menu-icon"></i>
+              <span class="menu-title">Dynamic Inner Sections</span>
+            </a>
+          </li>
           <li class="nav-item nav-category-sidebar">
             <a class="nav-link" href="{{url('admin/categories')}}">
               <i class="mdi mdi-playlist-check menu-icon"></i>
@@ -25,18 +42,6 @@
             <a class="nav-link" href="{{url('admin/offers')}}">
               <i class="mdi mdi-tag-multiple menu-icon"></i>
               <span class="menu-title">Offers Management</span>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="{{url('admin/landing-section')}}">
-              <i class="mdi mdi-floor-plan menu-icon"></i>
-              <span class="menu-title">Configure Landing Section</span>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="{{url('admin/inner-sections')}}">
-              <i class="mdi mdi-view-dashboard menu-icon"></i>
-              <span class="menu-title">Dynamic Inner Sections</span>
             </a>
           </li>
 
@@ -57,6 +62,12 @@
             <a class="nav-link" href="">
               <i class="mdi mdi-format-float-left menu-icon"></i>
               <span class="menu-title">Contact Form Queries</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="">
+              <i class="mdi mdi-notebook menu-icon"></i>
+              <span class="menu-title">Directory</span>
             </a>
           </li>
 

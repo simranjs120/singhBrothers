@@ -91,8 +91,8 @@
                             <textarea name="itemDescription" class="form-control" maxlength="1400"  placeholder="Enter Item Description..." required></textarea>
                         </div>
                         <div class="col-lg-3 col-md-6 col-sm-12 col-xs-12">
-                            <label class="mt-3">&nbsp;<b>Dimensions (200x150)<span class="asterik">*</span></b></label>
-                            <input type="text" name="dimensions" class="form-control" maxlength="80" placeholder="Enter like: 20x30..." required/>
+                            <label class="mt-3">&nbsp;<b>Dimensions (200x150)</b></label>
+                            <input type="text" name="dimensions" class="form-control" maxlength="80" placeholder="Enter like: 20x30..."/>
                         </div>
                         <div class="col-lg-3 col-md-6 col-sm-12 col-xs-12">
                             <label class="mt-3">&nbsp;<b>Size (cm/inches)<span class="asterik">*</span></b></label>

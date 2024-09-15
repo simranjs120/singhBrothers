@@ -11,6 +11,7 @@ use App\Models\categoryModel as category;
 use App\Helpers\Helper;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Auth;
 
 class landingSectionController extends Controller
 {
@@ -18,6 +19,7 @@ class landingSectionController extends Controller
         $data['profile'] = dashboard::fetchProfile();
         $data['navTabs']=landingSection::getNavTabs();
         $data['headings']=landingSection::getHeadings();
+        $data['tool']=landingSection::searchTool();
         return view('admin.landingSection',$data);
     }
 
@@ -77,12 +79,16 @@ class landingSectionController extends Controller
     }
 
     public function configureLandingHeadings(Request $request){
+        Log::info('Heading configuration request by: ',[Auth::id()]);
         $title=$request->title;
         $titleColor=$request->titleColor;
         $tagline=$request->tagline;
         $search_line=$request->search_line;
+        $search_tool_1=$request->search_tool_line_1;
+        $search_tool_2=$request->search_tool_line_2;
+        $search_tool_3=$request->search_tool_line_3;
         Log::info('Heading configuration request title/tagline/search_line: ',[$title,$tagline,$search_line]);
-        $update=landingSection::configureLandingHeadings($title,$titleColor,$tagline,$search_line);
+        $update=landingSection::configureLandingHeadings($title,$titleColor,$tagline,$search_line,$search_tool_1, $search_tool_2, $search_tool_3);
         if($update){
             # Entry for changes tracker
             $data['profile'] = dashboard::fetchProfile();
@@ -101,5 +107,21 @@ class landingSectionController extends Controller
         }
         Log::error('New headings configuration request FAILED');
         return redirect()->back()->with('error', 'An Error Occurred !! Please try again !!');
+    }
+
+    public function heroBg(Request $request){
+        Log::info('Hero BG configuration request by: ',[Auth::id()]);
+        $extension=$request->hero_bg->extension();
+        if($extension!="png"){
+            Log::error("Logo change failed because of wrong extension");
+            return redirect()->back()->with('error', 'Request Rejected, Wrong image extension, Only .png allowed !!');
+        } 
+        if($request->hero_bg!=""){
+            File::delete(public_path('assets/img/') . "home-bg.png");
+            $hero_bg = 'home-bg.' . $request->hero_bg->extension();
+            $move4=$request->hero_bg->move(public_path('assets/img'), $hero_bg);
+        }
+        Log::error("Background change request success");
+        return redirect()->back()->with('success', 'Background image updated successfully.');
     }
 }

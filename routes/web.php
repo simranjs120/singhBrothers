@@ -51,6 +51,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/admin/landing-section', [landingSection::class, 'index']);
     Route::post('/admin/configureNavTab', [landingSection::class, 'configureNavTab'])->name('configure.tab');
     Route::post('/admin/configureLandingHeadings', [landingSection::class, 'configureLandingHeadings'])->name('configure.headings');
+    Route::post('/admin/add-her-bg', [landingSection::class, 'heroBg'])->name('add.hero-bg');
 
     # Label section Module
     Route::get('/admin/labels', [labels::class, 'index']);

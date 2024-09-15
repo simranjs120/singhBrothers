@@ -30,6 +30,13 @@ class landingSectionModel extends Model
         return $data;
     }
 
+    static function searchTool(){
+        $data=DB::table('web_settings')->first([
+            'search_tool_line_1','search_tool_line_2','search_tool_line_3'
+        ]);
+        return $data;
+    }
+
     static function configureNavTab($id,$tabName,$tabLink){
         $update=NULL;
         if($id==1){
@@ -56,12 +63,15 @@ class landingSectionModel extends Model
         return false;
     }
 
-    static function configureLandingHeadings($title,$titleColor,$tagline,$search_line){
+    static function configureLandingHeadings($title,$titleColor,$tagline,$search_line,$search_tool_1, $search_tool_2, $search_tool_3){
         $update=DB::table('web_settings')->update([
             'title'=>$title,
             'title_color'=>$titleColor,
             'tagline'=>$tagline,
-            'search_line'=>$search_line
+            'search_line'=>$search_line,
+            'search_tool_line_1'=>$search_tool_1,
+            'search_tool_line_2'=>$search_tool_2,
+            'search_tool_line_3'=>$search_tool_3
         ]);
         if($update){
             return true;

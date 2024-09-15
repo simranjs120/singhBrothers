@@ -10,6 +10,7 @@
 </div>
 <br />
 <div class="row">
+    <div class="col-lg-12">
     <div class="card">
         <div class="row">
             <div class="col-lg-12">
@@ -77,13 +78,16 @@
             </div>
         </div>
     </div>
+    </div>
+    
 </div>
 <br/>
 <div class="row">
+    <div class="col-lg-6">
     <div class="card">
         <div class="row">
-            <div class="col-lg-12">
-                <h4 class="m-4"><b>Update Headings</b></h4>
+            <div class="col-lg-12 p-4">
+                <h4 class="card-title card-title-dash m-2"><b>Update Headings</b></h4><br/>
                 <form action="{{route('configure.headings')}}" method="POST">
                     @csrf
                     <label>Enter Title: </label>
@@ -98,11 +102,39 @@
                     <label>Enter line above search bar: </label>
                         <input type="text" name="search_line" class="form-control mt-1 border border-dark mb-3"
                         maxlength="70" placeholder="Enter line above search bar" value="{{$headings->search_line}}"/>
+                        <label>Enter search tool line 1: </label>
+                        <input type="text" name="search_tool_line_1" class="form-control mt-1 border border-dark mb-3"
+                        maxlength="70" placeholder="Enter line above search bar" value="{{$tool->search_tool_line_1}}"/>
+                        <label>Enter search tool line 2: </label>
+                        <input type="text" name="search_tool_line_2" class="form-control mt-1 border border-dark mb-3"
+                        maxlength="70" placeholder="Enter line above search bar" value="{{$tool->search_tool_line_2}}"/>
+                        <label>Enter search tool line 3: </label>
+                        <input type="text" name="search_tool_line_3" class="form-control mt-1 border border-dark mb-3"
+                        maxlength="70" placeholder="Enter line above search bar" value="{{$tool->search_tool_line_3}}"/>
                     <button type="submit" class="btn btn-success w-100 mb-3">Submit</button>
                 </form>
             </div>
         </div>
     </div>
+    </div>
+    <div class="col-lg-6">
+        <div class="card">
+            <div class="row">
+                <div class="col-lg-12 p-3">
+                    <h4 class="card-title card-title-dash m-3"><b>Update background image</b></h4>
+                        <p class="m-3"><b><span class="mdi mdi-lightbulb-on" style="color:orange;"></span>&nbsp;<u>Recommended Size:</u></b> Width 1366*Height 768 Pixels..</p>
+                        <img src="{{Helper::props('assets/img/home-bg.png')}}" class="img-fluid m-2" alt="Couldn't load image"/>
+                        <form action="{{route('add.hero-bg')}}" method="POST" enctype="multipart/form-data">
+                            @csrf
+                        <input type="file" class="form-control m-3 w-50" name="hero_bg" id="hero_bg"/>
+                        <br/>
+                        <button type="submit" class="btn btn-success m-3">Submit</button>
+                        </form>
+                    </div>
+            </div>
+        </div>
+    </div>
+   
 </div>
 
 <!-- Configure Navigation Item -->
@@ -145,4 +177,24 @@ function configurationModal(id){
     $('#configurationModal').modal('show');
     $('#setNavId').val(id);
 }
+function fileSizeError(){
+        Swal.fire({
+                position: "center",
+                icon: "error",
+                title: "<b>File size should not exceed more than 10 MB, Removing file !!</b>",
+                showConfirmButton: false,
+                background:'white',
+                timer: 3500
+            });   
+    }
+    // Check file sizes, if less than 10 MB set preview
+    const hero_bg = document.getElementById("hero_bg");
+    hero_bg.onchange = function() {
+        if(this.files[0].size > 10943040) {
+            fileSizeError();
+            this.value = "";
+        } else {
+            const [file] = hero_bg.files
+        }
+    };
 </script>

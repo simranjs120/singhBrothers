@@ -137,6 +137,7 @@
                                     <p class="mb-0">
                                       <a href="{{url('/admin/all-activity')}}" class="fw-bold text-primary">Show all <i class="mdi mdi-arrow-right ms-2"></i></a>
                                     </p>
+                                    <p class="mt-3"><b><span class="mdi mdi-lightbulb-on" style="color:orange;"></span>&nbsp;<u>Pro Tip:</u></b> You can always see specifically your own activity by clicking on <b>User Icon on top right > My Profile</b>.</p>
                                   </div>
                                 </div>
                               </div>

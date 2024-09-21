@@ -32,7 +32,7 @@ class landingSectionModel extends Model
 
     static function searchTool(){
         $data=DB::table('web_settings')->first([
-            'search_tool_line_1','search_tool_line_2','search_tool_line_3'
+            'search_tool_line_1','search_tool_line_2','search_tool_line_3','category_pills'
         ]);
         return $data;
     }
@@ -63,7 +63,7 @@ class landingSectionModel extends Model
         return false;
     }
 
-    static function configureLandingHeadings($title,$titleColor,$tagline,$search_line,$search_tool_1, $search_tool_2, $search_tool_3){
+    static function configureLandingHeadings($title,$titleColor,$tagline,$search_line,$search_tool_1, $search_tool_2, $search_tool_3,$category_pills){
         $update=DB::table('web_settings')->update([
             'title'=>$title,
             'title_color'=>$titleColor,
@@ -71,7 +71,8 @@ class landingSectionModel extends Model
             'search_line'=>$search_line,
             'search_tool_line_1'=>$search_tool_1,
             'search_tool_line_2'=>$search_tool_2,
-            'search_tool_line_3'=>$search_tool_3
+            'search_tool_line_3'=>$search_tool_3,
+            'category_pills'=>$category_pills
         ]);
         if($update){
             return true;

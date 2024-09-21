@@ -134,6 +134,7 @@
                     <label class="mt-2">Select section type <span class="asterik">*</span></label>
                     <select class="form-control" style="color:black !important;" name="type" required>
                         <option value="" selected disabled>--Select--</option>
+                        <option value="spotlight">**Spotlight**</option>
                         <option value="star">Star</option>
                         <option value="galaxy">Galaxy</option>
                         <option value="nebula">Nebula</option>
@@ -190,6 +191,7 @@
                     <label class="mt-2">Select section type <span class="asterik">*</span></label>
                     <select class="form-control" style="color:black !important;" name="type" id="type" required>
                         <option value="" selected disabled>--Select--</option>
+                        <option value="spotlight">**Spotlight**</option>
                         <option value="star">Star</option>
                         <option value="galaxy">Galaxy</option>
                         <option value="nebula">Nebula</option>

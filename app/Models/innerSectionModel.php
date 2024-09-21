@@ -80,4 +80,12 @@ class innerSectionModel extends Model
         }
         return false; 
     }
+
+    static function checkSpotLight(){
+        $check=DB::table('inner_section')->where('type','spotlight')->first();
+        if($check){
+            return true;
+        }
+        return false;
+    }
 }

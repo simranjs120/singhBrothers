@@ -10,7 +10,6 @@
 </div>
 <br />
 <div class="row">
-    <div class="col-lg-12">
     <div class="card">
         <div class="row">
             <div class="col-lg-12">
@@ -78,7 +77,6 @@
             </div>
         </div>
     </div>
-    </div>
     
 </div>
 <br/>
@@ -111,7 +109,12 @@
                         <label>Enter search tool line 3: </label>
                         <input type="text" name="search_tool_line_3" class="form-control mt-1 border border-dark mb-3"
                         maxlength="70" placeholder="Enter line above search bar" value="{{$tool->search_tool_line_3}}"/>
-                    <button type="submit" class="btn btn-success w-100 mb-3">Submit</button>
+                        <label>Show Category Pills: </label>
+                        <select name="category_pills" class="form-control" style="color:black !important;">
+                            <option value="1" @if($tool->category_pills==1) selected @endif>Yes</option>
+                            <option value="0" @if($tool->category_pills==0) selected @endif>No</option>
+                        </select>
+                    <button type="submit" class="btn btn-success w-100 mb-3 mt-3">Submit</button>
                 </form>
             </div>
         </div>

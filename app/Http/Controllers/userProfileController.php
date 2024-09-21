@@ -16,6 +16,7 @@ class userProfileController extends Controller
 {
     public function index(){
         $data['profile']=dashboard::fetchProfile();
+        $data['tracking']=dashboard::fetchMyActivity();
         return view('admin.myProfile', $data);
     }
     public function updateProfile(Request $request){

@@ -87,8 +87,9 @@ class landingSectionController extends Controller
         $search_tool_1=$request->search_tool_line_1;
         $search_tool_2=$request->search_tool_line_2;
         $search_tool_3=$request->search_tool_line_3;
+        $category_pills=$request->category_pills;
         Log::info('Heading configuration request title/tagline/search_line: ',[$title,$tagline,$search_line]);
-        $update=landingSection::configureLandingHeadings($title,$titleColor,$tagline,$search_line,$search_tool_1, $search_tool_2, $search_tool_3);
+        $update=landingSection::configureLandingHeadings($title,$titleColor,$tagline,$search_line,$search_tool_1, $search_tool_2, $search_tool_3,$category_pills);
         if($update){
             # Entry for changes tracker
             $data['profile'] = dashboard::fetchProfile();

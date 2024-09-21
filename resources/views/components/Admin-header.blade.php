@@ -125,7 +125,7 @@
                 } else if($time>=16 && $time<20){
                     $salutation="🌄Good Evening";  
                 } else {
-                    $salutation="🌌Nighty Night";
+                    $salutation="🌃Nighty Night";
                 }
             @endphp
             <div class="navbar-menu-wrapper d-flex align-items-top">
@@ -151,6 +151,11 @@
             </form>
           </li> -->
 
+                    <li class="nav-item dropdown">
+                    <a class="nav-link" href="{{str_replace('/public/',"/",Helper::props('/'))}}" target="_blank">
+                            <i class="mdi mdi-web" style="font-size:24px;"></i>
+                        </a>
+                    </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link count-indicator" id="countDropdown" href="#" data-bs-toggle="dropdown"
                             aria-expanded="false">

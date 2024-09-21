@@ -19,6 +19,15 @@ class dashboardModel extends Model
         return false;
     }
 
+    static function fetchMyActivity(){
+        $loggerId=Auth::id();
+        $fetchEmail=DB::table("users")->where("id",$loggerId)->first();
+        $fetchMyActivity=DB::table("changes_tracker")->where("changer_email",$fetchEmail->email)->orderBy('id','DESC')->get();
+        if($fetchMyActivity){
+            return $fetchMyActivity;
+        }
+        return false;
+    }
     static function fetchUsers(){
         $data=DB::table("users")->get();
         return $data;        

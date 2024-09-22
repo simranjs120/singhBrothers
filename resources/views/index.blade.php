@@ -501,37 +501,6 @@
   $(document).ready(function () {
     initiateSearchAnimation();
     fetchSpotlightItems();
-
-    // Initialise slick slider carousel after a delay because cards need time to render, Otherwise this won't work.
-    setTimeout(() => {
-      $('.spotlight-render-here').slick({
-        infinite: true,
-        dots: false,
-        speed: 300,
-        autoplay: true,
-        autoplaySpeed: 2000,
-        prevArrow: false,
-        nextArrow: false,
-        slidesToShow: 3,
-        slidesToScroll: 1,
-        responsive: [
-    {
-      breakpoint: 994,
-      settings: {
-        slidesToShow: 2,
-        slidesToScroll: 1,
-      }
-    },
-    {
-      breakpoint: 768,
-      settings: {
-        slidesToShow: 1,
-        slidesToScroll: 1
-      }
-    }
-  ]
-      });
-    }, 2000);
   });
 
   /******************************** Placeholder Animation Start *************************************/
@@ -602,12 +571,12 @@
 
   /************************************************** Fetch Spotlight content Start************************************************************/
   <?php
-if ($inner_section_spotlight != "" && !empty(json_decode($inventory_section_spotlight))) {
-    ?>
+    # Validate if spotlight section is not empty for any reason then only trigger the ajax.
+    if ($inner_section_spotlight != "" && !empty(json_decode($inventory_section_spotlight))) {
+  ?>
   function fetchSpotlightItems() {
     $("#loader").text("Loading...");
     const spotlightArray = [];
-
     var spotlightCount ={{$spotlightCount}};
     for (var s = 0; s < spotlightCount; s++) {
       spotlightArray.push($('#inventory_item_' + s).val());
@@ -638,10 +607,13 @@ if ($inner_section_spotlight != "" && !empty(json_decode($inventory_section_spot
           else if (response.data[i].offerBadge != null && response.data[i].strikerPrice == null) {
             var content = "<div class='box p-3'><div class='card'><img src='" + imgPath + '/' + response.data[i].thumbnailimg + "' class='img-fluid p-2'/><p style='text-align:left; margin-left:10px;'><span class='badge badge-spotlight'>" + response.data[i].offerBadge + "</span></p><h4 class='spotlight-itemName'>" + response.data[i].itemName + "</h4><h4 class='spotlight-pricetag'>₹" + response.data[i].actualPrice + "</div></div>";
           }
-
+          // Append the content to HTML
           $('.spotlight-render-here').append(content);
         }
         $("#loader").text("");
+
+        // Trigger slick slider after the content has been loaded, Otherwise slick won't work if pre-initialised.
+        triggerSlickSlider();
       },
       error: function (error) {
         // alert(JSON.stringify(error));
@@ -650,7 +622,36 @@ if ($inner_section_spotlight != "" && !empty(json_decode($inventory_section_spot
     });
   }
   <?php
-}
-      ?>
+    }
+  ?>
   /************************************************ Fetch Spotlight content End ************************************************************/
+  function triggerSlickSlider() {
+    $('.spotlight-render-here').slick({
+      infinite: true,
+      dots: false,
+      speed: 300,
+      autoplay: true,
+      autoplaySpeed: 2000,
+      prevArrow: false,
+      nextArrow: false,
+      slidesToShow: 3,
+      slidesToScroll: 1,
+      responsive: [
+        {
+          breakpoint: 994,
+          settings: {
+            slidesToShow: 2,
+            slidesToScroll: 1,
+          }
+        },
+        {
+          breakpoint: 768,
+          settings: {
+            slidesToShow: 1,
+            slidesToScroll: 1
+          }
+        }
+      ]
+    });
+  }
 </script>

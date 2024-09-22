@@ -13,15 +13,19 @@ use App\Http\Controllers\logoController as logo;
 
 use Illuminate\Support\Facades\Route;
 
-
+# Front page modules
 Route::get('/', [index::class, 'index']);
+Route::post('admin/fetch-inventory-item-from-id', [index::class, 'fetchSpotlightItems']);
 
-Route::get('admin/dashboard',  [dashboard::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard');
-
+# Cron job modules to auto enable/disable offers
 Route::get('/autoEnable', [offers::class, 'autoEnable']);
 Route::get('/autoDisable', [offers::class, 'autoDisable']);
 
+Route::get('admin/dashboard',  [dashboard::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard');
+
 Route::middleware('auth')->group(function () {
+
+    # Fetching all activity.
     Route::get('/admin/all-activity', [dashboard::class, 'allActivity']);
 
     # The inventory module

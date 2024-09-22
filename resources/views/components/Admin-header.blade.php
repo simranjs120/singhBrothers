@@ -152,7 +152,7 @@
           </li> -->
 
                     <li class="nav-item dropdown">
-                    <a class="nav-link" href="{{str_replace('/public/',"/",Helper::props('/'))}}" target="_blank">
+                    <a class="nav-link" href="{{str_replace('/public',"/",Helper::props('/'))}}" target="_blank">
                             <i class="mdi mdi-web" style="font-size:24px;"></i>
                         </a>
                     </li>

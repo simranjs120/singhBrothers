@@ -87,7 +87,8 @@
 
   <!-- Template Main JS File -->
   <script src="{{Helper::props('assets/js/main.js')}}"></script>
-
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/glider-js/1.7.9/glider.min.js" integrity="sha512-4Y5AXHQsKRWv/566s/2jHXVBo2J4xNpapJJeaVGSbSEbHroH82lNN8y9dxbI9j5q0O9uzef5yRy5glBvfO941g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
 </body>
 
 </html>

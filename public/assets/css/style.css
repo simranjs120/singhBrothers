@@ -491,12 +491,12 @@ h6 {
 @media (max-width: 768px) {
   #hero h1 {
     /* font-size: 28px; */
-    line-height: 1.0;
+    line-height: 1.1;
   }
 
   #hero h2 {
     /* font-size: 20px; */
-    line-height: 1.0;
+    line-height: 1.1;
   }
 }
 @media (max-width: 426px) {
@@ -644,17 +644,28 @@ section {
 # spotlight
 --------------------------------------------------------------*/
 .spotlight {
+  font-family: Arial, Helvetica, sans-serif !important;
   background: linear-gradient(rgba(2, 2, 2, 0.6), rgba(0, 0, 0, 0.9)), url("../img/home-bg.png")fixed center center;
   background-size: cover;
   padding: 60px 0;
 }
-
-.spotlight h3 {
-  color: #fff;
-  font-size: 28px;
+.spotlight-heading{
+  font-family: Arial, Helvetica, sans-serif !important;
+  font-size: 42px;
   font-weight: 700;
+  color:white;
 }
-
+.spotlight-itemName {
+  font-family: Arial, Helvetica, sans-serif !important;
+  font-weight: 700;
+  text-align: left;
+  margin: -3px 0px 10px 10px;
+}
+.spotlight-pricetag{
+  font-family: Arial, Helvetica, sans-serif !important;
+  text-align: left;
+  margin: 6px 0px 22px 10px;
+}
 .spotlight p {
   color: #fff;
 }
@@ -1364,4 +1375,20 @@ Custom CSS
 
 .category-pill:hover {
   background-color: #f1f1f1;
+}
+.badge-spotlight{
+  background-color:red;
+  color:white;
+  border-radius:20px;
+  font-size: 15px !important;
+  margin-top: 0px 0px 0px 25px !important;
+  /* width: 50%; */
+}
+.card{
+  transition: 0.5s;
+}
+.card:hover{
+  box-shadow:  -1px 3px 18px 3px var(--primary-color);
+  cursor: pointer;
+  transition: 0.5s;
 }

@@ -24,6 +24,8 @@
   <link href="{{Helper::props('assets/vendor/glightbox/css/glightbox.min.css')}}" rel="stylesheet">
   <link href="{{Helper::props('assets/vendor/remixicon/remixicon.css')}}" rel="stylesheet">
   <link href="{{Helper::props('assets/vendor/swiper/swiper-bundle.min.css')}}" rel="stylesheet">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
 
   <!-- Main CSS File -->
   <link href="{{Helper::props('assets/css/style.css')}}" rel="stylesheet">

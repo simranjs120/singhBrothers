@@ -96,22 +96,30 @@
     </div>
   </section><!-- End About Section -->
 
-  @if($inner_section_spotlight != "")
+  @if($inner_section_spotlight != "" && !empty(json_decode($inventory_section_spotlight)))
+    @php
+    /* Fetching all the inventory IDs from $inventory_section_spotlight array & put them in dynamic hidden fields, then fetch those hidden field's
+     value from javascript & put them in a js array, Then make an ajax call with those IDs & fetch actual inventory items. */
+    $spotlightCount = 0;
+    foreach ($inventory_section_spotlight as $row) {
+    echo "<input type='hidden' id='inventory_item_" . $spotlightCount . "' value='" . $row->inventory_id . "' />";
+    $spotlightCount++;
+    }
+  @endphp
     <!-- ======= Spotlight Section ======= -->
     <section id="spotlight" class="spotlight">
     <div class="container" data-aos="zoom-in">
       <div class="text-center">
-      <h3>Special Shoutouts🤩</h3>
+      <h2 class="spotlight-heading">Special Shoutouts🤩</h2>
       <p>{{$inner_section_spotlight->description}}</p>
-
-      <div class="shoutout-box">
-        @foreach($inventory_section_spotlight as $row)
-        {{$row->inventory_id}}
-        @endforeach
+      <p id="loader"></p>
+      <div class='container'>
+        <div class="spotlight-render-here">
+        </div>
       </div>
-      @if($inner_section_spotlight->button == 1)<a class="spotlight-btn" href="{{$inner_section_spotlight->url}}">Take a look</a>@endif
-     
 
+      @if($inner_section_spotlight->button == 1)<a class="spotlight-btn" href="{{$inner_section_spotlight->url}}">Take
+  a look</a>@endif
 
       </div>
     </div>
@@ -487,10 +495,46 @@
 
 </main><!-- End #main -->
 
-
 <x-footer />
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 <script>
+
+  $(document).ready(function () {
+    initiateSearchAnimation();
+    fetchSpotlightItems();
+
+    // Initialise slick slider carousel after a delay because cards need time to render, Otherwise this won't work.
+    setTimeout(() => {
+      $('.spotlight-render-here').slick({
+        infinite: true,
+        dots: false,
+        speed: 300,
+        autoplay: true,
+        autoplaySpeed: 2000,
+        prevArrow: false,
+        nextArrow: false,
+        slidesToShow: 3,
+        slidesToScroll: 1,
+        responsive: [
+    {
+      breakpoint: 994,
+      settings: {
+        slidesToShow: 2,
+        slidesToScroll: 1,
+      }
+    },
+    {
+      breakpoint: 768,
+      settings: {
+        slidesToShow: 1,
+        slidesToScroll: 1
+      }
+    }
+  ]
+      });
+    }, 2000);
+  });
+
+  /******************************** Placeholder Animation Start *************************************/
   // Add something to given element placeholder
   function addToPlaceholder(toAdd, el) {
     el.attr('placeholder', el.attr('placeholder') + toAdd);
@@ -526,7 +570,7 @@
       if (i == 3) {
         // Recursion
         setTimeout(() => {
-          run();
+          initiateSearchAnimation();
         }, 3000);
       }
     });
@@ -534,18 +578,15 @@
 
   // Print given phrases to element
   function printPhrases(phrases, el) {
-    // For each phrase
-    // wait for phrase to be typed
-    // before start typing next
+    // For each phrase, wait for phrase to be typed before start typing next
     phrases.reduce(
       (promise, phrase) => promise.then(_ => printPhrase(phrase, el)),
       Promise.resolve()
     );
-    // alert("here");
   }
 
-  // Start typing
-  function run() {
+  // Start typing for search box animation
+  function initiateSearchAnimation() {
     let phrases = [
       "{{$web->search_tool_line_1}}",
       "{{$web->search_tool_line_2}}",
@@ -557,8 +598,59 @@
       printPhrases(phrases, $('#search-tool'));
     }
   }
-  $(document).ready(function () {
-    run();
-    $('.shoutout-box').slick();
-  });
+  /********************************* Placeholder Animation End *******************************************/
+
+  /************************************************** Fetch Spotlight content Start************************************************************/
+  <?php
+if ($inner_section_spotlight != "" && !empty(json_decode($inventory_section_spotlight))) {
+    ?>
+  function fetchSpotlightItems() {
+    $("#loader").text("Loading...");
+    const spotlightArray = [];
+
+    var spotlightCount ={{$spotlightCount}};
+    for (var s = 0; s < spotlightCount; s++) {
+      spotlightArray.push($('#inventory_item_' + s).val());
+    }
+
+    // Ajax call to fetch inventory items based on IDs
+    $.ajax({
+      url: "{{url('admin/fetch-inventory-item-from-id')}}",
+      method: 'POST',
+      dataType: 'json',
+      data: {
+        ids: spotlightArray,
+        _token: '{{csrf_token()}}'
+      },
+      success: function (response) {
+        var imgPath = "{{Helper::props('admin/inventoryImages/')}}";
+        var count = response.countOfSpotlightInventory;
+        for (let i = 0; i <= count - 1; i++) {
+          // If offer Badge & Striker price both have value.
+          if (response.data[i].offerBadge != null && response.data[i].strikerPrice != null) {
+            var content = "<div class='box p-3'><div class='card'><img src='" + imgPath + '/' + response.data[i].thumbnailimg + "' class='img-fluid p-2'/><p style='text-align:left; margin-left:10px;'><span class='badge badge-spotlight'>" + response.data[i].offerBadge + "</span></p><h4 class='spotlight-itemName'>" + response.data[i].itemName + "</h4><h4 class='spotlight-pricetag'><s>₹" + response.data[i].strikerPrice + "</s> ₹" + response.data[i].actualPrice + "</h4></div></div>";
+          }
+          // If offer striker having value but offer badge is not having value.
+          else if (response.data[i].strikerPrice != null && response.data[i].offerBadge == null) {
+            var content = "<div class='box p-3'><div class='card'><img src='" + imgPath + '/' + response.data[i].thumbnailimg + "' class='img-fluid p-2'/><h4 class='spotlight-itemName'>" + response.data[i].itemName + "</h4><h4 class='spotlight-pricetag'><s>₹" + response.data[i].strikerPrice + "</s> ₹" + response.data[i].actualPrice + "</h4></div></div>";
+          }
+          // If offer badge is having value but striker is not having value.
+          else if (response.data[i].offerBadge != null && response.data[i].strikerPrice == null) {
+            var content = "<div class='box p-3'><div class='card'><img src='" + imgPath + '/' + response.data[i].thumbnailimg + "' class='img-fluid p-2'/><p style='text-align:left; margin-left:10px;'><span class='badge badge-spotlight'>" + response.data[i].offerBadge + "</span></p><h4 class='spotlight-itemName'>" + response.data[i].itemName + "</h4><h4 class='spotlight-pricetag'>₹" + response.data[i].actualPrice + "</div></div>";
+          }
+
+          $('.spotlight-render-here').append(content);
+        }
+        $("#loader").text("");
+      },
+      error: function (error) {
+        // alert(JSON.stringify(error));
+        alert("Fatal Error: Could not load label options, Please try again !!");
+      }
+    });
+  }
+  <?php
+}
+      ?>
+  /************************************************ Fetch Spotlight content End ************************************************************/
 </script>

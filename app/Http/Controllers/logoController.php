@@ -17,11 +17,24 @@ class logoController extends Controller
     }
     public function submit(Request $request){
         Log::info("Logo change request by User ID: ",[Auth::id()]);
-        $extension=$request->front_logo->extension();
-        if($extension!="png"){
+        $errorMessage="Request Rejected, Wrong image extension, Only .png allowed !!";
+        if($request->front_logo!="" && $request->front_logo->extension()!="png"){
             Log::error("Logo change failed because of wrong extension");
-            return redirect()->back()->with('error', 'Request Rejected, Wrong image extension, Only .png allowed !!');
-        } 
+            return redirect()->back()->with('error', $errorMessage);
+        }
+        if($request->favicon!="" && $request->favicon->extension()!="png"){
+            Log::error("Logo change failed because of wrong extension");
+            return redirect()->back()->with('error', $errorMessage);
+        }
+        if($request->admin_logo!="" && $request->admin_logo->extension()!="png"){
+            Log::error("Logo change failed because of wrong extension");
+            return redirect()->back()->with('error', $errorMessage);
+        }
+        if($request->front_footer_logo!="" && $request->front_footer_logo->extension()!="png"){
+            Log::error("Logo change failed because of wrong extension");
+            return redirect()->back()->with('error', $errorMessage);
+        }
+        
         
 
         if($request->front_logo!=""){

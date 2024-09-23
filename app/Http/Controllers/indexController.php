@@ -40,7 +40,6 @@ class indexController extends Controller
             $embedArray['offerBadge']=$getInventory->offerBadge;
             $result[]=$embedArray;
         }
-        // die;
         return json_encode([
             'data'=>$result,
             'countOfSpotlightInventory'=>count($result)

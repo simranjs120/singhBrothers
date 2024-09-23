@@ -53,14 +53,6 @@ class innerSectionController extends Controller
     public function editSection(Request $request){
         Log::info('New section edit request by ID: ',[Auth::id()]);
         $payload=$request->except(['_token']);
-        # Validation because spotlight section can only be one.
-        if($request->type=='spotlight'){
-            $validationSpotLight=innerSection::checkSpotLight();
-            if($validationSpotLight){
-                Log::error('Error, could not add the new section for request single spolight section validation: ', [$request->except(['_token'])]);
-                return redirect()->back()->with('error', 'Request Rejected, Spotlight section can only be 1, Section already exists');
-            }
-        }
         $dataIns=innerSection::editData($payload,$payload['id']);
         if($dataIns){
             # Entry for changes tracker start

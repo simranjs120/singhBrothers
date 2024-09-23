@@ -1,4 +1,10 @@
 <x-Admin-header :profile="$profile" />
+<style>
+    .colored-words{
+        background-color: #3ABEF9;
+        color:white;
+    }
+</style>
 <div class="row">
     <div class="card">
         <div class="row">
@@ -91,7 +97,7 @@
                     <label>Enter Title: </label>
                         <input type="text" name="title" class="form-control mt-1 border border-dark"
                         maxlength="70" placeholder="Enter title" value="{{$headings->title}}"/><br/>
-                        <label>Enter Title Colored Words: </label>
+                        <label>Enter Title <span class="colored-words">Colored Words</span>: </label>
                         <input type="text" name="titleColor" class="form-control mt-1 border border-dark"
                         maxlength="45" placeholder="Enter title colored words" value="{{$headings->title_color}}"/><br/>
                     <label>Enter Tagline: </label>
@@ -114,6 +120,9 @@
                             <option value="1" @if($tool->category_pills==1) selected @endif>Yes</option>
                             <option value="0" @if($tool->category_pills==0) selected @endif>No</option>
                         </select>
+                        <label>Pills Heading: </label>
+                        <input type="text" name="pills_heading" class="form-control mt-1 border border-dark mb-3"
+                        maxlength="70" placeholder="Enter line above search bar" value="{{$tool->pills_heading}}"/>
                     <button type="submit" class="btn btn-success w-100 mb-3 mt-3">Submit</button>
                 </form>
             </div>

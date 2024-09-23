@@ -62,7 +62,7 @@
     <div class="container d-flex justify-content-center">
       <div class="row">
       <div class="col-12">
-        <h2 class="text-center mb-4">What exactly are you looking for?</h2>
+        <h2 class="text-center mb-4">{{$web->pills_heading}}</h2>
         @foreach($category as $categoryset)
       <a href="#">
       <button class="button category-pill btn-lg">{{$categoryset->category}}</button>
@@ -110,7 +110,7 @@
     <section id="spotlight" class="spotlight">
     <div class="container" data-aos="zoom-in">
       <div class="text-center">
-      <h2 class="spotlight-heading">Special Shoutouts🤩</h2>
+      <h2 class="spotlight-heading">{{$inner_section_spotlight->name}}</h2>
       <p>{{$inner_section_spotlight->description}}</p>
       <p id="loader"></p>
       <div class='container'>

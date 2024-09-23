@@ -617,7 +617,7 @@
       },
       error: function (error) {
         // alert(JSON.stringify(error));
-        alert("Fatal Error: Could not load label options, Please try again !!");
+        alert("Error: Could not load some content, Please refresh again !!");
       }
     });
   }

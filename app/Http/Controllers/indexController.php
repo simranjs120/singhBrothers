@@ -32,7 +32,7 @@ class indexController extends Controller
         $embedArray=[];
         $result=[];
         for($i=0;$i<$countItems;$i++){
-            $getInventory=DB::table('inventory')->where('id',$ids[$i])->first();
+            $getInventory=DB::table('inventory')->where(['id'=>$ids[$i],'status'=>1])->first();
             $embedArray['thumbnailimg']=$getInventory->thumbnailimg;
             $embedArray['itemName']=$getInventory->itemName;
             $embedArray['strikerPrice']=$getInventory->strikerPrice;

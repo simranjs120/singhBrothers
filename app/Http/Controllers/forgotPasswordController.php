@@ -29,6 +29,7 @@ class forgotPasswordController extends Controller
     }
     public function sendLink(Request $request)
     {
+        try{
             $email = $request->email;
             Log::info('Forgot Password Request for Email: ', [$email]);
             $fetchEmail = DB::table('users')->where('email', $email)->first();
@@ -65,10 +66,14 @@ class forgotPasswordController extends Controller
                     'email' => env('FORGOT_PASSWORD_REQUEST_ERROR'),
                 ]);
             }
-
+        } catch (\Exception $e) {
+            Log::error('Exception in send password on forgot password module: ' . $e->getMessage());
+            return redirect()->back();
+        }
     }
 
     public function resetPassword(Request $request){
+        try{
         $userId=$request->userId;
         $password=Hash::make($request->password);
         $passwordKey=str_replace ('/', '', Hash::make($request->password));
@@ -79,5 +84,9 @@ class forgotPasswordController extends Controller
         } catch (Exception $exception){
             Log::error('Exception While Resetting Password: ',[$exception->getMessage()]);
         }
+    } catch (\Exception $e) {
+        Log::error('Exception in send password on reset password module: ' . $e->getMessage());
+        return redirect()->back();
+    }
     }
 }

@@ -14,81 +14,90 @@ use App\Helpers\Helper;
 
 class userProfileController extends Controller
 {
-    public function index(){
-        $data['profile']=dashboard::fetchProfile();
-        $data['tracking']=dashboard::fetchMyActivity();
+    public function index()
+    {
+        $data['profile'] = dashboard::fetchProfile();
+        $data['tracking'] = dashboard::fetchMyActivity();
         return view('admin.myProfile', $data);
     }
-    public function updateProfile(Request $request){
-       Log::info('Profile Update Request For User ID: ',[Auth::id()]);
-       $name=$request->name;
-       $email=$request->email;
-       $password=$request->password;
-       if($password!=""){
-        $updateInfoWithPassword=userProfile::updateWithPassword($name, $email, $password);
-        if($updateInfoWithPassword){
-            Log::info('Profile Update Request Successfull for User ID: ',[Auth::id()]);
-            return redirect()->back()->with('success','Your profile has been updated successfully !!');
-        } else {
-            Log::error('Profile Update Request Failed For User ID: ',[Auth::id()]);
-            return redirect()->back()->with('error','An error occured !! Please try again !!');
+    public function updateProfile(Request $request)
+    {
+        try {
+            Log::info('Profile Update Request For User ID: ', [Auth::id()]);
+            $name = $request->name;
+            $email = $request->email;
+            $password = $request->password;
+            if ($password != "") {
+                $updateInfoWithPassword = userProfile::updateWithPassword($name, $email, $password);
+                if ($updateInfoWithPassword) {
+                    Log::info('Profile Update Request Successfull for User ID: ', [Auth::id()]);
+                    return redirect()->back()->with('success', 'Your profile has been updated successfully !!');
+                } else {
+                    Log::error('Profile Update Request Failed For User ID: ', [Auth::id()]);
+                    return redirect()->back()->with('error', 'An error occured !! Please try again !!');
+                }
+            } else {
+                $fetchProfileForPreviousPassword = userProfile::fetchProfileForPreviousPassword();
+                $updateInfoWithoutPassword = userProfile::updateWithoutPassword($name, $email, $password = $fetchProfileForPreviousPassword->password);
+                if ($updateInfoWithoutPassword) {
+                    Log::info('Profile Update Request Successfull for User ID: ', [Auth::id()]);
+                    return redirect()->back()->with('success', 'Your profile has been updated successfully !!');
+                } else {
+                    Log::error('Profile Update Request Failed For User ID: ', [Auth::id()]);
+                    return redirect()->back()->with('error', 'An error occured !! Please try again !!');
+                }
+            }
+        } catch (\Exception $e) {
+            Log::error('Exception in update profile function: ' . $e->getMessage());
+            return redirect()->back()->with('error', 'Something went wrong!! Please try again !');
         }
-       } else{
-        $fetchProfileForPreviousPassword=userProfile::fetchProfileForPreviousPassword();
-        $updateInfoWithoutPassword=userProfile::updateWithoutPassword($name, $email,$password=$fetchProfileForPreviousPassword->password);
-        if($updateInfoWithoutPassword){
-            Log::info('Profile Update Request Successfull for User ID: ',[Auth::id()]);
-            return redirect()->back()->with('success','Your profile has been updated successfully !!');
-        } else {
-            Log::error('Profile Update Request Failed For User ID: ',[Auth::id()]);
-            return redirect()->back()->with('error','An error occured !! Please try again !!');
-        }
-       } 
     }
 
-    public function addNewUserRender(){
-        $data['profile']=dashboard::fetchProfile();
-         $data['fetchUsers']=dashboard::fetchUsers();
+    public function addNewUserRender()
+    {
+        $data['profile'] = dashboard::fetchProfile();
+        $data['fetchUsers'] = dashboard::fetchUsers();
         return view('admin.addUser', $data);
     }
 
-    public function addNewUser(Request $request){
-        Log::info('Request to create a new user by User ID: ',[Auth::id()]);
+    public function addNewUser(Request $request)
+    {
+        Log::info('Request to create a new user by User ID: ', [Auth::id()]);
         try {
             $user = User::create([
                 'name' => $request->name,
                 'email' => $request->email,
                 'password' => Hash::make($request->password),
-                'forgot_password_key'=>str_replace ('/', '', Hash::make($request->password)),
-                'created_at'=>Helper::timeStamp(),
+                'forgot_password_key' => str_replace('/', '', Hash::make($request->password)),
+                'created_at' => Helper::timeStamp(),
             ]);
-            $create=event(new Registered($user));    
-         } catch (\Exception $e) { 
+            $create = event(new Registered($user));
+        } catch (\Exception $e) {
             if ($e->getCode() == 23000) {
                 // Deal with duplicate key error  
-                Log::error('New user creation request failed, Email already exists -> by User ID: ',[Auth::id()]);
-                return redirect()->back()->with('error','Request Rejected, This email already exists !!');
+                Log::error('New user creation request failed, Email already exists -> by User ID: ', [Auth::id()]);
+                return redirect()->back()->with('error', 'Request Rejected, This email already exists !!');
             }
-         }
-        
-        if($create){
-            Log::info('New User created successfully by User ID: ',[Auth::id()]);
+        }
+
+        if ($create) {
+            Log::info('New User created successfully by User ID: ', [Auth::id()]);
             # Entry for changes tracker
-            $data['profile']=dashboard::fetchProfile();
-            $changer_name=$data['profile']->name;
-            $changer_email=$data['profile']->email;
-            $changer_title=" created a new user";
-            $trackIt=tracker::insert($changer_title, $changer_email, $changer_name);
-            if($trackIt){
+            $data['profile'] = dashboard::fetchProfile();
+            $changer_name = $data['profile']->name;
+            $changer_email = $data['profile']->email;
+            $changer_title = " created a new user";
+            $trackIt = tracker::insert($changer_title, $changer_email, $changer_name);
+            if ($trackIt) {
                 Log::info('Addition to tracker table success');
             } else {
                 Log::error('Addition to tracker table failed');
             }
             # Tracker End
-            return redirect()->back()->with('success','New User has been created successfully !!');
+            return redirect()->back()->with('success', 'New User has been created successfully !!');
         } else {
-            Log::error('New user creation request failed by User ID: ',[Auth::id()]);
-            return redirect()->back()->with('error','An error occured !! Please try again !!');
+            Log::error('New user creation request failed by User ID: ', [Auth::id()]);
+            return redirect()->back()->with('error', 'An error occured !! Please try again !!');
         }
     }
 }

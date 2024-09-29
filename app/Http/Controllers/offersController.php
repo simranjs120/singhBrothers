@@ -25,6 +25,7 @@ class offersController extends Controller
 
     public function submitOffers(Request $request)
     {
+        try{
         Log::info('New offer creation request by User ID: ', [Auth::id()]);
         # Offer Image 
         $imageName = "";
@@ -70,10 +71,15 @@ class offersController extends Controller
         }
         Log::error('Error, could not add the new offer for request: ', [$request->except(['_token'])]);
         return redirect()->back()->with('error', 'An error occured, Please try again !!');
+    } catch (\Exception $e) {
+        Log::error('Exception in submit offers function: ' . $e->getMessage());
+        return redirect()->back()->with('error', 'Something went wrong!! Please try again !');
+    }
     }
 
     public function changeOfferStatus($status, $id)
     {
+        try{
         Log::info('Offer status update request by: ', [Auth::id()]);
         $status = offers::changeStatus($status, $id);
         $previousData = offers::getOfferWithId($id);
@@ -99,10 +105,15 @@ class offersController extends Controller
         }
         Log::error('Error occured while updating status for Offer ID: ', [$id]);
         return redirect()->back()->with('error', 'An error occured !! Please try again !!');
+    } catch (\Exception $e) {
+        Log::error('Exception in changing offer status module: ' . $e->getMessage());
+        return redirect()->back()->with('error', 'Something went wrong!! Please try again !');
+    }
     }
 
     public function editOffers(Request $request)
     {
+        try{
         Log::info('offer edit request by User ID: ', [Auth::id()]);
         $previousData = offers::getOfferWithId($request->id);
         # Offer Image 
@@ -147,10 +158,16 @@ class offersController extends Controller
         }
         Log::error('Error, could not update the offer for request: ', [$request->except(['_token'])]);
         return redirect()->back()->with('error', 'An error occured, Please try again !!');
+    } catch (\Exception $e) {
+        Log::error('Exception in edit offers module: ' . $e->getMessage());
+        return redirect()->back()->with('error', 'Something went wrong!! Please try again !');
+    }
     }
 
     public function deleteOffers($id)
     {
+        try{
+        Log::info('offer delete request by User ID: ', [Auth::id()]);
         $previousData = offers::getOfferWithId($id);
         File::delete(public_path('admin/offerImages/') . $previousData->image);
         $deleteData = offers::deleteData($id);
@@ -172,6 +189,10 @@ class offersController extends Controller
         }
         Log::error('Error, could not delete the offer for request: ', [$previousData->title]);
         return redirect()->back()->with('error', 'An error occured, Please try again !!');
+    } catch (\Exception $e) {
+        Log::error('Exception in delete offers module: ' . $e->getMessage());
+        return redirect()->back()->with('error', 'Something went wrong!! Please try again !');
+    }
     }
 
     public function autoEnable(){

@@ -14,163 +14,195 @@ use Illuminate\Support\Facades\Auth;
 
 class labelsController extends Controller
 {
-    public function index(){
+    public function index()
+    {
         $data['profile'] = dashboard::fetchProfile();
         $data['label'] = labels::fetchLabels();
-        return view('admin.labels',$data);
+        return view('admin.labels', $data);
     }
 
-    public function fetchAjax(Request $request){
-        $id=$request->id;
-        $label=labels::fetchLabels();
-        $selectedForId=labels::selectedForId($id);
+    public function fetchAjax(Request $request)
+    {
+        $id = $request->id;
+        $label = labels::fetchLabels();
+        $selectedForId = labels::selectedForId($id);
         return json_encode([
-            'allLabels'=>$label,
-            'selected'=>$selectedForId,
-            'countOfTotalLabels'=>count($label),
-            'countOfSelectedLabels'=>count($selectedForId)
+            'allLabels' => $label,
+            'selected' => $selectedForId,
+            'countOfTotalLabels' => count($label),
+            'countOfSelectedLabels' => count($selectedForId)
         ]);
 
     }
-    public function submitLabels(Request $request){
-        Log::info('New Label creation request by user ID: ',[Auth::id()]);
-        $name=$request->name;
-        $status=$request->status;
-        $data=[
-            'name'=>$name,
-            'url'=>str_replace('/public/',"",Helper::props('/label/'.base64_encode(time()))),
-            'unique_hash'=> time(),
-            'status'=>$status,
-            'created_at'=>Helper::timeStamp()
-        ];
-        $insert=labels::insertData($data);
-        if($insert){
-            Log::info('Label creation success for payload: ',[$request->except(['_token'])]);
-            # Entry for changes tracker start
-            $data['profile'] = dashboard::fetchProfile();
-            $changer_name = $data['profile']->name;
-            $changer_email = $data['profile']->email;
-            $changer_title = " added a new label named as: " . $name;
-            $trackIt = tracker::insert($changer_title, $changer_email, $changer_name);
-            if ($trackIt) {
-                Log::info('Addition to tracker table success');
-            } else {
-                Log::error('Addition to tracker table failed');
-            }
-            # Enter for changes tracker end
-            return redirect()->back()->with('success', 'New label has been created successfully');
-        }
-        Log::error('Error occured while creating label for payload: ',[$request->except(['_token'])]);
-        return redirect()->back()->with('error', 'An error occured !! Please try again !!');
-    }
-
-    public function editLabel(Request $request){
-        Log::info('Label edit request by user ID: ',[Auth::id()]);
-        $name=$request->name;
-        $id=$request->id;
-        $edit=labels::editData($name,$id);
-        if($edit){
-            Log::info('Label Edit success, New Name: ',[$name]);
-            # Entry for changes tracker start
-            $data['profile'] = dashboard::fetchProfile();
-            $changer_name = $data['profile']->name;
-            $changer_email = $data['profile']->email;
-            $changer_title = " edited a label, New Name: " . $name;
-            $trackIt = tracker::insert($changer_title, $changer_email, $changer_name);
-            if ($trackIt) {
-                Log::info('Addition to tracker table success');
-            } else {
-                Log::error('Addition to tracker table failed');
-            }
-            # Enter for changes tracker end
-            return redirect()->back()->with('success', 'Label name has been edited successfully');
-        }
-        Log::error('Error occured while editing label for payload: ',[$request->except(['_token'])]);
-        return redirect()->back()->with('error', 'An error occured !! Please try again !!');
-    }
-
-    public function changeLabelStatus($status,$id){
-        Log::info('Label status update request by user ID: ',[Auth::id()]);
-        $updateStatus=labels::changeLabelStatus($status,$id);
-        $previousData=labels::getLabelWithId($id);
-        if($updateStatus){
-             # Entry for changes tracker start
-             $data['profile'] = dashboard::fetchProfile();
-             $changer_name = $data['profile']->name;
-             $changer_email = $data['profile']->email;
-             if ($status == 0) {
-                 $changer_title = " changed the status to In-Active for label Name: ".$previousData->name;
-             } else if ($status == 1) {
-                 $changer_title = " changed the status to Active for label Name: ".$previousData->name;
-             }
-             $trackIt = tracker::insert($changer_title, $changer_email, $changer_name);
-             if ($trackIt) {
-                 Log::info('Addition to tracker table success');
-             } else {
-                 Log::error('Addition to tracker table failed');
-             }
-             # Enter for changes tracker end
-            Log::info('Status updated for label ID: ',[$id]);
-            return redirect()->back()->with('success', 'Label status has been updated successfully');
-        }
-        Log::error('Error occured while updating status for Label ID: ',[$id]);
-        return redirect()->back()->with('error', 'An error occured !! Please try again !!');
-    }
-
-    public function deleteLabel($id){
-        Log::info('Label delete request by user ID: ',[Auth::id()]);
-        $previousData=labels::getLabelWithId($id);
-        $delete=labels::deleteLabel($id);
-        if($delete){
-             # Entry for changes tracker start
-             $data['profile'] = dashboard::fetchProfile();
-             $changer_name = $data['profile']->name;
-             $changer_email = $data['profile']->email;
-             $changer_title = " delete the label Name: ".$previousData->name;
-             $trackIt = tracker::insert($changer_title, $changer_email, $changer_name);
-             if ($trackIt) {
-                 Log::info('Addition to tracker table success');
-             } else {
-                 Log::error('Addition to tracker table failed');
-             }
-             # Enter for changes tracker end
-            Log::info('Label Deleted ID: ',[$id]);
-            return redirect()->back()->with('success', 'Label has been deleted successfully');
-        }
-        Log::error('Error occured while deleting Label ID: ',[$id]);
-        return redirect()->back()->with('error', 'An error occured !! Please try again !!');
-    }
-
-    public function assignLabels(Request $request){
-        Log::info('Assign Label request by user ID: ',[Auth::id()]);
-        $labels=$request->labels;
-        $inventoryId=$request->itemId;
-        Log::info('Payload for label assign: ',[$labels]);
-        Log::info('Inventory ID for this assingment: ',[$inventoryId]);
-        $count=count((array)$labels);
-        labels::erasePreviousAssingment($inventoryId);
-            try{
-                for($i=0;$i<$count;$i++){
-                    labels::newAssignment($labels[$i],$inventoryId);
+    public function submitLabels(Request $request)
+    {
+        try {
+            Log::info('New Label creation request by user ID: ', [Auth::id()]);
+            $name = $request->name;
+            $status = $request->status;
+            $data = [
+                'name' => $name,
+                'url' => str_replace('/public/', "", Helper::props('/label/' . base64_encode(time()))),
+                'unique_hash' => time(),
+                'status' => $status,
+                'created_at' => Helper::timeStamp()
+            ];
+            $insert = labels::insertData($data);
+            if ($insert) {
+                Log::info('Label creation success for payload: ', [$request->except(['_token'])]);
+                # Entry for changes tracker start
+                $data['profile'] = dashboard::fetchProfile();
+                $changer_name = $data['profile']->name;
+                $changer_email = $data['profile']->email;
+                $changer_title = " added a new label named as: " . $name;
+                $trackIt = tracker::insert($changer_title, $changer_email, $changer_name);
+                if ($trackIt) {
+                    Log::info('Addition to tracker table success');
+                } else {
+                    Log::error('Addition to tracker table failed');
                 }
-            } catch(\Exception $e){
+                # Enter for changes tracker end
+                return redirect()->back()->with('success', 'New label has been created successfully');
+            }
+            Log::error('Error occured while creating label for payload: ', [$request->except(['_token'])]);
+            return redirect()->back()->with('error', 'An error occured !! Please try again !!');
+        } catch (\Exception $e) {
+            Log::error('Exception in submit labels function: ' . $e->getMessage());
+            return redirect()->back()->with('error', 'Something went wrong!! Please try again !');
+        }
+    }
+
+    public function editLabel(Request $request)
+    {
+        try {
+            Log::info('Label edit request by user ID: ', [Auth::id()]);
+            $name = $request->name;
+            $id = $request->id;
+            $edit = labels::editData($name, $id);
+            if ($edit) {
+                Log::info('Label Edit success, New Name: ', [$name]);
+                # Entry for changes tracker start
+                $data['profile'] = dashboard::fetchProfile();
+                $changer_name = $data['profile']->name;
+                $changer_email = $data['profile']->email;
+                $changer_title = " edited a label, New Name: " . $name;
+                $trackIt = tracker::insert($changer_title, $changer_email, $changer_name);
+                if ($trackIt) {
+                    Log::info('Addition to tracker table success');
+                } else {
+                    Log::error('Addition to tracker table failed');
+                }
+                # Enter for changes tracker end
+                return redirect()->back()->with('success', 'Label name has been edited successfully');
+            }
+            Log::error('Error occured while editing label for payload: ', [$request->except(['_token'])]);
+            return redirect()->back()->with('error', 'An error occured !! Please try again !!');
+        } catch (\Exception $e) {
+            Log::error('Exception in edit label module: ' . $e->getMessage());
+            return redirect()->back()->with('error', 'Something went wrong!! Please try again !');
+        }
+    }
+
+    public function changeLabelStatus($status, $id)
+    {
+        try {
+            Log::info('Label status update request by user ID: ', [Auth::id()]);
+            $updateStatus = labels::changeLabelStatus($status, $id);
+            $previousData = labels::getLabelWithId($id);
+            if ($updateStatus) {
+                # Entry for changes tracker start
+                $data['profile'] = dashboard::fetchProfile();
+                $changer_name = $data['profile']->name;
+                $changer_email = $data['profile']->email;
+                if ($status == 0) {
+                    $changer_title = " changed the status to In-Active for label Name: " . $previousData->name;
+                } else if ($status == 1) {
+                    $changer_title = " changed the status to Active for label Name: " . $previousData->name;
+                }
+                $trackIt = tracker::insert($changer_title, $changer_email, $changer_name);
+                if ($trackIt) {
+                    Log::info('Addition to tracker table success');
+                } else {
+                    Log::error('Addition to tracker table failed');
+                }
+                # Enter for changes tracker end
+                Log::info('Status updated for label ID: ', [$id]);
+                return redirect()->back()->with('success', 'Label status has been updated successfully');
+            }
+            Log::error('Error occured while updating status for Label ID: ', [$id]);
+            return redirect()->back()->with('error', 'An error occured !! Please try again !!');
+        } catch (\Exception $e) {
+            Log::error('Exception in change label status module: ' . $e->getMessage());
+            return redirect()->back()->with('error', 'Something went wrong!! Please try again !');
+        }
+    }
+
+    public function deleteLabel($id)
+    {
+        try {
+            Log::info('Label delete request by user ID: ', [Auth::id()]);
+            $previousData = labels::getLabelWithId($id);
+            $delete = labels::deleteLabel($id);
+            if ($delete) {
+                # Entry for changes tracker start
+                $data['profile'] = dashboard::fetchProfile();
+                $changer_name = $data['profile']->name;
+                $changer_email = $data['profile']->email;
+                $changer_title = " delete the label Name: " . $previousData->name;
+                $trackIt = tracker::insert($changer_title, $changer_email, $changer_name);
+                if ($trackIt) {
+                    Log::info('Addition to tracker table success');
+                } else {
+                    Log::error('Addition to tracker table failed');
+                }
+                # Enter for changes tracker end
+                Log::info('Label Deleted ID: ', [$id]);
+                return redirect()->back()->with('success', 'Label has been deleted successfully');
+            }
+            Log::error('Error occured while deleting Label ID: ', [$id]);
+            return redirect()->back()->with('error', 'An error occured !! Please try again !!');
+        } catch (\Exception $e) {
+            Log::error('Exception in delete label module: ' . $e->getMessage());
+            return redirect()->back()->with('error', 'Something went wrong!! Please try again !');
+        }
+    }
+
+    public function assignLabels(Request $request)
+    {
+        try {
+            Log::info('Assign Label request by user ID: ', [Auth::id()]);
+            $labels = $request->labels;
+            $inventoryId = $request->itemId;
+            Log::info('Payload for label assign: ', [$labels]);
+            Log::info('Inventory ID for this assingment: ', [$inventoryId]);
+            $count = count((array) $labels);
+            labels::erasePreviousAssingment($inventoryId);
+            try {
+                for ($i = 0; $i < $count; $i++) {
+                    labels::newAssignment($labels[$i], $inventoryId);
+                }
+            } catch (\Exception $e) {
                 Log::error('Error occured while creating new label assingment');
                 return redirect()->back()->with('error', 'An error occured !! Please try again !!');
             }
-        # Entry for changes tracker start
-        $inventoryGet=inventory::getInventoryWithId($inventoryId);
-        $data['profile'] = dashboard::fetchProfile();
-        $changer_name = $data['profile']->name;
-        $changer_email = $data['profile']->email;
-        $changer_title = " assigned new labels to inventory item: " .$inventoryGet->itemName;
-        $trackIt = tracker::insert($changer_title, $changer_email, $changer_name);
-        if ($trackIt) {
-            Log::info('Addition to tracker table success');
-        } else {
-            Log::error('Addition to tracker table failed');
+            # Entry for changes tracker start
+            $inventoryGet = inventory::getInventoryWithId($inventoryId);
+            $data['profile'] = dashboard::fetchProfile();
+            $changer_name = $data['profile']->name;
+            $changer_email = $data['profile']->email;
+            $changer_title = " assigned new labels to inventory item: " . $inventoryGet->itemName;
+            $trackIt = tracker::insert($changer_title, $changer_email, $changer_name);
+            if ($trackIt) {
+                Log::info('Addition to tracker table success');
+            } else {
+                Log::error('Addition to tracker table failed');
+            }
+            # Enter for changes tracker end
+            Log::info('New label assingment created');
+            return redirect()->back()->with('success', 'Labels assigned to inventory items successfully');
+        } catch (\Exception $e) {
+            Log::error('Exception in assign labels module: ' . $e->getMessage());
+            return redirect()->back()->with('error', 'Something went wrong!! Please try again !');
         }
-        # Enter for changes tracker end
-        Log::info('New label assingment created');
-        return redirect()->back()->with('success', 'Labels assigned to inventory items successfully');
     }
 }

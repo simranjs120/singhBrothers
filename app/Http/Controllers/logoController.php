@@ -16,6 +16,7 @@ class logoController extends Controller
         return view('admin.logo',$data);
     }
     public function submit(Request $request){
+        try{
         Log::info("Logo change request by User ID: ",[Auth::id()]);
         $errorMessage="Request Rejected, Wrong image extension, Only .png allowed !!";
         if($request->front_logo!="" && $request->front_logo->extension()!="png"){
@@ -76,6 +77,10 @@ class logoController extends Controller
 
         Log::error("Logo change request success");
         return redirect()->back()->with('success', 'Logo identity updated successfully.');
+    } catch (\Exception $e) {
+        Log::error('Exception in submit logo module: ' . $e->getMessage());
+        return redirect()->back()->with('error', 'Something went wrong!! Please try again !');
+    }
     }
 
 }

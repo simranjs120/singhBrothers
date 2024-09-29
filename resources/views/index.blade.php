@@ -555,7 +555,8 @@ if ($inner_section_spotlight != "" && !empty(json_decode($inventory_section_spot
       },
       error: function (error) {
         // alert(JSON.stringify(error));
-        fetchSpotlightItems();
+        alert("Some content could not be loaded properly, Please refresh once.")
+        // fetchSpotlightItems();
       }
     });
   }

@@ -1,7 +1,7 @@
 <x-header :web="$web" />
 <style>
   .card {
-    height: 40vh;
+    height: 60vh;
   }
 </style>
 <!-- ======= Hero Section ======= -->

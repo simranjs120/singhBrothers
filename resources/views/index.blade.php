@@ -1,9 +1,4 @@
 <x-header :web="$web" />
-<style>
-  .card {
-    height: 60vh;
-  }
-</style>
 <!-- ======= Hero Section ======= -->
 <section id="hero" class="d-flex align-items-center justify-content-center">
   <div class="container" data-aos="fade-up">
@@ -99,7 +94,7 @@
 
     </div>
   </section><!-- End About Section -->
-
+<!----------------------------------------------------------------Spotlight Section Start ------------------------------------------------------------------------------------>
   @if($inner_section_spotlight != "" && !empty(json_decode($inventory_section_spotlight)))
     @php
     /* Fetching all the inventory IDs from $inventory_section_spotlight array & put them in dynamic hidden fields, then fetch those hidden field's
@@ -110,7 +105,6 @@
     $spotlightCount++;
     }
   @endphp
-    <!-- ======= Spotlight Section ======= -->
     <section id="spotlight" class="spotlight">
     <div class="container" data-aos="zoom-in">
       <div class="text-center">
@@ -127,10 +121,25 @@
 
       </div>
     </div>
-    </section><!-- End spotlight Section -->
+    </section>
   @endif
+<!----------------------------------------------------------------Spotlight Section End ------------------------------------------------------------------------------------>
 
-  <!-- ==================Star Section=================== -->
+<!----------------------------------------------------------------Dynamic Sections Start ------------------------------------------------------------------------------------>
+@if($inner_section_spotlight != "" && !empty(json_decode($inventory_section_spotlight)))
+    @php
+    /* Fetching all the inventory IDs from $inventory_section_spotlight array & put them in dynamic hidden fields, then fetch those hidden field's
+     value from javascript & put them in a js array, Then make an ajax call with those IDs & fetch actual inventory items. */
+    $spotlightCount = 0;
+    foreach ($inventory_section_spotlight as $row) {
+    echo "<input type='hidden' id='inventory_item_" . $spotlightCount . "' value='" . $row->inventory_id . "' />";
+    $spotlightCount++;
+    }
+  @endphp
+    
+  @endif  
+
+<!-- ==================Star Section=================== -->
   <section id="star" class="star">
     <div class="container" data-aos="fade-up">
       <div class="section-title">
@@ -353,7 +362,7 @@
             <span>Accountant</span>
           </div>
         </div>
-        
+
       </div>
     </div>
   </section><!-- End Nebula Section -->
@@ -437,8 +446,16 @@
 <script>
 
   $(document).ready(function () {
+    // Placeholder animation
     initiateSearchAnimation();
+    
+    // Spotlight items
     fetchSpotlightItems();
+
+    // Intitaing dynamic section fetch after a delay of 2 second so that other functions get some time to execute.
+    setTimeout(() => {
+      initiateSearchAnimation();
+    }, 2000);
   });
 
   /******************************** Placeholder Animation Start *************************************/
@@ -523,11 +540,10 @@ if ($inner_section_spotlight != "" && !empty(json_decode($inventory_section_spot
     // Ajax call to fetch inventory items based on IDs
     $.ajax({
       url: "{{url('admin/fetch-inventory-item-from-id')}}",
-      method: 'POST',
+      method: 'GET',
       dataType: 'json',
       data: {
-        ids: spotlightArray,
-        _token: '{{csrf_token()}}'
+        ids: spotlightArray
       },
       success: function (response) {
         var imgPath = "{{Helper::props('admin/inventoryImages/')}}";
@@ -555,7 +571,7 @@ if ($inner_section_spotlight != "" && !empty(json_decode($inventory_section_spot
       },
       error: function (error) {
         // alert(JSON.stringify(error));
-        alert("Some content could not be loaded properly, Please refresh once.")
+        alert("Fatal Error: Some content could not be loaded !!");
         // fetchSpotlightItems();
       }
     });

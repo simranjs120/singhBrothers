@@ -126,19 +126,22 @@
 <!----------------------------------------------------------------Spotlight Section End ------------------------------------------------------------------------------------>
 
 <!----------------------------------------------------------------Dynamic Sections Start ------------------------------------------------------------------------------------>
-@if($inner_section_spotlight != "" && !empty(json_decode($inventory_section_spotlight)))
-    @php
-    /* Fetching all the inventory IDs from $inventory_section_spotlight array & put them in dynamic hidden fields, then fetch those hidden field's
-     value from javascript & put them in a js array, Then make an ajax call with those IDs & fetch actual inventory items. */
-    $spotlightCount = 0;
-    foreach ($inventory_section_spotlight as $row) {
-    echo "<input type='hidden' id='inventory_item_" . $spotlightCount . "' value='" . $row->inventory_id . "' />";
-    $spotlightCount++;
-    }
+@if($inner_sections != "" && !empty(json_decode($inventory_section_dynamic)))
+@php
+    /* Setup the $inventory_section_dynamic variable here that is coming from indexController, it contains the ids of the inventory items 
+     and sections, Later fetch this in ajax function fetchDynamicSections() below from ID of this field. */
+    echo "<input type='hidden' id='dynamic_section_array' value='" . $inventory_section_dynamic . "' />";
+    
   @endphp
     
   @endif  
-
+  <section id="dynamicSections" class="dynamicSections">
+    <div class="container" data-aos="zoom-in">
+      <div class="render-dynamic-sections">
+        <p class="dynamic-sections-loader text-center"></p>
+      </div>
+    </div>
+  </section>
 <!-- ==================Star Section=================== -->
   <section id="star" class="star">
     <div class="container" data-aos="fade-up">
@@ -252,8 +255,60 @@
     </div>
   </section><!-- End Galaxy Section -->
 
-  <!-- ======= Counts Section ======= -->
+  <!-- ======= Nebula Section ======= -->
+  <section id="nebula" class="nebula">
+    <div class="container" data-aos="fade-up">
 
+      <div class="section-title">
+        <h2>Nebula Section</h2>
+        <p>Nebula</p>
+      </div>
+      <div class="container nebula-slick">
+        <div class="member" data-aos="fade-up" data-aos-delay="100">
+          <div class="member-img">
+            <img src="assets/img/team/team-1.jpg" class="img-fluid" alt="">
+          </div>
+          <div class="member-info">
+            <h4>Walter White</h4>
+            <span>Chief Executive Officer</span>
+          </div>
+        </div>
+
+        <div class="member" data-aos="fade-up" data-aos-delay="200">
+          <div class="member-img">
+            <img src="assets/img/team/team-2.jpg" class="img-fluid" alt="">
+          </div>
+          <div class="member-info">
+            <h4>Sarah Jhonson</h4>
+            <span>Product Manager</span>
+          </div>
+        </div>
+
+        <div class="member" data-aos="fade-up" data-aos-delay="300">
+          <div class="member-img">
+            <img src="assets/img/team/team-3.jpg" class="img-fluid" alt="">
+          </div>
+          <div class="member-info">
+            <h4>William Anderson</h4>
+            <span>CTO</span>
+          </div>
+        </div>
+
+        <div class="member" data-aos="fade-up" data-aos-delay="400">
+          <div class="member-img">
+            <img src="assets/img/team/team-4.jpg" class="img-fluid" alt="">
+          </div>
+          <div class="member-info">
+            <h4>Amanda Jepson</h4>
+            <span>Accountant</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section><!-- End Nebula Section -->
+
+    <!-- ======= Counts Section ======= -->
   <!-- <section id="counts" class="counts">
     <div class="container" data-aos="fade-up">
 
@@ -311,61 +366,7 @@
       </div>
     </div>
   </section> -->
-
   <!-- End Counts Section -->
-
-  <!-- ======= Nebula Section ======= -->
-  <section id="nebula" class="nebula">
-    <div class="container" data-aos="fade-up">
-
-      <div class="section-title">
-        <h2>Nebula Section</h2>
-        <p>Nebula</p>
-      </div>
-      <div class="container nebula-slick">
-        <div class="member" data-aos="fade-up" data-aos-delay="100">
-          <div class="member-img">
-            <img src="assets/img/team/team-1.jpg" class="img-fluid" alt="">
-          </div>
-          <div class="member-info">
-            <h4>Walter White</h4>
-            <span>Chief Executive Officer</span>
-          </div>
-        </div>
-
-        <div class="member" data-aos="fade-up" data-aos-delay="200">
-          <div class="member-img">
-            <img src="assets/img/team/team-2.jpg" class="img-fluid" alt="">
-          </div>
-          <div class="member-info">
-            <h4>Sarah Jhonson</h4>
-            <span>Product Manager</span>
-          </div>
-        </div>
-
-        <div class="member" data-aos="fade-up" data-aos-delay="300">
-          <div class="member-img">
-            <img src="assets/img/team/team-3.jpg" class="img-fluid" alt="">
-          </div>
-          <div class="member-info">
-            <h4>William Anderson</h4>
-            <span>CTO</span>
-          </div>
-        </div>
-
-        <div class="member" data-aos="fade-up" data-aos-delay="400">
-          <div class="member-img">
-            <img src="assets/img/team/team-4.jpg" class="img-fluid" alt="">
-          </div>
-          <div class="member-info">
-            <h4>Amanda Jepson</h4>
-            <span>Accountant</span>
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </section><!-- End Nebula Section -->
 
   <!-- ======= Contact Section ======= -->
   <section id="contact" class="contact">
@@ -449,13 +450,23 @@
     // Placeholder animation
     initiateSearchAnimation();
     
+    <?php
+    # Validate if spotlight section is not empty for any reason then only trigger the ajax.
+    
+    /* NOTE: If spotlight items are present, then we'll be initiating the function to fetch dynamic sections from SUCCESS of fetchSpotlightItems(),
+    so that first spotlight items will be fetched then all dynamic sections will be fetched, Only motive is to make app efficient. */
+    if ($inner_section_spotlight != "" && !empty(json_decode($inventory_section_spotlight))) {
+    ?>
     // Spotlight items
     fetchSpotlightItems();
-
-    // Intitaing dynamic section fetch after a delay of 2 second so that other functions get some time to execute.
-    setTimeout(() => {
-      initiateSearchAnimation();
-    }, 2000);
+    <?php
+    } else {
+      # NOTE: If spotlight items section is not present, Not initiated from admin, function to fetch dynamic section would be triggered instantly. 
+    ?>
+    fetchDynamicSections();
+    <?php
+    }
+    ?>
   });
 
   /******************************** Placeholder Animation Start *************************************/
@@ -524,11 +535,12 @@
   }
   /********************************* Placeholder Animation End *******************************************/
 
-  /************************************************** Fetch Spotlight content Start************************************************************/
+
   <?php
-# Validate if spotlight section is not empty for any reason then only trigger the ajax.
-if ($inner_section_spotlight != "" && !empty(json_decode($inventory_section_spotlight))) {
-  ?>
+    # Validate if spotlight section is not empty for any reason then only trigger the ajax.
+    if ($inner_section_spotlight != "" && !empty(json_decode($inventory_section_spotlight))) {
+    ?>
+  /************************************************** Fetch Spotlight content Start************************************************************/
   function fetchSpotlightItems() {
     $("#loader").text("Loading...");
     const spotlightArray = [];
@@ -539,7 +551,7 @@ if ($inner_section_spotlight != "" && !empty(json_decode($inventory_section_spot
 
     // Ajax call to fetch inventory items based on IDs
     $.ajax({
-      url: "{{url('admin/fetch-inventory-item-from-id')}}",
+      url: "{{url('admin/fetch-spotlight-item-from-id')}}",
       method: 'GET',
       dataType: 'json',
       data: {
@@ -568,6 +580,7 @@ if ($inner_section_spotlight != "" && !empty(json_decode($inventory_section_spot
 
         // Trigger slick slider after the content has been loaded, Otherwise slick won't work if pre-initialised.
         triggerSlickSlider();
+        fetchDynamicSections();
       },
       error: function (error) {
         // alert(JSON.stringify(error));
@@ -576,11 +589,62 @@ if ($inner_section_spotlight != "" && !empty(json_decode($inventory_section_spot
       }
     });
   }
-  <?php
-}
-  ?>
   /************************************************ Fetch Spotlight content End ************************************************************/
-  function triggerSlickSlider() {
+  <?php } ?>
+  
+  <?php
+    # Validate if dynamic section is not empty for any reason then only trigger the ajax.
+    if ($inner_sections != "" && !empty(json_decode($inventory_section_dynamic))) {
+  ?>
+  /************************************************** Fetch dynamic content Start ************************************************************/
+  function fetchDynamicSections(){
+    $(".dynamic-sections-loader").text("Loading...");
+    var json=$("#dynamic_section_array").val();
+    alert("json"+json);
+    // Ajax call to fetch inventory items based on IDs
+    $.ajax({
+      url: "{{url('admin/fetch-dynamic-item-from-id')}}",
+      method: 'GET',
+      dataType: 'json',
+      data: {
+        array: json
+      },
+      success: function (response) {
+        alert(JSON.stringify(response));
+        var imgPath = "{{Helper::props('admin/inventoryImages/')}}";
+        var count = response.countOfSpotlightInventory;
+        for (let i = 0; i <= count - 1; i++) {
+          // If offer Badge & Striker price both have value.
+          if (response.data[i].offerBadge != null && response.data[i].strikerPrice != null) {
+            var content = "<div class='box p-3'><div class='card'><img src='" + imgPath + '/' + response.data[i].thumbnailimg + "' class='img-fluid p-2'/><p style='text-align:left; margin-left:10px;'><span class='badge badge-spotlight'>" + response.data[i].offerBadge + "</span></p><h4 class='spotlight-itemName'>" + response.data[i].itemName + "</h4><h4 class='spotlight-pricetag'><s>₹" + response.data[i].strikerPrice + "</s> ₹" + response.data[i].actualPrice + "</h4></div></div>";
+          }
+          // If offer striker having value but offer badge is not having value.
+          else if (response.data[i].strikerPrice != null && response.data[i].offerBadge == null) {
+            var content = "<div class='box p-3'><div class='card'><img src='" + imgPath + '/' + response.data[i].thumbnailimg + "' class='img-fluid p-2'/><h4 class='spotlight-itemName'>" + response.data[i].itemName + "</h4><h4 class='spotlight-pricetag'><s>₹" + response.data[i].strikerPrice + "</s> ₹" + response.data[i].actualPrice + "</h4></div></div>";
+          }
+          // If offer badge is having value but striker is not having value.
+          else if (response.data[i].offerBadge != null && response.data[i].strikerPrice == null) {
+            var content = "<div class='box p-3'><div class='card'><img src='" + imgPath + '/' + response.data[i].thumbnailimg + "' class='img-fluid p-2'/><p style='text-align:left; margin-left:10px;'><span class='badge badge-spotlight'>" + response.data[i].offerBadge + "</span></p><h4 class='spotlight-itemName'>" + response.data[i].itemName + "</h4><h4 class='spotlight-pricetag'>₹" + response.data[i].actualPrice + "</div></div>";
+          }
+          // Append the content to HTML
+          $('.spotlight-render-here').append(content);
+        }
+        $("#loader").text("");
+
+        // Trigger slick slider after the content has been loaded, Otherwise slick won't work if pre-initialised.
+        triggerSlickSlider();
+      },
+      error: function (error) {
+        alert(JSON.stringify(error));
+        // alert("Fatal Error: Some content could not be loaded !!");
+      }
+    });
+  }
+/************************************************** Fetch dynamic content End ************************************************************/
+<?php } ?>
+  
+
+function triggerSlickSlider() {
     $('.nebula-slick').slick({
       infinite: true,
       dots: false,

@@ -28,19 +28,19 @@ class indexController extends Controller
             if(!$data['inner_sections']){
                 $data['inventory_section_dynamic']=[];
             } else {
-
                 $dataArray=[];
                 $resultArray=[];
                 foreach($data['inner_sections'] as $row){
                     $dataArray['section_id']=$row->id;
+                    $dataArray['section_type']=$row->type;
                     $dataArray['inventory_ids']=DB::table('inventory_section')->where(['section_id'=>$row->id])->get('inventory_id');
-                    $resultArray[]=$dataArray;
+                    
+                    # If there're no inventory items assigned to a section yet, it's useless to send that section, Hence only sending sections with data.
+                    if(count($dataArray['inventory_ids'])>0){
+                        $resultArray[]=$dataArray;
+                    }
                 }
-                // echo "<pre>";
-                // print_r($resultArray);
-                // echo "</pre>";
-                // die;
-                $data['inventory_section_dynamic']=$resultArray;
+                $data['inventory_section_dynamic']=json_encode($resultArray);
             }
         # Dynamic sections deal end
         return view('index',$data);
@@ -65,5 +65,29 @@ class indexController extends Controller
             'data'=>$result,
             'countOfSpotlightInventory'=>count($result)
         ]);
+    }
+
+    public function fetchDynamicItems(Request $request){
+        $array=json_decode($request->array);
+
+        $incomingArray=[];
+        $resultArray=[];
+        
+        # Now fetch data on the basis of "inventory_ids", Using nested loop.
+        // $i=0;
+        // foreach($array as $arrays){
+        //     $getInventory=DB::table('inventory')->where('id',$ids[$i])->first();
+        //     $embedArray['thumbnailimg']=$getInventory->thumbnailimg;
+        //     $embedArray['itemName']=$getInventory->itemName;
+        //     $embedArray['strikerPrice']=$getInventory->strikerPrice;
+        //     $embedArray['actualPrice']=$getInventory->actualPrice;
+        //     $embedArray['offerBadge']=$getInventory->offerBadge;
+        //     $result[]=$embedArray;
+        //     $i++;
+        // }
+        echo "<pre>";
+        print_r($array);
+        echo "</pre>";
+        die;
     }
 }

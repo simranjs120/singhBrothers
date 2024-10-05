@@ -15,7 +15,9 @@ use Illuminate\Support\Facades\Route;
 
 # Front page modules
 Route::get('/', [index::class, 'index']);
-Route::any('admin/fetch-inventory-item-from-id', [index::class, 'fetchSpotlightItems']);
+Route::any('admin/fetch-spotlight-item-from-id', [index::class, 'fetchSpotlightItems']);
+Route::any('admin/fetch-dynamic-item-from-id', [index::class, 'fetchDynamicItems']);
+
 
 # Cron job modules to auto enable/disable offers
 Route::get('/autoEnable', [offers::class, 'autoEnable']);

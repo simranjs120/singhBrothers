@@ -518,10 +518,10 @@ if ($inner_sections != "" && !empty(json_decode($inventory_section_dynamic))) {
             if (response.data[i].section_data.button == 1) {
               var footer = "</div>" +
                 "<a href=" + response.data[i].section_data.url + "><center><button type='button' class='btn btn-success btn-lg'>View all items <i class='bx bxs-right-arrow'></i></button></center></a>" +
-                "</div>";
+                "</div><br/>";
             } else {
               var footer = "</div>" +
-                "</div>";
+                "</div><br/>";
             }
 
             // Append footer

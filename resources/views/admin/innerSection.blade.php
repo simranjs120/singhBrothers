@@ -66,7 +66,11 @@
                                         @else
                                         <td>N/A</td>
                                         @endif
+                                        @if($row->type=='spotlight')
+                                        <td><span style="background-color:red; color:white; padding:2px;font-weight:bold;">{{$row->type}}</span></td>
+                                        @else
                                         <td>{{$row->type}}</td>
+                                        @endif
                                         @if($row->button==1)
                                             <td class="text-success"><b>Yes</b></td>
                                         @else

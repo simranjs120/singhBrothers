@@ -94,7 +94,7 @@
 
     </div>
   </section><!-- End About Section -->
-<!----------------------------------------------------------------Spotlight Section Start ------------------------------------------------------------------------------------>
+  <!----------------------------------------------------------------Spotlight Section Start ------------------------------------------------------------------------------------>
   @if($inner_section_spotlight != "" && !empty(json_decode($inventory_section_spotlight)))
     @php
     /* Fetching all the inventory IDs from $inventory_section_spotlight array & put them in dynamic hidden fields, then fetch those hidden field's
@@ -110,7 +110,9 @@
       <div class="text-center">
       <h2 class="spotlight-heading">{{$inner_section_spotlight->name}}</h2>
       <p>{{$inner_section_spotlight->description}}</p>
-      <p id="loader"></p>
+      <center>
+        <div class="loader-spotlight"></div>
+      </center>
       <div class='container'>
         <div class="spotlight-render-here">
         </div>
@@ -123,193 +125,28 @@
     </div>
     </section>
   @endif
-<!----------------------------------------------------------------Spotlight Section End ------------------------------------------------------------------------------------>
+  <!----------------------------------------------------------------Spotlight Section End ------------------------------------------------------------------------------------>
 
-<!----------------------------------------------------------------Dynamic Sections Start ------------------------------------------------------------------------------------>
-@if($inner_sections != "" && !empty(json_decode($inventory_section_dynamic)))
-@php
+  <!----------------------------------------------------------------Dynamic Sections Start ------------------------------------------------------------------------------------>
+  @if($inner_sections != "" && !empty(json_decode($inventory_section_dynamic)))
+    @php
     /* Setup the $inventory_section_dynamic variable here that is coming from indexController, it contains the ids of the inventory items 
      and sections, Later fetch this in ajax function fetchDynamicSections() below from ID of this field. */
     echo "<input type='hidden' id='dynamic_section_array' value='" . $inventory_section_dynamic . "' />";
-    
   @endphp
-    
-  @endif  
+  @endif
   <section id="dynamicSections" class="dynamicSections">
     <div class="container" data-aos="zoom-in">
+      <center>
+        <div class="loader-sections"></div>
+      </center>
       <div class="render-dynamic-sections">
-        <p class="dynamic-sections-loader text-center"></p>
       </div>
     </div>
   </section>
-<!-- ==================Star Section=================== -->
-  <section id="star" class="star">
-    <div class="container" data-aos="fade-up">
-      <div class="section-title">
-        <h2>Star type section</h2>
-        <p>Star</p>
-      </div>
-      <div class="star-box">
-        <div class="box">
-          <div class="row">
-            <div class="col-lg-6 order-1 order-lg-2" data-aos="fade-left" data-aos-delay="10">
-              <img src="assets/img/about.jpg" class="img-fluid" alt="">
-            </div>
-            <div class="col-lg-6 pt-4 pt-lg-0 order-2 order-lg-1 content" data-aos="fade-right" data-aos-delay="10">
-              <h3>Why we provide you not only with frames but picture perfect memories. 🖼️</h3>
-              <p class="fst-italic">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
-                dolore
-                magna aliqua.
-                Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in
-                voluptate
-                velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident
-              </p>
-            </div>
-          </div>
-        </div>
 
-        <div class="box">
-          <div class="row">
-            <div class="col-lg-6 order-1 order-lg-2" data-aos="fade-left" data-aos-delay="10">
-              <img src="assets/img/about.jpg" class="img-fluid" alt="">
-            </div>
-            <div class="col-lg-6 pt-4 pt-lg-0 order-2 order-lg-1 content" data-aos="fade-right" data-aos-delay="10">
-              <h3>Why we provide you not only with frames but picture perfect memories. 🖼️</h3>
-              <p class="fst-italic">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
-                dolore
-                magna aliqua.
-                Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in
-                voluptate
-                velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-  <!-- End Star section -->
-
-  <!-- ======= Galaxy Section ======= -->
-  <section id="galaxy" class="galaxy">
-    <div class="container" data-aos="fade-up">
-
-      <div class="section-title">
-        <h2>Galaxy</h2>
-        <p>Galaxy</p>
-      </div>
-
-      <div class="row">
-        <div class="col-lg-4 col-md-6 d-flex align-items-stretch" data-aos="zoom-in" data-aos-delay="10">
-          <div class="icon-box">
-            <img src="assets/img/about.jpg" class="img-fluid" alt="">
-            <h4 class="mt-4"><a href="">Lorem Ipsum</a></h4>
-            <p>Voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi</p>
-          </div>
-        </div>
-
-        <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4 mt-md-0" data-aos="zoom-in" data-aos-delay="10">
-          <div class="icon-box">
-            <img src="assets/img/about.jpg" class="img-fluid" alt="">
-            <h4 class="mt-4"><a href="">Lorem Ipsum</a></h4>
-            <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore</p>
-          </div>
-        </div>
-
-        <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4 mt-lg-0" data-aos="zoom-in" data-aos-delay="10">
-          <div class="icon-box">
-            <img src="assets/img/about.jpg" class="img-fluid" alt="">
-            <h4 class="mt-4"><a href="">Lorem Ipsum</a></h4>
-            <p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia</p>
-          </div>
-        </div>
-
-        <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4" data-aos="zoom-in" data-aos-delay="10">
-          <div class="icon-box">
-            <img src="assets/img/about.jpg" class="img-fluid" alt="">
-            <h4 class="mt-4"><a href="">Lorem Ipsum</a></h4>
-            <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis</p>
-          </div>
-        </div>
-
-        <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4" data-aos="zoom-in" data-aos-delay="10">
-          <div class="icon-box">
-            <img src="assets/img/about.jpg" class="img-fluid" alt="">
-            <h4 class="mt-4"><a href="">Lorem Ipsum</a></h4>
-            <p>Quis consequatur saepe eligendi voluptatem consequatur dolor consequuntur</p>
-          </div>
-        </div>
-
-        <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4" data-aos="zoom-in" data-aos-delay="10">
-          <div class="icon-box">
-            <img src="assets/img/about.jpg" class="img-fluid" alt="">
-            <h4 class="mt-4"><a href="">Lorem Ipsum</a></h4>
-            <p>Modi nostrum vel laborum. Porro fugit error sit minus sapiente sit aspernatur</p>
-          </div>
-        </div>
-
-      </div>
-
-    </div>
-  </section><!-- End Galaxy Section -->
-
-  <!-- ======= Nebula Section ======= -->
-  <section id="nebula" class="nebula">
-    <div class="container" data-aos="fade-up">
-
-      <div class="section-title">
-        <h2>Nebula Section</h2>
-        <p>Nebula</p>
-      </div>
-      <div class="container nebula-slick">
-        <div class="member" data-aos="fade-up" data-aos-delay="100">
-          <div class="member-img">
-            <img src="assets/img/team/team-1.jpg" class="img-fluid" alt="">
-          </div>
-          <div class="member-info">
-            <h4>Walter White</h4>
-            <span>Chief Executive Officer</span>
-          </div>
-        </div>
-
-        <div class="member" data-aos="fade-up" data-aos-delay="200">
-          <div class="member-img">
-            <img src="assets/img/team/team-2.jpg" class="img-fluid" alt="">
-          </div>
-          <div class="member-info">
-            <h4>Sarah Jhonson</h4>
-            <span>Product Manager</span>
-          </div>
-        </div>
-
-        <div class="member" data-aos="fade-up" data-aos-delay="300">
-          <div class="member-img">
-            <img src="assets/img/team/team-3.jpg" class="img-fluid" alt="">
-          </div>
-          <div class="member-info">
-            <h4>William Anderson</h4>
-            <span>CTO</span>
-          </div>
-        </div>
-
-        <div class="member" data-aos="fade-up" data-aos-delay="400">
-          <div class="member-img">
-            <img src="assets/img/team/team-4.jpg" class="img-fluid" alt="">
-          </div>
-          <div class="member-info">
-            <h4>Amanda Jepson</h4>
-            <span>Accountant</span>
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </section><!-- End Nebula Section -->
-
-    <!-- ======= Counts Section ======= -->
-  <!-- <section id="counts" class="counts">
+  <!-- ======= Counts Section ======= -->
+  <section id="counts" class="counts">
     <div class="container" data-aos="fade-up">
 
       <div class="row no-gutters">
@@ -365,7 +202,7 @@
         </div>
       </div>
     </div>
-  </section> -->
+  </section>
   <!-- End Counts Section -->
 
   <!-- ======= Contact Section ======= -->
@@ -449,23 +286,23 @@
   $(document).ready(function () {
     // Placeholder animation
     initiateSearchAnimation();
-    
+
     <?php
-    # Validate if spotlight section is not empty for any reason then only trigger the ajax.
-    
-    /* NOTE: If spotlight items are present, then we'll be initiating the function to fetch dynamic sections from SUCCESS of fetchSpotlightItems(),
-    so that first spotlight items will be fetched then all dynamic sections will be fetched, Only motive is to make app efficient. */
-    if ($inner_section_spotlight != "" && !empty(json_decode($inventory_section_spotlight))) {
+# Validate if spotlight section is not empty for any reason then only trigger the ajax.
+
+/* NOTE: If spotlight items are present, then we'll be initiating the function to fetch dynamic sections from SUCCESS of fetchSpotlightItems(),
+so that first spotlight items will be fetched then all dynamic sections will be fetched, Only motive is to make app efficient. */
+if ($inner_section_spotlight != "" && !empty(json_decode($inventory_section_spotlight))) {
     ?>
     // Spotlight items
     fetchSpotlightItems();
     <?php
-    } else {
-      # NOTE: If spotlight items section is not present, Not initiated from admin, function to fetch dynamic section would be triggered instantly. 
+} else {
+  # NOTE: If spotlight items section is not present, Not initiated from admin, function to fetch dynamic section would be triggered instantly. 
     ?>
     fetchDynamicSections();
     <?php
-    }
+}
     ?>
   });
 
@@ -537,12 +374,11 @@
 
 
   <?php
-    # Validate if spotlight section is not empty for any reason then only trigger the ajax.
-    if ($inner_section_spotlight != "" && !empty(json_decode($inventory_section_spotlight))) {
+# Validate if spotlight section is not empty for any reason then only trigger the ajax.
+if ($inner_section_spotlight != "" && !empty(json_decode($inventory_section_spotlight))) {
     ?>
   /************************************************** Fetch Spotlight content Start************************************************************/
   function fetchSpotlightItems() {
-    $("#loader").text("Loading...");
     const spotlightArray = [];
     var spotlightCount ={{$spotlightCount}};
     for (var s = 0; s < spotlightCount; s++) {
@@ -561,22 +397,19 @@
         var imgPath = "{{Helper::props('admin/inventoryImages/')}}";
         var count = response.countOfSpotlightInventory;
         for (let i = 0; i <= count - 1; i++) {
-          // If offer Badge & Striker price both have value.
-          if (response.data[i].offerBadge != null && response.data[i].strikerPrice != null) {
-            var content = "<div class='box p-3'><div class='card'><img src='" + imgPath + '/' + response.data[i].thumbnailimg + "' class='img-fluid p-2'/><p style='text-align:left; margin-left:10px;'><span class='badge badge-spotlight'>" + response.data[i].offerBadge + "</span></p><h4 class='spotlight-itemName'>" + response.data[i].itemName + "</h4><h4 class='spotlight-pricetag'><s>₹" + response.data[i].strikerPrice + "</s> ₹" + response.data[i].actualPrice + "</h4></div></div>";
-          }
-          // If offer striker having value but offer badge is not having value.
-          else if (response.data[i].strikerPrice != null && response.data[i].offerBadge == null) {
-            var content = "<div class='box p-3'><div class='card'><img src='" + imgPath + '/' + response.data[i].thumbnailimg + "' class='img-fluid p-2'/><h4 class='spotlight-itemName'>" + response.data[i].itemName + "</h4><h4 class='spotlight-pricetag'><s>₹" + response.data[i].strikerPrice + "</s> ₹" + response.data[i].actualPrice + "</h4></div></div>";
-          }
-          // If offer badge is having value but striker is not having value.
-          else if (response.data[i].offerBadge != null && response.data[i].strikerPrice == null) {
-            var content = "<div class='box p-3'><div class='card'><img src='" + imgPath + '/' + response.data[i].thumbnailimg + "' class='img-fluid p-2'/><p style='text-align:left; margin-left:10px;'><span class='badge badge-spotlight'>" + response.data[i].offerBadge + "</span></p><h4 class='spotlight-itemName'>" + response.data[i].itemName + "</h4><h4 class='spotlight-pricetag'>₹" + response.data[i].actualPrice + "</div></div>";
-          }
+          var content =
+            "<div class='box p-3'><div class='card'>" +
+            "<img src='" + imgPath + '/' + response.data[i].thumbnailimg + "' class='img-fluid p-2'/>" +
+            "<p style='text-align:left; margin-left:10px;'><span class='badge badge-spotlight'>" + (response.data[i].offerBadge || '') + "</span></p>" +
+            "<h4 class='spotlight-itemName'>" + response.data[i].itemName + "</h4>" +
+            "<h4 class='spotlight-pricetag'><s>" + (response.data[i].strikerPrice || '') + "</s> ₹" + response.data[i].actualPrice + "</h4>" +
+            "<h5 class='text-danger' style='font-weight:bold;text-align:left; padding-left:10px;'>" + (response.data[i].salePitch || '') + "</h5>" +
+            "<div class='d-flex'><button type='button' class='btn btn-secondary m-2' onclick='return confirm();' style='width:30%;'>Ask Us</button>" +
+            "</div></div></div>";
           // Append the content to HTML
           $('.spotlight-render-here').append(content);
         }
-        $("#loader").text("");
+        $(".loader-spotlight").hide();
 
         // Trigger slick slider after the content has been loaded, Otherwise slick won't work if pre-initialised.
         triggerSlickSlider();
@@ -585,22 +418,19 @@
       error: function (error) {
         // alert(JSON.stringify(error));
         alert("Fatal Error: Some content could not be loaded !!");
-        // fetchSpotlightItems();
       }
     });
   }
   /************************************************ Fetch Spotlight content End ************************************************************/
   <?php } ?>
-  
+
   <?php
-    # Validate if dynamic section is not empty for any reason then only trigger the ajax.
-    if ($inner_sections != "" && !empty(json_decode($inventory_section_dynamic))) {
+# Validate if dynamic section is not empty for any reason then only trigger the ajax.
+if ($inner_sections != "" && !empty(json_decode($inventory_section_dynamic))) {
   ?>
   /************************************************** Fetch dynamic content Start ************************************************************/
-  function fetchDynamicSections(){
-    $(".dynamic-sections-loader").text("Loading...");
-    var json=$("#dynamic_section_array").val();
-    alert("json"+json);
+  function fetchDynamicSections() {
+    var json = $("#dynamic_section_array").val();
     // Ajax call to fetch inventory items based on IDs
     $.ajax({
       url: "{{url('admin/fetch-dynamic-item-from-id')}}",
@@ -610,26 +440,128 @@
         array: json
       },
       success: function (response) {
-        alert(JSON.stringify(response));
         var imgPath = "{{Helper::props('admin/inventoryImages/')}}";
-        var count = response.countOfSpotlightInventory;
+        var count = response.countOfDynamicItems;
         for (let i = 0; i <= count - 1; i++) {
-          // If offer Badge & Striker price both have value.
-          if (response.data[i].offerBadge != null && response.data[i].strikerPrice != null) {
-            var content = "<div class='box p-3'><div class='card'><img src='" + imgPath + '/' + response.data[i].thumbnailimg + "' class='img-fluid p-2'/><p style='text-align:left; margin-left:10px;'><span class='badge badge-spotlight'>" + response.data[i].offerBadge + "</span></p><h4 class='spotlight-itemName'>" + response.data[i].itemName + "</h4><h4 class='spotlight-pricetag'><s>₹" + response.data[i].strikerPrice + "</s> ₹" + response.data[i].actualPrice + "</h4></div></div>";
+          // If section type is "Galaxy" start.
+          if (response.data[i].section_data.type == "galaxy") {
+            // Render heading first because inside we've multiple items inside, but outside we only have 1 heading & description, We'll render the boxes inside this rendered ROW.
+            var heading = "<div class='galaxy container mt-3' data-aos='fade-up'>" +
+              "<div class='section-title'>" +
+              "<h2 class='text-dark'>" + response.data[i].section_data.name + "</h2>" +
+              "<p class='text-dark'>" + (response.data[i].section_data.description || '') + "</p>" +
+              "</div>" +
+              "<div class='row'>";
+            $('.render-dynamic-sections').append(heading);
+            for (var g = 0; g <= response.data[i].inventory_ids.length - 1; g++) { // Count and render the internal inventory details.
+              var content =
+                "<div class='col-lg-4 col-md-6 d-flex align-items-stretch p-2' data-aos='zoom-in'>" +
+                "<a href=''>" +
+                "<div class='icon-box'>" +
+                "<img src='" + imgPath + '/' + response.data[i].inventory_ids[g].thumbnailimg + "' class='img-fluid text-dark' alt='Image could not be loaded'>" +
+                "<h4 class='mt-4 text-dark'>" + response.data[i].inventory_ids[g].itemName + "</h4>" +
+                "<span class='badge badge-spotlight'>" + (response.data[i].inventory_ids[g].offerBadge || '') + "</span>" +
+                "<h5 class='dynamic-amount text-dark mt-2'><s>" + (response.data[i].inventory_ids[g].strikerPrice || '') + "</s> ₹" + response.data[i].inventory_ids[g].actualPrice + "</h5>" +
+                "<h5 class='text-danger'><b>" + (response.data[i].inventory_ids[g].salePitch || '') + "</b></h5>" +
+                "<button type='button' class='btn btn-primary mt-2' onclick='return confirm();'>Ask Us</button>" +
+                "</div></a>" +
+                "</div>";
+              $('.render-dynamic-sections').children().last().find('.row').append(content);
+            }
+            // Ending the ROW & div here as all the items are already rendered.
+            var footer = "</div>" +
+              "</div>";
+            $('.render-dynamic-sections').append(footer);
           }
-          // If offer striker having value but offer badge is not having value.
-          else if (response.data[i].strikerPrice != null && response.data[i].offerBadge == null) {
-            var content = "<div class='box p-3'><div class='card'><img src='" + imgPath + '/' + response.data[i].thumbnailimg + "' class='img-fluid p-2'/><h4 class='spotlight-itemName'>" + response.data[i].itemName + "</h4><h4 class='spotlight-pricetag'><s>₹" + response.data[i].strikerPrice + "</s> ₹" + response.data[i].actualPrice + "</h4></div></div>";
+          // If section type is "Galaxy" end.
+
+          // If setion type is "Star" start.
+          if (response.data[i].section_data.type == "star") {
+            // Create the section heading
+            var heading = "<div class='star container mt-3' data-aos='fade-up'>" +
+              "<div class='section-title'>" +
+              "<h2 class='text-dark'>" + response.data[i].section_data.name + "</h2>" +
+              "<p class='text-dark'>" + (response.data[i].section_data.description || '') + "</p>" +
+              "</div>" +
+              "<div class='star-box'>";
+
+            // Append heading to the section
+            $('.render-dynamic-sections').append(heading);
+
+            // Loop through inventory items
+            for (var g = 0; g < response.data[i].inventory_ids.length; g++) { // Use < for length check
+              var content =
+                "<a href=''><div class='box m-3'><div class='row'><div class='col-lg-6 order-1 order-lg-2' data-aos='fade-left' data-aos-delay='10'>" +
+                "<img src='" + imgPath + '/' + response.data[i].inventory_ids[g].thumbnailimg + "' class='img-fluid' alt='Image could not be loaded'>" +
+                "</div>" +
+                "<div class='col-lg-6 pt-4 pt-lg-0 order-2 order-lg-1 content' data-aos='fade-right' data-aos-delay='10'>" +
+                "<h3 class='text-dark'>" + response.data[i].inventory_ids[g].itemName + "</h3>" +
+                "<span class='badge badge-spotlight'>" + (response.data[i].inventory_ids[g].offerBadge || '') + "</span>" +
+                "<h5 class='dynamic-amount text-dark mt-2'><s>" + (response.data[i].inventory_ids[g].strikerPrice || '') + "</s> ₹" + response.data[i].inventory_ids[g].actualPrice + "</h5>" +
+                "<h5 class='text-danger'><b>" + (response.data[i].inventory_ids[g].salePitch || '') + "</b></h5>" +
+                "<p class='text-dark'>" + response.data[i].inventory_ids[g].itemDescription.substring(0, 300) + "...</p>" +
+                "<button type='button' class='btn btn-primary mt-2' onclick='return confirm();'>Ask Us</button>" +
+                "</div></div></div></a>";
+
+              // Append content to the last row
+              $('.render-dynamic-sections').children().last().find('.star-box').append(content);
+            }
+
+            // Close the row and the star-box div
+            var footer =
+              "</div>" + // Close star-box
+              "</div>"; // Close container
+
+            // Append footer
+            $('.render-dynamic-sections').append(footer);
           }
-          // If offer badge is having value but striker is not having value.
-          else if (response.data[i].offerBadge != null && response.data[i].strikerPrice == null) {
-            var content = "<div class='box p-3'><div class='card'><img src='" + imgPath + '/' + response.data[i].thumbnailimg + "' class='img-fluid p-2'/><p style='text-align:left; margin-left:10px;'><span class='badge badge-spotlight'>" + response.data[i].offerBadge + "</span></p><h4 class='spotlight-itemName'>" + response.data[i].itemName + "</h4><h4 class='spotlight-pricetag'>₹" + response.data[i].actualPrice + "</div></div>";
+          // Section type "Star" end.
+
+          // If section type "Nebula" start.
+          if (response.data[i].section_data.type == "nebula") {
+            // Create the section heading
+            var heading = "<div class='nebula container mt-3' data-aos='fade-up'>"+
+              "<div class='section-title'>"+
+                "<h2 class='text-dark'>" + response.data[i].section_data.name + "</h2>"+
+                "<p class='text-dark'>" + (response.data[i].section_data.description || '') + "</p>"+
+              "</div>"+
+            "<div class='container nebula-slick'>";
+
+            // Append heading to the section
+            $('.render-dynamic-sections').append(heading);
+
+            // Loop through inventory items
+            for (var g = 0; g < response.data[i].inventory_ids.length; g++) { // Use < for length check
+              var content =
+                "<a href=''><div class='member' data-aos='fade-up' data-aos-delay='10'>"+
+                  "<div class='member-img'>"+
+                    "<img src='" + imgPath + '/' + response.data[i].inventory_ids[g].thumbnailimg + "' class='img-fluid text-dark' alt='Image could not be loaded'>"+
+                      "</div>"+
+                      "<div class='member-info'>"+
+                      "<h4>" + response.data[i].inventory_ids[g].itemName + "</h4>"+
+                      "<span class='badge badge-spotlight'>" + (response.data[i].inventory_ids[g].offerBadge || '') + "</span>" +
+                      "<h5 class='dynamic-amount text-dark mt-2'><s>" + (response.data[i].inventory_ids[g].strikerPrice || '') + "</s> ₹" + response.data[i].inventory_ids[g].actualPrice + "</h5>" +
+                      "<h5 class='text-danger'><b>" + (response.data[i].inventory_ids[g].salePitch || '') + "</b></h5>" +
+                      "<button type='button' class='btn btn-primary mt-2' onclick='return confirm();'>Ask Us</button>" +
+                      "</div>"+
+                      "</div></a>";
+
+              // Append content to the last row
+              $('.render-dynamic-sections').children().last().find('.nebula-slick').append(content);
+            }
+
+            // Close the row and the star-box div
+            var footer =
+              "</div>" + // Close star-box
+              "</div>"; // Close container
+
+            // Append footer
+            $('.render-dynamic-sections').append(footer);
           }
-          // Append the content to HTML
-          $('.spotlight-render-here').append(content);
+          // Section type "nebula" end.
+
         }
-        $("#loader").text("");
+        $(".loader-sections").hide();
 
         // Trigger slick slider after the content has been loaded, Otherwise slick won't work if pre-initialised.
         triggerSlickSlider();
@@ -640,11 +572,11 @@
       }
     });
   }
-/************************************************** Fetch dynamic content End ************************************************************/
-<?php } ?>
-  
+  /************************************************** Fetch dynamic content End ************************************************************/
+  <?php } ?>
 
-function triggerSlickSlider() {
+
+  function triggerSlickSlider() {
     $('.nebula-slick').slick({
       infinite: true,
       dots: false,
@@ -672,17 +604,17 @@ function triggerSlickSlider() {
         }
       ]
     });
-    $('.star-box').slick({
-      infinite: true,
-      dots: false,
-      speed: 1000,
-      autoplay: true,
-      autoplaySpeed: 2000,
-      prevArrow: false,
-      nextArrow: false,
-      slidesToShow: 1,
-      slidesToScroll: 1,
-    });
+    // $('.star-box').slick({
+    //   infinite: true,
+    //   dots: false,
+    //   speed: 1000,
+    //   autoplay: true,
+    //   autoplaySpeed: 2000,
+    //   prevArrow: false,
+    //   nextArrow: false,
+    //   slidesToShow: 1,
+    //   slidesToScroll: 1,
+    // });
     $('.spotlight-render-here').slick({
       infinite: true,
       dots: false,

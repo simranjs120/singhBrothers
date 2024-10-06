@@ -30,7 +30,7 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: "Raleway", sans-serif;
+  /* font-family: "Raleway", sans-serif; */
 }
 
 /*--------------------------------------------------------------
@@ -526,11 +526,9 @@ section {
   font-weight: 700;
   padding: 0;
   text-align:center;
-  line-height: 1px;
   margin: 8px 0 5px 0;
-  letter-spacing: 2px;
-  color: #aaaaaa;
-  font-family: "Poppins", sans-serif;
+  letter-spacing: 1px;
+  color: black;
 }
 
 .section-title h2 {
@@ -608,13 +606,19 @@ section {
 # galaxy
 --------------------------------------------------------------*/
 .galaxy .icon-box {
-  text-align: center;
+  text-align: left;
   /* border: 1px solid #ebebeb; */
-  padding: 40px 10px 40px 10px;
+  padding: 10px 10px 40px 10px;
   transition: all ease-in-out 0.3s;
-  background: #fff;
+  border-color: #fff;
+  box-shadow: 0px 0 25px 0 rgba(0, 0, 0, 0.1);
 }
-
+.galaxy .icon-box a{
+  text-decoration: none !important;
+}
+.dynamic-content{
+  font-family: Arial, Helvetica, sans-serif !important;
+}
 .galaxy .icon-box .icon {
   margin: 0 auto;
   width: 64px;
@@ -640,10 +644,7 @@ section {
   font-size: 24px;
 }
 
-.galaxy .icon-box h4 a {
-  color: #151515;
-  transition: ease-in-out 0.3s;
-}
+
 
 .galaxy .icon-box p {
   line-height: 24px;
@@ -682,7 +683,7 @@ section {
 .spotlight-pricetag{
   font-family: Arial, Helvetica, sans-serif !important;
   text-align: left;
-  margin: 6px 0px 22px 10px;
+  margin: 6px 0px 10px 10px;
 }
 .spotlight p {
   color: #fff;
@@ -827,13 +828,13 @@ section {
   font-size: 18px;
   color: #151515;
 }
-
+/* 
 .nebula .member .member-info span {
   display: block;
   font-size: 13px;
   font-weight: 400;
   color: #aaaaaa;
-}
+} */
 
 .nebula .member .member-info p {
   font-style: italic;
@@ -1267,3 +1268,39 @@ Custom CSS
   cursor: pointer;
   transition: 0.5s;
 }
+/* Loader css */
+/* HTML: <div class="loader"></div> */
+.loader-spotlight {
+  width: 50px;
+  padding: 8px;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: var(--primary-color);
+  --_m: 
+    conic-gradient(#0000 10%,#000),
+    linear-gradient(#000 0 0) content-box;
+  -webkit-mask: var(--_m);
+          mask: var(--_m);
+  -webkit-mask-composite: source-out;
+          mask-composite: subtract;
+  animation: l3 1s infinite linear;
+}
+@keyframes l3 {to{transform: rotate(1turn)}}
+
+
+.loader-sections {
+  width: 50px;
+  padding: 8px;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: var(--primary-color);
+  --_m: 
+    conic-gradient(#0000 10%,#000),
+    linear-gradient(#000 0 0) content-box;
+  -webkit-mask: var(--_m);
+          mask: var(--_m);
+  -webkit-mask-composite: source-out;
+          mask-composite: subtract;
+  animation: l3 1s infinite linear;
+}
+@keyframes l3 {to{transform: rotate(1turn)}}

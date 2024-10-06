@@ -86,7 +86,7 @@ class indexController extends Controller
             $inventoryDetails=[];
             for($j=0;$j<$arrays->count_inventory_ids;$j++){
                 # Fetch inventory data
-                $inventory = DB::table('inventory')->where('id', $arrays->inventory_ids[$j]->inventory_id)->first();
+                $inventory = DB::table('inventory')->where(['id'=>$arrays->inventory_ids[$j]->inventory_id,'status'=>1])->first();
                 
                 # Confirm that the item is not repeated 2 times, If an item is already in array & is repeated, This boolean will omit the item.
                 if($inventory && !in_array($inventory,$inventoryDetails)){

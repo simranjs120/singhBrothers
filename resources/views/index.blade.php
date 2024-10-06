@@ -446,7 +446,7 @@ if ($inner_sections != "" && !empty(json_decode($inventory_section_dynamic))) {
           // If section type is "Galaxy" start.
           if (response.data[i].section_data.type == "galaxy") {
             // Render heading first because inside we've multiple items inside, but outside we only have 1 heading & description, We'll render the boxes inside this rendered ROW.
-            var heading = "<div class='galaxy container mt-3' data-aos='fade-up'>" +
+            var heading = "<div class='galaxy container mt-4' data-aos='fade-up'>" +
               "<div class='section-title'>" +
               "<h2 class='text-dark'>" + response.data[i].section_data.name + "</h2>" +
               "<p class='text-dark'>" + (response.data[i].section_data.description || '') + "</p>" +
@@ -456,7 +456,7 @@ if ($inner_sections != "" && !empty(json_decode($inventory_section_dynamic))) {
             for (var g = 0; g <= response.data[i].inventory_ids.length - 1; g++) { // Count and render the internal inventory details.
               var content =
                 "<div class='col-lg-4 col-md-6 d-flex align-items-stretch p-2' data-aos='zoom-in'>" +
-                "<a href=''>" +
+                "<a href='#'>" +
                 "<div class='icon-box'>" +
                 "<img src='" + imgPath + '/' + response.data[i].inventory_ids[g].thumbnailimg + "' class='img-fluid text-dark' alt='Image could not be loaded'>" +
                 "<h4 class='mt-4 text-dark'>" + response.data[i].inventory_ids[g].itemName + "</h4>" +
@@ -468,9 +468,16 @@ if ($inner_sections != "" && !empty(json_decode($inventory_section_dynamic))) {
                 "</div>";
               $('.render-dynamic-sections').children().last().find('.row').append(content);
             }
-            // Ending the ROW & div here as all the items are already rendered.
-            var footer = "</div>" +
-              "</div>";
+            // Ending the ROW & div here as all the items are already rendered. validate if button is there
+            if (response.data[i].section_data.button == 1) {
+              var footer = "</div>" +
+                "<a href=" + response.data[i].section_data.url + "><center><button type='button' class='btn btn-success btn-lg'>View all items <i class='bx bxs-right-arrow'></i></button></center></a>" +
+                "</div>";
+            } else {
+              var footer = "</div>" +
+                "</div>";
+            }
+
             $('.render-dynamic-sections').append(footer);
           }
           // If section type is "Galaxy" end.
@@ -478,7 +485,7 @@ if ($inner_sections != "" && !empty(json_decode($inventory_section_dynamic))) {
           // If setion type is "Star" start.
           if (response.data[i].section_data.type == "star") {
             // Create the section heading
-            var heading = "<div class='star container mt-3' data-aos='fade-up'>" +
+            var heading = "<div class='star container mt-4' data-aos='fade-up'>" +
               "<div class='section-title'>" +
               "<h2 class='text-dark'>" + response.data[i].section_data.name + "</h2>" +
               "<p class='text-dark'>" + (response.data[i].section_data.description || '') + "</p>" +
@@ -507,10 +514,15 @@ if ($inner_sections != "" && !empty(json_decode($inventory_section_dynamic))) {
               $('.render-dynamic-sections').children().last().find('.star-box').append(content);
             }
 
-            // Close the row and the star-box div
-            var footer =
-              "</div>" + // Close star-box
-              "</div>"; // Close container
+            // Ending the ROW & div here as all the items are already rendered. validate if button is there
+            if (response.data[i].section_data.button == 1) {
+              var footer = "</div>" +
+                "<a href=" + response.data[i].section_data.url + "><center><button type='button' class='btn btn-success btn-lg'>View all items <i class='bx bxs-right-arrow'></i></button></center></a>" +
+                "</div>";
+            } else {
+              var footer = "</div>" +
+                "</div>";
+            }
 
             // Append footer
             $('.render-dynamic-sections').append(footer);
@@ -520,12 +532,12 @@ if ($inner_sections != "" && !empty(json_decode($inventory_section_dynamic))) {
           // If section type "Nebula" start.
           if (response.data[i].section_data.type == "nebula") {
             // Create the section heading
-            var heading = "<div class='nebula container mt-3' data-aos='fade-up'>"+
-              "<div class='section-title'>"+
-                "<h2 class='text-dark'>" + response.data[i].section_data.name + "</h2>"+
-                "<p class='text-dark'>" + (response.data[i].section_data.description || '') + "</p>"+
-              "</div>"+
-            "<div class='container nebula-slick'>";
+            var heading = "<div class='nebula container mt-4' data-aos='fade-up'>" +
+              "<div class='section-title'>" +
+              "<h2 class='text-dark'>" + response.data[i].section_data.name + "</h2>" +
+              "<p class='text-dark'>" + (response.data[i].section_data.description || '') + "</p>" +
+              "</div>" +
+              "<div class='container nebula-slick'>";
 
             // Append heading to the section
             $('.render-dynamic-sections').append(heading);
@@ -533,27 +545,33 @@ if ($inner_sections != "" && !empty(json_decode($inventory_section_dynamic))) {
             // Loop through inventory items
             for (var g = 0; g < response.data[i].inventory_ids.length; g++) { // Use < for length check
               var content =
-                "<a href=''><div class='member' data-aos='fade-up' data-aos-delay='10'>"+
-                  "<div class='member-img'>"+
-                    "<img src='" + imgPath + '/' + response.data[i].inventory_ids[g].thumbnailimg + "' class='img-fluid text-dark' alt='Image could not be loaded'>"+
-                      "</div>"+
-                      "<div class='member-info'>"+
-                      "<h4>" + response.data[i].inventory_ids[g].itemName + "</h4>"+
-                      "<span class='badge badge-spotlight'>" + (response.data[i].inventory_ids[g].offerBadge || '') + "</span>" +
-                      "<h5 class='dynamic-amount text-dark mt-2'><s>" + (response.data[i].inventory_ids[g].strikerPrice || '') + "</s> ₹" + response.data[i].inventory_ids[g].actualPrice + "</h5>" +
-                      "<h5 class='text-danger'><b>" + (response.data[i].inventory_ids[g].salePitch || '') + "</b></h5>" +
-                      "<button type='button' class='btn btn-primary mt-2' onclick='return confirm();'>Ask Us</button>" +
-                      "</div>"+
-                      "</div></a>";
+                "<a href=''><div class='member' data-aos='fade-up' data-aos-delay='10'>" +
+                "<div class='member-img'>" +
+                "<img src='" + imgPath + '/' + response.data[i].inventory_ids[g].thumbnailimg + "' class='img-fluid text-dark' alt='Image could not be loaded'>" +
+                "</div>" +
+                "<div class='member-info'>" +
+                "<h4>" + response.data[i].inventory_ids[g].itemName + "</h4>" +
+                "<span class='badge badge-spotlight'>" + (response.data[i].inventory_ids[g].offerBadge || '') + "</span>" +
+                "<h5 class='dynamic-amount text-dark mt-2'><s>" + (response.data[i].inventory_ids[g].strikerPrice || '') + "</s> ₹" + response.data[i].inventory_ids[g].actualPrice + "</h5>" +
+                "<h5 class='text-danger'><b>" + (response.data[i].inventory_ids[g].salePitch || '') + "</b></h5>" +
+                "<button type='button' class='btn btn-primary mt-2' onclick='return confirm();'>Ask Us</button>" +
+                "</div>" +
+                "</div></a>";
 
               // Append content to the last row
               $('.render-dynamic-sections').children().last().find('.nebula-slick').append(content);
             }
 
-            // Close the row and the star-box div
-            var footer =
-              "</div>" + // Close star-box
-              "</div>"; // Close container
+            // Ending the ROW & div here as all the items are already rendered. validate if button is there
+            if (response.data[i].section_data.button == 1) {
+              var footer = 
+              "<a href=" + response.data[i].section_data.url + "><center><button type='button' class='btn btn-success btn-lg'>View all items <i class='bx bxs-right-arrow'></i></button></center></a>" +
+              "<br/><br/></div>" +
+                "</div>";
+            } else {
+              var footer = "</div>" +
+                "</div>";
+            }
 
             // Append footer
             $('.render-dynamic-sections').append(footer);

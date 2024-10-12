@@ -24,13 +24,12 @@ class labelsController extends Controller
     public function fetchAjax(Request $request)
     {
         $id = $request->id;
-        $label = labels::fetchLabels();
+        $data = inventory::getInventory();
         $selectedForId = labels::selectedForId($id);
         return json_encode([
-            'allLabels' => $label,
+            'data' => $data,
             'selected' => $selectedForId,
-            'countOfTotalLabels' => count($label),
-            'countOfSelectedLabels' => count($selectedForId)
+            'countOfTotalInventoryItems' => count($data)
         ]);
 
     }
@@ -170,23 +169,23 @@ class labelsController extends Controller
     public function assignLabels(Request $request)
     {
         try {
-            Log::info('Assign Label request by user ID: ', [Auth::id()]);
-            $labels = $request->labels;
-            $inventoryId = $request->itemId;
-            Log::info('Payload for label assign: ', [$labels]);
-            Log::info('Inventory ID for this assingment: ', [$inventoryId]);
-            $count = count((array) $labels);
-            labels::erasePreviousAssingment($inventoryId);
+            Log::info('Assign inventory to label request by user ID: ', [Auth::id()]);
+            $inventory = $request->inventory;
+            $labelId = $request->itemId;
+            Log::info('Payload inventory items ID for label assign: ', [$inventory]);
+            Log::info('Label ID for this assingment: ', [$labelId]);
+            $count = count((array) $inventory);
+            labels::erasePreviousAssingment($labelId);
             try {
                 for ($i = 0; $i < $count; $i++) {
-                    labels::newAssignment($labels[$i], $inventoryId);
+                    labels::newAssignment($inventory[$i], $labelId);
                 }
             } catch (\Exception $e) {
                 Log::error('Error occured while creating new label assingment');
-                return redirect()->back()->with('error', 'An error occured !! Please try again !!');
+                return redirect()->back()->with('error', 'Something went wrong!! Please try again !');
             }
             # Entry for changes tracker start
-            $inventoryGet = inventory::getInventoryWithId($inventoryId);
+            $inventoryGet = inventory::getInventoryWithId($inventory);
             $data['profile'] = dashboard::fetchProfile();
             $changer_name = $data['profile']->name;
             $changer_email = $data['profile']->email;

@@ -59,7 +59,7 @@ class labelsModel extends Model
     }
 
     static function selectedForId($id){
-        $data=DB::table('label_inventory')->where('inventory_id',$id)->get();
+        $data=DB::table('label_inventory')->where('label_id',$id)->get();
         if($data){
             return $data;
         }
@@ -67,7 +67,7 @@ class labelsModel extends Model
     }
 
     static function erasePreviousAssingment($id){
-        $delete=DB::table('label_inventory')->where('inventory_id',$id)->delete();
+        $delete=DB::table('label_inventory')->where('label_id',$id)->delete();
         if($delete){
             return true;
         }
@@ -75,7 +75,7 @@ class labelsModel extends Model
     }
 
     static function newAssignment($payload,$id){
-        $insert=DB::table('label_inventory')->insert(['label_id'=>$payload,'inventory_id'=>$id]);
+        $insert=DB::table('label_inventory')->insert(['inventory_id'=>$payload,'label_id'=>$id]);
         if($insert){
             return true;
         }

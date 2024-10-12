@@ -237,7 +237,7 @@
             <form action="{{route('assign.inventory')}}" method="POST">
                 @csrf
                 <div class="modal-body">
-                    <p class="text-danger">Items colored Red are Inactive, These items won't show on main pages even if you add them here. Kindly enable them first from inventory section if you want.</p>
+                    <p class="text-danger inventory-warning">Items colored Red are Inactive, These items won't show on main pages even if you add them here. Kindly enable them first from inventory section if you want.</p>
                     <div class="row">
                         <input type="hidden" id="itemId" name="itemId"/>
                         <p id="loader"></p>
@@ -245,7 +245,7 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="submit" class="btn btn-success">Assign</button>
+                    <button type="submit" class="btn btn-success assign-btn">Assign</button>
                     <button type="button" class="btn btn-danger" data-bs-dismiss="modal" onclick="erase()" title="Close Popup">Close</button>
                 </div>
             </form>
@@ -309,16 +309,22 @@
             _token: '{{csrf_token()}}'
           },
           success: function (response) {
+            var warning=0;
             $("#loader").text("Autofilling...");
             // Response format is here in this alert //Uncomment this and use.....
             // alert(JSON.stringify(response));
             var count=response.countOfTotalInventoryItems;
-            for(let i=0;i<=count-1;i++){ // -1 to reduce an extra index, coz array starts from 0. Initiating i from 0 did not work.
+            if(count>0){
+                for(let i=0;i<=count-1;i++){ // -1 to reduce an extra index, coz array starts from 0. Initiating i from 0 did not work.
                 // Append labels
                 if(response.data[i].status==0){
                     var checkboxes="<div class='col-12'><input type='checkbox' name='inventory[]' id='name_"+response.data[i].id+"' value='"+response.data[i].id+"'/> <label for='vehicle' class='text-danger'>"+response.data[i].itemName+"</label></div>";
+                    warning++;
                 } else {
                     var checkboxes="<div class='col-12'><input type='checkbox' name='inventory[]' id='name_"+response.data[i].id+"' value='"+response.data[i].id+"'/> <label for='vehicle'>"+response.data[i].itemName+"</label></div>";
+                }
+                if(warning==0){
+                    $('.inventory-warning').hide();
                 }
                 $('.html-render').append(checkboxes);
             }
@@ -330,6 +336,13 @@
                 }
             }
             $("#loader").text("");
+            } else {
+                // No inventory items found
+                $("#loader").text("No inventory items found!! Please add some inventory first from Manage Inventory Section");   
+                $('.inventory-warning').text("");
+                $('.assign-btn').hide();
+            }
+            
           },
           error: function (error) {
             // alert(JSON.stringify(error));

@@ -245,6 +245,8 @@
                 }
                 if(warning==0){
                     $('.inventory-warning').hide();
+                } else {
+                    $('.inventory-warning').show();
                 }
                 $('.html-render').append(checkboxes);
             }

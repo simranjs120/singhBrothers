@@ -62,7 +62,9 @@
                             @foreach($inventory as $key => $row)
                                 <tr>
                                     <td>{{$key + 1}}</td>
-                                    <td>{{$row->itemName}}</td>
+                                    
+                                        <td><a href="{{url('admin/view-inventory/' . $row->id)}}">{{$row->itemName}}</a></td>
+                                    
                                     <td>
                                         <img src="{{Helper::props('admin/inventoryImages') . '/' . $row->thumbnailimg}}"
                                             class="img-fluid" id="image-popper"
@@ -92,10 +94,10 @@
                                     </td>
                                     <td>&nbsp;
                                         <a href="{{url('admin/view-inventory/' . $row->id)}}">
-                                            <button type="button" class="btn btn-success text-light" title="View Item"><span class="mdi mdi-eye"></span></button>
+                                            <button type="button" class="btn btn-success text-light" title="View Item">View</button>
                                         </a>
                                         <a href="{{url('admin/edit-inventory/' . $row->id)}}">
-                                            <button type="button" class="btn btn-dark text-light" title="Edit Item"><span class="mdi mdi-pencil"></span></button>
+                                            <button type="button" class="btn btn-dark text-light" title="Edit Item">Edit</button>
                                         </a>
                                             <button type="button" class="btn btn-primary text-light" title="Assign Labels To Item" onclick="popLabel('{{$row->itemName}}','{{$row->id}}')">Labels</button>
                                     </td>
@@ -127,7 +129,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <img src="#" class="img-fluid" id="popElement" alt="Loading..." />
+                <img src="#" class="img-fluid" id="popElement" alt=" Image couldn't be loaded" />
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>

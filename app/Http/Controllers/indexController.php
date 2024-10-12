@@ -61,6 +61,7 @@ class indexController extends Controller
             $embedArray['actualPrice']=$getInventory->actualPrice;
             $embedArray['salePitch']=$getInventory->salePitch;
             $embedArray['offerBadge']=$getInventory->offerBadge;
+            $embedArray['importantNote']=$getInventory->importantNote;
             $result[]=$embedArray;
         }
         return json_encode([

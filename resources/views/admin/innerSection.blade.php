@@ -153,7 +153,7 @@
 
                     <label class="mt-2">Button's URL</label>
                     <input type="text" class="form-control border border-dark mb-2" maxlength="499" name="url" id="url-submit"
-                         placeholder="Start Typing..."/>
+                         placeholder="Please enter full URL like https://www.google.com"/>
 
                     <label class="mt-2">Select status</label>
                     <select class="form-control" style="color:black !important;" name="status" required>
@@ -181,6 +181,7 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
+            <p class="mt-3" style="margin:0px 0px 0px 10px;"><b><span class="mdi mdi-lightbulb-on" style="color:orange;"></span>&nbsp;<u>Pro Tip:</u></b> Don't want button anymore? Just set "Need a button" to No & submit.</p>
             <form action="{{route('edit.section')}}" method="POST">
                 @csrf
                 <div class="modal-body">
@@ -210,7 +211,7 @@
 
                     <label for="url" class="mt-2">Button's URL</label>
                     <input type="text" class="form-control border border-dark mb-2" id="url" maxlength="499" name="url"
-                        required placeholder="Start Typing..."/>
+                        required placeholder="Please enter full URL like https://www.google.com"/>
                 </div>
                 <div class="modal-footer">
                     <button type="submit" class="btn btn-success">Submit</button>
@@ -236,6 +237,7 @@
             <form action="{{route('assign.inventory')}}" method="POST">
                 @csrf
                 <div class="modal-body">
+                    <p class="text-danger">Items colored Red are Inactive, These items won't show on main pages even if you add them here. Kindly enable them first from inventory section if you want.</p>
                     <div class="row">
                         <input type="hidden" id="itemId" name="itemId"/>
                         <p id="loader"></p>
@@ -309,11 +311,15 @@
           success: function (response) {
             $("#loader").text("Autofilling...");
             // Response format is here in this alert //Uncomment this and use.....
-            // console.log(JSON.stringify(response));
+            // alert(JSON.stringify(response));
             var count=response.countOfTotalInventoryItems;
             for(let i=0;i<=count-1;i++){ // -1 to reduce an extra index, coz array starts from 0. Initiating i from 0 did not work.
                 // Append labels
-                var checkboxes="<div class='col-12'><input type='checkbox' name='inventory[]' id='name_"+response.data[i].id+"' value='"+response.data[i].id+"'/> <label for='vehicle'>"+response.data[i].itemName+"</label></div>";
+                if(response.data[i].status==0){
+                    var checkboxes="<div class='col-12'><input type='checkbox' name='inventory[]' id='name_"+response.data[i].id+"' value='"+response.data[i].id+"'/> <label for='vehicle' class='text-danger'>"+response.data[i].itemName+"</label></div>";
+                } else {
+                    var checkboxes="<div class='col-12'><input type='checkbox' name='inventory[]' id='name_"+response.data[i].id+"' value='"+response.data[i].id+"'/> <label for='vehicle'>"+response.data[i].itemName+"</label></div>";
+                }
                 $('.html-render').append(checkboxes);
             }
 

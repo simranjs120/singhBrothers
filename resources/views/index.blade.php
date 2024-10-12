@@ -1,16 +1,16 @@
 <x-header :web="$web" />
 <!-- ======= Hero Section ======= -->
 <section id="hero" class="d-flex align-items-center justify-content-center">
-  <div class="container" data-aos="fade-up">
+  <div class="container">
 
-    <div class="row justify-content-center landing-content" data-aos="fade-up" data-aos-delay="10">
+    <div class="row justify-content-center landing-content">
       <div class="col-xl-10 col-lg-10">
         <h1>{{$web->title}} <span>{{$web->title_color}}</span></h1>
         <h2>{{$web->tagline}}</h2>
       </div>
     </div>
 
-    <div class="row gy-4 mt-3 justify-content-center" data-aos="zoom-in" data-aos-delay="10">
+    <div class="row gy-4 mt-3 justify-content-center">
 
       <!-- <div class="col-xl-2 col-md-4">
           <div class="icon-box">
@@ -74,13 +74,13 @@
   @endif
   <!-- ======= About Section ======= -->
   <section id="about" class="about">
-    <div class="container" data-aos="fade-up">
+    <div class="container">
 
       <div class="row">
-        <div class="col-lg-6 order-1 order-lg-2" data-aos="fade-left" data-aos-delay="10">
+        <div class="col-lg-6 order-1 order-lg-2">
           <img src="assets/img/about.jpg" class="img-fluid" alt="">
         </div>
-        <div class="col-lg-6 pt-4 pt-lg-0 order-2 order-lg-1 content" data-aos="fade-right" data-aos-delay="10">
+        <div class="col-lg-6 pt-4 pt-lg-0 order-2 order-lg-1 content">
           <h3>Why we provide you not only with frames but picture perfect memories. 🖼️</h3>
           <p class="fst-italic">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
@@ -106,7 +106,7 @@
     }
   @endphp
     <section id="spotlight" class="spotlight">
-    <div class="container" data-aos="zoom-in">
+    <div class="container">
       <div class="text-center">
       <h2 class="spotlight-heading">{{$inner_section_spotlight->name}}</h2>
       <p>{{$inner_section_spotlight->description}}</p>
@@ -136,7 +136,7 @@
   @endphp
   @endif
   <section id="dynamicSections" class="dynamicSections">
-    <div class="container" data-aos="zoom-in">
+    <div class="container">
       <center>
         <div class="loader-sections"></div>
       </center>
@@ -147,13 +147,11 @@
 
   <!-- ======= Counts Section ======= -->
   <section id="counts" class="counts">
-    <div class="container" data-aos="fade-up">
+    <div class="container">
 
       <div class="row no-gutters">
-        <div class="image col-xl-5 d-flex align-items-stretch justify-content-center justify-content-lg-start"
-          data-aos="fade-right" data-aos-delay="100"></div>
-        <div class="col-xl-7 ps-4 ps-lg-5 pe-4 pe-lg-1 d-flex align-items-stretch" data-aos="fade-left"
-          data-aos-delay="100">
+        <div class="image col-xl-5 d-flex align-items-stretch justify-content-center justify-content-lg-start"></div>
+        <div class="col-xl-7 ps-4 ps-lg-5 pe-4 pe-lg-1 d-flex align-items-stretch">
           <div class="content d-flex flex-column justify-content-center">
             <h3>Voluptatem dignissimos provident quasi</h3>
             <p>
@@ -207,7 +205,7 @@
 
   <!-- ======= Contact Section ======= -->
   <section id="contact" class="contact">
-    <div class="container" data-aos="fade-up">
+    <div class="container">
 
       <div class="section-title">
         <h2>Contact</h2>
@@ -402,9 +400,10 @@ if ($inner_section_spotlight != "" && !empty(json_decode($inventory_section_spot
             "<img src='" + imgPath + '/' + response.data[i].thumbnailimg + "' class='img-fluid p-2'/>" +
             "<p style='text-align:left; margin-left:10px;'><span class='badge badge-spotlight'>" + (response.data[i].offerBadge || '') + "</span></p>" +
             "<h4 class='spotlight-itemName'>" + response.data[i].itemName + "</h4>" +
+            "<p class='text-dark text-start' style='margin:0px 0px 0px 10px;'>" + (response.data[i].importantNote || '') + "</p>" +
             "<h4 class='spotlight-pricetag'><s>" + (response.data[i].strikerPrice || '') + "</s> ₹" + response.data[i].actualPrice + "</h4>" +
-            "<h5 class='text-danger' style='font-weight:bold;text-align:left; padding-left:10px;'>" + (response.data[i].salePitch || '') + "</h5>" +
-            "<div class='d-flex'><button type='button' class='btn btn-secondary m-2' onclick='return confirm();' style='width:30%;'>Ask Us</button>" +
+            "<h6 class='text-danger' style='font-weight:bold;text-align:left; padding-left:10px;'>" + (response.data[i].salePitch || '') + "</h6>" +
+            "<div class='d-flex'><button type='button' class='btn btn-primary' onclick='return confirm();' style='width:30%; margin:10px 0px 25px 10px;'>Ask Us</button><br/><br/>" +
             "</div></div></div>";
           // Append the content to HTML
           $('.spotlight-render-here').append(content);
@@ -444,9 +443,9 @@ if ($inner_sections != "" && !empty(json_decode($inventory_section_dynamic))) {
         var count = response.countOfDynamicItems;
         for (let i = 0; i <= count - 1; i++) {
           // If section type is "Galaxy" start.
-          if (response.data[i].section_data.type == "galaxy") {
+          if (response.data[i].section_data.type == "galaxy" && response.data[i].inventory_ids.length!=0) {
             // Render heading first because inside we've multiple items inside, but outside we only have 1 heading & description, We'll render the boxes inside this rendered ROW.
-            var heading = "<div class='galaxy container mt-4' data-aos='fade-up'>" +
+            var heading = "<div class='galaxy container mt-4'>" +
               "<div class='section-title'>" +
               "<h2 class='text-dark'>" + response.data[i].section_data.name + "</h2>" +
               "<p class='text-dark'>" + (response.data[i].section_data.description || '') + "</p>" +
@@ -455,14 +454,15 @@ if ($inner_sections != "" && !empty(json_decode($inventory_section_dynamic))) {
             $('.render-dynamic-sections').append(heading);
             for (var g = 0; g <= response.data[i].inventory_ids.length - 1; g++) { // Count and render the internal inventory details.
               var content =
-                "<div class='col-lg-4 col-md-6 d-flex align-items-stretch p-2' data-aos='zoom-in'>" +
+                "<div class='col-lg-4 col-md-6 d-flex align-items-stretch p-2'>" +
                 "<a href='#'>" +
                 "<div class='icon-box'>" +
                 "<img src='" + imgPath + '/' + response.data[i].inventory_ids[g].thumbnailimg + "' class='img-fluid text-dark' alt='Image could not be loaded'>" +
                 "<h4 class='mt-4 text-dark'>" + response.data[i].inventory_ids[g].itemName + "</h4>" +
                 "<span class='badge badge-spotlight'>" + (response.data[i].inventory_ids[g].offerBadge || '') + "</span>" +
+                "<h6 class='text-dark mt-2'>" + (response.data[i].inventory_ids[g].importantNote || '') + "</h6>" +
                 "<h5 class='dynamic-amount text-dark mt-2'><s>" + (response.data[i].inventory_ids[g].strikerPrice || '') + "</s> ₹" + response.data[i].inventory_ids[g].actualPrice + "</h5>" +
-                "<h5 class='text-danger'><b>" + (response.data[i].inventory_ids[g].salePitch || '') + "</b></h5>" +
+                "<h6 class='text-danger'><b>" + (response.data[i].inventory_ids[g].salePitch || '') + "</b></h6>" +
                 "<button type='button' class='btn btn-primary mt-2' onclick='return confirm();'>Ask Us</button>" +
                 "</div></a>" +
                 "</div>";
@@ -470,12 +470,12 @@ if ($inner_sections != "" && !empty(json_decode($inventory_section_dynamic))) {
             }
             // Ending the ROW & div here as all the items are already rendered. validate if button is there
             if (response.data[i].section_data.button == 1) {
-              var footer = "</div>" +
+              var footer = "</div><br/>" +
                 "<a href=" + response.data[i].section_data.url + "><center><button type='button' class='btn btn-success btn-lg'>View all items <i class='bx bxs-right-arrow'></i></button></center></a>" +
-                "</div>";
+                "</div><br/><br/>";
             } else {
               var footer = "</div>" +
-                "</div>";
+                "</div><br/><br/>";
             }
 
             $('.render-dynamic-sections').append(footer);
@@ -483,9 +483,9 @@ if ($inner_sections != "" && !empty(json_decode($inventory_section_dynamic))) {
           // If section type is "Galaxy" end.
 
           // If setion type is "Star" start.
-          if (response.data[i].section_data.type == "star") {
+          if (response.data[i].section_data.type == "star" && response.data[i].inventory_ids.length!=0) {
             // Create the section heading
-            var heading = "<div class='star container mt-4' data-aos='fade-up'>" +
+            var heading = "<div class='star container mt-4'>" +
               "<div class='section-title'>" +
               "<h2 class='text-dark'>" + response.data[i].section_data.name + "</h2>" +
               "<p class='text-dark'>" + (response.data[i].section_data.description || '') + "</p>" +
@@ -498,17 +498,18 @@ if ($inner_sections != "" && !empty(json_decode($inventory_section_dynamic))) {
             // Loop through inventory items
             for (var g = 0; g < response.data[i].inventory_ids.length; g++) { // Use < for length check
               var content =
-                "<a href=''><div class='box m-3'><div class='row'><div class='col-lg-6 order-1 order-lg-2' data-aos='fade-left' data-aos-delay='10'>" +
+                "<a href=''><div class='box m-3'><div class='row'><div class='col-lg-6 order-1 order-lg-2'>" +
                 "<img src='" + imgPath + '/' + response.data[i].inventory_ids[g].thumbnailimg + "' class='img-fluid' alt='Image could not be loaded'>" +
                 "</div>" +
-                "<div class='col-lg-6 pt-4 pt-lg-0 order-2 order-lg-1 content' data-aos='fade-right' data-aos-delay='10'>" +
+                "<div class='col-lg-6 pt-4 pt-lg-0 order-2 order-lg-1 content'>" +
                 "<h3 class='text-dark'>" + response.data[i].inventory_ids[g].itemName + "</h3>" +
                 "<span class='badge badge-spotlight'>" + (response.data[i].inventory_ids[g].offerBadge || '') + "</span>" +
+                "<h6 class='text-dark mt-2'>" + (response.data[i].inventory_ids[g].importantNote || '') + "</h6>" +
                 "<h5 class='dynamic-amount text-dark mt-2'><s>" + (response.data[i].inventory_ids[g].strikerPrice || '') + "</s> ₹" + response.data[i].inventory_ids[g].actualPrice + "</h5>" +
-                "<h5 class='text-danger'><b>" + (response.data[i].inventory_ids[g].salePitch || '') + "</b></h5>" +
+                "<h6 class='text-danger'><b>" + (response.data[i].inventory_ids[g].salePitch || '') + "</b></h6>" +
                 "<p class='text-dark'>" + response.data[i].inventory_ids[g].itemDescription.substring(0, 300) + "...</p>" +
                 "<button type='button' class='btn btn-primary mt-2' onclick='return confirm();'>Ask Us</button>" +
-                "</div></div></div></a>";
+                "</div></div></div></a><br/><br/><br/><br/>";
 
               // Append content to the last row
               $('.render-dynamic-sections').children().last().find('.star-box').append(content);
@@ -517,11 +518,11 @@ if ($inner_sections != "" && !empty(json_decode($inventory_section_dynamic))) {
             // Ending the ROW & div here as all the items are already rendered. validate if button is there
             if (response.data[i].section_data.button == 1) {
               var footer = "</div>" +
-                "<a href=" + response.data[i].section_data.url + "><center><button type='button' class='btn btn-success btn-lg'>View all items <i class='bx bxs-right-arrow'></i></button></center></a>" +
-                "</div><br/>";
+                "<a href=" + response.data[i].section_data.url + "><center><button type='button' class='btn btn-success btn-lg' style='margin-top:-40px;'>View all items <i class='bx bxs-right-arrow'></i></button></center></a>" +
+                "</div><br/><br/><br/>";
             } else {
               var footer = "</div>" +
-                "</div><br/>";
+                "</div><br/><br/><br/>";
             }
 
             // Append footer
@@ -530,9 +531,9 @@ if ($inner_sections != "" && !empty(json_decode($inventory_section_dynamic))) {
           // Section type "Star" end.
 
           // If section type "Nebula" start.
-          if (response.data[i].section_data.type == "nebula") {
+          if (response.data[i].section_data.type == "nebula" && response.data[i].inventory_ids.length!=0) {
             // Create the section heading
-            var heading = "<div class='nebula container mt-4' data-aos='fade-up'>" +
+            var heading = "<div class='nebula container mt-4'>" +
               "<div class='section-title'>" +
               "<h2 class='text-dark'>" + response.data[i].section_data.name + "</h2>" +
               "<p class='text-dark'>" + (response.data[i].section_data.description || '') + "</p>" +
@@ -545,15 +546,16 @@ if ($inner_sections != "" && !empty(json_decode($inventory_section_dynamic))) {
             // Loop through inventory items
             for (var g = 0; g < response.data[i].inventory_ids.length; g++) { // Use < for length check
               var content =
-                "<a href=''><div class='member' data-aos='fade-up' data-aos-delay='10'>" +
+                "<a href=''><div class='member'>" +
                 "<div class='member-img'>" +
                 "<img src='" + imgPath + '/' + response.data[i].inventory_ids[g].thumbnailimg + "' class='img-fluid text-dark' alt='Image could not be loaded'>" +
                 "</div>" +
                 "<div class='member-info'>" +
                 "<h4>" + response.data[i].inventory_ids[g].itemName + "</h4>" +
                 "<span class='badge badge-spotlight'>" + (response.data[i].inventory_ids[g].offerBadge || '') + "</span>" +
+                "<h6 class='text-dark mt-2'>" + (response.data[i].inventory_ids[g].importantNote || '') + "</h6>" +
                 "<h5 class='dynamic-amount text-dark mt-2'><s>" + (response.data[i].inventory_ids[g].strikerPrice || '') + "</s> ₹" + response.data[i].inventory_ids[g].actualPrice + "</h5>" +
-                "<h5 class='text-danger'><b>" + (response.data[i].inventory_ids[g].salePitch || '') + "</b></h5>" +
+                "<h6 class='text-danger'><b>" + (response.data[i].inventory_ids[g].salePitch || '') + "</b></h6>" +
                 "<button type='button' class='btn btn-primary mt-2' onclick='return confirm();'>Ask Us</button>" +
                 "</div>" +
                 "</div></a>";
@@ -567,10 +569,10 @@ if ($inner_sections != "" && !empty(json_decode($inventory_section_dynamic))) {
               var footer = 
               "<a href=" + response.data[i].section_data.url + "><center><button type='button' class='btn btn-success btn-lg'>View all items <i class='bx bxs-right-arrow'></i></button></center></a>" +
               "<br/><br/></div>" +
-                "</div>";
+                "</div><br/>";
             } else {
               var footer = "</div>" +
-                "</div>";
+                "</div><br/>";
             }
 
             // Append footer

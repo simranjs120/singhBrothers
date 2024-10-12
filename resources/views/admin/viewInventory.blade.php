@@ -57,7 +57,7 @@
 <br />
 <div class="row">
     <div class="card">
-    <h2 class="mt-3 text-center"><b>Other Information</b></h2><br/>
+    <h2 class="mt-3 text-center"><b><u>Other Information</u></b></h2><br/>
         <div class="row">
             <div class="col-lg-6">
                 <h4 class="">Offer badge: <span class="badge badge-pill badge-danger">{{$inventory->offerBadge}}</span>
@@ -85,7 +85,7 @@
 <div class="row">
     <div class="card">
         <div class="row">
-            <h2 class="mt-3 text-center"><b>Other Product Images</b></h2>
+            <h2 class="mt-3 text-center"><b><u>Other Product Images</u></b></h2>
             @if($inventory->productimg1 != "" || $inventory->productimg2 != "" || $inventory->productimg3 != "")
                 <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12">
                     <img src="{{Helper::props('admin/inventoryImages') . '/' . $inventory->productimg1}}"

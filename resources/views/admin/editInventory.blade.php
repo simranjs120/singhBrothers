@@ -87,8 +87,8 @@
                             <input type="text" name="actualPrice" class="form-control" maxlength="80" placeholder="₹ Only Enter Number Here..." value="{{$inventoryData->actualPrice}}" required/>
                         </div>
                         <div class="col-lg-3 col-md-6 col-sm-12 col-xs-12">
-                            <label class="mt-3">&nbsp;<b>Any Offer Badge Text</b> <span class="badge badge-pill badge-danger">Diwali Special</span></label>
-                            <input type="text" name="offerBadge" class="form-control" maxlength="180" placeholder="Enter any type of offer..." value="{{$inventoryData->offerBadge}}"/>
+                            <label class="mt-3">&nbsp;<b>Any Offer Badge Text</b> <span class="badge badge-pill badge-danger">Festive Sale</span></label>
+                            <input type="text" name="offerBadge" class="form-control" maxlength="180" placeholder="30% off" value="{{$inventoryData->offerBadge}}"/>
                         </div>
                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                             <label class="mt-3">&nbsp;<b>Item Description<span class="asterik">*</span></b></label>
@@ -99,20 +99,20 @@
                             <input type="text" name="dimensions" class="form-control" maxlength="80" placeholder="Enter like: 20x30..." value="{{$inventoryData->dimensions}}"/>
                         </div>
                         <div class="col-lg-3 col-md-6 col-sm-12 col-xs-12">
-                            <label class="mt-3">&nbsp;<b>Size (cm/inches)<span class="asterik">*</span></b></label>
-                            <input type="text" name="size" class="form-control" maxlength="80" placeholder="Enter like: 20 cm/20 Inches..." value="{{$inventoryData->size}}" required/>
+                            <label class="mt-3">&nbsp;<b>Size (cm/inches)</b></label>
+                            <input type="text" name="size" class="form-control" maxlength="80" placeholder="Enter like: 20 cm/20 Inches..." value="{{$inventoryData->size}}"/>
                         </div>
                         <div class="col-lg-3 col-md-6 col-sm-12 col-xs-12">
                             <label class="mt-3">&nbsp;<b>Quantity<span class="asterik">*</span></b></label>
                             <input type="text" name="quantity" class="form-control" maxlength="80" placeholder="Enter only number here..." value="{{$inventoryData->quantity}}" required/>
                         </div>
                         <div class="col-lg-3 col-md-6 col-sm-12 col-xs-12">
-                            <label class="mt-3">&nbsp;<b>Sale Pitch (Only Few Left,Hurry !!)</b></label>
-                            <input type="text" name="salePitch" class="form-control" maxlength="180" placeholder="Something like: Only a few left !!" value="{{$inventoryData->salePitch}}"/>
+                            <label class="mt-3">&nbsp;<b>Sale Pitch (<span class="text-danger">Only Few Left,Hurry !!</span>)</b></label>
+                            <input type="text" name="salePitch" class="form-control" maxlength="180" placeholder="Great Festival Sale !!" value="{{$inventoryData->salePitch}}"/>
                         </div>
                         <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
                             <label class="mt-3">&nbsp;<b>Any Important Notes</b></label>
-                            <input type="text" name="importantNote" class="form-control" maxlength="500" placeholder="Any important note for customer..." value="{{$inventoryData->importantNote}}"/>
+                            <input type="text" name="importantNote" class="form-control" maxlength="500" placeholder="Free delivery till tomorrow or pay delivery charge" value="{{$inventoryData->importantNote}}"/>
                         </div>
                         <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
                             <label class="mt-3">&nbsp;<b>Select Collection<span class="asterik">*</span></b></label>

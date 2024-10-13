@@ -65,7 +65,7 @@
 </section><!-- End Hero -->
 
 <main id="main">
-  @if($web->category_pills == 1)
+  @if($web->category_pills == 1 && count($category)>0)
     <section id="categories">
     <div class="container d-flex justify-content-center">
       <div class="row">
@@ -103,8 +103,9 @@
 
     </div>
   </section><!-- End About Section -->
+
   <!----------------------------------------------------------------Spotlight Section Start ------------------------------------------------------------------------------------>
-  @if($inner_section_spotlight != "" && !empty(json_decode($inventory_section_spotlight)))
+  @if($inner_section_spotlight != "" && !empty(json_decode($inventory_section_spotlight)) && $inventoryItemsCount>0)
     @php
     /* Fetching all the inventory IDs from $inventory_section_spotlight array & put them in dynamic hidden fields, then fetch those hidden field's
      value from javascript & put them in a js array, Then make an ajax call with those IDs & fetch actual inventory items. */
@@ -137,13 +138,12 @@
   <!----------------------------------------------------------------Spotlight Section End ------------------------------------------------------------------------------------>
 
   <!----------------------------------------------------------------Dynamic Sections Start ------------------------------------------------------------------------------------>
-  @if($inner_sections != "" && !empty(json_decode($inventory_section_dynamic)))
+  @if($inner_sections != "" && !empty(json_decode($inventory_section_dynamic)) && $inventoryItemsCount>0)
     @php
     /* Setup the $inventory_section_dynamic variable here that is coming from indexController, it contains the ids of the inventory items 
      and sections, Later fetch this in ajax function fetchDynamicSections() below from ID of this field. */
     echo "<input type='hidden' id='dynamic_section_array' value='" . $inventory_section_dynamic . "' />";
   @endphp
-  @endif
   <section id="dynamicSections" class="dynamicSections">
     <div class="container">
       <center>
@@ -153,7 +153,8 @@
       </div>
     </div>
   </section>
-
+  @endif
+  <!----------------------------------------------------------------Dynamic Sections End ------------------------------------------------------------------------------------>
   <!-- ======= Counts Section ======= -->
   <section id="counts" class="counts">
     <div class="container">
@@ -320,23 +321,22 @@
   $(document).ready(function () {
     // Placeholder animation
     initiateSearchAnimation();
-
     <?php
-# Validate if spotlight section is not empty for any reason then only trigger the ajax.
+      # Validate if spotlight section is not empty for any reason then only trigger the ajax.
 
-/* NOTE: If spotlight items are present, then we'll be initiating the function to fetch dynamic sections from SUCCESS of fetchSpotlightItems(),
-so that first spotlight items will be fetched then all dynamic sections will be fetched, Only motive is to make app efficient. */
-if ($inner_section_spotlight != "" && !empty(json_decode($inventory_section_spotlight))) {
+      /* NOTE: If spotlight items are present, then we'll be initiating the function to fetch dynamic sections from SUCCESS of fetchSpotlightItems(),
+      so that first spotlight items will be fetched then all dynamic sections will be fetched, Only motive is to make app efficient. */
+      if ($inner_section_spotlight != "" && !empty(json_decode($inventory_section_spotlight)) && $inventoryItemsCount>0) {
     ?>
     // Spotlight items
     fetchSpotlightItems();
     <?php
-} else {
-  # NOTE: If spotlight items section is not present, Not initiated from admin, function to fetch dynamic section would be triggered instantly. 
+      } else {
+      # NOTE: If spotlight items section is not present, Not initiated from admin, function to fetch dynamic section would be triggered instantly. 
     ?>
     fetchDynamicSections();
     <?php
-}
+      }
     ?>
   });
 
@@ -416,7 +416,7 @@ if ($inner_section_spotlight != "" && !empty(json_decode($inventory_section_spot
 
   <?php
 # Validate if spotlight section is not empty for any reason then only trigger the ajax.
-if ($inner_section_spotlight != "" && !empty(json_decode($inventory_section_spotlight))) {
+if ($inner_section_spotlight != "" && !empty(json_decode($inventory_section_spotlight)) && $inventoryItemsCount>0) {
     ?>
   /************************************************** Fetch Spotlight content Start************************************************************/
   function fetchSpotlightItems() {
@@ -477,7 +477,7 @@ if ($inner_section_spotlight != "" && !empty(json_decode($inventory_section_spot
 
   <?php
 # Validate if dynamic section is not empty for any reason then only trigger the ajax.
-if ($inner_sections != "" && !empty(json_decode($inventory_section_dynamic))) {
+if ($inner_sections != "" && !empty(json_decode($inventory_section_dynamic)) && $inventoryItemsCount>0) {
   ?>
   /************************************************** Fetch dynamic content Start ************************************************************/
   function fetchDynamicSections() {

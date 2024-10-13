@@ -2,7 +2,16 @@
 <!-- ======= Hero Section ======= -->
 <section id="hero" class="d-flex align-items-center justify-content-center">
   <div class="container">
-
+    @if (Illuminate\Support\Facades\Session::has('success'))
+    <div class="alert alert-success mt-2" style="background-color:#58ad2e;">
+      <h5 class="text-light">{{Illuminate\Support\Facades\Session::pull('success')}}</h5>
+    </div><br />
+  @endif
+    @if (Illuminate\Support\Facades\Session::has('error'))
+    <div class="alert alert-danger mt-2" style="background-color:#d22a1f;">
+      <h5 class="text-light">{{Illuminate\Support\Facades\Session::pull('error')}}</h5>
+    </div><br />
+  @endif
     <div class="row justify-content-center landing-content">
       <div class="col-xl-10 col-lg-10">
         <h1>{{$web->title}} <span>{{$web->title_color}}</span></h1>
@@ -246,25 +255,21 @@
 
         <div class="col-lg-8 mt-5 mt-lg-0">
 
-          <form action="forms/contact.php" method="post" role="form" class="php-email-form">
+          <form action="{{route('submit.contact')}}" method="POST" class="php-email-form">
+            @csrf
             <div class="row">
               <div class="col-md-6 form-group">
-                <input type="text" name="name" class="form-control" id="name" placeholder="Your Name" required>
+                <input type="text" name="name" class="form-control" id="name" placeholder="Your Name" required maxlength="99">
               </div>
               <div class="col-md-6 form-group mt-3 mt-md-0">
-                <input type="email" class="form-control" name="email" id="email" placeholder="Your Email" required>
+                <input type="email" class="form-control" name="email" id="email" placeholder="Your Email" required maxlength="99">
               </div>
             </div>
             <div class="form-group mt-3">
-              <input type="text" class="form-control" name="subject" id="subject" placeholder="Subject" required>
+              <input type="text" class="form-control" name="phone" id="phone" placeholder="Your Phone Number" required pattern="[0-9]{10}" title="Enter 10 digit mobile number">
             </div>
             <div class="form-group mt-3">
-              <textarea class="form-control" name="message" rows="5" placeholder="Message" required></textarea>
-            </div>
-            <div class="my-3">
-              <div class="loading">Loading</div>
-              <div class="error-message"></div>
-              <div class="sent-message">Your message has been sent. Thank you!</div>
+              <textarea class="form-control" name="message" rows="5" placeholder="Message" required maxlength="499"></textarea>
             </div>
             <div class="text-center"><button type="submit">Send Message</button></div>
           </form>
@@ -275,6 +280,37 @@
 
     </div>
   </section><!-- End Contact Section -->
+
+  <!-- Add Product Query Modal -->
+  <div class="modal fade" id="queryModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Ask a query from us</h5>
+        </div>
+        <div class="modal-body">
+          <form action="{{route('submit.query')}}" method="POST">
+            @csrf
+            <input type="hidden" name="product" class="form-control mt-1 border border-dark product-field" required
+              maxlength="99" placeholder="Product in question" />
+            <input type="text" name="name" class="form-control mt-1 border border-dark" required maxlength="99"
+              placeholder="Your Name" />
+            <input type="email" name="email" class="form-control mt-1 border border-dark mt-3" required maxlength="99"
+              placeholder="Your email" />
+            <input type="text" name="phone" class="form-control mt-1 border border-dark mt-3" required
+              placeholder="Your Phone Number" pattern="[0-9]{10}" title="Enter 10 digit mobile number" />
+            <textarea class="form-control mt-3 border-dark" required name="message" placeholder="Your Query/Message"
+              maxlength="499"></textarea>
+        </div>
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-primary">Send Query</button>
+          <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+        </div>
+        </form>
+      </div>
+    </div>
+  </div>
 
 </main><!-- End #main -->
 
@@ -303,6 +339,13 @@ if ($inner_section_spotlight != "" && !empty(json_decode($inventory_section_spot
 }
     ?>
   });
+
+  function popProductModal(productName, e) {
+    $('#queryModal').modal('show');
+    $('.product-field').val(productName);
+    $('#exampleModalLabel').text("Product: " + productName);
+    e.preventDefault();
+  }
 
   /******************************** Placeholder Animation Start *************************************/
   // Add something to given element placeholder
@@ -396,18 +439,27 @@ if ($inner_section_spotlight != "" && !empty(json_decode($inventory_section_spot
         var count = response.countOfSpotlightInventory;
         for (let i = 0; i <= count - 1; i++) {
           var content =
-            "<div class='box p-3'><div class='card'>" +
+            "<div class='box p-3'>" +
+            "<div class='card'>" +
             "<img src='" + imgPath + '/' + response.data[i].thumbnailimg + "' class='img-fluid p-2'/>" +
-            "<p style='text-align:left; margin-left:10px;'><span class='badge badge-spotlight'>" + (response.data[i].offerBadge || '') + "</span></p>" +
+            "<p style='text-align:left; margin-left:10px;'>" +
+            "<span class='badge badge-spotlight'>" + (response.data[i].offerBadge || '') + "</span>" +
+            "</p>" +
             "<h4 class='spotlight-itemName'>" + response.data[i].itemName + "</h4>" +
             "<p class='text-dark text-start' style='margin:0px 0px 0px 10px;'>" + (response.data[i].importantNote || '') + "</p>" +
             "<h4 class='spotlight-pricetag'><s>" + (response.data[i].strikerPrice || '') + "</s> ₹" + response.data[i].actualPrice + "</h4>" +
             "<h6 class='text-danger' style='font-weight:bold;text-align:left; padding-left:10px;'>" + (response.data[i].salePitch || '') + "</h6>" +
-            "<div class='d-flex'><button type='button' class='btn btn-primary' onclick='return confirm();' style='width:30%; margin:10px 0px 25px 10px;'>Ask Us</button><br/><br/>" +
-            "</div></div></div>";
+            "<div class='d-flex'>" +
+            "<button type='button' class='btn btn-primary' onclick='return popProductModal(\"" + response.data[i].itemName + "\");' style='width:30%; margin:10px 0px 25px 10px;'>Ask Us</button>" +
+            "<br/><br/>" +
+            "</div>" +
+            "</div>" +
+            "</div>";
+
           // Append the content to HTML
           $('.spotlight-render-here').append(content);
         }
+
         $(".loader-spotlight").hide();
 
         // Trigger slick slider after the content has been loaded, Otherwise slick won't work if pre-initialised.
@@ -443,15 +495,18 @@ if ($inner_sections != "" && !empty(json_decode($inventory_section_dynamic))) {
         var count = response.countOfDynamicItems;
         for (let i = 0; i <= count - 1; i++) {
           // If section type is "Galaxy" start.
-          if (response.data[i].section_data.type == "galaxy" && response.data[i].inventory_ids.length!=0) {
-            // Render heading first because inside we've multiple items inside, but outside we only have 1 heading & description, We'll render the boxes inside this rendered ROW.
+          if (response.data[i].section_data.type == "galaxy" && response.data[i].inventory_ids.length != 0) {
+            // Render heading first because inside we've multiple items inside, but outside we only have 1 heading & description,
+            // We'll render the boxes inside this rendered ROW.
             var heading = "<div class='galaxy container mt-4'>" +
               "<div class='section-title'>" +
               "<h2 class='text-dark'>" + response.data[i].section_data.name + "</h2>" +
               "<p class='text-dark'>" + (response.data[i].section_data.description || '') + "</p>" +
               "</div>" +
               "<div class='row'>";
+
             $('.render-dynamic-sections').append(heading);
+
             for (var g = 0; g <= response.data[i].inventory_ids.length - 1; g++) { // Count and render the internal inventory details.
               var content =
                 "<div class='col-lg-4 col-md-6 d-flex align-items-stretch p-2'>" +
@@ -463,18 +518,22 @@ if ($inner_sections != "" && !empty(json_decode($inventory_section_dynamic))) {
                 "<h6 class='text-dark mt-2'>" + (response.data[i].inventory_ids[g].importantNote || '') + "</h6>" +
                 "<h5 class='dynamic-amount text-dark mt-2'><s>" + (response.data[i].inventory_ids[g].strikerPrice || '') + "</s> ₹" + response.data[i].inventory_ids[g].actualPrice + "</h5>" +
                 "<h6 class='text-danger'><b>" + (response.data[i].inventory_ids[g].salePitch || '') + "</b></h6>" +
-                "<button type='button' class='btn btn-primary mt-2' onclick='return confirm();'>Ask Us</button>" +
-                "</div></a>" +
+                "<button type='button' class='btn btn-primary mt-2' onclick='return popProductModal(\"" + response.data[i].inventory_ids[g].itemName + "\");'>Ask Us</button>" +
+                "</div>" +
+                "</a>" +
                 "</div>";
+
               $('.render-dynamic-sections').children().last().find('.row').append(content);
             }
+
             // Ending the ROW & div here as all the items are already rendered. validate if button is there
+            var footer;
             if (response.data[i].section_data.button == 1) {
-              var footer = "</div><br/>" +
-                "<a href=" + response.data[i].section_data.url + "><center><button type='button' class='btn btn-success btn-lg'>View all items <i class='bx bxs-right-arrow'></i></button></center></a>" +
+              footer = "</div><br/>" +
+                "<a href='" + response.data[i].section_data.url + "'><center><button type='button' class='btn btn-success btn-lg'>View all items <i class='bx bxs-right-arrow'></i></button></center></a>" +
                 "</div><br/><br/>";
             } else {
-              var footer = "</div>" +
+              footer = "</div>" +
                 "</div><br/><br/>";
             }
 
@@ -483,7 +542,7 @@ if ($inner_sections != "" && !empty(json_decode($inventory_section_dynamic))) {
           // If section type is "Galaxy" end.
 
           // If setion type is "Star" start.
-          if (response.data[i].section_data.type == "star" && response.data[i].inventory_ids.length!=0) {
+          if (response.data[i].section_data.type == "star" && response.data[i].inventory_ids.length != 0) {
             // Create the section heading
             var heading = "<div class='star container mt-4'>" +
               "<div class='section-title'>" +
@@ -498,7 +557,10 @@ if ($inner_sections != "" && !empty(json_decode($inventory_section_dynamic))) {
             // Loop through inventory items
             for (var g = 0; g < response.data[i].inventory_ids.length; g++) { // Use < for length check
               var content =
-                "<a href=''><div class='box m-3'><div class='row'><div class='col-lg-6 order-1 order-lg-2'>" +
+                "<a href=''>" +
+                "<div class='box m-3'>" +
+                "<div class='row'>" +
+                "<div class='col-lg-6 order-1 order-lg-2'>" +
                 "<img src='" + imgPath + '/' + response.data[i].inventory_ids[g].thumbnailimg + "' class='img-fluid' alt='Image could not be loaded'>" +
                 "</div>" +
                 "<div class='col-lg-6 pt-4 pt-lg-0 order-2 order-lg-1 content'>" +
@@ -508,30 +570,31 @@ if ($inner_sections != "" && !empty(json_decode($inventory_section_dynamic))) {
                 "<h5 class='dynamic-amount text-dark mt-2'><s>" + (response.data[i].inventory_ids[g].strikerPrice || '') + "</s> ₹" + response.data[i].inventory_ids[g].actualPrice + "</h5>" +
                 "<h6 class='text-danger'><b>" + (response.data[i].inventory_ids[g].salePitch || '') + "</b></h6>" +
                 "<p class='text-dark'>" + response.data[i].inventory_ids[g].itemDescription.substring(0, 300) + "...</p>" +
-                "<button type='button' class='btn btn-primary mt-2' onclick='return confirm();'>Ask Us</button>" +
-                "</div></div></div></a><br/><br/><br/><br/>";
-
+                "<button type='button' class='btn btn-primary mt-2' onclick='return popProductModal(\"" + response.data[i].inventory_ids[g].itemName + "\");'>Ask Us</button>" +
+                "</div>" +
+                "</div>" +
+                "</div>" +
+                "</a><br/><br/><br/><br/>";
               // Append content to the last row
               $('.render-dynamic-sections').children().last().find('.star-box').append(content);
             }
-
             // Ending the ROW & div here as all the items are already rendered. validate if button is there
+            var footer;
             if (response.data[i].section_data.button == 1) {
-              var footer = "</div>" +
-                "<a href=" + response.data[i].section_data.url + "><center><button type='button' class='btn btn-success btn-lg' style='margin-top:-40px;'>View all items <i class='bx bxs-right-arrow'></i></button></center></a>" +
+              footer = "</div>" +
+                "<a href='" + response.data[i].section_data.url + "'><center><button type='button' class='btn btn-success btn-lg' style='margin-top:-40px;'>View all items <i class='bx bxs-right-arrow'></i></button></center></a>" +
                 "</div><br/><br/><br/>";
             } else {
-              var footer = "</div>" +
+              footer = "</div>" +
                 "</div><br/><br/><br/>";
             }
-
             // Append footer
             $('.render-dynamic-sections').append(footer);
           }
           // Section type "Star" end.
 
           // If section type "Nebula" start.
-          if (response.data[i].section_data.type == "nebula" && response.data[i].inventory_ids.length!=0) {
+          if (response.data[i].section_data.type == "nebula" && response.data[i].inventory_ids.length != 0) {
             // Create the section heading
             var heading = "<div class='nebula container mt-4'>" +
               "<div class='section-title'>" +
@@ -546,7 +609,8 @@ if ($inner_sections != "" && !empty(json_decode($inventory_section_dynamic))) {
             // Loop through inventory items
             for (var g = 0; g < response.data[i].inventory_ids.length; g++) { // Use < for length check
               var content =
-                "<a href=''><div class='member'>" +
+                "<a href=''>" +
+                "<div class='member'>" +
                 "<div class='member-img'>" +
                 "<img src='" + imgPath + '/' + response.data[i].inventory_ids[g].thumbnailimg + "' class='img-fluid text-dark' alt='Image could not be loaded'>" +
                 "</div>" +
@@ -556,22 +620,24 @@ if ($inner_sections != "" && !empty(json_decode($inventory_section_dynamic))) {
                 "<h6 class='text-dark mt-2'>" + (response.data[i].inventory_ids[g].importantNote || '') + "</h6>" +
                 "<h5 class='dynamic-amount text-dark mt-2'><s>" + (response.data[i].inventory_ids[g].strikerPrice || '') + "</s> ₹" + response.data[i].inventory_ids[g].actualPrice + "</h5>" +
                 "<h6 class='text-danger'><b>" + (response.data[i].inventory_ids[g].salePitch || '') + "</b></h6>" +
-                "<button type='button' class='btn btn-primary mt-2' onclick='return confirm();'>Ask Us</button>" +
+                "<button type='button' class='btn btn-primary mt-2' onclick='return popProductModal(\"" + response.data[i].inventory_ids[g].itemName + "\");'>Ask Us</button>" +
                 "</div>" +
-                "</div></a>";
+                "</div>" +
+                "</a>";
 
               // Append content to the last row
               $('.render-dynamic-sections').children().last().find('.nebula-slick').append(content);
             }
 
             // Ending the ROW & div here as all the items are already rendered. validate if button is there
+            var footer;
             if (response.data[i].section_data.button == 1) {
-              var footer = 
-              "<a href=" + response.data[i].section_data.url + "><center><button type='button' class='btn btn-success btn-lg'>View all items <i class='bx bxs-right-arrow'></i></button></center></a>" +
-              "<br/><br/></div>" +
+              footer =
+                "<a href='" + response.data[i].section_data.url + "'><center><button type='button' class='btn btn-success btn-lg'>View all items <i class='bx bxs-right-arrow'></i></button></center></a>" +
+                "<br/><br/></div>" +
                 "</div><br/>";
             } else {
-              var footer = "</div>" +
+              footer = "</div>" +
                 "</div><br/>";
             }
 
@@ -579,7 +645,6 @@ if ($inner_sections != "" && !empty(json_decode($inventory_section_dynamic))) {
             $('.render-dynamic-sections').append(footer);
           }
           // Section type "nebula" end.
-
         }
         $(".loader-sections").hide();
 
@@ -587,8 +652,8 @@ if ($inner_sections != "" && !empty(json_decode($inventory_section_dynamic))) {
         triggerSlickSlider();
       },
       error: function (error) {
-        alert(JSON.stringify(error));
-        // alert("Fatal Error: Some content could not be loaded !!");
+        // alert(JSON.stringify(error));
+        alert("Fatal Error: Some content could not be loaded !!");
       }
     });
   }

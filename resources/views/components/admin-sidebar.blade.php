@@ -53,19 +53,13 @@
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="">
-              <i class="mdi mdi-barcode-scan menu-icon"></i>
-              <span class="menu-title">Product Queries</span>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="">
+            <a class="nav-link" href="{{url('admin/queries')}}">
               <i class="mdi mdi-format-float-left menu-icon"></i>
-              <span class="menu-title">Contact Form Queries</span>
+              <span class="menu-title">Customer Queries</span>
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="">
+            <a class="nav-link" href="{{url('admin/directory')}}">
               <i class="mdi mdi-notebook menu-icon"></i>
               <span class="menu-title">Directory</span>
             </a>

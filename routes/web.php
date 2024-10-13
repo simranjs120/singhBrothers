@@ -9,7 +9,9 @@ use App\Http\Controllers\offersController as offers;
 use App\Http\Controllers\indexController as index;
 use App\Http\Controllers\labelsController as labels;
 use App\Http\Controllers\innerSectionController as innerSection;
+use App\Http\Controllers\directoryController as directory;
 use App\Http\Controllers\logoController as logo;
+use App\Http\Controllers\queryController as query;
 
 use Illuminate\Support\Facades\Route;
 
@@ -23,8 +25,9 @@ Route::any('admin/fetch-dynamic-item-from-id', [index::class, 'fetchDynamicItems
 Route::get('/autoEnable', [offers::class, 'autoEnable']);
 Route::get('/autoDisable', [offers::class, 'autoDisable']);
 
-Route::get('admin/dashboard',  [dashboard::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard');
 
+# Admin Modules
+Route::get('admin/dashboard',  [dashboard::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard');
 Route::middleware('auth')->group(function () {
 
     # Fetching all activity.
@@ -80,6 +83,14 @@ Route::middleware('auth')->group(function () {
     # Logo Module
     Route::get('/admin/logo', [logo::class, 'index']);
     Route::post('/admin/submit-logo', [logo::class, 'submit'])->name('submit.logos');
+
+    # Customer query module
+    Route::get('/admin/queries', [query::class, 'index']);
+    Route::post('/admin/submit-query', [query::class, 'submit'])->name('submit.query');
+    Route::post('/admin/submit-contact', [query::class, 'submitContact'])->name('submit.contact');
+
+    # Directory module
+    Route::get('admin/directory', [directory::class, 'index']);
 
     # Category Module
     Route::any('/admin/categories/delete-category/{id}', [category::class, 'deleteCategory']);

@@ -83,7 +83,7 @@
   <script src="{{Helper::props('assets/vendor/glightbox/js/glightbox.min.js')}}"></script>
   <script src="{{Helper::props('assets/vendor/isotope-layout/isotope.pkgd.min.js')}}"></script>
   <script src="{{Helper::props('assets/vendor/swiper/swiper-bundle.min.js')}}"></script>
-  <script src="{{Helper::props('assets/vendor/php-email-form/validate.js')}}"></script>
+
 
   <!-- Template Main JS File -->
   <script src="{{Helper::props('assets/js/main.js')}}"></script>
@@ -91,3 +91,8 @@
 </body>
 
 </html>
+<script>
+  setTimeout(function () {
+      $('.alert').hide();
+    }, 4000);
+</script>

@@ -13,6 +13,10 @@
                     <span class="breadcrumbs-active">List Directory Items</span>
                 </h5>
             </div>
+            <div class="col-lg-6">
+                <button type="button" onclick="popModalDirectoryItem()"
+                    class="pull-right btn btn-success m-2 mt-2 text-light" title="Add new Item">+ Add New Item</button>
+            </div>
         </div>
     </div>
 </div>
@@ -42,7 +46,7 @@
                                         <th scope="col">Name</th>
                                         <th scope="col">Email</th>
                                         <th scope="col">Phone</th>
-                                        <th scope="col">Created From</th>
+                                        <th scope="col">Created By</th>
                                         <th scope="col">Created On</th>
                                         <th scope="col">Actions</th>
                                     </tr>
@@ -57,7 +61,8 @@
                                             <td>{{$row->created_from}}</td>
                                             <td>{{App\Helpers\Helper::timeStampProcessed($row->created_at)}}</td>
                                             <td>
-                                                <a href=""
+                                            <button type="button" class="btn btn-dark text-light" onclick="popModalDirectoryItemEdit('{{$row->name}}','{{$row->email}}','{{$row->phone}}','{{$row->id}}')">Edit</button>
+                                                <a href="{{url('admin/delete-directory-item/' . $row->id)}}"
                                                     onclick="return confirm('Are you sure you want to delete this item?')">
                                                     <button type="button" class="btn btn-danger text-light">Delete</button>
                                                 </a>
@@ -73,5 +78,80 @@
         </div>
     </div>
 </div>
-
+<!-- Add new directory item -->
+<div class="modal fade" id="popModalDirectoryItem" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <form action="{{route('submit.insertEntryFromAdmin')}}" method="POST">
+                @csrf
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Add new directory item</h5>
+                    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <label class="">&nbsp;Name<span class="asterik">*</span></label>
+                    <input type="text" name="name" class="form-control" maxlength="80" placeholder="Enter name..."
+                        required />
+                    <label class="mt-3">&nbsp;Email<span class="asterik">*</span></label>
+                    <input type="email" name="email" class="form-control" maxlength="80" placeholder="Enter email..."
+                        required />
+                    <label class="mt-3">&nbsp;Phone<span class="asterik">*</span></label>
+                    <input type="text" name="phone" class="form-control" maxlength="80" placeholder="Enter phone..."
+                        required />
+                </div>
+                <div class="modal-footer">
+                <button type="submit" class="btn btn-success">Submit</button>
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="popModalDirectoryItemEdit" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <form action="{{route('edit.insertEntryFromAdmin')}}" method="POST">
+                @csrf
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Edit directory item</h5>
+                    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                <input type="hidden" name="id" class="form-control" maxlength="80" id="editId" required />
+                    <label class="">&nbsp;Name<span class="asterik">*</span></label>
+                    <input type="text" name="name" class="form-control" maxlength="80" id="editName" placeholder="Enter name..."
+                        required />
+                    <label class="mt-3">&nbsp;Email<span class="asterik">*</span></label>
+                    <input type="email" name="email" class="form-control" maxlength="80" id="editEmail" placeholder="Enter email..."
+                        required />
+                    <label class="mt-3">&nbsp;Phone<span class="asterik">*</span></label>
+                    <input type="text" name="phone" class="form-control" maxlength="80" id="editPhone" placeholder="Enter phone..."
+                        required />
+                </div>
+                <div class="modal-footer">
+                <button type="submit" class="btn btn-success">Submit</button>
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
 <x-admin-footer />
+<script>
+    function popModalDirectoryItem() {
+        $('#popModalDirectoryItem').modal('show');
+    }
+    function popModalDirectoryItemEdit(name,email,phone,id){
+        $('#popModalDirectoryItemEdit').modal('show');
+        $('#editEmail').val(email);
+        $('#editName').val(name);
+        $('#editPhone').val(phone);
+        $('#editId').val(id);
+    }
+</script>

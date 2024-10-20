@@ -83,7 +83,7 @@
                                             <td>{{$row->message}}</td>
                                             <td>{{App\Helpers\Helper::timeStampProcessed($row->created_at)}}</td>
                                             <td>
-                                                <a href=""
+                                                <a href="{{url('admin/delete-query/' . $row->id)}}"
                                                     onclick="return confirm('Are you sure you want to delete this item?')">
                                                     <button type="button" class="btn btn-danger text-light">Delete</button>
                                                 </a>
@@ -120,7 +120,7 @@
                                             <td>{{$row1->message}}</td>
                                             <td>{{App\Helpers\Helper::timeStampProcessed($row1->created_at)}}</td>
                                             <td>
-                                                <a href=""
+                                                <a href="{{url('admin/delete-query/' . $row1->id)}}"
                                                     onclick="return confirm('Are you sure you want to delete this item?')">
                                                     <button type="button" class="btn btn-danger text-light">Delete</button>
                                                 </a>

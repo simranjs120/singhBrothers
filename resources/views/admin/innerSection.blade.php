@@ -340,7 +340,7 @@
             $("#loader").text("");
             } else {
                 // No inventory items found
-                $("#loader").text("No inventory items found!! Please add some inventory first from Manage Inventory Section");   
+                $("#loader").text("No inventory items found ☹️ Please add some inventory first from Manage Inventory Section");   
                 $('.inventory-warning').text("");
                 $('.assign-btn').hide();
             }

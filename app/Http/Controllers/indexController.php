@@ -104,9 +104,5 @@ class indexController extends Controller
             'data'=>$resultArray,
             'countOfDynamicItems'=>count($resultArray)
         ]);
-        // echo "<pre>";
-        // print_r(json_encode($resultArray));
-        // echo "</pre>";
-        // die;
     }
 }

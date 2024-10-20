@@ -88,9 +88,13 @@ Route::middleware('auth')->group(function () {
     Route::get('/admin/queries', [query::class, 'index']);
     Route::post('/admin/submit-query', [query::class, 'submit'])->name('submit.query');
     Route::post('/admin/submit-contact', [query::class, 'submitContact'])->name('submit.contact');
+    Route::get('/admin/delete-query/{id}', [query::class, 'deleteItem']);
 
     # Directory module
     Route::get('admin/directory', [directory::class, 'index']);
+    Route::post('admin/directory', [directory::class, 'insertEntryFromAdmin'])->name('submit.insertEntryFromAdmin');
+    Route::post('admin/directory/edit', [directory::class, 'editEntryFromAdmin'])->name('edit.insertEntryFromAdmin');
+    Route::get('admin/delete-directory-item/{id}', [directory::class, 'deleteItem']);
 
     # Category Module
     Route::any('/admin/categories/delete-category/{id}', [category::class, 'deleteCategory']);

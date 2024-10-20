@@ -25,4 +25,17 @@ class queryModel extends Model
         return false;
     }
 
+    static function getItemWithId($id){
+        $checkRecord=DB::table('queries')->where('id',$id)->first();
+        return $checkRecord;
+    }
+
+    static function deleteItem($id){
+        $deleteItem=DB::table('queries')->where('id',$id)->delete();
+        if($deleteItem){
+            return true;
+        }
+        return false;
+    }
+
 }

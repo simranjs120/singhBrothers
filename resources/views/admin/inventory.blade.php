@@ -48,8 +48,6 @@
                                 <th scope="col">Striker Price</th>
                                 <th scope="col">Actual Price</th>
                                 <th scope="col">Offer Badge</th>
-                                <th scope="col">Dimensions</th>
-                                <th scope="col">Size</th>
                                 <th scope="col">Stock</th>
                                 <th scope="col">Collection</th>
                                 <th scope="col">Created On</th>
@@ -73,8 +71,6 @@
                                     <td><s>{{$row->strikerPrice}}</s></td>
                                     <td>{{$row->actualPrice}}</td>
                                     <td>{{$row->offerBadge}}</td>
-                                    <td>{{$row->dimensions}}</td>
-                                    <td>{{$row->size}}</td>
                                     <td>{{$row->quantity}}</td>
                                     <td>{{$row->collection_name}}</td>
                                     <td>{{App\Helpers\Helper::timeStampProcessed($row->created_at)}}</td>

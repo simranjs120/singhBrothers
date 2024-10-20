@@ -510,7 +510,7 @@ if ($inner_sections != "" && !empty(json_decode($inventory_section_dynamic)) && 
             for (var g = 0; g <= response.data[i].inventory_ids.length - 1; g++) { // Count and render the internal inventory details.
               var content =
                 "<div class='col-lg-4 col-md-6 d-flex align-items-stretch p-2'>" +
-                "<a href='#'>" +
+                "<a href='https://www.google.com'>" +
                 "<div class='icon-box'>" +
                 "<img src='" + imgPath + '/' + response.data[i].inventory_ids[g].thumbnailimg + "' class='img-fluid text-dark' alt='Image could not be loaded'>" +
                 "<h4 class='mt-4 text-dark'>" + response.data[i].inventory_ids[g].itemName + "</h4>" +
@@ -518,7 +518,7 @@ if ($inner_sections != "" && !empty(json_decode($inventory_section_dynamic)) && 
                 "<h6 class='text-dark mt-2'>" + (response.data[i].inventory_ids[g].importantNote || '') + "</h6>" +
                 "<h5 class='dynamic-amount text-dark mt-2'><s>" + (response.data[i].inventory_ids[g].strikerPrice || '') + "</s> ₹" + response.data[i].inventory_ids[g].actualPrice + "</h5>" +
                 "<h6 class='text-danger'><b>" + (response.data[i].inventory_ids[g].salePitch || '') + "</b></h6>" +
-                "<button type='button' class='btn btn-primary mt-2' onclick='return popProductModal(\"" + response.data[i].inventory_ids[g].itemName + "\");'>Ask Us</button>" +
+                "<button type='button' class='btn btn-primary mt-2 redirectBlock' onclick='return popProductModal(\"" + response.data[i].inventory_ids[g].itemName + "\");'>Ask Us</button>" +
                 "</div>" +
                 "</a>" +
                 "</div>";
@@ -537,7 +537,14 @@ if ($inner_sections != "" && !empty(json_decode($inventory_section_dynamic)) && 
                 "</div><br/><br/>";
             }
 
+            // Render
             $('.render-dynamic-sections').append(footer);
+            // Prevent click inside on buttons in cards
+            $('.redirectBlock').on('click',function(e) {
+              if( $(e.target).is('.redirectBlock') ) {
+                e.preventDefault();
+              }
+            });
           }
           // If section type is "Galaxy" end.
 
@@ -569,8 +576,8 @@ if ($inner_sections != "" && !empty(json_decode($inventory_section_dynamic)) && 
                 "<h6 class='text-dark mt-2'>" + (response.data[i].inventory_ids[g].importantNote || '') + "</h6>" +
                 "<h5 class='dynamic-amount text-dark mt-2'><s>" + (response.data[i].inventory_ids[g].strikerPrice || '') + "</s> ₹" + response.data[i].inventory_ids[g].actualPrice + "</h5>" +
                 "<h6 class='text-danger'><b>" + (response.data[i].inventory_ids[g].salePitch || '') + "</b></h6>" +
-                "<p class='text-dark'>" + response.data[i].inventory_ids[g].itemDescription.substring(0, 300) + "...</p>" +
-                "<button type='button' class='btn btn-primary mt-2' onclick='return popProductModal(\"" + response.data[i].inventory_ids[g].itemName + "\");'>Ask Us</button>" +
+                "<p class='text-dark'>" + response.data[i].inventory_ids[g].itemDescription.substring(0, 400) + "...</p>" +
+                "<button type='button' class='btn btn-primary mt-2 redirectBlock' onclick='return popProductModal(\"" + response.data[i].inventory_ids[g].itemName + "\");'>Ask Us</button>" +
                 "</div>" +
                 "</div>" +
                 "</div>" +
@@ -590,6 +597,12 @@ if ($inner_sections != "" && !empty(json_decode($inventory_section_dynamic)) && 
             }
             // Append footer
             $('.render-dynamic-sections').append(footer);
+           // Prevent click inside on buttons in cards
+           $('.redirectBlock').on('click',function(e) {
+              if( $(e.target).is('.redirectBlock') ) {
+                e.preventDefault();
+              }
+           });
           }
           // Section type "Star" end.
 
@@ -620,7 +633,7 @@ if ($inner_sections != "" && !empty(json_decode($inventory_section_dynamic)) && 
                 "<h6 class='text-dark mt-2'>" + (response.data[i].inventory_ids[g].importantNote || '') + "</h6>" +
                 "<h5 class='dynamic-amount text-dark mt-2'><s>" + (response.data[i].inventory_ids[g].strikerPrice || '') + "</s> ₹" + response.data[i].inventory_ids[g].actualPrice + "</h5>" +
                 "<h6 class='text-danger'><b>" + (response.data[i].inventory_ids[g].salePitch || '') + "</b></h6>" +
-                "<button type='button' class='btn btn-primary mt-2' onclick='return popProductModal(\"" + response.data[i].inventory_ids[g].itemName + "\");'>Ask Us</button>" +
+                "<button type='button' class='btn btn-primary mt-2 redirectBlock' onclick='return popProductModal(\"" + response.data[i].inventory_ids[g].itemName + "\");'>Ask Us</button>" +
                 "</div>" +
                 "</div>" +
                 "</a>";
@@ -643,6 +656,12 @@ if ($inner_sections != "" && !empty(json_decode($inventory_section_dynamic)) && 
 
             // Append footer
             $('.render-dynamic-sections').append(footer);
+            // Prevent click inside on buttons in cards
+            $('.redirectBlock').on('click',function(e) {
+              if( $(e.target).is('.redirectBlock') ) {
+                e.preventDefault();
+              }
+            });
           }
           // Section type "nebula" end.
         }

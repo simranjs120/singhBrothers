@@ -82,4 +82,31 @@ class queryController extends Controller
             return redirect()->back()->with('error', 'Something went wrong!! Please try again !');
         }
     }
+
+    public function deleteItem($id){
+        try {
+            Log::info('Query item delete request by user ID: ', [Auth::id()]);
+            $previousData = query::getItemWithId($id);
+            $delete = query::deleteItem($id);
+            if ($delete) {
+                # Entry for changes tracker start
+                $data['profile'] = dashboard::fetchProfile();
+                $changer_name = $data['profile']->name;
+                $changer_email = $data['profile']->email;
+                $changer_title = " deleted query entry with email: " . $previousData->email;
+                $trackIt = tracker::insert($changer_title, $changer_email, $changer_name);
+                if ($trackIt) {
+                    Log::info('Addition to tracker table success');
+                } else {
+                    Log::error('Addition to tracker table failed');
+                }
+                # Enter for changes tracker end
+                Log::info('Query item Deleted ID: ', [$id]);
+                return redirect()->back()->with('success', 'Query entry has been deleted successfully');
+            }
+        } catch (\Exception $e) {
+            Log::error('Exception in delete query item module: ' . $e->getMessage());
+            return redirect()->back()->with('error', 'Something went wrong!! Please try again !');
+        }
+    }
 }

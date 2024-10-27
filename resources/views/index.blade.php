@@ -510,7 +510,7 @@ if ($inner_sections != "" && !empty(json_decode($inventory_section_dynamic)) && 
             for (var g = 0; g <= response.data[i].inventory_ids.length - 1; g++) { // Count and render the internal inventory details.
               var content =
                 "<div class='col-lg-4 col-md-6 d-flex align-items-stretch p-2'>" +
-                "<a href='https://www.google.com'>" +
+                "<a href='{{env('APP_URL')}}/listing/"+btoa(response.data[i].inventory_ids[g].id)+"/"+btoa(response.data[i].inventory_ids[g].category_id)+"/"+btoa(response.data[i].inventory_ids[g].sub_category_id)+"'>" +
                 "<div class='icon-box'>" +
                 "<img src='" + imgPath + '/' + response.data[i].inventory_ids[g].thumbnailimg + "' class='img-fluid text-dark' alt='Image could not be loaded'>" +
                 "<h4 class='mt-4 text-dark'>" + response.data[i].inventory_ids[g].itemName + "</h4>" +
@@ -564,7 +564,7 @@ if ($inner_sections != "" && !empty(json_decode($inventory_section_dynamic)) && 
             // Loop through inventory items
             for (var g = 0; g < response.data[i].inventory_ids.length; g++) { // Use < for length check
               var content =
-                "<a href=''>" +
+                "<a href='{{env('APP_URL')}}/listing/"+btoa(response.data[i].inventory_ids[g].id)+"/"+btoa(response.data[i].inventory_ids[g].category_id)+"/"+btoa(response.data[i].inventory_ids[g].sub_category_id)+"'>" +
                 "<div class='box m-3'>" +
                 "<div class='row'>" +
                 "<div class='col-lg-6 order-1 order-lg-2'>" +
@@ -622,7 +622,7 @@ if ($inner_sections != "" && !empty(json_decode($inventory_section_dynamic)) && 
             // Loop through inventory items
             for (var g = 0; g < response.data[i].inventory_ids.length; g++) { // Use < for length check
               var content =
-                "<a href=''>" +
+               "<a href='{{env('APP_URL')}}/listing/"+btoa(response.data[i].inventory_ids[g].id)+"/"+btoa(response.data[i].inventory_ids[g].category_id)+"/"+btoa(response.data[i].inventory_ids[g].sub_category_id)+"'>" +
                 "<div class='member'>" +
                 "<div class='member-img'>" +
                 "<img src='" + imgPath + '/' + response.data[i].inventory_ids[g].thumbnailimg + "' class='img-fluid text-dark' alt='Image could not be loaded'>" +

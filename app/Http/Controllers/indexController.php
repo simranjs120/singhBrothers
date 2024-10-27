@@ -105,4 +105,42 @@ class indexController extends Controller
             'countOfDynamicItems'=>count($resultArray)
         ]);
     }
+
+    public function fetchItems($inventory,$category,$sub){
+        $data['web']=DB::table('web_settings')->first();
+        $data['item']=DB::table('inventory')->where('id',base64_decode($inventory))->first();
+        $data['relatedItems']=DB::table('inventory')
+        ->where(['category_id'=>base64_decode($category),'status'=>1])
+        ->where('id','!=',$data['item']->id)->take('3')->get();
+        return view('listing',$data);
+    }
+    public function labelPage($key){
+        $getLabel=DB::table('labels')->where('unique_hash',$key)->first();
+        if($getLabel->status==0){
+            return abort(404);
+        }
+        $data['LabelName']=$getLabel->name;
+        $items=DB::table('label_inventory')->where('label_id',$getLabel->id)->get('inventory_id');
+        // print_r($items);
+        // die;
+        $embedArray=[];
+        $result=[];
+        for($i=0;$i<count($items);$i++){
+            $getInventory=DB::table('inventory')->where('id',$items[$i]->inventory_id)->first();
+            $embedArray['id']=$getInventory->id;
+            $embedArray['category_id']=$getInventory->category_id;
+            $embedArray['sub_category_id']=$getInventory->sub_category_id;
+            $embedArray['thumbnailimg']=$getInventory->thumbnailimg;
+            $embedArray['itemName']=$getInventory->itemName;
+            $embedArray['strikerPrice']=$getInventory->strikerPrice;
+            $embedArray['actualPrice']=$getInventory->actualPrice;
+            $embedArray['salePitch']=$getInventory->salePitch;
+            $embedArray['offerBadge']=$getInventory->offerBadge;
+            $embedArray['importantNote']=$getInventory->importantNote;
+            $result[]=$embedArray;
+        }
+        $data['inventory']=$result;
+        $data['web']=DB::table('web_settings')->first();
+        return view('labels',$data);
+    }
 }

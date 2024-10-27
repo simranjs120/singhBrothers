@@ -132,7 +132,7 @@
                 <ul class="navbar-nav">
                     <li class="nav-item font-weight-semibold d-none d-lg-block ms-0">
                         <h1 class="welcome-text"><?php echo $salutation; ?>, <span class="text-black fw-bold">{{$profile->name}}</span></h1>
-                        <h3 class="welcome-sub-text">You're fully synced with your customers😎</h3>
+                        <h3 class="welcome-sub-text">Welcome back to Work, Have a great day!!😎</h3>
                     </li>
                 </ul>
                 <ul class="navbar-nav ms-auto">
@@ -151,17 +151,17 @@
             </form>
           </li> -->
 
-                    <li class="nav-item dropdown">
+                    <!-- <li class="nav-item dropdown">
                     <a class="nav-link" href="{{str_replace('/public',"/",Helper::props('/'))}}" target="_blank">
                             <i class="mdi mdi-web" style="font-size:24px;"></i>
                         </a>
-                    </li>
+                    </li> -->
                     <li class="nav-item dropdown">
-                        <a class="nav-link count-indicator" id="countDropdown" href="#" data-bs-toggle="dropdown"
+                        <!-- <a class="nav-link count-indicator" id="countDropdown" href="#" data-bs-toggle="dropdown"
                             aria-expanded="false">
                             <i class="icon-bell"></i>
                             <span class="count"></span>
-                        </a>
+                        </a> -->
                         <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list pb-0"
                             aria-labelledby="countDropdown">
                             <a class="dropdown-item py-3">

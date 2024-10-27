@@ -7,6 +7,12 @@
               <span class="menu-title">Dashboard</span>
             </a>
           </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{{url('/')}}" target="_blank">
+              <i class="mdi mdi-web menu-icon"></i>
+              <span class="menu-title">Visit Main Website</span>
+            </a>
+          </li>
           <li class="nav-item nav-category">Configuration</li>
           <li class="nav-item nav-category-sidebar">
             <a class="nav-link" href="{{url('admin/logo')}}">
@@ -38,12 +44,14 @@
               <span class="menu-title">Inventory Labelling</span>
             </a>
           </li>
-          <li class="nav-item">
+
+          <!-- Deprecating as of now -->
+          <!-- <li class="nav-item">
             <a class="nav-link" href="{{url('admin/offers')}}">
               <i class="mdi mdi-tag-multiple menu-icon"></i>
               <span class="menu-title">Offers Management</span>
             </a>
-          </li>
+          </li> -->
 
           <li class="nav-item nav-category">Website Mangement</li>
           <li class="nav-item nav-category-inventory">

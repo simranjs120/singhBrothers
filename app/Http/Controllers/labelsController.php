@@ -41,8 +41,8 @@ class labelsController extends Controller
             $status = $request->status;
             $data = [
                 'name' => $name,
-                'url' => str_replace('/public/', "", Helper::props('/label/' . base64_encode(time()))),
-                'unique_hash' => time(),
+                'url' => str_replace('/public/', "", Helper::props('/label/' . md5(time()))),
+                'unique_hash' => md5(time()),
                 'status' => $status,
                 'created_at' => Helper::timeStamp()
             ];

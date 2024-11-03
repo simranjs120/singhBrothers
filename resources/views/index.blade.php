@@ -53,11 +53,13 @@
         </div> -->
       <div class="searchpanelbase">
         <h4>{{$web->search_line}}</h4>
-        <div id="search-container">
-          <i class="ri-search-line"></i>
-          <input type="text" class="form-control" id="search-tool" placeholder="Search here..." />
-        </div>
-        <button type="button" class="btn btn-success btn-lg">Search</button>
+        <form action="{{url('/search')}}" method="GET">
+          <div id="search-container">
+            <i class="ri-search-line"></i>
+            <input type="text" class="form-control" id="search-tool" name="queryString" placeholder="Search here..." />
+          </div>
+          <button type="submit" class="btn btn-success btn-lg">Search</button>
+        </form>
       </div>
     </div>
 
@@ -65,7 +67,7 @@
 </section><!-- End Hero -->
 
 <main id="main">
-  @if($web->category_pills == 1 && count($category)>0)
+  @if($web->category_pills == 1 && count($category) > 0)
     <section id="categories">
     <div class="container d-flex justify-content-center">
       <div class="row">
@@ -105,7 +107,7 @@
   </section><!-- End About Section -->
 
   <!----------------------------------------------------------------Spotlight Section Start ------------------------------------------------------------------------------------>
-  @if($inner_section_spotlight != "" && !empty(json_decode($inventory_section_spotlight)) && $inventoryItemsCount>0)
+  @if($inner_section_spotlight != "" && !empty(json_decode($inventory_section_spotlight)) && $inventoryItemsCount > 0)
     @php
     /* Fetching all the inventory IDs from $inventory_section_spotlight array & put them in dynamic hidden fields, then fetch those hidden field's
      value from javascript & put them in a js array, Then make an ajax call with those IDs & fetch actual inventory items. */
@@ -138,21 +140,21 @@
   <!----------------------------------------------------------------Spotlight Section End ------------------------------------------------------------------------------------>
 
   <!----------------------------------------------------------------Dynamic Sections Start ------------------------------------------------------------------------------------>
-  @if($inner_sections != "" && !empty(json_decode($inventory_section_dynamic)) && $inventoryItemsCount>0)
+  @if($inner_sections != "" && !empty(json_decode($inventory_section_dynamic)) && $inventoryItemsCount > 0)
     @php
     /* Setup the $inventory_section_dynamic variable here that is coming from indexController, it contains the ids of the inventory items 
      and sections, Later fetch this in ajax function fetchDynamicSections() below from ID of this field. */
     echo "<input type='hidden' id='dynamic_section_array' value='" . $inventory_section_dynamic . "' />";
   @endphp
-  <section id="dynamicSections" class="dynamicSections">
+    <section id="dynamicSections" class="dynamicSections">
     <div class="container">
       <center>
-        <div class="loader-sections"></div>
+      <div class="loader-sections"></div>
       </center>
       <div class="render-dynamic-sections">
       </div>
     </div>
-  </section>
+    </section>
   @endif
   <!----------------------------------------------------------------Dynamic Sections End ------------------------------------------------------------------------------------>
   <!-- ======= Counts Section ======= -->
@@ -260,17 +262,21 @@
             @csrf
             <div class="row">
               <div class="col-md-6 form-group">
-                <input type="text" name="name" class="form-control" id="name" placeholder="Your Name" required maxlength="99">
+                <input type="text" name="name" class="form-control" id="name" placeholder="Your Name" required
+                  maxlength="99">
               </div>
               <div class="col-md-6 form-group mt-3 mt-md-0">
-                <input type="email" class="form-control" name="email" id="email" placeholder="Your Email" required maxlength="99">
+                <input type="email" class="form-control" name="email" id="email" placeholder="Your Email" required
+                  maxlength="99">
               </div>
             </div>
             <div class="form-group mt-3">
-              <input type="text" class="form-control" name="phone" id="phone" placeholder="Your Phone Number" required pattern="[0-9]{10}" title="Enter 10 digit mobile number">
+              <input type="text" class="form-control" name="phone" id="phone" placeholder="Your Phone Number" required
+                pattern="[0-9]{10}" title="Enter 10 digit mobile number">
             </div>
             <div class="form-group mt-3">
-              <textarea class="form-control" name="message" rows="5" placeholder="Message" required maxlength="499"></textarea>
+              <textarea class="form-control" name="message" rows="5" placeholder="Message" required
+                maxlength="499"></textarea>
             </div>
             <div class="text-center"><button type="submit">Send Message</button></div>
           </form>
@@ -322,21 +328,21 @@
     // Placeholder animation
     initiateSearchAnimation();
     <?php
-      # Validate if spotlight section is not empty for any reason then only trigger the ajax.
+# Validate if spotlight section is not empty for any reason then only trigger the ajax.
 
-      /* NOTE: If spotlight items are present, then we'll be initiating the function to fetch dynamic sections from SUCCESS of fetchSpotlightItems(),
-      so that first spotlight items will be fetched then all dynamic sections will be fetched, Only motive is to make app efficient. */
-      if ($inner_section_spotlight != "" && !empty(json_decode($inventory_section_spotlight)) && $inventoryItemsCount>0) {
+/* NOTE: If spotlight items are present, then we'll be initiating the function to fetch dynamic sections from SUCCESS of fetchSpotlightItems(),
+so that first spotlight items will be fetched then all dynamic sections will be fetched, Only motive is to make app efficient. */
+if ($inner_section_spotlight != "" && !empty(json_decode($inventory_section_spotlight)) && $inventoryItemsCount > 0) {
     ?>
     // Spotlight items
     fetchSpotlightItems();
     <?php
-      } else {
-      # NOTE: If spotlight items section is not present, Not initiated from admin, function to fetch dynamic section would be triggered instantly. 
+} else {
+  # NOTE: If spotlight items section is not present, Not initiated from admin, function to fetch dynamic section would be triggered instantly. 
     ?>
     fetchDynamicSections();
     <?php
-      }
+}
     ?>
   });
 
@@ -416,7 +422,7 @@
 
   <?php
 # Validate if spotlight section is not empty for any reason then only trigger the ajax.
-if ($inner_section_spotlight != "" && !empty(json_decode($inventory_section_spotlight)) && $inventoryItemsCount>0) {
+if ($inner_section_spotlight != "" && !empty(json_decode($inventory_section_spotlight)) && $inventoryItemsCount > 0) {
     ?>
   /************************************************** Fetch Spotlight content Start************************************************************/
   function fetchSpotlightItems() {
@@ -477,7 +483,7 @@ if ($inner_section_spotlight != "" && !empty(json_decode($inventory_section_spot
 
   <?php
 # Validate if dynamic section is not empty for any reason then only trigger the ajax.
-if ($inner_sections != "" && !empty(json_decode($inventory_section_dynamic)) && $inventoryItemsCount>0) {
+if ($inner_sections != "" && !empty(json_decode($inventory_section_dynamic)) && $inventoryItemsCount > 0) {
   ?>
   /************************************************** Fetch dynamic content Start ************************************************************/
   function fetchDynamicSections() {
@@ -510,7 +516,7 @@ if ($inner_sections != "" && !empty(json_decode($inventory_section_dynamic)) && 
             for (var g = 0; g <= response.data[i].inventory_ids.length - 1; g++) { // Count and render the internal inventory details.
               var content =
                 "<div class='col-lg-4 col-md-6 d-flex align-items-stretch p-2'>" +
-                "<a href='{{env('APP_URL')}}/listing/"+btoa(response.data[i].inventory_ids[g].id)+"/"+btoa(response.data[i].inventory_ids[g].category_id)+"/"+btoa(response.data[i].inventory_ids[g].sub_category_id)+"'>" +
+                "<a href='{{env('APP_URL')}}/listing/" + btoa(response.data[i].inventory_ids[g].id) + "/" + btoa(response.data[i].inventory_ids[g].category_id) + "/" + btoa(response.data[i].inventory_ids[g].sub_category_id) + "'>" +
                 "<div class='icon-box'>" +
                 "<img src='" + imgPath + '/' + response.data[i].inventory_ids[g].thumbnailimg + "' class='img-fluid text-dark' alt='Image could not be loaded'>" +
                 "<h4 class='mt-4 text-dark'>" + response.data[i].inventory_ids[g].itemName + "</h4>" +
@@ -540,8 +546,8 @@ if ($inner_sections != "" && !empty(json_decode($inventory_section_dynamic)) && 
             // Render
             $('.render-dynamic-sections').append(footer);
             // Prevent click inside on buttons in cards
-            $('.redirectBlock').on('click',function(e) {
-              if( $(e.target).is('.redirectBlock') ) {
+            $('.redirectBlock').on('click', function (e) {
+              if ($(e.target).is('.redirectBlock')) {
                 e.preventDefault();
               }
             });
@@ -564,7 +570,7 @@ if ($inner_sections != "" && !empty(json_decode($inventory_section_dynamic)) && 
             // Loop through inventory items
             for (var g = 0; g < response.data[i].inventory_ids.length; g++) { // Use < for length check
               var content =
-                "<a href='{{env('APP_URL')}}/listing/"+btoa(response.data[i].inventory_ids[g].id)+"/"+btoa(response.data[i].inventory_ids[g].category_id)+"/"+btoa(response.data[i].inventory_ids[g].sub_category_id)+"'>" +
+                "<a href='{{env('APP_URL')}}/listing/" + btoa(response.data[i].inventory_ids[g].id) + "/" + btoa(response.data[i].inventory_ids[g].category_id) + "/" + btoa(response.data[i].inventory_ids[g].sub_category_id) + "'>" +
                 "<div class='box m-3'>" +
                 "<div class='row'>" +
                 "<div class='col-lg-6 order-1 order-lg-2'>" +
@@ -597,12 +603,12 @@ if ($inner_sections != "" && !empty(json_decode($inventory_section_dynamic)) && 
             }
             // Append footer
             $('.render-dynamic-sections').append(footer);
-           // Prevent click inside on buttons in cards
-           $('.redirectBlock').on('click',function(e) {
-              if( $(e.target).is('.redirectBlock') ) {
+            // Prevent click inside on buttons in cards
+            $('.redirectBlock').on('click', function (e) {
+              if ($(e.target).is('.redirectBlock')) {
                 e.preventDefault();
               }
-           });
+            });
           }
           // Section type "Star" end.
 
@@ -622,7 +628,7 @@ if ($inner_sections != "" && !empty(json_decode($inventory_section_dynamic)) && 
             // Loop through inventory items
             for (var g = 0; g < response.data[i].inventory_ids.length; g++) { // Use < for length check
               var content =
-               "<a href='{{env('APP_URL')}}/listing/"+btoa(response.data[i].inventory_ids[g].id)+"/"+btoa(response.data[i].inventory_ids[g].category_id)+"/"+btoa(response.data[i].inventory_ids[g].sub_category_id)+"'>" +
+                "<a href='{{env('APP_URL')}}/listing/" + btoa(response.data[i].inventory_ids[g].id) + "/" + btoa(response.data[i].inventory_ids[g].category_id) + "/" + btoa(response.data[i].inventory_ids[g].sub_category_id) + "'>" +
                 "<div class='member'>" +
                 "<div class='member-img'>" +
                 "<img src='" + imgPath + '/' + response.data[i].inventory_ids[g].thumbnailimg + "' class='img-fluid text-dark' alt='Image could not be loaded'>" +
@@ -657,8 +663,8 @@ if ($inner_sections != "" && !empty(json_decode($inventory_section_dynamic)) && 
             // Append footer
             $('.render-dynamic-sections').append(footer);
             // Prevent click inside on buttons in cards
-            $('.redirectBlock').on('click',function(e) {
-              if( $(e.target).is('.redirectBlock') ) {
+            $('.redirectBlock').on('click', function (e) {
+              if ($(e.target).is('.redirectBlock')) {
                 e.preventDefault();
               }
             });

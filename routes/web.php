@@ -17,10 +17,11 @@ use Illuminate\Support\Facades\Route;
 
 # Front page modules
 Route::get('/', [index::class, 'index']);
-Route::get('/listing/{inventory}/{category}/{sub}',[index::class,'fetchItems']);
-Route::get('/label/{key}',[index::class,'labelPage']);
+Route::get('listing/{inventory}/{category}/{sub}',[index::class,'fetchItems']);
+Route::get('label/{key}',[index::class,'labelPage']);
 Route::any('admin/fetch-spotlight-item-from-id', [index::class, 'fetchSpotlightItems']);
 Route::any('admin/fetch-dynamic-item-from-id', [index::class, 'fetchDynamicItems']);
+Route::get('search/{queryString?}',[index::class,'search']);
 
 
 # Cron job modules to auto enable/disable offers

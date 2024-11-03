@@ -143,4 +143,62 @@ class indexController extends Controller
         $data['web']=DB::table('web_settings')->first();
         return view('labels',$data);
     }
+
+    public function search(){
+        $data['web']=DB::table('web_settings')->first();
+        if(request()->has('queryString')){
+            $query=request()->get('queryString');
+            $numberOfWords=$this->get_num_of_words($query);
+            $wordsArray = $this->get_words_array($query);
+            for($i=0;$i<$numberOfWords;$i++){
+                $getInventory=DB::table('inventory')->where('itemName', 'like', '%' . $wordsArray[$i] . '%')->first();  
+                if(empty($getInventory)){
+                    break;
+                }
+                $embedArray['id']=$getInventory->id;
+                $embedArray['category_id']=$getInventory->category_id;
+                $embedArray['sub_category_id']=$getInventory->sub_category_id;
+                $embedArray['thumbnailimg']=$getInventory->thumbnailimg;
+                $embedArray['itemName']=$getInventory->itemName;
+                $embedArray['strikerPrice']=$getInventory->strikerPrice;
+                $embedArray['actualPrice']=$getInventory->actualPrice;
+                $embedArray['salePitch']=$getInventory->salePitch;
+                $embedArray['offerBadge']=$getInventory->offerBadge;
+                $embedArray['importantNote']=$getInventory->importantNote;
+                $result[]=$embedArray;
+            }
+            if(!empty($result)){
+                $data['inventory']=$result;
+            } else {
+                $data['notFound']="No Results Found for '".$query."'";
+            }
+            $data['resultFor']=$query;
+            return view('search',$data);
+        } 
+        return abort(404);
+    }
+
+// Function to count the words
+function get_num_of_words($string) {
+    $str = trim($string);
+      while (substr_count($str, "  ") > 0) {
+        $str = str_replace("  ", " ", $str);
+    }
+      return substr_count($str, " ")+1;
+}
+function get_words_array($string) {
+    // Trim the string to remove leading and trailing whitespaces
+    $str = trim($string);
+    
+    // Replace multiple spaces with a single space
+    while (substr_count($str, "  ") > 0) {
+        $str = str_replace("  ", " ", $str);
+    }
+
+    // Split the string by spaces to create an array of words
+    $wordsArray = explode(" ", $str);
+    
+    // Return the array of words
+    return $wordsArray;
+}
 }

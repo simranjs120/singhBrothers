@@ -8,13 +8,25 @@
 <section id="spotlight" class="spotlight" height="auto">
     <div class="container">
       <div class="text-center">
-      <h2 class="spotlight-heading mt-5"><br/>{{$LabelName}}</h2>
+      <h2 class="spotlight-heading mt-5"><br/>Search Results For "{{$resultFor}}"</h2>
+      <center>
+      <div class="searchpanelbase">
+        <form action="{{url('/search')}}" method="GET">
+          <div id="search-container">
+            <i class="ri-search-line"></i>
+            <input type="text" class="form-control" id="search-tool" name="queryString" placeholder="Search here..." />
+          </div>
+          <button type="submit" class="btn btn-success btn-lg">Search</button>
+        </form>
+      </div>
+      </center>
       </div>
     </div>
     </section>
     <section id="" class="mt-5">
         <div class="container">
             <div class="row">
+                @if(!empty($inventory))
                 @foreach($inventory as $row)
                     <div class="col-lg-4 mt-4">
                         <a
@@ -42,6 +54,9 @@
                         </a>
                     </div>
                 @endforeach
+                @else
+                <h2 class="mt-2 text-center"><b>{{$notFound}}</b></h2>
+                @endif
             </div>
         </div>
 

@@ -24,10 +24,10 @@
     <script src="https://cdn.datatables.net/responsive/3.0.3/js/dataTables.responsive.js"></script>
     <script src="https://cdn.datatables.net/responsive/3.0.3/js/responsive.dataTables.js"></script>
 
-    <link rel="stylesheet" href="https://cdn.datatables.net/2.1.6/css/dataTables.dataTables.css"/>
-    <link rel="stylesheet" href="https://cdn.datatables.net/rowreorder/1.5.0/css/rowReorder.dataTables.css"/>
-    <link rel="stylesheet" href="https://cdn.datatables.net/responsive/3.0.3/css/responsive.dataTables.css"/>
-   
+    <link rel="stylesheet" href="https://cdn.datatables.net/2.1.6/css/dataTables.dataTables.css" />
+    <link rel="stylesheet" href="https://cdn.datatables.net/rowreorder/1.5.0/css/rowReorder.dataTables.css" />
+    <link rel="stylesheet" href="https://cdn.datatables.net/responsive/3.0.3/css/responsive.dataTables.css" />
+
     <link rel="stylesheet" href="{{Helper::props('admin/vendors/simple-line-icons/css/simple-line-icons.css')}}">
     <link rel="stylesheet" href="{{Helper::props('admin/vendors/css/vendor.bundle.base.css')}}">
 
@@ -42,61 +42,77 @@
     <link rel="shortcut icon" href="{{Helper::props('assets/img/favicon.png')}}" />
 </head>
 <style>
-    .asterik{
-        color:red;
+    .asterik {
+        color: red;
     }
-    .breadcrumbs{
-        color:black;
+
+    .breadcrumbs {
+        color: black;
     }
-    .breadcrumbs-active{
-        color:blue;
+
+    .breadcrumbs-active {
+        color: blue;
     }
-    .breadcrumbs:hover{
-        cursor:pointer;
+
+    .breadcrumbs:hover {
+        cursor: pointer;
     }
-    .breadcrumbs-active:hover{
-        cursor:pointer;
+
+    .breadcrumbs-active:hover {
+        cursor: pointer;
     }
-    .pull-right{
+
+    .pull-right {
         float: right;
     }
-    a{
-        text-decoration:none;
-        color:black;
+
+    a {
+        text-decoration: none;
+        color: black;
     }
-    @media(max-width:992px){
-    .dashboard-stats-glance{
-      margin-top:30px;
+
+    @media(max-width:992px) {
+        .dashboard-stats-glance {
+            margin-top: 30px;
+        }
+
+        #mobile-agent {
+            display: block !important;
+        }
+
+        #pc-agent {
+            display: none !important;
+        }
     }
-    #mobile-agent{
-      display:block !important;
+
+    #mobile-agent {
+        display: none;
     }
-    #pc-agent{
-    display:none !important;
-  }
-  }
-  #mobile-agent{
-    display:none;
-  }
-  #pc-agent{
-    display:block;
-  }
-  .badge-success{
-    background-color:green;
-    color:white;
-    border:1px solid green;
-  }
-  .badge-danger{
-    background-color:red;
-    color:white;
-    border:1px solid red;
-  }
+
+    #pc-agent {
+        display: block;
+    }
+
+    .badge-success {
+        background-color: green;
+        color: white;
+        border: 1px solid green;
+    }
+
+    .badge-danger {
+        background-color: red;
+        color: white;
+        border: 1px solid red;
+    }
 </style>
+
 <body>
     <div class="container-scroller">
-        <!-- partial:partials/_navbar.html -->
         <nav class="navbar default-layout col-lg-12 col-12 p-0 fixed-top d-flex align-items-top flex-row">
-            <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-start">
+            <!--***************************************************************************************************************************************************
+             FOR BRAND NAME ON LEFT, BRAND NAME WILL ALSO COLLAPSE WITH MENU,UNCOMMENT THIS & REMOVE THE CONTENT FROM INSIDE OF BELOW DIV "navbar-menu-wrapper" CLASS
+            **************************************************************************************************************************************************** -->
+            <!-- <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-start">
                 <div class="me-3">
                     <button class="navbar-toggler navbar-toggler align-self-center" type="button"
                         data-bs-toggle="minimize">
@@ -105,63 +121,58 @@
                 </div>
                 <div>
                     <a class="brand-logo text-decoration-none d-none d-lg-block" href="{{url('admin/dashboard')}}">
-                        <!-- <marquee class="text-dark mt-2" scrollamount="5"> -->
                         <h3 class="text-dark mt-1"><b><span class="text-primary">SB</span> Admin</b></h3>
-                        <!-- </marquee> -->
                     </a>
                     <a class="navbar-brand brand-logo-mini" href="{{url('admin/dashboard')}}">
                         <img src="{{Helper::props('admin/images/logo-mini.svg')}}" alt="logo" />
                     </a>
                 </div>
-            </div>
-            @php
-                date_default_timezone_set(env('APPLICATION_TIMEZONE'));
-                $time=date("H");
-                $salutation="a";
-                if($time>=4 && $time<12){
-                    $salutation="🌅Good Morning";
-                } else if($time>=12 && $time<16){
-                    $salutation="🏞️Good Afternoon";
-                } else if($time>=16 && $time<20){
-                    $salutation="🌄Good Evening";  
-                } else {
-                    $salutation="🌃Nighty Night";
-                }
-            @endphp
+            </div> -->
+            <!--***************************************************************************************************************************************************
+             FOR BRAND NAME ON LEFT, BRAND NAME WILL ALSO COLLAPSE WITH MENU,UNCOMMENT THIS & REMOVE THE CONTENT FROM INSIDE OF BELOW DIV "navbar-menu-wrapper" CLASS
+            **************************************************************************************************************************************************** -->
+
             <div class="navbar-menu-wrapper d-flex align-items-top">
+                <!--***************************************************************************************************************************************************
+             FOR BRAND NAME TO BE ON LEFT AND COLLAPSABLE,REMOVE THIS DIV FROM HERE, UNCOMMENT THE ABOVE CODE WITH THAT HAS "navbar-brand-wrapper" CLASS.
+            **************************************************************************************************************************************************** -->
                 <ul class="navbar-nav">
                     <li class="nav-item font-weight-semibold d-none d-lg-block ms-0">
-                        <h1 class="welcome-text"><?php echo $salutation; ?>, <span class="text-black fw-bold">{{$profile->name}}</span></h1>
-                        <h3 class="welcome-sub-text">Welcome back to Work, Have a great day!!😎</h3>
+                        <button class="navbar-toggler navbar-toggler align-self-center" type="button"
+                            data-bs-toggle="minimize">
+                            <span class="icon-menu"></span>
+                        </button>
                     </li>
                 </ul>
+                <ul class="navbar-nav">
+                    <li class="nav-item font-weight-semibold">
+                        <a class="brand-logo text-decoration-none d-lg-block" href="{{url('admin/dashboard')}}">
+                            <img src="{{Helper::props('admin/images/logo.png')}}" class="img-fluid" width="auto" height="auto"/>
+                        </a>
+                    </li>
+                </ul>
+            <!--***************************************************************************************************************************************************
+             FOR BRAND NAME TO BE ON LEFT AND COLLAPSABLE,REMOVE THIS DIV FROM HERE, UNCOMMENT THE ABOVE CODE WITH THAT HAS "navbar-brand-wrapper" CLASS.
+            **************************************************************************************************************************************************** -->
+
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item dropdown d-none d-lg-block">
-                        <img src="{{Helper::props('admin/images/logo.png')}}" class="img-fluid" width="90%" height="auto" />
+                        <button type="button" class="btn btn-light store-status"><b>Store Status</b> <i class="mdi mdi-octagon signal-active"></i></button>    
                     </li>
-
-                    <li class="nav-item d-none d-lg-block">
-                        <!-- Empty usable block -->
+                    <li class="nav-item dropdown d-none d-lg-block">
+                        <button type="button" class="btn btn-success btn-sm"><i class="mdi mdi-magnify"></i>&nbsp;Search</button>
                     </li>
-
-                    <!-- <li class="nav-item">
-            <form class="search-form" action="#">
-              <i class="icon-search"></i>
-              <input type="search" class="form-control" placeholder="Search Here" title="Search here">
-            </form>
-          </li> -->
-
-                    <!-- <li class="nav-item dropdown">
-                    <a class="nav-link" href="{{str_replace('/public',"/",Helper::props('/'))}}" target="_blank">
-                            <i class="mdi mdi-web" style="font-size:24px;"></i>
+                    <li class="nav-item dropdown d-none d-lg-block">
+                        <a class="" href="{{str_replace('/public', "/", Helper::props('/'))}}" target="_blank">
+                            <button type="button" class="btn btn-primary btn-sm"><i class="mdi mdi-web"></i>&nbsp;Store</button>
                         </a>
-                    </li> -->
+                    </li>
                     <li class="nav-item dropdown">
-                        <!-- <a class="nav-link count-indicator" id="countDropdown" href="#" data-bs-toggle="dropdown"
+                        <a class="nav-link count-indicator" id="countDropdown" href="#" data-bs-toggle="dropdown"
                             aria-expanded="false">
                             <i class="icon-bell"></i>
                             <span class="count"></span>
-                        </a> -->
+                        </a>
                         <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list pb-0"
                             aria-labelledby="countDropdown">
                             <a class="dropdown-item py-3">
@@ -199,14 +210,16 @@
                         </div>
                     </li>
                     <?php
-                        $letter=ucfirst(substr($profile->name,0,1)); 
+                        $letter = ucfirst(substr($profile->name, 0, 1)); 
                     ?>
                     <li class="nav-item dropdown  d-lg-block user-dropdown">
                         <a class="nav-link" id="UserDropdown" href="#" data-bs-toggle="dropdown" aria-expanded="false">
-                            <img class="img-xs rounded-circle" src="{{Helper::props('admin/images/dp/'.$letter.'.png')}}" alt="Profile image"> </a>
+                            <img class="img-xs rounded-circle"
+                                src="{{Helper::props('admin/images/dp/' . $letter . '.png')}}" alt="Profile image"> </a>
                         <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="UserDropdown">
                             <div class="dropdown-header text-center">
-                                <img class="img-md rounded-circle" src="{{Helper::props('admin/images/dp/'.$letter.'.png')}}" alt="Profile image">
+                                <img class="img-md rounded-circle"
+                                    src="{{Helper::props('admin/images/dp/' . $letter . '.png')}}" alt="Profile image">
                                 <p class="mb-1 mt-3 font-weight-semibold">{{$profile->name}}</p>
                                 <p class="fw-light text-muted mb-0">{{$profile->email}}</p>
                             </div>
@@ -238,8 +251,8 @@
         </nav>
         <!-- partial -->
         <div class="container-fluid page-body-wrapper">
-      <!-- Settings to change theme (temporary) -->
-      <!-- <div class="theme-setting-wrapper">
+            <!-- Settings to change theme (temporary) -->
+            <!-- <div class="theme-setting-wrapper">
         <div id="settings-trigger"><i class="ti-settings"></i></div>
         <div id="theme-settings" class="settings-panel">
           <i class="settings-close ti-close"></i>
@@ -257,9 +270,9 @@
           </div>
         </div>
       </div> -->
-      
-      <!-- Sidebar -->
-      <x-admin-sidebar/>
 
-      <div class="main-panel">
-        <div class="content-wrapper">
+            <!-- Sidebar -->
+            <x-admin-sidebar />
+
+            <div class="main-panel mt-3">
+                <div class="content-wrapper">

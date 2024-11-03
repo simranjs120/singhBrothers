@@ -5,21 +5,13 @@
     }
 </style>
 <div class="row">
-    <div class="card">
-        <div class="row">
-            <div class="col-lg-6 breadcrumbs">
-                <h5 class="m-4">
-                    <a href="{{url('admin/inventory')}}">Inventory</a> /
-                    <span class="breadcrumbs-active">List Inventory</span>
-                </h5>
-            </div>
-            <div class="col-lg-6">
-                <a href="{{url('admin/add-inventory')}}">
-                    <button type="button" class="pull-right btn btn-success m-2 mt-2 text-light" title="Create New Inventory Item">+ New Inventory
-                        item</button>
-                </a>
-            </div>
-        </div>
+    <h2 class="panel-headings">Manage Inventory</h2>
+    <p class="panel-breadcrumbs">Inventory/List Inventory</p>
+    <div class="d-flex">
+        <a href="{{url('admin/add-inventory')}}">
+            <button type="button" class="btn btn-success mt-2 text-light"title="Create New Inventory Item">+ New Inventory item</button>
+        </a>&nbsp;&nbsp;
+        <button type="button" class="btn btn-primary mt-2 text-light" title="Export data to excel">Export Excel</button>
     </div>
 </div>
 <br />
@@ -27,7 +19,7 @@
     <div class="card">
         <div class="col-sm-12">
             <div class="home-tab">
-                <h4 class="card-title card-title-dash m-4">All Your Inventory</h4>
+                <!-- <h4 class="card-title card-title-dash m-4">All Your Inventory</h4> -->
                 @if (Illuminate\Support\Facades\Session::has('success'))
                     <div class="alert alert-success mt-2" style="background-color:#58ad2e;">
                         <h5 class="text-light">{{Illuminate\Support\Facades\Session::pull('success')}}</h5>
@@ -60,9 +52,9 @@
                             @foreach($inventory as $key => $row)
                                 <tr>
                                     <td>{{$key + 1}}</td>
-                                    
-                                        <td><a href="{{url('admin/view-inventory/' . $row->id)}}">{{$row->itemName}}</a></td>
-                                    
+
+                                    <td><a href="{{url('admin/view-inventory/' . $row->id)}}">{{$row->itemName}}</a></td>
+
                                     <td>
                                         <img src="{{Helper::props('admin/inventoryImages') . '/' . $row->thumbnailimg}}"
                                             class="img-fluid" id="image-popper"
@@ -90,10 +82,12 @@
                                     </td>
                                     <td>&nbsp;
                                         <a href="{{url('admin/view-inventory/' . $row->id)}}">
-                                            <button type="button" class="btn btn-success text-light" title="View Item">View</button>
+                                            <button type="button" class="btn btn-success text-light"
+                                                title="View Item">View</button>
                                         </a>
                                         <a href="{{url('admin/edit-inventory/' . $row->id)}}">
-                                            <button type="button" class="btn btn-dark text-light" title="Edit Item">Edit</button>
+                                            <button type="button" class="btn btn-dark text-light"
+                                                title="Edit Item">Edit</button>
                                         </a>
                                     </td>
                                     <td>

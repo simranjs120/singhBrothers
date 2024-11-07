@@ -146,7 +146,7 @@
                 </ul>
                 <ul class="navbar-nav">
                     <li class="nav-item font-weight-semibold">
-                        <a class="brand-logo text-decoration-none d-lg-block" href="{{url('admin/dashboard')}}">
+                        <a class="brand-logo text-decoration-none" href="{{url('admin/dashboard')}}">
                             <img src="{{Helper::props('admin/images/logo.png')}}" class="img-fluid" width="auto" height="auto"/>
                         </a>
                     </li>
@@ -156,15 +156,15 @@
             **************************************************************************************************************************************************** -->
 
                 <ul class="navbar-nav ms-auto">
-                    <li class="nav-item dropdown d-none d-lg-block">
-                        <button type="button" class="btn btn-light store-status"><b>Store Status</b> <i class="mdi mdi-octagon signal-active"></i></button>    
+                    <li class="nav-item dropdown d-lg-block d-none d-md-block">
+                        <button type="button" class="btn btn-light nav-custom-button"><b>Store</b> <i class="mdi mdi-octagon signal-active"></i></button>    
                     </li>
-                    <li class="nav-item dropdown d-none d-lg-block">
-                        <button type="button" class="btn btn-success btn-sm"><i class="mdi mdi-magnify"></i>&nbsp;Search</button>
+                    <li class="nav-item dropdown d-lg-block d-none d-md-block">
+                        <button type="button" class="btn btn-light nav-custom-button"><i class="mdi mdi-magnify"></i>&nbsp;Search</button>
                     </li>
-                    <li class="nav-item dropdown d-none d-lg-block">
+                    <li class="nav-item dropdown d-lg-block d-none d-md-block">
                         <a class="" href="{{str_replace('/public', "/", Helper::props('/'))}}" target="_blank">
-                            <button type="button" class="btn btn-primary btn-sm"><i class="mdi mdi-web"></i>&nbsp;Store</button>
+                            <button type="button" class="btn btn-light nav-custom-button"><i class="mdi mdi-web"></i>&nbsp;Visit Store</button>
                         </a>
                     </li>
                     <li class="nav-item dropdown">
@@ -233,6 +233,11 @@
                                         class="dropdown-item-icon mdi mdi-account-multiple-plus text-primary me-2"></i>
                                     Add New User</a>
                             </button>
+                            <button type="submit" class="border-0 bg-transparent w-100">
+                                <a class="dropdown-item" href="{{url('/admin/add-user')}}"><i
+                                        class="dropdown-item-icon mdi mdi-account-question text-primary me-2"></i>
+                                    Roles and Permissions</a>
+                            </button>
                             <form action="{{url('logout')}}" method="post">
                                 @csrf
                                 <button type="submit" class="border-0 bg-transparent w-100">
@@ -274,5 +279,5 @@
             <!-- Sidebar -->
             <x-admin-sidebar />
 
-            <div class="main-panel mt-3">
+            <div class="main-panel mt-0">
                 <div class="content-wrapper">

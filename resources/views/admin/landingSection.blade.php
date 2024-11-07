@@ -6,7 +6,11 @@
     }
 </style>
 <div class="row">
-    <div class="card">
+    <h2 class="panel-headings">Static Sections</h2>
+    <p class="panel-breadcrumbs">Inner Sections/Static Sections</p>
+</div>
+<div class="row">
+    <div class="card mt-3">
         <div class="row">
             <div class="col-lg-12 breadcrumbs">
             <p class="m-3"><b><span class="mdi mdi-lightbulb-on" style="color:orange;"></span>&nbsp;<u>Pro Tip: </u></b>You can create new Navigation links from here named "Fresh Arrivals" & put the "Fresh Arrivals" label's Link from "Inventory Labelling" here in "Tab Link", This way customers will be able to navigate on your freshly arrived items.</p>

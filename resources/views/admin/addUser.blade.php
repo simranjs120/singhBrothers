@@ -5,10 +5,13 @@
     }
 </style>
 <div class="row">
+    <h2 class="panel-headings">Add New User</h2>
+    <p class="panel-breadcrumbs">Dashboard/Add New User</p>
+</div>
+<div class="row">
     <div class="card">
         <div class="col-sm-12">
-            <div class="home-tab mb-4">
-                <h4 class="card-title card-title-dash m-4">Add a new user</h4>
+            <div class="home-tab mb-4"><br/>
                 @if (Illuminate\Support\Facades\Session::has('success'))
                     <div class="alert alert-success mt-2" style="background-color:#58ad2e;">
                         <h5 class="text-light">{{Illuminate\Support\Facades\Session::pull('success')}}</h5>

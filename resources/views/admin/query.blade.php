@@ -5,16 +5,8 @@
     }
 </style>
 <div class="row">
-    <div class="card">
-        <div class="row">
-            <div class="col-lg-6 breadcrumbs">
-                <h5 class="m-4">
-                    <a href="{{url('admin/queries')}}">Customer Queries</a> /
-                    <span class="breadcrumbs-active">List Queries</span>
-                </h5>
-            </div>
-        </div>
-    </div>
+    <h2 class="panel-headings">Customer Queries</h2>
+    <p class="panel-breadcrumbs">Dashboard/Customer Queries</p>
 </div>
 <br />
 <div class="row">

@@ -5,19 +5,11 @@
     }
 </style>
 <div class="row">
-    <div class="card">
-        <div class="row">
-            <div class="col-lg-6 breadcrumbs">
-                <h5 class="m-4">
-                    <a href="{{url('admin/directory')}}">Directory</a> /
-                    <span class="breadcrumbs-active">List Directory Items</span>
-                </h5>
-            </div>
-            <div class="col-lg-6">
-                <button type="button" onclick="popModalDirectoryItem()"
-                    class="pull-right btn btn-success m-2 mt-2 text-light" title="Add new Item">+ Add New Item</button>
-            </div>
-        </div>
+    <h2 class="panel-headings">Directory</h2>
+    <p class="panel-breadcrumbs">Dashboard/Directory</p>
+    <div class="d-flex">
+    <button type="button" onclick="popModalDirectoryItem()"
+    class="pull-right btn btn-success mt-2 text-light all-btns" title="Add new Item">+ Add New Item</button>
     </div>
 </div>
 <br />

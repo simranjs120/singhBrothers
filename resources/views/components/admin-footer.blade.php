@@ -43,6 +43,13 @@
 <script type="text/javascript">
   $('#sub-category-submit').attr("disabled",'disabled');
   $(document).ready(function () {
+    // Responsive header and buttons start
+    var width = $(window).width();
+    if (width < 767){
+      $('.off-canvas-custom-buttons').removeClass('d-none'); 
+      $('.all-btns').addClass('btn-sm');
+    }
+    // Responsive header and buttons end
     new DataTable('#datatable', {
     responsive: true,
     bLengthChange: true,
@@ -71,4 +78,19 @@ new DataTable('#datatable-2', {
     }, 500);
     });
   });
+
+  // Responsive header and buttons start
+  $(window).resize(function() {
+    var width = $(window).width();
+    if (width < 950){
+      $('.nav-custom-button').addClass('btn-sm');
+      $('.all-btns').addClass('btn-sm');
+    }
+    if (width > 767){
+      $('.off-canvas-custom-buttons').addClass('d-none');
+    } else {
+      $('.off-canvas-custom-buttons').removeClass('d-none'); 
+    }
+  });
+  // Responsive header and buttons end
 </script>

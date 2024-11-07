@@ -4,6 +4,10 @@
         cursor: pointer;
     }
 </style>
+<div class="row">
+    <h2 class="panel-headings">Logos & Color</h2>
+    <p class="panel-breadcrumbs">Configuration/Logos & Color</p>
+</div>
 @if (Illuminate\Support\Facades\Session::has('success'))
     <div class="alert alert-success mt-2" style="background-color:#58ad2e;">
         <h5 class="text-light">{{Illuminate\Support\Facades\Session::pull('success')}}</h5>
@@ -15,7 +19,7 @@
     </div><br />
 @endif
 <div class="row">
-<div class="col-lg-12">
+<div class="col-lg-12 mt-4">
     <div class="card">
         <div class="row">
             <div class="col-lg-12 breadcrumbs">

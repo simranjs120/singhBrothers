@@ -5,21 +5,13 @@
     }
 </style>
 <div class="row">
-    <div class="card">
-        <div class="row">
-            <div class="col-lg-6 breadcrumbs">
-                <h5 class="m-4">
-                    <a href="{{url('admin/categories')}}">Category</a> / 
-                    <span class="breadcrumbs-active">Manage Category</span>
-                </h5>
-            </div>
-            <div class="col-lg-6">
-                <button type="button" class="btn btn-success m-2 mt-2 text-light pull-right" data-bs-toggle="modal"
-                    data-bs-target="#categoryModal">+ New Category</button>
-                <button type="button" class="btn btn-primary m-2 mt-2 text-light pull-right" data-bs-toggle="modal"
+    <h2 class="panel-headings">Categories & Collections</h2>
+    <p class="panel-breadcrumbs">Dashboard/Categories & Collections</p>
+    <div class="d-flex">
+    <button type="button" class="btn btn-success mt-2 text-light all-btns" data-bs-toggle="modal"
+                    data-bs-target="#categoryModal">+ New Category</button>&nbsp;&nbsp;
+                <button type="button" class="btn btn-primary mt-2 text-light all-btns" data-bs-toggle="modal"
                     data-bs-target="#subCategoryModal">+ New Sub-Category</button>
-            </div>
-        </div>
     </div>
 </div>
 <br/>

@@ -6,12 +6,12 @@
 </style>
 <div class="row">
     <h2 class="panel-headings">Manage Inventory</h2>
-    <p class="panel-breadcrumbs">Inventory/List Inventory</p>
+    <p class="panel-breadcrumbs">Dashboard/Manage Inventory</p>
     <div class="d-flex">
         <a href="{{url('admin/add-inventory')}}">
-            <button type="button" class="btn btn-success mt-2 text-light"title="Create New Inventory Item">+ New Inventory item</button>
+            <button type="button" class="btn btn-success mt-2 text-light all-btns"title="Create New Inventory Item">+ New Inventory item</button>
         </a>&nbsp;&nbsp;
-        <button type="button" class="btn btn-primary mt-2 text-light" title="Export data to excel">Export Excel</button>
+        <button type="button" class="btn btn-primary mt-2 text-light all-btns" title="Export data to excel">Export Excel</button>
     </div>
 </div>
 <br />

@@ -5,18 +5,11 @@
     }
 </style>
 <div class="row">
-    <div class="card">
-        <div class="row">
-            <div class="col-lg-6 breadcrumbs">
-                <h5 class="m-4">
-                    <a href="{{url('admin/inner-sections')}}">Inner Sections</a> /
-                    <span class="breadcrumbs-active">Manage Inner Sections</span>
-                </h5>
-            </div>
-            <div class="col-lg-6">
-                <button type="button" class="pull-right btn btn-primary m-2 mt-2 text-light" onclick="popModal()">+ Add Inventory Display Section</button>
-            </div>
-        </div>
+    <h2 class="panel-headings">Dynamic Sections</h2>
+    <p class="panel-breadcrumbs">Inner Sections/Dynamic Sections</p>
+    <div class="d-flex">
+        <button type="button" class="btn btn-success mt-2 text-light all-btns" onclick="popModal()">+ New
+            Section</button>
     </div>
 </div>
 <br />
@@ -56,27 +49,33 @@
                                 @foreach($innerSection as $key => $row)
                                     <tr>
                                         <td>{{$key + 1}}</td>
-                                        <td> 
-                                            <button type="button" class="btn btn-primary text-light mt-1" onclick="editModal('{{$row->id}}','{{$row->name}}','{{$row->type}}','{{$row->button}}','{{$row->url}}','{{$row->button}}','{{$row->description}}')">Edit</button>
-                                            <button type="button" class="btn btn-dark text-light mt-1" title="Assign Inventory Items" onclick="popToAssign('{{$row->name}}',{{$row->id}})">Assign Inventory</button>
+                                        <td>
+                                            <button type="button" class="btn btn-primary text-light mt-1"
+                                                onclick="editModal('{{$row->id}}','{{$row->name}}','{{$row->type}}','{{$row->button}}','{{$row->url}}','{{$row->button}}','{{$row->description}}')">Edit</button>
+                                            <button type="button" class="btn btn-dark text-light mt-1"
+                                                title="Assign Inventory Items"
+                                                onclick="popToAssign('{{$row->name}}',{{$row->id}})">Assign
+                                                Inventory</button>
                                         </td>
                                         <td>{{$row->name}}</td>
-                                        @if($row->description!="")
-                                        <td>{{$row->description}}</td>
+                                        @if($row->description != "")
+                                            <td>{{$row->description}}</td>
                                         @else
-                                        <td>N/A</td>
+                                            <td>N/A</td>
                                         @endif
-                                        @if($row->type=='spotlight')
-                                        <td><span style="background-color:red; color:white; padding:2px;font-weight:bold;">{{$row->type}}</span></td>
+                                        @if($row->type == 'spotlight')
+                                            <td><span
+                                                    style="background-color:red; color:white; padding:2px;font-weight:bold;">{{$row->type}}</span>
+                                            </td>
                                         @else
-                                        <td>{{$row->type}}</td>
+                                            <td>{{$row->type}}</td>
                                         @endif
-                                        @if($row->button==1)
+                                        @if($row->button == 1)
                                             <td class="text-success"><b>Yes</b></td>
                                         @else
                                             <td class="text-danger"><b>No</b></td>
                                         @endif
-                                        @if($row->url!="")
+                                        @if($row->url != "")
                                             <td>{{$row->url}}</td>
                                         @else
                                             <td>N/A</td>
@@ -127,13 +126,13 @@
             <form action="{{route('submit.section')}}" method="POST">
                 @csrf
                 <div class="modal-body">
-                    <input type="hidden" name="created_at" value="{{App\Helpers\Helper::timeStamp()}}"/>
+                    <input type="hidden" name="created_at" value="{{App\Helpers\Helper::timeStamp()}}" />
                     <label>Enter the section name <span class="asterik">*</span></label>
-                    <input type="text" class="form-control border border-dark mb-2" maxlength="99" name="name"
-                        required placeholder="Start Typing..."/>
+                    <input type="text" class="form-control border border-dark mb-2" maxlength="99" name="name" required
+                        placeholder="Start Typing..." />
                     <label>Enter the section Description (If Any)</label>
                     <input type="text" class="form-control border border-dark mb-2" maxlength="99" name="description"
-                        placeholder="Start Typing..."/>
+                        placeholder="Start Typing..." />
 
                     <label class="mt-2">Select section type <span class="asterik">*</span></label>
                     <select class="form-control" style="color:black !important;" name="type" required>
@@ -145,15 +144,16 @@
                     </select>
 
                     <label class="mt-2">Need a button? <span class="asterik">*</span></label>
-                    <select class="form-control" style="color:black !important;" name="button" id="button-submit" required>
+                    <select class="form-control" style="color:black !important;" name="button" id="button-submit"
+                        required>
                         <option value="" selected disabled>--Select--</option>
                         <option value="1">Yes</option>
                         <option value="0">No</option>
                     </select>
 
                     <label class="mt-2">Button's URL</label>
-                    <input type="text" class="form-control border border-dark mb-2" maxlength="499" name="url" id="url-submit"
-                         placeholder="Please enter full URL like https://www.google.com"/>
+                    <input type="text" class="form-control border border-dark mb-2" maxlength="499" name="url"
+                        id="url-submit" placeholder="Please enter full URL like https://www.google.com" />
 
                     <label class="mt-2">Select status</label>
                     <select class="form-control" style="color:black !important;" name="status" required>
@@ -181,17 +181,19 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <p class="mt-3" style="margin:0px 0px 0px 10px;"><b><span class="mdi mdi-lightbulb-on" style="color:orange;"></span>&nbsp;<u>Pro Tip:</u></b> Don't want button anymore? Just set "Need a button" to No & submit.</p>
+            <p class="mt-3" style="margin:0px 0px 0px 10px;"><b><span class="mdi mdi-lightbulb-on"
+                        style="color:orange;"></span>&nbsp;<u>Pro Tip:</u></b> Don't want button anymore? Just set "Need
+                a button" to No & submit.</p>
             <form action="{{route('edit.section')}}" method="POST">
                 @csrf
                 <div class="modal-body">
-                <label>Enter the section name <span class="asterik">*</span></label>
-                <input type="hidden" name="id" id="id"/>
-                    <input type="text" class="form-control border border-dark mb-2" maxlength="99" name="name"
-                        required id="name" placeholder="Start Typing..."/>
-                <label>Enter the section description</label>
+                    <label>Enter the section name <span class="asterik">*</span></label>
+                    <input type="hidden" name="id" id="id" />
+                    <input type="text" class="form-control border border-dark mb-2" maxlength="99" name="name" required
+                        id="name" placeholder="Start Typing..." />
+                    <label>Enter the section description</label>
                     <input type="text" class="form-control border border-dark mb-2" maxlength="99" name="description"
-                        id="description" placeholder="Start Typing..."/>
+                        id="description" placeholder="Start Typing..." />
 
                     <label class="mt-2">Select section type <span class="asterik">*</span></label>
                     <select class="form-control" style="color:black !important;" name="type" id="type" required>
@@ -211,7 +213,7 @@
 
                     <label for="url" class="mt-2">Button's URL</label>
                     <input type="text" class="form-control border border-dark mb-2" id="url" maxlength="499" name="url"
-                        required placeholder="Please enter full URL like https://www.google.com"/>
+                        required placeholder="Please enter full URL like https://www.google.com" />
                 </div>
                 <div class="modal-footer">
                     <button type="submit" class="btn btn-success">Submit</button>
@@ -230,23 +232,27 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="elename"></h5>
-                <button type="button" class="close" data-bs-dismiss="modal" onclick="erase()" aria-label="Close" title="Close Popup">
+                <button type="button" class="close" data-bs-dismiss="modal" onclick="erase()" aria-label="Close"
+                    title="Close Popup">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <form action="{{route('assign.inventory')}}" method="POST">
                 @csrf
                 <div class="modal-body">
-                    <p class="text-danger inventory-warning">Items colored Red are Inactive, These items won't show on main pages even if you add them here. Kindly enable them first from inventory section if you want.</p>
+                    <p class="text-danger inventory-warning">Items colored Red are Inactive, These items won't show on
+                        main pages even if you add them here. Kindly enable them first from inventory section if you
+                        want.</p>
                     <div class="row">
-                        <input type="hidden" id="itemId" name="itemId"/>
+                        <input type="hidden" id="itemId" name="itemId" />
                         <p id="loader"></p>
                         <div class="html-render"></div>
                     </div>
                 </div>
                 <div class="modal-footer">
                     <button type="submit" class="btn btn-success assign-btn">Assign</button>
-                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal" onclick="erase()" title="Close Popup">Close</button>
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal" onclick="erase()"
+                        title="Close Popup">Close</button>
                 </div>
             </form>
         </div>
@@ -260,7 +266,7 @@
         $('#popModal').modal('show');
     }
 
-    function editModal(id,name,type,button,url,button,description) {
+    function editModal(id, name, type, button, url, button, description) {
         $('#editModal').modal('show');
         $('#id').val(id);
         $('#name').val(name);
@@ -269,12 +275,12 @@
         $("#type").val(type).change();
         $("#button").val(button).change();
     }
-    $(document).ready(function(){
+    $(document).ready(function () {
         $('#url-submit').hide();
     });
-    $('#button-submit').on('change', function() {
-        var val=this.value;
-        if(val==1){
+    $('#button-submit').on('change', function () {
+        var val = this.value;
+        if (val == 1) {
             $('#url-submit').show();
             $('#url-submit').attr("required", "true");
         } else {
@@ -283,78 +289,78 @@
         }
     });
 
-    $('#button').on('change', function() {
-        var val=this.value;
-        if(val==1){
+    $('#button').on('change', function () {
+        var val = this.value;
+        if (val == 1) {
             $('#url').attr("required", "true");
         } else {
             $('#url').removeAttr("required", "false");
         }
     });
 
-    function popToAssign(elename,itemId) {
+    function popToAssign(elename, itemId) {
         // Clicking outside of modal is disabled to handle the ajax data removal...
         $('#popAssignModal').modal('show');
-        $("#elename").text("Assign inventory to "+elename);
+        $("#elename").text("Assign inventory to " + elename);
         $("#itemId").val(itemId);
         $("#loader").text("Loading...");
-        
+
         // Fetch the labels & process the selected labels for this particular inventory item with this ajax request.
         $.ajax({
-          url: "{{url('admin/fetch-inventory-to-assign')}}",
-          method: 'POST',
-          dataType: 'json',
-          data: {
-            id:itemId,
-            _token: '{{csrf_token()}}'
-          },
-          success: function (response) {
-            var warning=0;
-            $("#loader").text("Autofilling...");
-            // Response format is here in this alert //Uncomment this and use.....
-            // alert(JSON.stringify(response));
-            var count=response.countOfTotalInventoryItems;
-            if(count>0){
-                for(let i=0;i<=count-1;i++){ // -1 to reduce an extra index, coz array starts from 0. Initiating i from 0 did not work.
-                // Append labels
-                if(response.data[i].status==0){
-                    var checkboxes="<div class='col-12'><input type='checkbox' name='inventory[]' id='name_"+response.data[i].id+"' value='"+response.data[i].id+"'/> <label for='vehicle' class='text-danger'>"+response.data[i].itemName+"</label></div>";
-                    warning++;
-                } else {
-                    var checkboxes="<div class='col-12'><input type='checkbox' name='inventory[]' id='name_"+response.data[i].id+"' value='"+response.data[i].id+"'/> <label for='vehicle'>"+response.data[i].itemName+"</label></div>";
-                }
-                if(warning==0){
-                    $('.inventory-warning').hide();
-                } else {
-                    $('.inventory-warning').show();
-                }
-                $('.html-render').append(checkboxes);
-            }
+            url: "{{url('admin/fetch-inventory-to-assign')}}",
+            method: 'POST',
+            dataType: 'json',
+            data: {
+                id: itemId,
+                _token: '{{csrf_token()}}'
+            },
+            success: function (response) {
+                var warning = 0;
+                $("#loader").text("Autofilling...");
+                // Response format is here in this alert //Uncomment this and use.....
+                // alert(JSON.stringify(response));
+                var count = response.countOfTotalInventoryItems;
+                if (count > 0) {
+                    for (let i = 0; i <= count - 1; i++) { // -1 to reduce an extra index, coz array starts from 0. Initiating i from 0 did not work.
+                        // Append labels
+                        if (response.data[i].status == 0) {
+                            var checkboxes = "<div class='col-12'><input type='checkbox' name='inventory[]' id='name_" + response.data[i].id + "' value='" + response.data[i].id + "'/> <label for='vehicle' class='text-danger'>" + response.data[i].itemName + "</label></div>";
+                            warning++;
+                        } else {
+                            var checkboxes = "<div class='col-12'><input type='checkbox' name='inventory[]' id='name_" + response.data[i].id + "' value='" + response.data[i].id + "'/> <label for='vehicle'>" + response.data[i].itemName + "</label></div>";
+                        }
+                        if (warning == 0) {
+                            $('.inventory-warning').hide();
+                        } else {
+                            $('.inventory-warning').show();
+                        }
+                        $('.html-render').append(checkboxes);
+                    }
 
-            for(let i=0;i<=response.selected.length-1;i++){
-                if(response.countOfTotalInventoryItems!=0 || response.countOfTotalInventoryItems!=undefined){
-                    // Where label_id from selected table matches the ID of label, Set that select box checked.
-                    $('#name_'+response.selected[i].inventory_id).prop('checked', true);
+                    for (let i = 0; i <= response.selected.length - 1; i++) {
+                        if (response.countOfTotalInventoryItems != 0 || response.countOfTotalInventoryItems != undefined) {
+                            // Where label_id from selected table matches the ID of label, Set that select box checked.
+                            $('#name_' + response.selected[i].inventory_id).prop('checked', true);
+                        }
+                    }
+                    $("#loader").text("");
+                } else {
+                    // No inventory items found
+                    $("#loader").text("No inventory items found ☹️ Please add some inventory first from Manage Inventory Section");
+                    $('.inventory-warning').text("");
+                    $('.assign-btn').hide();
                 }
+
+            },
+            error: function (error) {
+                // alert(JSON.stringify(error));
+                alert("Fatal Error: Could not load label options, Please try again !!");
             }
-            $("#loader").text("");
-            } else {
-                // No inventory items found
-                $("#loader").text("No inventory items found ☹️ Please add some inventory first from Manage Inventory Section");   
-                $('.inventory-warning').text("");
-                $('.assign-btn').hide();
-            }
-            
-          },
-          error: function (error) {
-            // alert(JSON.stringify(error));
-            alert("Fatal Error: Could not load label options, Please try again !!");
-          }
         });
     }
 
     // Handling condition: Everytime button is clicked without refreshing, Ajax re-renders the same checkboxes again
-    function erase(){
+    function erase() {
         $('.html-render').html("");
     }
 </script>

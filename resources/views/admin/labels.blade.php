@@ -8,19 +8,11 @@
     }
 </style>
 <div class="row">
-    <div class="card">
-        <div class="row">
-            <div class="col-lg-6 breadcrumbs">
-                <h5 class="m-4">
-                    <a href="{{url('admin/offers')}}">Labels</a> /
-                    <span class="breadcrumbs-active">Manage Labels</span>
-                </h5>
-            </div>
-            <div class="col-lg-6">
-                <button type="button" class="pull-right btn btn-success m-2 mt-2 text-light" onclick="popModal()">+ Add
-                    New Label</button>
-            </div>
-        </div>
+    <h2 class="panel-headings">Inventory Pages</h2>
+    <p class="panel-breadcrumbs">Dashboard/Inventory Pages</p>
+    <div class="d-flex">
+    <button type="button" class="pull-right btn btn-success mt-2 text-light all-btns" onclick="popModal()">+ Add
+    New Label</button>
     </div>
 </div>
 <br />

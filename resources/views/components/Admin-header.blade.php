@@ -137,7 +137,7 @@
              FOR BRAND NAME TO BE ON LEFT AND COLLAPSABLE,REMOVE THIS DIV FROM HERE, UNCOMMENT THE ABOVE CODE WITH THAT HAS "navbar-brand-wrapper" CLASS.
             **************************************************************************************************************************************************** -->
                 <ul class="navbar-nav">
-                    <li class="nav-item font-weight-semibold d-none d-lg-block ms-0">
+                    <li class="nav-item font-weight-semibold d-none ms-0">
                         <button class="navbar-toggler navbar-toggler align-self-center" type="button"
                             data-bs-toggle="minimize">
                             <span class="icon-menu"></span>
@@ -159,9 +159,9 @@
                     <li class="nav-item dropdown d-lg-block d-none d-md-block">
                         <button type="button" class="btn btn-light nav-custom-button"><b>Store</b> <i class="mdi mdi-octagon signal-active"></i></button>    
                     </li>
-                    <li class="nav-item dropdown d-lg-block d-none d-md-block">
+                    <!-- <li class="nav-item dropdown d-lg-block d-none d-md-block">
                         <button type="button" class="btn btn-light nav-custom-button"><i class="mdi mdi-magnify"></i>&nbsp;Search</button>
-                    </li>
+                    </li> -->
                     <li class="nav-item dropdown d-lg-block d-none d-md-block">
                         <a class="" href="{{str_replace('/public', "/", Helper::props('/'))}}" target="_blank">
                             <button type="button" class="btn btn-light nav-custom-button"><i class="mdi mdi-web"></i>&nbsp;Visit Store</button>

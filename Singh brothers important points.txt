@@ -1,0 +1,114 @@
+Singh brothers important points to remember
+-------------------------------------------------------------------------------------------------------------------------
+1. Register functionality is disabled as of now because there Is only one sole user, That admin will be able to create more admins directly
+from the admin panel. Path: ROUTES/AUTH.PHP -  register route commented.
+
+2. All the assets are being called from a helper function known as PROPS. PATH: app/Helpers/Helper.php. & aliases in CONFIG/APP.PHP.
+
+3. Change .env's APP_URL, DB CREDS according to the server.
+
+4. Setting up CRON job to auto enable/disable offers.
+
+5. do not name images as logo, logo-dark or favicon as it will break the admin panel's site logo section functionality.
+
+6. Same point for home-bg.png
+
+7. enable utf-8 encoding if database is phpMyAdmin so that emojis are also stored.
+
+8. .env set debug=false if application on prod, else set to true on local.
+
+9. Spotlight is kept different from other sections as it will be displayed only once.
+
+
+
+
+----------------------------------------------------------- Steps to deploy-------------------------------------------------------
+1. Copy the clone link from git.
+2. Go to the intended directory on server and write "git clone CLONE URL". The project will be clones in the directory.
+3. If project is created in a separate folder, Move the files out.
+4. In root folder, create a new file names as index.php and out this code in that:
+<?php
+require('public/index.php');
+?>
+This will redirect to application's start on server as on live servers it can't automatically go to public/index.php
+
+5. check if there is an .htaccess file in root folder, if not create on and paste this code:
+<IfModule mod_rewrite.c>
+    <IfModule mod_negotiation.c>
+        Options -MultiViews -Indexes
+    </IfModule>
+
+    RewriteEngine On
+
+    # Handle Authorization Header
+    RewriteCond %{HTTP:Authorization} .
+    RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
+
+    # Redirect Trailing Slashes If Not A Folder...
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteCond %{REQUEST_URI} (.+)/$
+    RewriteRule ^ %1 [L,R=301]
+
+    # Send Requests To Front Controller...
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteRule ^ index.php [L]
+</IfModule>
+
+# BEGIN cPanel-generated php ini directives, do not edit
+# Manual editing of this file may result in unexpected behavior.
+# To make changes to this file, use the cPanel MultiPHP INI Editor (Home >> Software >> MultiPHP INI Editor)
+# For more information, read our documentation (https://go.cpanel.net/EA4ModifyINI)
+<IfModule php7_module>
+   php_flag display_errors Off
+   php_value max_execution_time 30
+   php_value max_input_time 60
+   php_value max_input_vars 1000
+   php_value memory_limit 128M
+   php_value post_max_size 42M
+   php_value session.gc_maxlifetime 1440
+   php_value session.save_path "/var/cpanel/php/sessions/ea-php74"
+   php_value upload_max_filesize 42M
+   php_flag zlib.output_compression Off
+</IfModule>
+<IfModule lsapi_module>
+   php_flag display_errors Off
+   php_value max_execution_time 30
+   php_value max_input_time 60
+   php_value max_input_vars 1000
+   php_value memory_limit 128M
+   php_value post_max_size 42M
+   php_value session.gc_maxlifetime 1440
+   php_value session.save_path "/var/cpanel/php/sessions/ea-php74"
+   php_value upload_max_filesize 42M
+   php_flag zlib.output_compression Off
+</IfModule>
+# END cPanel-generated php ini directives, do not edit
+
+
+==================================== Or try this one==============================================================
+<IfModule mod_rewrite.c>
+    <IfModule mod_negotiation.c>
+        Options -MultiViews -Indexes
+    </IfModule>
+
+    RewriteEngine On
+
+    # Redirect Trailing Slashes...
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteRule ^(.*)/$ /$1 [L,R=301]
+
+    # Handle Front Controller...
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteRule ^ index.php [L]
+</IfModule>
+=========================================================================================================================
+
+
+6.In app/helpers/helper.php, Add public in front of the return URL, In public static function props, add this line while returning:
+	"return app('url')->asset('public/'.$path, $secure);"
+
+7. In .env file, change the APP_URL and set APP_DEBUG to false; and APP_ENV to production
+8. Change the database credentials according to your database.
+9. Import the database accordingly.

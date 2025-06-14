@@ -156,9 +156,9 @@
             **************************************************************************************************************************************************** -->
 
                 <ul class="navbar-nav ms-auto">
-                    <li class="nav-item dropdown d-lg-block d-none d-md-block">
+                    <!-- <li class="nav-item dropdown d-lg-block d-none d-md-block">
                         <button type="button" class="btn btn-light nav-custom-button"><b>Store</b> <i class="mdi mdi-octagon signal-active"></i></button>    
-                    </li>
+                    </li> -->
                     <!-- <li class="nav-item dropdown d-lg-block d-none d-md-block">
                         <button type="button" class="btn btn-light nav-custom-button"><i class="mdi mdi-magnify"></i>&nbsp;Search</button>
                     </li> -->
@@ -167,7 +167,7 @@
                             <button type="button" class="btn btn-light nav-custom-button"><i class="mdi mdi-web"></i>&nbsp;Visit Store</button>
                         </a>
                     </li>
-                    <li class="nav-item dropdown">
+                    <li class="nav-item dropdown d-none">
                         <a class="nav-link count-indicator" id="countDropdown" href="#" data-bs-toggle="dropdown"
                             aria-expanded="false">
                             <i class="icon-bell"></i>

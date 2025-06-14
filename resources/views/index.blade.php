@@ -88,17 +88,10 @@
     <div class="container">
 
       <div class="row">
-        <div class="col-lg-6 order-1 order-lg-2">
-          <img src="assets/img/about.jpg" class="img-fluid" alt="">
-        </div>
-        <div class="col-lg-6 pt-4 pt-lg-0 order-2 order-lg-1 content">
-          <h3>Why we provide you not only with frames but picture perfect memories. 🖼️</h3>
-          <p class="fst-italic">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
-            dolore
-            magna aliqua.
-            Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
-            velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident
+        <div class="col-lg-12 pt-4 pt-lg-0 order-2 order-lg-1 content text-center">
+          <h2 class="fw-bold" style="font-weight:900;"># Why we provide you not only with frames but picture perfect memories. 🖼️</h2>
+          <p class="">
+            At Singh Brothers Frames, we specialize in crafting high-quality custom photo frames that preserve your memories with elegance and style. From traditional to modern designs, we offer a wide range of materials, sizes, and finishes to suit every taste. Whether it's for your home, office, or gifting needs, our expert craftsmanship and attention to detail ensure your photos are showcased beautifully. We also provide photo printing, canvas framing, and restoration services to complete your experience. With a commitment to quality and customer satisfaction, we turn your special moments into timeless displays. Visit us today and frame your story with care.
           </p>
         </div>
       </div>
@@ -158,7 +151,7 @@
   @endif
   <!----------------------------------------------------------------Dynamic Sections End ------------------------------------------------------------------------------------>
   <!-- ======= Counts Section ======= -->
-  <section id="counts" class="counts">
+  <!-- <section id="counts" class="counts">
     <div class="container">
 
       <div class="row no-gutters">
@@ -212,7 +205,7 @@
         </div>
       </div>
     </div>
-  </section>
+  </section> -->
   <!-- End Counts Section -->
 
   <!-- ======= Contact Section ======= -->
@@ -224,11 +217,11 @@
         <p>Contact Us</p>
       </div>
 
-      <div>
+      <!-- <div>
         <iframe style="border:0; width: 100%; height: 270px;"
           src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d12097.433213460943!2d-74.0062269!3d40.7101282!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xb89d1fe6bc499443!2sDowntown+Conference+Center!5e0!3m2!1smk!2sbg!4v1539943755621"
           frameborder="0" allowfullscreen></iframe>
-      </div>
+      </div> -->
 
       <div class="row mt-5">
 
@@ -237,19 +230,19 @@
             <div class="address">
               <i class="bi bi-geo-alt"></i>
               <h4>Location:</h4>
-              <p>A108 Adam Street, New York, NY 535022</p>
+              <p>RZ-201-A, Sayed Village, Paschim Vihar, New Delhi-110087</p>
             </div>
 
             <div class="email">
               <i class="bi bi-envelope"></i>
               <h4>Email:</h4>
-              <p>info@example.com</p>
+              <p>satnam9811428583@gmail.com</p>
             </div>
 
             <div class="phone">
               <i class="bi bi-phone"></i>
               <h4>Call:</h4>
-              <p>+1 5589 55488 55s</p>
+              <p>+91 9811428583</p>
             </div>
 
           </div>

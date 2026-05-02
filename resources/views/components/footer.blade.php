@@ -1,74 +1,94 @@
-
   <!-- ======= Footer ======= -->
-  <footer id="footer">
-    <!-- <div class="footer-top">
+  <footer id="footer" class="site-footer">
+    <div class="footer-cta">
       <div class="container">
-        <div class="row">
+        <div class="row align-items-center g-4">
+          <div class="col-lg-8">
+            <span class="footer-eyebrow">Custom framing made simple</span>
+            <h2>Bring your photos, artwork, and memories to a finish worth keeping.</h2>
+          </div>
+          <div class="col-lg-4 text-lg-end">
+            <a href="{{url('/#contact')}}" class="footer-cta-btn">
+              <i class="bi bi-chat-dots"></i>
+              Start an enquiry
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
 
-          <div class="col-lg-3 col-md-6">
-            <div class="footer-info">
-              <h3>Gp<span>.</span></h3>
-              <p>
-                A108 Adam Street <br>
-                NY 535022, USA<br><br>
-                <strong>Phone:</strong> +1 5589 55488 55<br>
-                <strong>Email:</strong> info@example.com<br>
-              </p>
-              <div class="social-links mt-3">
-                <a href="#" class="twitter"><i class="bx bxl-twitter"></i></a>
-                <a href="#" class="facebook"><i class="bx bxl-facebook"></i></a>
-                <a href="#" class="instagram"><i class="bx bxl-instagram"></i></a>
-                <a href="#" class="google-plus"><i class="bx bxl-skype"></i></a>
-                <a href="#" class="linkedin"><i class="bx bxl-linkedin"></i></a>
-              </div>
+    <div class="footer-main">
+      <div class="container">
+        <div class="row g-4 g-lg-5">
+          <div class="col-lg-4 col-md-6">
+            <a class="footer-brand" href="{{url('/')}}">
+              <img src="{{Helper::props('assets/img/logo.png')}}" alt="Singh Brothers Frames">
+            </a>
+            <p class="footer-about">
+              Singh Brothers Frames crafts custom photo frames, glass work, mouldings, art pieces, and collage displays
+              with careful finishing for homes, offices, and gifting.
+            </p>
+            <div class="footer-badges">
+              <span>Photo Frames</span>
+              <span>Glass</span>
+              <span>Mouldings</span>
             </div>
           </div>
 
-          <div class="col-lg-2 col-md-6 footer-links">
-            <h4>Useful Links</h4>
-            <ul>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">Home</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">About us</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">Services</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">Terms of service</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">Privacy policy</a></li>
+          <div class="col-lg-2 col-md-6">
+            <h3>Explore</h3>
+            <ul class="footer-links">
+              <li><a href="{{url('/')}}">Home</a></li>
+              <li><a href="{{url('/#about')}}">About</a></li>
+              <li><a href="{{url('/#categories')}}">Categories</a></li>
+              <li><a href="{{url('/search')}}">Search</a></li>
+              <li><a href="{{url('/#contact')}}">Contact</a></li>
             </ul>
           </div>
 
-          <div class="col-lg-3 col-md-6 footer-links">
-            <h4>Our Services</h4>
-            <ul>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">Web Design</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">Web Development</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">Product Management</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">Marketing</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">Graphic Design</a></li>
+          <div class="col-lg-3 col-md-6">
+            <h3>What We Make</h3>
+            <ul class="footer-links">
+              <li><a href="{{url('/#categories')}}">Custom Photo Frames</a></li>
+              <li><a href="{{url('/#categories')}}">Glass Solutions</a></li>
+              <li><a href="{{url('/#categories')}}">Frame Mouldings</a></li>
+              <li><a href="{{url('/#categories')}}">Art Pieces</a></li>
+              <li><a href="{{url('/#categories')}}">Photo Collages</a></li>
             </ul>
           </div>
 
-          <div class="col-lg-4 col-md-6 footer-newsletter">
-            <h4>Our Newsletter</h4>
-            <p>Tamen quem nulla quae legam multos aute sint culpa legam noster magna</p>
-            <form action="" method="post">
-              <input type="email" name="email"><input type="submit" value="Subscribe">
-            </form>
-
+          <div class="col-lg-3 col-md-6">
+            <h3>Visit Or Call</h3>
+            <ul class="footer-contact">
+              <li>
+                <i class="bi bi-geo-alt"></i>
+                <span>RZ-201-A, Sayed Village, Paschim Vihar, New Delhi-110087</span>
+              </li>
+              <li>
+                <i class="bi bi-telephone"></i>
+                <a href="tel:+919811428583">+91 9811428583</a>
+              </li>
+              <li>
+                <i class="bi bi-envelope"></i>
+                <a href="mailto:satnam9811428583@gmail.com">satnam9811428583@gmail.com</a>
+              </li>
+            </ul>
+            <div class="footer-social">
+              <a href="tel:+919811428583" aria-label="Call Singh Brothers Frames"><i class="bi bi-telephone-fill"></i></a>
+              <a href="mailto:satnam9811428583@gmail.com" aria-label="Email Singh Brothers Frames"><i class="bi bi-envelope-fill"></i></a>
+              <a href="{{url('/#contact')}}" aria-label="Open contact form"><i class="bi bi-send-fill"></i></a>
+            </div>
           </div>
-
         </div>
       </div>
-    </div> -->
+    </div>
 
-    <div class="container">
-      <div class="copyright">
-        &copy; Copyright <strong><span>Singh Brothers</span></strong>. All Rights Reserved
-      </div>
-      <div class="credits">
-        <!-- All the links in the footer should remain intact. -->
-        <!-- You can delete the links only if you purchased the pro version. -->
-        <!-- Licensing information: https://bootstrapmade.com/license/ -->
-        <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/gp-free-multipurpose-html-bootstrap-template/ -->
-        Designed by <a href="#">Simranjeet Singh</a>
+    <div class="footer-bottom">
+      <div class="container">
+        <div class="d-flex flex-column flex-md-row justify-content-between align-items-center gap-2">
+          <p class="mb-0">&copy; {{date('Y')}} Singh Brothers Frames. All Rights Reserved.</p>
+          <p class="mb-0">Designed by <a href="#">Simranjeet Singh</a></p>
+        </div>
       </div>
     </div>
   </footer><!-- End Footer -->

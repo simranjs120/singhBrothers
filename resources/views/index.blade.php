@@ -3,55 +3,42 @@
 <section id="hero" class="d-flex align-items-center justify-content-center">
   <div class="container">
     @if (Illuminate\Support\Facades\Session::has('success'))
-    <div class="alert alert-success mt-2" style="background-color:#58ad2e;">
-      <h5 class="text-light">{{Illuminate\Support\Facades\Session::pull('success')}}</h5>
-    </div><br />
-  @endif
+      <div class="alert alert-success mt-2" style="background-color:#58ad2e;">
+        <h5 class="text-light">{{Illuminate\Support\Facades\Session::pull('success')}}</h5>
+      </div><br />
+    @endif
     @if (Illuminate\Support\Facades\Session::has('error'))
-    <div class="alert alert-danger mt-2" style="background-color:#d22a1f;">
-      <h5 class="text-light">{{Illuminate\Support\Facades\Session::pull('error')}}</h5>
-    </div><br />
-  @endif
-    <div class="row justify-content-center landing-content">
-      <div class="col-xl-10 col-lg-10">
-        <h1>{{$web->title}} <span>{{$web->title_color}}</span></h1>
-        <h2>{{$web->tagline}}</h2>
+      <div class="alert alert-danger mt-2" style="background-color:#d22a1f;">
+        <h5 class="text-light">{{Illuminate\Support\Facades\Session::pull('error')}}</h5>
+      </div><br />
+    @endif
+    <div class="row">
+      <div class="col-lg-6">
+        <h1 class="text-light fw-bold mt-0 mt-lg-5">Premium <span class="color-secondary">Photo
+            Frames</span>.<br />Perfect Finishes.</h1>
+        <!-- Pills -->
+        <div class="d-flex flex-wrap gap-2 mb-4 mt-3">
+          <span class="badge rounded-pill border px-3 py-2 border-light color-secondary">Photo Frames</span>
+          <span class="badge rounded-pill border px-3 py-2 border-light color-secondary">Glass</span>
+          <span class="badge rounded-pill border px-3 py-2 border-light color-secondary">Pins</span>
+          <span class="badge rounded-pill border px-3 py-2 border-light color-secondary">Mouldings</span>
+          <span class="badge rounded-pill border px-3 py-2 border-light color-secondary">Art Pieces</span>
+          <span class="badge rounded-pill border px-3 py-2 border-light color-secondary">Collages</span>
+        </div>
+        <h4 class="text-light">Trusted craftsmanship and a wide collection to suit every home and office. Custom orders
+          also available</h2>
+          <button type="button"
+            class="background-secondary px-3 py-3 border border-0 text-dark fw-bold mt-3 rounded-3">Explore our
+            collection</button>
+      </div>
+      <div class="col-lg-6 d-none d-lg-block">
+        <img src="{{Helper::props('assets/img/hero-img.png')}}" class="img-fluid" />
       </div>
     </div>
 
     <div class="row gy-4 mt-3 justify-content-center">
 
-      <!-- <div class="col-xl-2 col-md-4">
-          <div class="icon-box">
-            <i class="ri-store-line"></i>
-            <h3><a href="">Lorem Ipsum</a></h3>
-          </div>
-        </div>
-        <div class="col-xl-2 col-md-4">
-          <div class="icon-box">
-            <i class="ri-bar-chart-box-line"></i>
-            <h3><a href="">Dolor Sitema</a></h3>
-          </div>
-        </div>
-        <div class="col-xl-2 col-md-4">
-          <div class="icon-box">
-            <i class="ri-calendar-todo-line"></i>
-            <h3><a href="">Sedare Perspiciatis</a></h3>
-          </div>
-        </div>
-        <div class="col-xl-2 col-md-4">
-          <div class="icon-box">
-            <i class="ri-paint-brush-line"></i>
-            <h3><a href="">Magni Dolores</a></h3>
-          </div>
-        </div>
-        <div class="col-xl-2 col-md-4">
-          <div class="icon-box">
-            <i class="ri-database-2-line"></i>
-            <h3><a href="">Nemos Enimade</a></h3>
-          </div>
-        </div> -->
-      <div class="searchpanelbase">
+      <!-- <div class="searchpanelbase">
         <h4>{{$web->search_line}}</h4>
         <form action="{{url('/search')}}" method="GET">
           <div id="search-container">
@@ -60,27 +47,466 @@
           </div>
           <button type="submit" class="btn btn-success btn-lg">Search</button>
         </form>
-      </div>
+      </div> -->
     </div>
 
   </div>
 </section><!-- End Hero -->
 
+<!-- ======= Why Choose Us Section ======= -->
+<section class="py-2">
+  <div class="container text-dark">
+
+    <div class="mb-5">
+      <h2 class="fw-bold mt-5">Why Choose Us</h2>
+      <p class="text-dark">Quality workmanship and reliable service you can trust</p>
+    </div>
+
+    <div class="row g-4">
+
+      <div class="col-lg-3 col-md-6">
+        <div class="gap-3">
+          <i class="bi bi-gem fs-1 color-secondary"></i>
+          <div>
+            <h4 class="mb-1 fw-bold">Premium Quality</h4>
+            <p class="mb-0 text-dark">
+              Finest materials used to ensure durability and a refined finish.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-3 col-md-6">
+        <div class="gap-3">
+          <i class="bi bi-aspect-ratio fs-1 color-secondary"></i>
+          <div>
+            <h4 class="mb-1 fw-bold">Custom Sizes</h4>
+            <p class="mb-0 text-dark">
+              Frames and glass solutions tailored to your exact requirements.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-3 col-md-6">
+        <div class="gap-3">
+          <i class="bi bi-grid fs-1 color-secondary"></i>
+          <div>
+            <h4 class="mb-1 fw-bold">Wide Variety</h4>
+            <p class="mb-0 text-dark">
+              A large collection of frames, mouldings and art pieces to choose from.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-3 col-md-6">
+        <div class="gap-3">
+          <i class="bi bi-hand-thumbs-up fs-1 color-secondary"></i>
+          <div>
+            <h4 class="mb-1 fw-bold">Trusted Service</h4>
+            <p class="mb-0 text-dark">
+              Years of experience with a commitment to customer satisfaction.
+            </p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+<div class="d-flex justify-content-center my-5">
+  <hr style="width:320px; height:2px; background-color:#C8A96A; border:none; opacity:1;">
+</div>
+<!-- ======= Our way of working Section ======= -->
+<section class="py-2">
+  <div class="container">
+
+    <!-- Heading -->
+    <div class="mb-5">
+      <h2 class="fw-bold">Our Way of Working</h2>
+      <p class="text-muted mb-0">
+        Simple process, just like you visit a shop
+      </p>
+    </div>
+
+    <div class="row g-4 text-center">
+
+      <!-- Step 1 -->
+      <div class="col-lg-3 col-md-6">
+        <div class="p-4 h-100 border rounded-3 background-primary">
+          <div class="mb-3 d-flex align-items-center justify-content-center rounded-circle mx-auto background-secondary"
+            style="width:85px; height:85px;">
+            <i class="bi bi-telephone fs-1 text-dark"></i>
+          </div>
+          <h4 class="fw-semibold text-light">Call or Message Us</h4>
+          <p class="small mb-0 text-light">
+            Just give us a call or message on WhatsApp.
+          </p>
+        </div>
+      </div>
+
+      <!-- Step 2 -->
+      <div class="col-lg-3 col-md-6">
+        <div class="p-4 h-100 border rounded-3 background-primary">
+          <div class="mb-3 d-flex align-items-center justify-content-center rounded-circle mx-auto background-secondary"
+            style="width:85px; height:85px;">
+            <i class="bi bi-images fs-1 text-dark"></i>
+          </div>
+          <h4 class="fw-semibold text-light">See Options</h4>
+          <p class="small mb-0 text-light">
+            We will show you designs and samples.
+          </p>
+        </div>
+      </div>
+
+      <!-- Step 3 -->
+      <div class="col-lg-3 col-md-6">
+        <div class="p-4 h-100 border rounded-3 background-primary">
+          <div class="mb-3 d-flex align-items-center justify-content-center rounded-circle mx-auto background-secondary"
+            style="width:85px; height:85px;">
+            <i class="bi bi-check-circle fs-1 text-dark"></i>
+          </div>
+          <h4 class="fw-semibold text-light">Confirm Order</h4>
+          <p class="small mb-0 text-light">
+            Finalize your choice and place the order.
+          </p>
+        </div>
+      </div>
+
+      <!-- Step 4 -->
+      <div class="col-lg-3 col-md-6">
+        <div class="p-4 h-100 border rounded-3 background-primary">
+          <div class="mb-3 d-flex align-items-center justify-content-center rounded-circle mx-auto background-secondary"
+            style="width:85px; height:85px;">
+            <i class="bi bi-box-seam fs-1 text-dark"></i>
+          </div>
+          <h4 class="fw-semibold text-light">Ready & Delivered</h4>
+          <p class="small mb-0 text-light">
+            Your order will be ready or delivered safely.
+          </p>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+<div class="d-flex justify-content-center my-5">
+  <hr style="width:320px; height:2px; background-color:#C8A96A; border:none; opacity:1;">
+</div>
+
+
+<!-- ======= Featured Product Section ======= -->
+<section class="py-2">
+  <div class="container">
+
+    <!-- Title -->
+    <div class="mb-5">
+      <h2 class="fw-bold"><span class="background-secondary text-dark px-1">Best selling</span> item from our collection
+      </h2>
+    </div>
+
+    <div class="row align-items-center g-4">
+
+      <!-- Left Content -->
+      <div class="col-lg-6 order-2 order-lg-1">
+
+        <h3 class="fw-semibold mb-3">3D Frame Item</h3>
+
+        <!-- Badge -->
+        <span class="badge bg-danger mb-3">Festivity Sale</span>
+
+        <!-- Offer -->
+        <p class="mb-2">
+          Free Delivery till midnight, after that delivery charges will apply
+        </p>
+
+        <!-- Pricing -->
+        <div class="mb-2">
+          <span class="text-muted text-decoration-line-through me-2">₹2000</span>
+          <span class="fw-bold fs-4 text-dark">₹1000</span>
+        </div>
+
+        <!-- Urgency -->
+        <p class="text-danger fw-semibold mb-3">
+          Only Few Left Hurry!!
+        </p>
+
+        <!-- Description -->
+        <p class="text-muted">
+          Premium quality frame designed to enhance your interiors.
+          Crafted with precision and durable materials to give your memories a timeless look.
+        </p>
+
+        <!-- CTA -->
+        <div class="d-flex gap-3 flex-wrap">
+          <!-- WhatsApp Button -->
+          <a href="#"
+            class="d-inline-flex align-items-center gap-2 fw-bold px-4 py-2 rounded-3 text-white text-decoration-none"
+            style="background-color:#25D366;">
+
+            <i class="bi bi-whatsapp"></i>
+            Enquire on WhatsApp
+          </a>
+          <!-- Dark Button (Your Theme) -->
+          <a href="#" class="background-primary text-light border border-1 border-dark rounded-3 fw-normal px-4 py-2 text-decoration-none">
+            Request Callback
+          </a>
+        </div>
+
+      </div>
+
+      <!-- Right Image -->
+      <div class="col-lg-6 order-1 order-lg-2">
+
+        <img src="your-image.jpg" class="img-fluid rounded shadow" alt="Product Image"
+          style="max-height:400px; object-fit:cover;">
+
+      </div>
+
+    </div>
+  </div>
+</section>
+<div class="d-flex justify-content-center my-5">
+  <hr style="width:320px; height:2px; background-color:#C8A96A; border:none; opacity:1;">
+</div>
+
+<!-- ======= Categories Section ======= -->
+<section class="py-5">
+  <div class="container">
+
+    <!-- Heading -->
+    <div class="mb-5">
+      <h2 class="fw-bold">Our Categories</h2>
+      <p class="text-muted">Explore our range of products</p>
+    </div>
+
+    <!-- Grid -->
+    <div class="row">
+
+      <!-- Item -->
+      <div class="col-6 col-lg-3 col-md-6 col-12 mb-5 mb-lg-0">
+        <div class="d-flex flex-column align-items-center" style="transition:0.3s; cursor:pointer;"
+          onmouseover="this.style.transform='translateY(-6px) scale(1.03)'" onmouseout="this.style.transform='none'">
+
+          <!-- Circle Icon -->
+          <div class="d-flex align-items-center background-secondary justify-content-center rounded-circle mb-3"
+            style="width:100px; height:100px;">
+            <i class="bi bi-image fs-1 text-dark"></i>
+          </div>
+
+          <!-- Text -->
+          <p class="mb-0 fs-4 fw-bold">Photo Frames</p>
+        </div>
+      </div>
+
+      <!-- Item -->
+      <div class="col-6 col-lg-3 col-md-6 col-12 mb-5 mb-lg-0">
+        <div class="d-flex flex-column align-items-center" style="transition:0.3s; cursor:pointer;"
+          onmouseover="this.style.transform='translateY(-6px) scale(1.03)'" onmouseout="this.style.transform='none'">
+          <div class="d-flex align-items-center background-secondary justify-content-center rounded-circle mb-3"
+            style="width:100px; height:100px;">
+            <i class="bi bi-square fs-1 text-dark"></i>
+          </div>
+          <p class="mb-0 fs-4 fw-bold">Glass</p>
+        </div>
+      </div>
+
+      <!-- Item -->
+      <div class="col-6 col-lg-3 col-md-6 col-12 mb-5 mb-lg-0">
+        <div class="d-flex flex-column align-items-center" style="transition:0.3s; cursor:pointer;"
+          onmouseover="this.style.transform='translateY(-6px) scale(1.03)'" onmouseout="this.style.transform='none'">
+          <div class="d-flex align-items-center background-secondary justify-content-center rounded-circle mb-3"
+            style="width:100px; height:100px;">
+            <i class="bi bi-bounding-box fs-1 text-dark"></i>
+          </div>
+          <p class="mb-0 fs-4 fw-bold">Mouldings</p>
+        </div>
+      </div>
+
+      <!-- Item -->
+      <div class="col-6 col-lg-3 col-md-6 col-12 mb-5 mb-lg-0">
+        <div class="d-flex flex-column align-items-center" style="transition:0.3s; cursor:pointer;"
+          onmouseover="this.style.transform='translateY(-6px) scale(1.03)'" onmouseout="this.style.transform='none'">
+          <div class="d-flex align-items-center background-secondary justify-content-center rounded-circle mb-3"
+            style="width:100px; height:100px;">
+            <i class="bi bi-palette fs-1 text-dark"></i>
+          </div>
+          <p class="mb-0 fs-4 fw-bold">Art Pieces</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ======= All Products Section ======= -->
+<section class="py-5 mt-2 mt-lg-5">
+  <div class="container">
+
+    <!-- Heading -->
+    <div class="mb-5">
+      <h2 class="fw-bold">Photo Frames</h2>
+    </div>
+
+    <div class="row g-4">
+
+      <!-- CARD -->
+      <div class="col-lg-4 col-md-6">
+        <div class="card h-100 border-0 shadow-sm">
+
+          <!-- Image -->
+          <div class="bg-dark d-flex align-items-center justify-content-center" style="height:220px;">
+            <span class="text-white small">Image</span>
+          </div>
+
+          <div class="card-body">
+
+            <!-- Title -->
+            <h5 class="fw-semibold mb-2">3D Frame Item</h5>
+
+            <!-- Badge -->
+            <span class="badge bg-danger mb-2">Festivity Sale</span>
+
+            <!-- Description -->
+            <p class="text-muted small mb-2">
+              Free Delivery till midnight, after that delivery charges will apply
+            </p>
+
+            <!-- Price -->
+            <div class="mb-2">
+              <span class="text-muted text-decoration-line-through me-2">₹2000</span>
+              <span class="fw-bold text-dark">₹1000</span>
+            </div>
+
+            <!-- Urgency -->
+            <p class="text-danger fw-semibold small mb-3">
+              Only Few Left Hurry!!
+            </p>
+
+            <!-- Button -->
+            <a href="#"
+              class="background-secondary text-dark border border-1 border-dark rounded-3 fw-bold px-4 py-2 text-decoration-none">
+              Ask Us
+            </a>
+
+          </div>
+        </div>
+      </div>
+
+      <!-- CARD -->
+      <div class="col-lg-4 col-md-6">
+        <div class="card h-100 border-0 shadow-sm">
+
+          <div class="bg-dark d-flex align-items-center justify-content-center" style="height:220px;">
+            <span class="text-white small">Image</span>
+          </div>
+
+          <div class="card-body">
+            <h5 class="fw-semibold mb-2">Golden Frame</h5>
+
+            <span class="badge bg-danger mb-2">10% Off</span>
+
+            <p class="text-muted small mb-2">
+              Minimum order is 20 pieces
+            </p>
+
+            <div class="mb-2">
+              <span class="text-muted text-decoration-line-through me-2">₹500</span>
+              <span class="fw-bold text-dark">₹100</span>
+            </div>
+
+            <p class="text-danger fw-semibold small mb-3">
+              Diwali Sale
+            </p>
+
+            <a href="#"
+              class="background-secondary text-dark border border-1 border-dark rounded-3 fw-bold px-4 py-2 text-decoration-none">
+              Ask Us
+            </a>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- CARD -->
+      <div class="col-lg-4 col-md-6">
+        <div class="card h-100 border-0 shadow-sm">
+
+          <div class="bg-dark d-flex align-items-center justify-content-center" style="height:220px;">
+            <span class="text-white small">Image</span>
+          </div>
+
+          <div class="card-body">
+            <h5 class="fw-semibold mb-2">Mix Photo Collage</h5>
+
+            <span class="badge bg-danger mb-2">Fresh Arrivals</span>
+
+            <p class="text-muted small mb-2">
+              Free Delivery till midnight, after that delivery charges will apply
+            </p>
+
+            <div class="mb-2">
+              <span class="text-muted text-decoration-line-through me-2">₹6000</span>
+              <span class="fw-bold text-dark">₹3000</span>
+            </div>
+
+            <p class="text-danger fw-semibold small mb-3">
+              20% off if 2 pieces are ordered
+            </p>
+
+            <a href="#"
+              class="background-secondary text-dark border border-1 border-dark rounded-3 fw-bold px-4 py-2 text-decoration-none">
+              Ask Us
+            </a>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+
+    <!-- View All -->
+    <div class="text-center mt-5">
+      <a href="#"
+        class="background-secondary text-dark border border-1 border-dark rounded-3 fw-bold px-5 py-2 text-decoration-none">
+        View All Items
+      </a>
+    </div>
+
+  </div>
+</section>
+
+
+
+
+
+
+
+
+
+
+
+
+
 <main id="main">
   @if($web->category_pills == 1 && count($category) > 0)
     <section id="categories">
-    <div class="container d-flex justify-content-center">
-      <div class="row">
-      <div class="col-12">
-        <h2 class="text-center mb-4">{{$web->pills_heading}}</h2>
-        @foreach($category as $categoryset)
-      <a href="#">
-      <button class="button category-pill btn-lg">{{$categoryset->category}}</button>
-      </a>
-    @endforeach
+      <div class="container d-flex justify-content-center">
+        <div class="row">
+          <div class="col-12">
+            <h2 class="text-center mb-4">{{$web->pills_heading}}</h2>
+            @foreach($category as $categoryset)
+              <a href="#">
+                <button class="button category-pill btn-lg">{{$categoryset->category}}</button>
+              </a>
+            @endforeach
+          </div>
+        </div>
       </div>
-      </div>
-    </div>
     </section>
   @endif
   <!-- ======= About Section ======= -->
@@ -89,9 +515,16 @@
 
       <div class="row">
         <div class="col-lg-12 pt-4 pt-lg-0 order-2 order-lg-1 content text-center">
-          <h2 class="fw-bold" style="font-weight:900;"># Why we provide you not only with frames but picture perfect memories. 🖼️</h2>
+          <h2 class="fw-bold" style="font-weight:900;"># Why we provide you not only with frames but picture perfect
+            memories. 🖼️</h2>
           <p class="">
-            At Singh Brothers Frames, we specialize in crafting high-quality custom photo frames that preserve your memories with elegance and style. From traditional to modern designs, we offer a wide range of materials, sizes, and finishes to suit every taste. Whether it's for your home, office, or gifting needs, our expert craftsmanship and attention to detail ensure your photos are showcased beautifully. We also provide photo printing, canvas framing, and restoration services to complete your experience. With a commitment to quality and customer satisfaction, we turn your special moments into timeless displays. Visit us today and frame your story with care.
+            At Singh Brothers Frames, we specialize in crafting high-quality custom photo frames that preserve your
+            memories with elegance and style. From traditional to modern designs, we offer a wide range of materials,
+            sizes, and finishes to suit every taste. Whether it's for your home, office, or gifting needs, our expert
+            craftsmanship and attention to detail ensure your photos are showcased beautifully. We also provide photo
+            printing, canvas framing, and restoration services to complete your experience. With a commitment to quality
+            and customer satisfaction, we turn your special moments into timeless displays. Visit us today and frame
+            your story with care.
           </p>
         </div>
       </div>
@@ -102,32 +535,32 @@
   <!----------------------------------------------------------------Spotlight Section Start ------------------------------------------------------------------------------------>
   @if($inner_section_spotlight != "" && !empty(json_decode($inventory_section_spotlight)) && $inventoryItemsCount > 0)
     @php
-    /* Fetching all the inventory IDs from $inventory_section_spotlight array & put them in dynamic hidden fields, then fetch those hidden field's
-     value from javascript & put them in a js array, Then make an ajax call with those IDs & fetch actual inventory items. */
-    $spotlightCount = 0;
-    foreach ($inventory_section_spotlight as $row) {
-    echo "<input type='hidden' id='inventory_item_" . $spotlightCount . "' value='" . $row->inventory_id . "' />";
-    $spotlightCount++;
-    }
-  @endphp
+      /* Fetching all the inventory IDs from $inventory_section_spotlight array & put them in dynamic hidden fields, then fetch those hidden field's
+       value from javascript & put them in a js array, Then make an ajax call with those IDs & fetch actual inventory items. */
+      $spotlightCount = 0;
+      foreach ($inventory_section_spotlight as $row) {
+        echo "<input type='hidden' id='inventory_item_" . $spotlightCount . "' value='" . $row->inventory_id . "' />";
+        $spotlightCount++;
+      }
+    @endphp
     <section id="spotlight" class="spotlight">
-    <div class="container">
-      <div class="text-center">
-      <h2 class="spotlight-heading">{{$inner_section_spotlight->name}}</h2>
-      <p>{{$inner_section_spotlight->description}}</p>
-      <center>
-        <div class="loader-spotlight"></div>
-      </center>
-      <div class='container'>
-        <div class="spotlight-render-here">
+      <div class="container">
+        <div class="text-center">
+          <h2 class="spotlight-heading">{{$inner_section_spotlight->name}}</h2>
+          <p>{{$inner_section_spotlight->description}}</p>
+          <center>
+            <div class="loader-spotlight"></div>
+          </center>
+          <div class='container'>
+            <div class="spotlight-render-here">
+            </div>
+          </div>
+
+          @if($inner_section_spotlight->button == 1)<a class="spotlight-btn" href="{{$inner_section_spotlight->url}}">Take
+          a look</a>@endif
+
         </div>
       </div>
-
-      @if($inner_section_spotlight->button == 1)<a class="spotlight-btn" href="{{$inner_section_spotlight->url}}">Take
-  a look</a>@endif
-
-      </div>
-    </div>
     </section>
   @endif
   <!----------------------------------------------------------------Spotlight Section End ------------------------------------------------------------------------------------>
@@ -135,18 +568,18 @@
   <!----------------------------------------------------------------Dynamic Sections Start ------------------------------------------------------------------------------------>
   @if($inner_sections != "" && !empty(json_decode($inventory_section_dynamic)) && $inventoryItemsCount > 0)
     @php
-    /* Setup the $inventory_section_dynamic variable here that is coming from indexController, it contains the ids of the inventory items 
-     and sections, Later fetch this in ajax function fetchDynamicSections() below from ID of this field. */
-    echo "<input type='hidden' id='dynamic_section_array' value='" . $inventory_section_dynamic . "' />";
-  @endphp
+      /* Setup the $inventory_section_dynamic variable here that is coming from indexController, it contains the ids of the inventory items 
+       and sections, Later fetch this in ajax function fetchDynamicSections() below from ID of this field. */
+      echo "<input type='hidden' id='dynamic_section_array' value='" . $inventory_section_dynamic . "' />";
+    @endphp
     <section id="dynamicSections" class="dynamicSections">
-    <div class="container">
-      <center>
-      <div class="loader-sections"></div>
-      </center>
-      <div class="render-dynamic-sections">
+      <div class="container">
+        <center>
+          <div class="loader-sections"></div>
+        </center>
+        <div class="render-dynamic-sections">
+        </div>
       </div>
-    </div>
     </section>
   @endif
   <!----------------------------------------------------------------Dynamic Sections End ------------------------------------------------------------------------------------>

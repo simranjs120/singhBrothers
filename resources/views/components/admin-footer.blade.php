@@ -43,6 +43,16 @@
 <script type="text/javascript">
   $('#sub-category-submit').attr("disabled",'disabled');
   $(document).ready(function () {
+    $('[data-sidebar-close]').on('click', function () {
+      $('.sidebar-offcanvas').removeClass('active');
+    });
+
+    $('.sb-admin-sidebar .nav-link').on('click', function () {
+      if ($(window).width() < 992 && !$(this).attr('data-bs-toggle')) {
+        $('.sidebar-offcanvas').removeClass('active');
+      }
+    });
+
     // Responsive header and buttons start
     var width = $(window).width();
     if (width < 767){

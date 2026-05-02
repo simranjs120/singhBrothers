@@ -1,150 +1,44 @@
-<x-Admin-header :profile="$profile"/>
-          <div class="row">
-            <div class="col-sm-12">
-              <div class="home-tab">
-                <div class="d-sm-flex align-items-center justify-content-between">
-                @php
-                date_default_timezone_set(env('APPLICATION_TIMEZONE'));
-                $time = date("H");
-                $salutation = "";
-                if ($time >= 4 && $time < 12) {
-                    $salutation = "🌅Good Morning,";
-                } else if ($time >= 12 && $time < 16) {
-                    $salutation = "🏞️Good Afternoon,";
-                } else if ($time >= 16 && $time < 20) {
-                    $salutation = "🌄Good Evening,";
-                } else if($time >= 20 && $time < 23){
-                    $salutation = "🌃Nighty Night,";
-                } else {
-                  $salutation = "🌃Staying Up late?";
-                }
-            @endphp
-            <h2 class="welcome-text"><?php echo $salutation; ?> <span
-                class="text-black fw-bold">{{$profile->name}}, </span>Welcome to your dashboard</h2>
-                </div>
-                <div class="tab-content tab-content-basic">
-                  <div class="tab-pane fade show active" id="overview" role="tabpanel" aria-labelledby="overview"> 
-
-                    <!-- <div class="row">
-                      <div class="col-sm-12">
-                        <div class="statistics-details align-items-center justify-content-between">
-                          <div class="row">
-                          <div class="col-lg-2 col-md-4 col-sm-6 col-xs-12 dashboard-stats-glance">
-                            <p class="statistics-title">Total Inventory Items</p>
-                            <h3 class="rate-percentage">100</h3>
-                            <p class="text-danger d-flex"><span>0 Added Today</span></p>
-                          </div>
-                          <div class="col-lg-2 col-md-4 col-sm-6 col-xs-12 dashboard-stats-glance">
-                            <p class="statistics-title">Total Categories</p>
-                            <h3 class="rate-percentage">10</h3>
-                            <p class="text-success d-flex"><i class="mdi mdi-menu-up"></i><span>+2 Today</span></p>
-                          </div>
-                          <div class="col-lg-2 col-md-4 col-sm-6 col-xs-12 dashboard-stats-glance">
-                            <p class="statistics-title">Total Landing Searches</p>
-                            <h3 class="rate-percentage">68</h3>
-                            <p class="text-success d-flex"><i class="mdi mdi-menu-up"></i><span>+10 Today</span></p>
-                          </div>
-                          <div class="col-lg-2 col-md-4 col-sm-6 col-xs-12 dashboard-stats-glance">
-                            <p class="statistics-title">Total Offers</p>
-                            <h3 class="rate-percentage">50</h3>
-                            <p class="text-danger d-flex"><span>0 Created Today</span></p>
-                          </div>
-                          <div class="col-lg-2 col-md-4 col-sm-6 col-xs-12 dashboard-stats-glance">
-                            <p class="statistics-title">Product Queries</p>
-                            <h3 class="rate-percentage">68</h3>
-                            <p class="text-success d-flex"><i class="mdi mdi-menu-up"></i><span>+5 Today</span></p>
-                          </div>
-                          <div class="col-lg-2 col-md-4 col-sm-6 col-xs-12 dashboard-stats-glance">
-                            <p class="statistics-title">Contact Form Queries</p>
-                            <h3 class="rate-percentage">102</h3>
-                            <p class="text-danger d-flex"><span>0 Today</span></p>
-                          </div>
-                          </div>
-                        </div>
+<x-Admin-header :profile="$profile" />
+<div class="row">
+  <div class="col-sm-12">
+    <div class="home-tab">
+      <div class="tab-content tab-content-basic">
+        <div class="tab-pane fade show active" id="overview" role="tabpanel" aria-labelledby="overview">
+          <h2 class="h4 fw-bold mb-3">Activity Logger</h2>
+          <div class="row g-3">
+            <div class="col-12">
+              <div class="card border shadow-sm rounded-1">
+                <div class="card-body p-4">
+                      <div class="d-flex align-items-center justify-content-between mb-4">
+                        <h4 class="h5 fw-bold mb-0"><i class="mdi mdi-clock"></i> Activity Logger</h4>
                       </div>
-                    </div>  -->
-<!-- --------------------------------------------------------Row 1------------------------------------------------------------------- -->
-                    <!-- <div class="row">
-                      <div class="col-lg-8 d-flex flex-column">
-                        <div class="row flex-grow">
-                          <div class="col-12 col-lg-4 col-lg-12 grid-margin stretch-card">
-                            <div class="card card-rounded">
-                              <div class="card-body">
-                                <div class="d-sm-flex justify-content-between align-items-start">
-                                  <div>
-                                   <h4 class="card-title card-title-dash">Performance Line Chart</h4>
-                                   <h5 class="card-subtitle card-subtitle-dash">Lorem Ipsum is simply dummy text of the printing</h5>
-                                  </div>
-                                  <div id="performance-line-legend"></div>
-                                </div>
-                                <div class="chartjs-wrapper mt-5">
-                                  <canvas id="performaneLine"></canvas>
-                                </div>
+                      <ul class="list-unstyled ps-3 mb-0 small sb-timeline">
+                        @foreach($tracking10 as $row)
+                          <li>
+                            <div class="d-flex flex-column flex-lg-row justify-content-between gap-1 gap-lg-3">
+                              <div>
+                                <span class="text-primary fw-bold">{{$row->changer_name}}</span> {{$row->change_title}}
+                                <p class="d-lg-none fw-bold mb-0">{{App\Helpers\Helper::timeStampProcessed($row->created_at)}}</p>
                               </div>
+                              <p class="d-none d-lg-block fw-bold mb-0 text-nowrap small">{{App\Helpers\Helper::timeStampProcessed($row->created_at)}}</p>
                             </div>
-                          </div>
+                          </li>
+                        @endforeach
+                      </ul>
+                      <div class="list align-items-center pt-3">
+                        <div class="wrapper w-100">
+                          <p class="mb-0">
+                            <a href="{{url('/admin/all-activity')}}" class="btn btn-primary px-4">Show all</a>
+                          </p>
                         </div>
                       </div>
-                      <div class="col-lg-4 d-flex flex-column">
-                      <div class="row flex-grow">
-                          <div class="col-12 grid-margin stretch-card">
-                            <div class="card card-rounded">
-                              <div class="card-body">
-                                <div class="row">
-                                  <div class="col-lg-12">
-                                    <div class="d-flex justify-content-between align-items-center mb-3">
-                                      <h4 class="card-title card-title-dash">Types of Items</h4>
-                                    </div>
-                                    <canvas class="my-auto" id="doughnutChart" height="200"></canvas>
-                                    <div id="doughnut-chart-legend" class="mt-5 text-center"></div>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div> -->
-<!-- --------------------------------------------------------Row 2------------------------------------------------------------------- -->
-                    <div class="row">
-                      <div class="col-lg-12 d-flex flex-column">
-                        <div class="row flex-grow">
-                          <div class="col-md-12 col-lg-12 grid-margin stretch-card">
-                            <div class="card card-rounded">
-                              <div class="card-body">
-                                <div class="d-flex align-items-center justify-content-between mb-3">
-                                  <h4 class="card-title card-title-dash">Activities</h4>
-                                  <p class="mb-0">Timestamps</p>
-                                </div>
-                                <ul class="bullet-line-list">
-                                  @foreach($tracking10 as $row)
-                                  <li>
-                                    <div class="d-flex justify-content-between">
-                                      <div><span class="text-light-green">{{$row->changer_name}}</span> {{$row->change_title}} <p id="mobile-agent">{{App\Helpers\Helper::timeStampProcessed($row->created_at)}}</p></div>
-                                      <p id="pc-agent">{{App\Helpers\Helper::timeStampProcessed($row->created_at)}}</p>
-                                    </div>
-                                  </li>
-                                  @endforeach
-                                </ul>
-                                <div class="list align-items-center pt-3">
-                                  <div class="wrapper w-100">
-                                    <p class="mb-0">
-                                      <a href="{{url('/admin/all-activity')}}" class="fw-bold text-primary">Show all <i class="mdi mdi-arrow-right ms-2"></i></a>
-                                    </p>
-                                    <p class="mt-3"><b><span class="mdi mdi-lightbulb-on" style="color:orange;"></span>&nbsp;<u>Pro Tip:</u></b> You can always see specifically your own activity by clicking on <b>User Icon on top right > My Profile</b>.</p>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-
-                  </div>
                 </div>
               </div>
             </div>
           </div>
-          <!-- Footer -->
-  <x-admin-footer/>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<x-admin-footer />

@@ -11,7 +11,7 @@ class adminDashboardController extends Controller
     public function index(){
         $data['profile']=dashboard::fetchProfile();
         $data['tracking10']=dashboard::getTracking10();
-        return view('admin.dashboard',$data);
+        return view('admin.dashboard', $data);
     }
 
     public function allActivity(){

@@ -4,15 +4,20 @@
         cursor: pointer;
     }
 </style>
-<div class="row">
-    <h2 class="panel-headings">Customer Queries</h2>
-    <p class="panel-breadcrumbs">Dashboard/Customer Queries</p>
-</div>
-<br />
-<div class="row">
-    <div class="card">
-        <div class="col-sm-12">
-            <div class="home-tab">
+<div class="container-fluid px-3">
+  <!-- Header -->
+  <div class="row mb-3">
+    <div class="col-12">
+      <h1 class="mb-1">Add New User</h1>
+      <p class="text-muted small mb-0 mt-3">Admin / Add New User</p>
+    </div>
+  </div>
+
+  
+  <div class="row mb-4">
+    <div class="col-12">
+      <div class="card shadow-sm">
+        <div class="card-body">
                 <div class="mt-3 d-sm-flex align-items-center justify-content-between border-bottom">
                     <!-- Start: Navigation Bar & Some Useful Buttons -->
 
@@ -128,5 +133,5 @@
         </div>
     </div>
 </div>
-
+</div>
 <x-admin-footer />

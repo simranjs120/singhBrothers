@@ -13,27 +13,20 @@
         color:red;
     }
 </style>
-<div class="row">
-    <div class="card">
-        <div class="row">
-            <div class="col-lg-6 breadcrumbs">
-                <h5 class="m-4">
-                    <a href="{{url('admin/inventory')}}">Inventory</a> / <a href="{{url('admin/inventory')}}">List
-                        Inventory</a> / <a href="{{url('admin/view-inventory/'.$inventoryId)}}">View Inventory</a> /
-                    <span class="breadcrumbs-active">Edit Inventory</span>
-                </h5>
-            </div>
-            <div class="col-lg-6">
-                <h5 class="pull-right mt-4"><b>Items marked with(<span class="asterik">*</span>) are mandatory !!</b></span></h5>
-            </div>
-        </div>
+
+<div class="container-fluid px-3">
+  <!-- Header -->
+  <div class="row mb-3">
+    <div class="col-12">
+      <h1 class="mb-1">Add New User</h1>
+      <p class="text-muted small mb-0 mt-3">Admin / Add New User</p>
     </div>
-</div>
-<br />
-<div class="row">
-    <div class="card">
-        <div class="col-sm-12">
-            <div class="home-tab">
+  </div>
+
+  <div class="row mb-4">
+    <div class="col-12">
+      <div class="card shadow-sm">
+        <div class="card-body">
                 <h4 class="card-title card-title-dash mt-4 mb-2">Edit the Inventory Item</h4>
                 @if (Illuminate\Support\Facades\Session::has('success'))
                     <div class="alert alert-success mt-2" style="background-color:#58ad2e;">
@@ -136,6 +129,7 @@
             </div>
         </div>
     </div>
+</div>
 </div>
 <script>
     $('.nav-category-inventory').addClass('active');

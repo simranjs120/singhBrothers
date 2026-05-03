@@ -1,15 +1,36 @@
+/* ===== ROOT ===== */
 :root {
-  --sb-sidebar-width: 325px;
+  --sb-sidebar-width: 300px;
+  --primary-color: #0F0F0F;
+  --secondary-color: #d9ac4f;
+  --dark-color: #1C1C1C;
 }
 
+.background-primary {
+  background: var(--primary-color);
+}
+
+.background-secondary {
+  background: var(--secondary-color);
+}
+
+.color-primary {
+  color: var(--primary-color);
+}
+
+.color-secondary {
+  color: var(--secondary-color);
+}
+
+/* ===== BODY ===== */
 body.sb-admin-body {
   overflow-x: hidden;
 }
-
-.sb-admin-shell .navbar.default-layout {
-  display: none !important;
+.content-wrapper{
+  margin-left:10px !important;
 }
 
+/* ===== SIDEBAR ===== */
 .sb-admin-sidebar {
   background: #060707 !important;
   height: 100vh;
@@ -21,60 +42,228 @@ body.sb-admin-body {
   top: 0 !important;
   width: var(--sb-sidebar-width) !important;
   z-index: 1040;
+  padding: 10px 0;
 }
 
+.sb-admin-sidebar .nav-link.active,
+.sb-admin-sidebar .nav-link.bg-dark {
+  background-color: #ffffff41 !important;
+  backdrop-filter: blur(5px);
+  border-radius: 6px;
+  border-radius: 10px !important;
+  transition: 0.3s;
+}
+
+.tabs-toggle .nav-link {
+  background-color: transparent;
+  transition: 0.2s;
+}
+
+.tabs-toggle .nav-link.active {
+  background-color: rgba(0, 0, 0, 0.15) !important;
+  color: #000 !important;
+}
+
+.tabs-toggle .nav-link:hover {
+  background-color: rgba(0, 0, 0, 0.08);
+}
+
+.nav-link:hover {
+  background-color: #ffffff41 !important;
+  backdrop-filter: blur(5px);
+  border-radius: 10px !important;
+}
+
+/* ===== MAIN CONTENT ===== */
 .sb-admin-main {
   margin-left: var(--sb-sidebar-width);
-  min-height: 100vh;
   width: calc(100% - var(--sb-sidebar-width));
+  min-height: 100vh;
 }
 
-.sb-sidebar-backdrop {
-  background: rgba(0, 0, 0, 0.22);
-  inset: 0;
-  opacity: 0;
-  pointer-events: none;
-  position: fixed;
-  transition: opacity 0.2s ease;
-  z-index: 1035;
-}
 
+/* ===== TIMELINE ===== */
 .sb-timeline li {
   border-left: 2px solid #111;
-  padding: 0 0 16px 24px;
+  padding: 0 0 25px 20px;
   position: relative;
 }
 
 .sb-timeline li::before {
-  background: #169fe5;
+  background: var(--secondary-color);
   border-radius: 50%;
   content: "";
-  height: 18px;
-  left: -9px;
+  height: 16px;
+  left: -8px;
   position: absolute;
   top: 4px;
-  width: 18px;
+  width: 16px;
 }
 
+/* ===== TABLE (important but minimal) ===== */
+/* Table cleanup */
+.table {
+  margin-bottom: 0;
+}
+
+.table td,
+.table th {
+  padding: 10px 12px;
+  font-size: 14px;
+}
+
+/* DataTables header + controls alignment */
+.dataTables_wrapper .dataTables_length,
+.dataTables_wrapper .dataTables_filter {
+  margin-bottom: 10px;
+  font-size: 14px;
+}
+
+/* Fix table inside card */
+.card .table {
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+/* ===== RESPONSIVE ===== */
 @media (max-width: 991.98px) {
+
   .sb-admin-main {
     margin-left: 0;
     width: 100%;
   }
 
   .sb-admin-sidebar {
-    max-width: 330px;
+    width: 100vw !important;    
+    max-width: 100vw;         
+    height: 100vh;            
+    top: 0;
+    left: 0;
     transform: translateX(-100%);
     transition: transform 0.24s ease;
-    width: min(330px, calc(100vw - 112px)) !important;
   }
 
   .sb-admin-sidebar.active {
     transform: translateX(0);
   }
+}
 
-  .sb-admin-sidebar.active + .sb-sidebar-backdrop {
-    opacity: 1;
-    pointer-events: auto;
-  }
+
+
+/* Hide scrollbar for sidebar only */
+.sb-admin-sidebar {
+  overflow-y: auto !important;
+  scrollbar-width: none !important;
+  /* Firefox */
+  -ms-overflow-style: none !important;
+  /* IE */
+}
+
+.sb-admin-sidebar::-webkit-scrollbar {
+  width: 0px !important;
+  /* Chrome, Edge, Safari */
+}
+
+
+
+/* ===== DARK MODAL THEME (FINAL) ===== */
+
+.modal-content {
+  background-color: var(--dark-color) !important;
+  border: 1px solid #2a2a2a;
+  border-radius: 10px;
+  color: #fff !important;
+  border: 2px solid white;
+}
+
+/* Header */
+.modal-header {
+  border-bottom: 1px solid #2a2a2a;
+}
+
+.modal-title {
+  color: #fff;
+  font-weight: 500;
+}
+
+/* Body */
+.modal-body {
+  color: #d0d0d0;
+}
+
+/* Footer */
+.modal-footer {
+  border-top: 1px solid #2a2a2a;
+}
+
+/* Force text inside modal */
+.modal * {
+  color: #fff !important;
+}
+
+/* Inputs */
+.modal .form-control,
+.modal select,
+.modal textarea {
+  background-color: var(--primary-color) !important;
+  border: 1px solid var(--secondary-color) !important;
+  color: #fff !important;
+}
+
+/* Placeholder */
+.modal .form-control::placeholder {
+  color: #aaa !important;
+}
+
+/* ===== SELECT DROPDOWN FIX ===== */
+
+/* Closed select (selected value visible) */
+.modal select.form-control {
+  color: #fff !important;
+}
+
+/* Dropdown options (keep readable) */
+.modal select.form-control option {
+  color: #000;
+}
+
+/* Focus state */
+.modal select.form-control:focus,
+.modal select.form-control:active {
+  color: #fff !important;
+}
+
+/* ===== BUTTONS ===== */
+
+.modal .btn {
+  border-radius: 6px;
+}
+
+/* Save button (gold) */
+.modal .btn-success,
+.modal .btn-primary {
+  background-color: var(--secondary-color) !important;
+  border: none !important;
+  color: #000 !important;
+  font-weight: 500;
+}
+
+/* Close button (white outline) */
+.modal .btn-danger,
+.modal .btn-secondary {
+  background-color: transparent !important;
+  border: 1px solid #fff !important;
+  color: #fff !important;
+}
+
+.modal .btn-danger:hover,
+.modal .btn-secondary:hover {
+  background-color: #fff !important;
+  color: #000 !important;
+}
+
+/* Backdrop */
+.modal-backdrop.show {
+  background-color: #000;
+  opacity: 0.7;
 }

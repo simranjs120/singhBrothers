@@ -10,27 +10,19 @@
         height: 150px !important;
     }
 </style>
-<div class="row">
-    <div class="card">
-        <div class="row">
-            <div class="col-lg-6 breadcrumbs">
-                <h5 class="m-4">
-                    <a href="{{url('admin/inventory')}}">Inventory</a> / <a href="{{url('admin/inventory')}}">List
-                        Inventory</a> /
-                    <span class="breadcrumbs-active">Add Inventory</span>
-                </h5>
-            </div>
-            <div class="col-lg-6">
-                <h5 class="pull-right mt-4"><b>Items marked with(<span class="asterik">*</span>) are mandatory !!</b></span></h5>
-            </div>
-        </div>
+<div class="container-fluid px-3">
+      <!-- Header -->
+  <div class="row mb-3">
+    <div class="col-12">
+      <h1 class="mb-1">Manage Inventory</h1>
+      <p class="text-muted small mb-0 mt-3">Admin / Manage Inventory / New Inventory Item</p>
     </div>
-</div>
-<br />
-<div class="row">
-    <div class="card">
-        <div class="col-sm-12">
-            <div class="home-tab">
+  </div>
+
+  <div class="row mb-4">
+    <div class="col-12">
+      <div class="card shadow-sm">
+        <div class="card-body">
                 <h4 class="card-title card-title-dash mt-4 mb-4">Add New Inventory Item</h4>
                 @if (Illuminate\Support\Facades\Session::has('success'))
                     <div class="alert alert-success mt-2" style="background-color:#58ad2e;">
@@ -120,7 +112,7 @@
                             </select>
                         </div>
                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 mt-5">
-                            <button type="submit" class="w-100 btn btn-success btn-lg text-light">Submit</button>
+                            <button type="submit" class="w-100 btn btn-success text-light">Submit</button>
                         </div>
                      </div>
                 </form>
@@ -128,6 +120,7 @@
             </div>
         </div>
     </div>
+</div>
 </div>
 <script>
     $('.nav-category-inventory').addClass('active');

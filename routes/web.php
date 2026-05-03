@@ -5,12 +5,10 @@ use App\Http\Controllers\categoryController as category;
 use App\Http\Controllers\adminDashboardController as dashboard;
 use App\Http\Controllers\userProfileController as userProfile;
 use App\Http\Controllers\landingSectionController as landingSection;
-use App\Http\Controllers\offersController as offers;
 use App\Http\Controllers\indexController as index;
 use App\Http\Controllers\labelsController as labels;
 use App\Http\Controllers\innerSectionController as innerSection;
 use App\Http\Controllers\directoryController as directory;
-use App\Http\Controllers\logoController as logo;
 use App\Http\Controllers\queryController as query;
 
 use Illuminate\Support\Facades\Route;
@@ -82,10 +80,6 @@ Route::middleware('auth')->group(function () {
     Route::get('/admin/delete-section/{id}', [innerSection::class, 'deleteSection']);
     Route::post('admin/fetch-inventory-to-assign/', [innerSection::class, 'fetchToAssign']);
     Route::post('admin/assign-inventory/', [innerSection::class, 'assignInventory'])->name('assign.inventory');
-
-    # Logo Module
-    Route::get('/admin/logo', [logo::class, 'index']);
-    Route::post('/admin/submit-logo', [logo::class, 'submit'])->name('submit.logos');
 
     # Customer query module
     Route::get('/admin/queries', [query::class, 'index']);

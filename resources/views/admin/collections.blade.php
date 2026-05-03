@@ -4,23 +4,20 @@
         cursor: pointer;
     }
 </style>
-<div class="row">
-    <div class="card">
-        <div class="row">
-            <div class="col-lg-6 breadcrumbs">
-                <h5 class="m-4">
-                    <a href="{{url('admin/categories')}}">Category</a> / <a href="{{url('admin/categories')}}">Manage Category</a> /  
-                    <span class="breadcrumbs-active">Collections</span>
-                </h5>
-            </div>
-        </div>
+<div class="container-fluid px-3">
+  <!-- Header -->
+  <div class="row mb-0">
+    <div class="col-12">
+      <h1 class="mb-1">Add New User</h1>
+      <p class="text-muted small mb-0 mt-3">Admin / Categories & Collections / Manage Category</p>
     </div>
-</div>
+  </div>
+
 <br/>
-<div class="row">
-    <div class="card">
-        <div class="col-sm-12">
-            <div class="home-tab">
+  <div class="row mb-4">
+    <div class="col-12">
+      <div class="card shadow-sm">
+        <div class="card-body">
                     <div class="tab-pane fade show active" id="categories" role="tabpanel">
                         <h4 class="card-title card-title-dash p-3">Here's the list of all your collections</h4>
                         <div class="table-box" style="overflow-x:scroll !important;">
@@ -47,6 +44,7 @@
             </div>
         </div>
     </div>
+</div>
 </div>
 <script>
     $('.nav-category-sidebar').addClass('active');

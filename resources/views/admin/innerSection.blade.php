@@ -4,21 +4,27 @@
         cursor: pointer;
     }
 </style>
-<div class="row">
-    <h2 class="panel-headings">Dynamic Sections</h2>
-    <p class="panel-breadcrumbs">Inner Sections/Dynamic Sections</p>
-    <div class="d-flex">
-        <button type="button" class="btn btn-success mt-2 text-light all-btns" onclick="popModal()">+ New
-            Section</button>
+
+<div class="container-fluid px-3">
+    <!-- Header -->
+    <div class="row mb-3">
+        <div class="col-12">
+            <h1 class="mb-1">Product Sections</h1>
+            <p class="text-muted small mb-0 mt-3">Admin / Product Sections</p>
+            <button type="button"
+                class="btn btn-sm py-2 background-secondary text-decoration-none text-dark border border-dark border-1 rounded-3 px-4 fw-bold mt-3"
+                onclick="popModal()">+ New
+                Section</button>
+        </div>
     </div>
-</div>
-<br />
-<div class="row">
-    <div class="card">
-        <div class="row">
-            <div class="col-sm-12">
-                <div class="home-tab">
-                    <h4 class="card-title card-title-dash m-4">All Inner Section List</h4>
+
+    <div class="row mb-4">
+        <div class="col-12">
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <p class="fs-4 mb-0">All Inner Section List</p>
+                    <p class="text-muted text-sm mt-0">Here you can create products that you want to be featured on main page, Create section like "Latest arrival" & 
+                        assign products to it, those products will show under that section on the main page.</p>
                     @if (Illuminate\Support\Facades\Session::has('success'))
                         <div class="alert alert-success mt-2" style="background-color:#58ad2e;">
                             <h5 class="text-light">{{Illuminate\Support\Facades\Session::pull('success')}}</h5>
@@ -50,9 +56,9 @@
                                     <tr>
                                         <td>{{$key + 1}}</td>
                                         <td>
-                                            <button type="button" class="btn btn-primary text-light mt-1"
+                                            <button type="button" class="btn btn-sm py-1 background-secondary text-decoration-none text-dark border border-dark border-1 rounded-3 px-4 fw-bold mt-1"
                                                 onclick="editModal('{{$row->id}}','{{$row->name}}','{{$row->type}}','{{$row->button}}','{{$row->url}}','{{$row->button}}','{{$row->description}}')">Edit</button>
-                                            <button type="button" class="btn btn-dark text-light mt-1"
+                                            <button type="button" class="btn btn-dark text-light mt-1 btn-sm"
                                                 title="Assign Inventory Items"
                                                 onclick="popToAssign('{{$row->name}}',{{$row->id}})">Assign
                                                 Inventory</button>
@@ -98,7 +104,7 @@
                                         <td>
                                             <a href="{{url('/admin/delete-section/' . $row->id)}}"
                                                 onclick="return confirm('Are you sure you want to delete this item?')">
-                                                <button type="button" class="btn btn-danger text-light">Delete</button>
+                                                <button type="button" class="btn btn-dark text-light">Delete</button>
                                             </a>
                                         </td>
                                     </tr>
@@ -111,7 +117,6 @@
         </div>
     </div>
 </div>
-
 <!-- Add section Popper Modal -->
 <div class="modal fade" id="popModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
     aria-hidden="true">

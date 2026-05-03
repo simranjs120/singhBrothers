@@ -4,29 +4,23 @@
         cursor: pointer;
     }
 </style>
-<div class="row">
-    <div class="card">
-        <div class="row">
-            <div class="col-lg-6 breadcrumbs">
-                <h5 class="m-4">
-                    <a href="{{url('admin/inventory')}}">Inventory</a> / <a href="{{url('admin/inventory')}}">List
-                        Inventory</a> /
-                    <span class="breadcrumbs-active">View Inventory</span>
-                </h5>
-            </div>
-            <div class="col-lg-6">
-                <a href="{{url('admin/edit-inventory/'.$inventoryId)}}">
+
+<div class="container-fluid px-3">
+  <!-- Header -->
+  <div class="row mb-3">
+    <div class="col-12">
+      <h1 class="mb-1">Add New User</h1>
+      <p class="text-muted small mb-0 mt-3">Admin / Add New User</p>
+    </div>
+  </div>
+
+  <div class="row mb-4">
+    <div class="col-12">
+      <div class="card shadow-sm">
+        <div class="card-body">
+            <a href="{{url('admin/edit-inventory/'.$inventoryId)}}">
                     <button type="button" class="pull-right btn btn-success m-2 mt-2 text-light">Edit this item</button>
                 </a>
-            </div>
-        </div>
-    </div>
-</div>
-<br />
-<div class="row">
-    <div class="card">
-        <div class="col-sm-12">
-            <div class="home-tab mb-4">
                 <h4 class="card-title card-title-dash m-4">Inventory Details for <u>{{$inventory->itemName}}</u></h4>
                 @if (Illuminate\Support\Facades\Session::has('success'))
                     <div class="alert alert-success mt-2" style="background-color:#58ad2e;">
@@ -57,7 +51,7 @@
 <br />
 <div class="row">
     <div class="card">
-    <h2 class="mt-3 text-center"><b><u>Other Information</u></b></h2><br/>
+        <h2 class="mt-3 text-center"><b><u>Other Information</u></b></h2><br/>
         <div class="row">
             <div class="col-lg-6">
                 <h4 class="">Offer badge: <span class="badge badge-pill badge-danger">{{$inventory->offerBadge}}</span>
@@ -104,6 +98,7 @@
             @endif
         </div>
     </div>
+</div>
 </div>
 <script>
     $('.nav-category-inventory').addClass('active');

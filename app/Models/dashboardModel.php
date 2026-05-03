@@ -33,7 +33,7 @@ class dashboardModel extends Model
         return $data;        
     }
     static function getTracking10(){
-        $fetchTracking=DB::table("changes_tracker")->orderBy('id', 'DESC')->take(10)->get();
+        $fetchTracking=DB::table("changes_tracker")->orderBy('id', 'DESC')->take(5)->get();
         if($fetchTracking){
             return $fetchTracking;
         }

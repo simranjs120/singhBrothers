@@ -16,26 +16,8 @@
 </div>
 <!-- container-scroller -->
 
-<!-- plugins:js -->
-<script src="{{Helper::props('admin/vendors/js/vendor.bundle.base.js')}}"></script>
-<!-- endinject -->
-<!-- Plugin js for this page -->
-<script src="{{Helper::props('admin/vendors/chart.js/Chart.min.js')}}"></script>
-<script src="{{Helper::props('admin/vendors/bootstrap-datepicker/bootstrap-datepicker.min.js')}}"></script>
-<script src="{{Helper::props('admin/vendors/progressbar.js/progressbar.min.js')}}"></script>
-
-<!-- End plugin js for this page -->
-<!-- inject:js -->
 <script src="{{Helper::props('admin/js/off-canvas.js')}}"></script>
-<script src="{{Helper::props('admin/js/hoverable-collapse.js')}}"></script>
-<script src="{{Helper::props('admin/js/template.js')}}"></script>
-<script src="{{Helper::props('admin/js/settings.js')}}"></script>
-<script src="{{Helper::props('admin/js/todolist.js')}}"></script>
-<!-- endinject -->
-<!-- Custom js for this page-->
-<script src="{{Helper::props('admin/js/dashboard.js')}}"></script>
-<script src="{{Helper::props('admin/js/Chart.roundedBarCharts.js')}}"></script>
-<!-- End custom js for this page-->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 
 </html>
@@ -43,6 +25,16 @@
 <script type="text/javascript">
   $('#sub-category-submit').attr("disabled",'disabled');
   $(document).ready(function () {
+    $('[data-sidebar-close]').on('click', function () {
+      $('.sidebar-offcanvas').removeClass('active');
+    });
+
+    $('.sb-admin-sidebar .nav-link').on('click', function () {
+      if ($(window).width() < 992 && !$(this).attr('data-bs-toggle')) {
+        $('.sidebar-offcanvas').removeClass('active');
+      }
+    });
+
     // Responsive header and buttons start
     var width = $(window).width();
     if (width < 767){

@@ -4,21 +4,24 @@
         cursor: pointer;
     }
 </style>
-<div class="row">
-    <h2 class="panel-headings">Manage Inventory</h2>
-    <p class="panel-breadcrumbs">Dashboard/Manage Inventory</p>
-    <div class="d-flex">
-        <a href="{{url('admin/add-inventory')}}">
+
+<div class="container-fluid px-3">
+  <!-- Header -->
+  <div class="row mb-3">
+    <div class="col-12">
+      <h1 class="mb-1">Add New User</h1>
+      <p class="text-muted small mb-0 mt-3">Admin / Add New User</p>
+    </div>
+  </div>
+
+  <div class="row mb-4">
+    <div class="col-12">
+      <div class="card shadow-sm">
+        <div class="card-body">
+            <a href="{{url('admin/add-inventory')}}">
             <button type="button" class="btn btn-success mt-2 text-light all-btns"title="Create New Inventory Item">+ New Inventory item</button>
         </a>&nbsp;&nbsp;
         <button type="button" class="btn btn-primary mt-2 text-light all-btns" title="Export data to excel">Export Excel</button>
-    </div>
-</div>
-<br />
-<div class="row">
-    <div class="card">
-        <div class="col-sm-12">
-            <div class="home-tab">
                 <!-- <h4 class="card-title card-title-dash m-4">All Your Inventory</h4> -->
                 @if (Illuminate\Support\Facades\Session::has('success'))
                     <div class="alert alert-success mt-2" style="background-color:#58ad2e;">
@@ -105,7 +108,7 @@
         </div>
     </div>
 </div>
-
+</div>
 <!-- Image Popper Modal -->
 <div class="modal fade" id="popImageModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
     aria-hidden="true">

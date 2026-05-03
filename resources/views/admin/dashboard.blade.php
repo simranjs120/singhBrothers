@@ -1,150 +1,66 @@
-<x-Admin-header :profile="$profile"/>
-          <div class="row">
-            <div class="col-sm-12">
-              <div class="home-tab">
-                <div class="d-sm-flex align-items-center justify-content-between">
-                @php
-                date_default_timezone_set(env('APPLICATION_TIMEZONE'));
-                $time = date("H");
-                $salutation = "";
-                if ($time >= 4 && $time < 12) {
-                    $salutation = "🌅Good Morning,";
-                } else if ($time >= 12 && $time < 16) {
-                    $salutation = "🏞️Good Afternoon,";
-                } else if ($time >= 16 && $time < 20) {
-                    $salutation = "🌄Good Evening,";
-                } else if($time >= 20 && $time < 23){
-                    $salutation = "🌃Nighty Night,";
-                } else {
-                  $salutation = "🌃Staying Up late?";
-                }
-            @endphp
-            <h2 class="welcome-text"><?php echo $salutation; ?> <span
-                class="text-black fw-bold">{{$profile->name}}, </span>Welcome to your dashboard</h2>
-                </div>
-                <div class="tab-content tab-content-basic">
-                  <div class="tab-pane fade show active" id="overview" role="tabpanel" aria-labelledby="overview"> 
+<x-Admin-header :profile="$profile" />
+@php
+  date_default_timezone_set(env('APPLICATION_TIMEZONE'));
+  $hour = (int) date('H');
+  if ($hour >= 4 && $hour < 12) {
+    $salutation = "🌅 Good Morning";
+  } elseif ($hour >= 12 && $hour < 16) {
+    $salutation = "🏞️ Good Afternoon";
+  } elseif ($hour >= 16 && $hour < 20) {
+    $salutation = "🌄 Good Evening";
+  } else {
+    $salutation = "🌃 Good Night";
+  }
+  $letter = ucfirst(substr($profile->name, 0, 1));
+  $path = trim(request()->path(), '/') . '/';
+@endphp
+<div class="container-fluid px-3">
+  <!-- Header -->
+  <div class="row mb-3">
+    <div class="col-12">
+      <h1 class="h2 fw-normal mb-0">{{$salutation}} <strong class="fw-bold d-block d-lg-inline">{{$profile->name}}.
+        </strong>Welcome to your dashboard</h1>
+      <p class="text-muted mb-0 small mt-3">{{$path}}</p>
+    </div>
+  </div>
 
-                    <!-- <div class="row">
-                      <div class="col-sm-12">
-                        <div class="statistics-details align-items-center justify-content-between">
-                          <div class="row">
-                          <div class="col-lg-2 col-md-4 col-sm-6 col-xs-12 dashboard-stats-glance">
-                            <p class="statistics-title">Total Inventory Items</p>
-                            <h3 class="rate-percentage">100</h3>
-                            <p class="text-danger d-flex"><span>0 Added Today</span></p>
-                          </div>
-                          <div class="col-lg-2 col-md-4 col-sm-6 col-xs-12 dashboard-stats-glance">
-                            <p class="statistics-title">Total Categories</p>
-                            <h3 class="rate-percentage">10</h3>
-                            <p class="text-success d-flex"><i class="mdi mdi-menu-up"></i><span>+2 Today</span></p>
-                          </div>
-                          <div class="col-lg-2 col-md-4 col-sm-6 col-xs-12 dashboard-stats-glance">
-                            <p class="statistics-title">Total Landing Searches</p>
-                            <h3 class="rate-percentage">68</h3>
-                            <p class="text-success d-flex"><i class="mdi mdi-menu-up"></i><span>+10 Today</span></p>
-                          </div>
-                          <div class="col-lg-2 col-md-4 col-sm-6 col-xs-12 dashboard-stats-glance">
-                            <p class="statistics-title">Total Offers</p>
-                            <h3 class="rate-percentage">50</h3>
-                            <p class="text-danger d-flex"><span>0 Created Today</span></p>
-                          </div>
-                          <div class="col-lg-2 col-md-4 col-sm-6 col-xs-12 dashboard-stats-glance">
-                            <p class="statistics-title">Product Queries</p>
-                            <h3 class="rate-percentage">68</h3>
-                            <p class="text-success d-flex"><i class="mdi mdi-menu-up"></i><span>+5 Today</span></p>
-                          </div>
-                          <div class="col-lg-2 col-md-4 col-sm-6 col-xs-12 dashboard-stats-glance">
-                            <p class="statistics-title">Contact Form Queries</p>
-                            <h3 class="rate-percentage">102</h3>
-                            <p class="text-danger d-flex"><span>0 Today</span></p>
-                          </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>  -->
-<!-- --------------------------------------------------------Row 1------------------------------------------------------------------- -->
-                    <!-- <div class="row">
-                      <div class="col-lg-8 d-flex flex-column">
-                        <div class="row flex-grow">
-                          <div class="col-12 col-lg-4 col-lg-12 grid-margin stretch-card">
-                            <div class="card card-rounded">
-                              <div class="card-body">
-                                <div class="d-sm-flex justify-content-between align-items-start">
-                                  <div>
-                                   <h4 class="card-title card-title-dash">Performance Line Chart</h4>
-                                   <h5 class="card-subtitle card-subtitle-dash">Lorem Ipsum is simply dummy text of the printing</h5>
-                                  </div>
-                                  <div id="performance-line-legend"></div>
-                                </div>
-                                <div class="chartjs-wrapper mt-5">
-                                  <canvas id="performaneLine"></canvas>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="col-lg-4 d-flex flex-column">
-                      <div class="row flex-grow">
-                          <div class="col-12 grid-margin stretch-card">
-                            <div class="card card-rounded">
-                              <div class="card-body">
-                                <div class="row">
-                                  <div class="col-lg-12">
-                                    <div class="d-flex justify-content-between align-items-center mb-3">
-                                      <h4 class="card-title card-title-dash">Types of Items</h4>
-                                    </div>
-                                    <canvas class="my-auto" id="doughnutChart" height="200"></canvas>
-                                    <div id="doughnut-chart-legend" class="mt-5 text-center"></div>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div> -->
-<!-- --------------------------------------------------------Row 2------------------------------------------------------------------- -->
-                    <div class="row">
-                      <div class="col-lg-12 d-flex flex-column">
-                        <div class="row flex-grow">
-                          <div class="col-md-12 col-lg-12 grid-margin stretch-card">
-                            <div class="card card-rounded">
-                              <div class="card-body">
-                                <div class="d-flex align-items-center justify-content-between mb-3">
-                                  <h4 class="card-title card-title-dash">Activities</h4>
-                                  <p class="mb-0">Timestamps</p>
-                                </div>
-                                <ul class="bullet-line-list">
-                                  @foreach($tracking10 as $row)
-                                  <li>
-                                    <div class="d-flex justify-content-between">
-                                      <div><span class="text-light-green">{{$row->changer_name}}</span> {{$row->change_title}} <p id="mobile-agent">{{App\Helpers\Helper::timeStampProcessed($row->created_at)}}</p></div>
-                                      <p id="pc-agent">{{App\Helpers\Helper::timeStampProcessed($row->created_at)}}</p>
-                                    </div>
-                                  </li>
-                                  @endforeach
-                                </ul>
-                                <div class="list align-items-center pt-3">
-                                  <div class="wrapper w-100">
-                                    <p class="mb-0">
-                                      <a href="{{url('/admin/all-activity')}}" class="fw-bold text-primary">Show all <i class="mdi mdi-arrow-right ms-2"></i></a>
-                                    </p>
-                                    <p class="mt-3"><b><span class="mdi mdi-lightbulb-on" style="color:orange;"></span>&nbsp;<u>Pro Tip:</u></b> You can always see specifically your own activity by clicking on <b>User Icon on top right > My Profile</b>.</p>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
 
+  <!-- Content -->
+  <div class="row">
+    <div class="col-12">
+      <div class="card shadow-sm">
+        <div class="card-body">
+          <div class="d-flex align-items-center justify-content-between mb-4">
+            <p class="fw-normal mb-0 fs-4"><i class="mdi mdi-clock"></i>Activity Logger</p>
+          </div>
+          <ul class="list-unstyled ps-3 mb-0 small sb-timeline">
+            @foreach($tracking10 as $row)
+              <li>
+                <div class="d-flex flex-column flex-lg-row justify-content-between gap-1 gap-lg-3">
+                  <div>
+                    <span class="text-dark fw-bold">{{$row->changer_name}}</span> {{$row->change_title}}
+                    <p class="fw-bold mb-0">{{App\Helpers\Helper::timeStampProcessed($row->created_at)}}
+                    </p>
                   </div>
                 </div>
-              </div>
+              </li>
+            @endforeach
+          </ul>
+          <div class="list align-items-center pt-3">
+            <div class="wrapper w-100">
+              <p class="mb-0">
+                <a href="{{url('/admin/all-activity')}}"
+                  class="btn btn-sm py-2 background-secondary text-decoration-none text-dark border border-dark border-1 rounded-3 px-4 fw-bold">Show
+                  all</a>
+              </p>
             </div>
           </div>
-          <!-- Footer -->
-  <x-admin-footer/>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+</div>
+<x-admin-footer />

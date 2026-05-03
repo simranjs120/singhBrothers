@@ -4,19 +4,23 @@
         cursor: pointer;
     }
 </style>
-<div class="row">
-    <h2 class="panel-headings">Directory</h2>
-    <p class="panel-breadcrumbs">Dashboard/Directory</p>
-    <div class="d-flex">
-    <button type="button" onclick="popModalDirectoryItem()"
-    class="pull-right btn btn-success mt-2 text-light all-btns" title="Add new Item">+ Add New Item</button>
+
+<div class="container-fluid px-3">
+
+  <!-- Header -->
+  <div class="row mb-3">
+    <div class="col-12">
+      <h1 class="mb-1">Directory</h1>
+      <p class="text-muted small mb-0 mt-3">Admin / Directory</p>
     </div>
-</div>
-<br />
-<div class="row">
-    <div class="card">
-        <div class="col-sm-12">
-            <div class="home-tab">
+  </div>
+
+  <div class="row mb-4">
+    <div class="col-12">
+      <div class="card shadow-sm">
+        <div class="card-body">
+                <button type="button" onclick="popModalDirectoryItem()"
+    class="pull-right btn btn-success mt-2 text-light all-btns" title="Add new Item">+ Add New Item</button>
                 @if (Illuminate\Support\Facades\Session::has('success'))
                     <div class="alert alert-success mt-2" style="background-color:#58ad2e;">
                         <h5 class="text-light">{{Illuminate\Support\Facades\Session::pull('success')}}</h5>
@@ -69,6 +73,7 @@
             </div>
         </div>
     </div>
+</div>
 </div>
 <!-- Add new directory item -->
 <div class="modal fade" id="popModalDirectoryItem" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"

@@ -124,9 +124,6 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLabel">New Section</h5>
-                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
             </div>
             <form action="{{route('submit.section')}}" method="POST">
                 @csrf
@@ -182,9 +179,6 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLabel">Edit Section</h5>
-                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
             </div>
             <p class="mt-3" style="margin:0px 0px 0px 10px;"><b><span class="mdi mdi-lightbulb-on"
                         style="color:orange;"></span>&nbsp;<u>Pro Tip:</u></b> Don't want button anymore? Just set "Need
@@ -237,10 +231,6 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="elename"></h5>
-                <button type="button" class="close" data-bs-dismiss="modal" onclick="erase()" aria-label="Close"
-                    title="Close Popup">
-                    <span aria-hidden="true">&times;</span>
-                </button>
             </div>
             <form action="{{route('assign.inventory')}}" method="POST">
                 @csrf

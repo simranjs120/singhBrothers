@@ -40,8 +40,8 @@
     </a>
   </li>
 
-  <li class="nav-item {{$isActive('admin/add-user') || $isActive('admin/my-profile') ? 'active' : ''}}">
-    <a class="nav-link text-white d-flex align-items-center gap-3 px-3 py-2 rounded-0 fw-semibold {{($isActive('admin/add-user') || $isActive('admin/my-profile')) ? 'bg-dark' : ''}}" href="{{url('admin/add-user')}}">
+  <li class="nav-item {{$isActive('admin/add-user') ? 'active' : ''}}">
+    <a class="nav-link text-white d-flex align-items-center gap-3 px-3 py-2 rounded-0 fw-semibold {{($isActive('admin/add-user') ) ? 'bg-dark' : ''}}" href="{{url('admin/add-user')}}">
       <i class="bi bi-person color-secondary"></i>
       <span class="menu-title">System users</span>
     </a>

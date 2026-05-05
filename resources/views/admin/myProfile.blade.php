@@ -9,15 +9,15 @@
   <!-- Header -->
   <div class="row mb-3">
     <div class="col-12">
-      <h1 class="mb-1">Add New User</h1>
-      <p class="text-muted small mb-0 mt-3">Admin / Add New User</p>
+      <h1 class="mb-1">My Profile</h1>
+      <p class="text-muted small mb-0 mt-3">Admin / More Options / My Profile</p>
     </div>
   </div>
   <div class="row mb-4">
     <div class="col-12">
       <div class="card shadow-sm">
         <div class="card-body">
-                <h4 class="card-title card-title-dash" style="margin: 20px 0px 30px 0px;">You can update your profile from here {{$profile->name}}</h4>
+                <p class="fs-4 mb-4">You can update your profile from here <b>{{$profile->name}}</b></p>
                 @if (Illuminate\Support\Facades\Session::has('success'))
                     <div class="alert alert-success mt-2" style="background-color:#58ad2e;">
                         <h5 class="text-light">{{Illuminate\Support\Facades\Session::pull('success')}}</h5>
@@ -50,11 +50,10 @@
                                 placeholder="Set your new password here..." maxlength="200" />
                         </div>
                     </div>
-                    <button type="submit" class="btn btn-success text-light mt-4">Update My Profile</button>
+                    <button type="submit" class="btn btn-sm py-2 px-4 fw-bold rounded-3 background-secondary text-dark border border-dark text-decoration-none mt-4">Update My Profile</button>
                 </form>
-                <p class="mt-3"><b><span class="mdi mdi-lightbulb-on" style="color:orange;"></span>&nbsp;<u>Pro Tip:
-                        </u>
-                    </b>Password is not pre-set here, If you don't want to update your password, You can leave it blank
+                <p class="mt-3"><b><span class="mdi mdi-lightbulb-on" style="color:orange;"></span>&nbsp;<u>Pro Tip:</u>
+                    </b> If you don't want to update your password, You can leave it blank
                     & proceed.</p>
             </div>
         </div>
@@ -67,7 +66,6 @@
         <div class="card-body">
                 <div class="d-flex align-items-center justify-content-between mb-3">
                     <h4 class="card-title card-title-dash">My Activity (New to Old)</h4>
-                    <p class="mb-0">Timestamps</p>
                 </div>
             <ul class="list-unstyled ps-3 mb-0 small sb-timeline">
             @foreach($tracking as $row)
@@ -82,14 +80,6 @@
               </li>
             @endforeach
           </ul>
-                <div class="list align-items-center pt-3">
-                    <div class="wrapper w-100">
-                        <p class="mb-0">
-                            <a href="{{url('/admin/all-activity')}}" class="fw-bold text-primary">Show all activity<i
-                                    class="mdi mdi-arrow-right ms-2"></i></a>
-                        </p>
-                    </div>
-                </div>
             </div>
         </div>
     </div>

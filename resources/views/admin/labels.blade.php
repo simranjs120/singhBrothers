@@ -136,9 +136,6 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLabel">Edit Offer</h5>
-                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
             </div>
             <form action="{{route('edit.labels')}}" method="POST">
                 @csrf
@@ -164,10 +161,6 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="elename"></h5>
-                <button type="button" class="close" data-bs-dismiss="modal" onclick="erase()" aria-label="Close"
-                    title="Close Popup">
-                    <span aria-hidden="true">&times;</span>
-                </button>
             </div>
             <form action="{{route('assign.labels')}}" method="POST">
                 @csrf

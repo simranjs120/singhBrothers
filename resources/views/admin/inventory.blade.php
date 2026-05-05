@@ -9,8 +9,8 @@
   <!-- Header -->
   <div class="row mb-3">
     <div class="col-12">
-      <h1 class="mb-1">Add New User</h1>
-      <p class="text-muted small mb-0 mt-3">Admin / Add New User</p>
+      <h1 class="mb-1">Manage Inventory</h1>
+      <p class="text-muted small mb-0 mt-3">Admin / Manage Inventory</p>
     </div>
   </div>
 
@@ -18,10 +18,23 @@
     <div class="col-12">
       <div class="card shadow-sm">
         <div class="card-body">
-            <a href="{{url('admin/add-inventory')}}">
-            <button type="button" class="btn btn-success mt-2 text-light all-btns"title="Create New Inventory Item">+ New Inventory item</button>
-        </a>&nbsp;&nbsp;
-        <button type="button" class="btn btn-primary mt-2 text-light all-btns" title="Export data to excel">Export Excel</button>
+            <div class="d-flex align-items-center gap-2 flex-wrap">
+
+            <a href="{{url('admin/add-inventory')}}"
+                class="btn btn-sm py-2 px-4 fw-bold rounded-3 background-secondary text-dark border border-dark text-decoration-none"
+                title="Create New Inventory Item">
+                + New Inventory Item
+            </a>
+
+            <button type="button"
+                class="btn btn-sm py-2 px-4 fw-bold rounded-3 btn-success d-flex align-items-center gap-2"
+                title="Export data to excel">
+            <i class="bi bi-file-earmark-excel"></i>
+            Export Excel
+
+            </button>
+
+            </div>
                 <!-- <h4 class="card-title card-title-dash m-4">All Your Inventory</h4> -->
                 @if (Illuminate\Support\Facades\Session::has('success'))
                     <div class="alert alert-success mt-2" style="background-color:#58ad2e;">
@@ -85,7 +98,7 @@
                                     </td>
                                     <td>&nbsp;
                                         <a href="{{url('admin/view-inventory/' . $row->id)}}">
-                                            <button type="button" class="btn btn-success text-light"
+                                            <button type="button" class="btn btn-sm py-2 px-2 fw-bold rounded-3 background-secondary text-dark border border-dark text-decoration-none"
                                                 title="View Item">View</button>
                                         </a>
                                         <a href="{{url('admin/edit-inventory/' . $row->id)}}">

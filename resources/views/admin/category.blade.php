@@ -49,9 +49,7 @@
                                     Sub-categories
                                 </a>
                             </li>
-
                         </ul>
-
                     </div>
 
                     <!-- Alerts -->
@@ -194,7 +192,6 @@
 
             <div class="modal-header">
                 <h5>Add Category</h5>
-                <button class="btn-close" data-bs-dismiss="modal"></button>
             </div>
 
             <div class="modal-body">
@@ -220,7 +217,6 @@
 
             <div class="modal-header">
                 <h5>Add Sub Category</h5>
-                <button class="btn-close" data-bs-dismiss="modal"></button>
             </div>
 
             <div class="modal-body">

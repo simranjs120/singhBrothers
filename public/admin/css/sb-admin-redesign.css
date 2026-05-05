@@ -238,7 +238,6 @@ body.sb-admin-body {
 .modal .btn {
   border-radius: 6px;
 }
-
 /* Save button (gold) */
 .modal .btn-success,
 .modal .btn-primary {
@@ -266,4 +265,14 @@ body.sb-admin-body {
 .modal-backdrop.show {
   background-color: #000;
   opacity: 0.7;
+}
+
+.badge-success{
+  background-color: green;
+  color: white;
+}
+
+.badge-danger{
+  background-color: red;
+  color: white;
 }

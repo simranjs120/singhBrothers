@@ -5,21 +5,24 @@
     }
 </style>
 <div class="container-fluid px-3">
-  <!-- Header -->
-  <div class="row mb-0">
-    <div class="col-12">
-      <h1 class="mb-1">Add New User</h1>
-      <p class="text-muted small mb-0 mt-3">Admin / Categories & Collections / Manage Category</p>
+    <!-- Header -->
+    <div class="row mb-0">
+        <div class="col-12">
+            <h1 class="mb-1">View Collections</h1>
+            <p class="text-muted small mb-0 mt-3">Admin / Categories & Collections / View Collections</p>
+        </div>
     </div>
-  </div>
 
-<br/>
-  <div class="row mb-4">
-    <div class="col-12">
-      <div class="card shadow-sm">
-        <div class="card-body">
+    <br />
+    <div class="row mb-4">
+        <div class="col-12">
+            <div class="card shadow-sm">
+                <div class="card-body">
                     <div class="tab-pane fade show active" id="categories" role="tabpanel">
-                        <h4 class="card-title card-title-dash p-3">Here's the list of all your collections</h4>
+                    <a href="javascript:history.back()" class="mb-4 text-decoration-none text-dark d-inline-flex align-items-center gap-2 fw-semibold">
+                        <i class="bi bi-arrow-left"></i>Back
+                    </a>
+                        <p class="fs-4">Here's the list of all your collections</p>
                         <div class="table-box" style="overflow-x:scroll !important;">
                             <table class="table" id="datatable" style="overflow-x:scroll;">
                                 <thead>
@@ -41,10 +44,10 @@
                             </table>
                         </div>
                     </div>
+                </div>
             </div>
         </div>
     </div>
-</div>
 </div>
 <script>
     $('.nav-category-sidebar').addClass('active');

@@ -1,4 +1,4 @@
-<x-header :web="$web" />
+<x-header/>
 <!-- ======= Hero Section ======= -->
 <section id="hero" class="d-flex align-items-center justify-content-center">
   <div class="container">
@@ -35,21 +35,6 @@
         <img src="{{Helper::props('assets/img/hero-img.png')}}" class="img-fluid" />
       </div>
     </div>
-
-    <div class="row gy-4 mt-3 justify-content-center">
-
-      <!-- <div class="searchpanelbase">
-        <h4>{{$web->search_line}}</h4>
-        <form action="{{url('/search')}}" method="GET">
-          <div id="search-container">
-            <i class="ri-search-line"></i>
-            <input type="text" class="form-control" id="search-tool" name="queryString" placeholder="Search here..." />
-          </div>
-          <button type="submit" class="btn btn-success btn-lg">Search</button>
-        </form>
-      </div> -->
-    </div>
-
   </div>
 </section><!-- End Hero -->
 
@@ -493,22 +478,6 @@
 
 
 <main id="main">
-  @if($web->category_pills == 1 && count($category) > 0)
-    <section id="categories">
-      <div class="container d-flex justify-content-center">
-        <div class="row">
-          <div class="col-12">
-            <h2 class="text-center mb-4">{{$web->pills_heading}}</h2>
-            @foreach($category as $categoryset)
-              <a href="#">
-                <button class="button category-pill btn-lg">{{$categoryset->category}}</button>
-              </a>
-            @endforeach
-          </div>
-        </div>
-      </div>
-    </section>
-  @endif
   <!-- ======= About Section ======= -->
   <section id="about" class="about">
     <div class="container">
@@ -751,8 +720,6 @@
 <script>
 
   $(document).ready(function () {
-    // Placeholder animation
-    initiateSearchAnimation();
     <?php
 # Validate if spotlight section is not empty for any reason then only trigger the ajax.
 
@@ -778,73 +745,6 @@ if ($inner_section_spotlight != "" && !empty(json_decode($inventory_section_spot
     $('#exampleModalLabel').text("Product: " + productName);
     e.preventDefault();
   }
-
-  /******************************** Placeholder Animation Start *************************************/
-  // Add something to given element placeholder
-  function addToPlaceholder(toAdd, el) {
-    el.attr('placeholder', el.attr('placeholder') + toAdd);
-    // Delay between symbols "typing" 
-    return new Promise(resolve => setTimeout(resolve, 100));
-  }
-
-  // Cleare placeholder attribute in given element
-  function clearPlaceholder(el) {
-    el.attr("placeholder", "");
-  }
-
-  // Print one phrase
-  let i = 0;
-  function printPhrase(phrase, el) {
-    return new Promise(resolve => {
-      // Clear placeholder before typing next phrase
-      clearPlaceholder(el);
-      let letters = phrase.split('');
-      // For each letter in phrase
-      letters.reduce(
-        (promise, letter, index) => promise.then(_ => {
-          // Resolve promise when all letters are typed
-          if (index === letters.length - 1) {
-            // Delay before start next phrase "typing"
-            setTimeout(resolve, 3000);
-          }
-          return addToPlaceholder(letter, el);
-        }),
-        Promise.resolve()
-      );
-      i++;
-      if (i == 3) {
-        // Recursion
-        setTimeout(() => {
-          initiateSearchAnimation();
-        }, 3000);
-      }
-    });
-  }
-
-  // Print given phrases to element
-  function printPhrases(phrases, el) {
-    // For each phrase, wait for phrase to be typed before start typing next
-    phrases.reduce(
-      (promise, phrase) => promise.then(_ => printPhrase(phrase, el)),
-      Promise.resolve()
-    );
-  }
-
-  // Start typing for search box animation
-  function initiateSearchAnimation() {
-    let phrases = [
-      "{{$web->search_tool_line_1}}",
-      "{{$web->search_tool_line_2}}",
-      "{{$web->search_tool_line_3}}"
-    ];
-    if (phrases.includes("")) {
-      $('#search-tool').attr('placeholder', 'Search Here...')
-    } else {
-      printPhrases(phrases, $('#search-tool'));
-    }
-  }
-  /********************************* Placeholder Animation End *******************************************/
-
 
   <?php
 # Validate if spotlight section is not empty for any reason then only trigger the ajax.

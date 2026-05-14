@@ -81,4 +81,12 @@ class labelsModel extends Model
         }
         return false; 
     }
+
+    static function checkIfExists($name){
+        $check=DB::table('labels')->where('unique_hash', $name)->first();
+        if($check){
+            return true;
+        }
+        return false;
+    }
 }

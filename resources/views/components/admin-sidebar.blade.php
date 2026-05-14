@@ -47,6 +47,27 @@
     </a>
   </li>
 
+    <li class="nav-item {{$isActive('admin/queries')}}">
+    <a class="nav-link text-white d-flex align-items-center gap-3 px-3 py-2 rounded-0 fw-semibold {{$isActive('admin/queries') ? 'bg-dark' : ''}}" href="{{url('admin/queries')}}">
+      <i class="bi bi-person-plus color-secondary"></i>
+      <span class="menu-title">Customer Queries</span>
+    </a>
+  </li>
+
+  <li class="nav-item {{$isActive('admin/directory')}}">
+    <a class="nav-link text-white d-flex align-items-center gap-3 px-3 py-2 rounded-0 fw-semibold {{$isActive('admin/directory') ? 'bg-dark' : ''}}" href="{{url('admin/directory')}}">
+      <i class="bi bi-people color-secondary"></i>
+      <span class="menu-title">Directory</span>
+    </a>
+  </li>
+
+  <li class="nav-item {{$isActive('admin/all-activity')}}">
+    <a class="nav-link text-white d-flex align-items-center gap-3 px-3 py-2 rounded-0 fw-semibold {{$isActive('admin/all-activity') ? 'bg-dark' : ''}}" href="{{url('/admin/all-activity')}}">
+      <i class="bi bi-clock color-secondary"></i>
+      <span class="menu-title">Activity Tracker</span>
+    </a>
+  </li>
+
   <li class="nav-item text-uppercase small text-secondary mt-4 px-2">My Store</li>
 
   <li class="nav-item {{request()->is('admin/inner-sections') ? 'active' : ''}}">
@@ -74,29 +95,6 @@
     <a class="nav-link text-white d-flex align-items-center gap-3 px-3 py-2 rounded-0 fw-semibold {{(request()->is('admin/inventory') || request()->is('admin/add-inventory') || request()->is('admin/edit-inventory/*') || request()->is('admin/view-inventory/*')) ? 'bg-dark' : ''}}" href="{{url('admin/inventory')}}">
       <i class="bi bi-box-seam color-secondary"></i>
       <span class="menu-title">Manage Inventory</span>
-    </a>
-  </li>
-
-  <li class="nav-item text-uppercase small text-secondary mt-4 px-2">Customers</li>
-
-  <li class="nav-item {{$isActive('admin/queries')}}">
-    <a class="nav-link text-white d-flex align-items-center gap-3 px-3 py-2 rounded-0 fw-semibold {{$isActive('admin/queries') ? 'bg-dark' : ''}}" href="{{url('admin/queries')}}">
-      <i class="bi bi-person-plus color-secondary"></i>
-      <span class="menu-title">Customer Queries</span>
-    </a>
-  </li>
-
-  <li class="nav-item {{$isActive('admin/directory')}}">
-    <a class="nav-link text-white d-flex align-items-center gap-3 px-3 py-2 rounded-0 fw-semibold {{$isActive('admin/directory') ? 'bg-dark' : ''}}" href="{{url('admin/directory')}}">
-      <i class="bi bi-people color-secondary"></i>
-      <span class="menu-title">Directory</span>
-    </a>
-  </li>
-
-  <li class="nav-item {{$isActive('admin/all-activity')}}">
-    <a class="nav-link text-white d-flex align-items-center gap-3 px-3 py-2 rounded-0 fw-semibold {{$isActive('admin/all-activity') ? 'bg-dark' : ''}}" href="{{url('/admin/all-activity')}}">
-      <i class="bi bi-clock color-secondary"></i>
-      <span class="menu-title">Activity Tracker</span>
     </a>
   </li>
 

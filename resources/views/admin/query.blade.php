@@ -88,7 +88,7 @@
                                                     <a href="{{url('admin/delete-query/' . $row->id)}}"
                                                         onclick="return confirm('Are you sure you want to delete this item?')">
                                                         <button type="button"
-                                                            class="btn btn-danger text-light">Delete</button>
+                                                            class="btn btn-dark text-light">Delete</button>
                                                     </a>
                                                 </td>
                                             </tr>
@@ -126,7 +126,7 @@
                                                     <a href="{{url('admin/delete-query/' . $row1->id)}}"
                                                         onclick="return confirm('Are you sure you want to delete this item?')">
                                                         <button type="button"
-                                                            class="btn btn-danger text-light">Delete</button>
+                                                            class="btn btn-dark text-light">Delete</button>
                                                     </a>
                                                 </td>
                                             </tr>

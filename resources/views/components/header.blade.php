@@ -59,41 +59,29 @@
 
           <ul class="navbar-nav align-items-lg-center fw-bold">
 
-            @if($web->nav_tab_1 != "")
               <li class="nav-item">
-                <a class="nav-link text-dark" href="{{$web->nav_tab_1_link}}">{{$web->nav_tab_1}}</a>
+                <a class="nav-link text-dark" href="">Test</a>
               </li>
-            @endif
 
-            @if($web->nav_tab_2 != "")
               <li class="nav-item">
-                <a class="nav-link text-dark" href="{{$web->nav_tab_2_link}}">{{$web->nav_tab_2}}</a>
+                <a class="nav-link text-dark" href="">Test</a>
               </li>
-            @endif
 
-            @if($web->nav_tab_3 != "")
               <li class="nav-item">
-                <a class="nav-link text-dark" href="{{$web->nav_tab_3_link}}">{{$web->nav_tab_3}}</a>
+                <a class="nav-link text-dark" href="">Test</a>
               </li>
-            @endif
 
-            @if($web->nav_tab_4 != "")
               <li class="nav-item">
-                <a class="nav-link text-dark" href="{{$web->nav_tab_4_link}}">{{$web->nav_tab_4}}</a>
+                <a class="nav-link text-dark" href="">Test</a>
               </li>
-            @endif
 
-            @if($web->nav_tab_5 != "")
               <li class="nav-item">
-                <a class="nav-link text-dark" href="{{$web->nav_tab_5_link}}">{{$web->nav_tab_5}}</a>
+                <a class="nav-link text-dark" href="">Test</a>
               </li>
-            @endif
 
-            @if($web->nav_tab_6 != "")
               <li class="nav-item">
-                <a class="nav-link text-dark" href="{{$web->nav_tab_6_link}}">{{$web->nav_tab_6}}</a>
+                <a class="nav-link text-dark" href="">Test</a>
               </li>
-            @endif
 
             <!-- Contact Button -->
             <li class="nav-item ms-lg-3 mt-3 mt-lg-0 fw-normal mb-4 mb-lg-0">

@@ -3,10 +3,6 @@
     #image-popper:hover {
         cursor: pointer;
     }
-
-    .copyBtn:hover {
-        color: black;
-    }
 </style>
 <div class="container-fluid px-3">
 
@@ -59,14 +55,15 @@
                                     <tr>
                                         <td>{{$key + 1}}</td>
                                         <td>
-                                            <button type="button" class="btn btn-sm py-1 my-2 px-4 fw-bold background-secondary text-dark border border-dark rounded-3 mt-4"
+                                            <button type="button" class="btn btn-sm py-1 my-2 px-4 fw-bold background-secondary text-dark border border-dark rounded-3 mt-0"
                                                 onclick="editModal('{{$row->id}}','{{$row->name}}')">Edit</button>
+                                                <br/>
                                             <button type="button" class="btn btn-dark btn-sm text-light"
                                                 onclick="popLabel('{{$row->id}}','{{$row->name}}')">Assign
                                                 Inventory</button>
                                         </td>
                                         <td>{{$row->name}}</td>
-                                        <td>{{$row->url}}&nbsp;&nbsp;<button type="button" class="btn btn-secondary copyBtn"
+                                        <td>{{$row->url}}&nbsp;&nbsp;<button type="button" class="btn btn-outline background-secondary border-1 border-dark"
                                                 onclick="copyToClipboard('{{$row->url}}','{{$row->id}}')"
                                                 id="copied_{{$row->id}}">Copy</button></td>
                                         <td>
@@ -115,7 +112,7 @@
                     <input type="text" class="form-control border border-dark mb-2" maxlength="100" name="name" required
                         placeholder="Start Typing..." />
                     <label>Status</label>
-                    <select class="form-control" style="color:black !important;" name="status" id="type" required>
+                    <select class="form-control" name="status" id="type" required>
                         <option value="1" selected>Active</option>
                         <option value="0">Inactive</option>
                     </select>
@@ -197,7 +194,7 @@
     }
     function copyToClipboard(copyText, id) {
         navigator.clipboard.writeText(copyText);
-        $('#copied_' + id).text('Link Copied !!');
+        $('#copied_' + id).text('Done');
         $('#copied_' + id).css('color', 'black');
         setTimeout(() => {
             $('#copied_' + id).text('Copy');

@@ -39,10 +39,15 @@ class labelsController extends Controller
             Log::info('New Label creation request by user ID: ', [Auth::id()]);
             $name = $request->name;
             $status = $request->status;
+            $uniqueKey = strtolower(preg_replace('/\s+/', '-', trim($name)));
+            $checkIfExists=labels::checkIfExists($uniqueKey);
+            if($checkIfExists){
+                return redirect()->back()->with('error', 'This page name already exists, please try another one');
+            }
             $data = [
                 'name' => $name,
-                'url' => str_replace('/public/', "", Helper::props('/label/' . md5(time()))),
-                'unique_hash' => md5(time()),
+                'url' => str_replace('/public/', "", Helper::props($uniqueKey)),
+                'unique_hash' => $uniqueKey,
                 'status' => $status,
                 'created_at' => Helper::timeStamp()
             ];
@@ -53,7 +58,7 @@ class labelsController extends Controller
                 $data['profile'] = dashboard::fetchProfile();
                 $changer_name = $data['profile']->name;
                 $changer_email = $data['profile']->email;
-                $changer_title = " added a new label named as: " . $name;
+                $changer_title = " added a new inventory page named as: " . $name;
                 $trackIt = tracker::insert($changer_title, $changer_email, $changer_name);
                 if ($trackIt) {
                     Log::info('Addition to tracker table success');
@@ -61,7 +66,7 @@ class labelsController extends Controller
                     Log::error('Addition to tracker table failed');
                 }
                 # Enter for changes tracker end
-                return redirect()->back()->with('success', 'New label has been created successfully');
+                return redirect()->back()->with('success', 'New entry has been created successfully');
             }
             Log::error('Error occured while creating label for payload: ', [$request->except(['_token'])]);
             return redirect()->back()->with('error', 'An error occured !! Please try again !!');
@@ -84,7 +89,7 @@ class labelsController extends Controller
                 $data['profile'] = dashboard::fetchProfile();
                 $changer_name = $data['profile']->name;
                 $changer_email = $data['profile']->email;
-                $changer_title = " edited a label, New Name: " . $name;
+                $changer_title = " edited an inventory page, New Name: " . $name;
                 $trackIt = tracker::insert($changer_title, $changer_email, $changer_name);
                 if ($trackIt) {
                     Log::info('Addition to tracker table success');
@@ -114,9 +119,9 @@ class labelsController extends Controller
                 $changer_name = $data['profile']->name;
                 $changer_email = $data['profile']->email;
                 if ($status == 0) {
-                    $changer_title = " changed the status to In-Active for label Name: " . $previousData->name;
+                    $changer_title = " changed the status to In-Active for inventory page Name: " . $previousData->name;
                 } else if ($status == 1) {
-                    $changer_title = " changed the status to Active for label Name: " . $previousData->name;
+                    $changer_title = " changed the status to Active for inventory page Name: " . $previousData->name;
                 }
                 $trackIt = tracker::insert($changer_title, $changer_email, $changer_name);
                 if ($trackIt) {
@@ -147,7 +152,7 @@ class labelsController extends Controller
                 $data['profile'] = dashboard::fetchProfile();
                 $changer_name = $data['profile']->name;
                 $changer_email = $data['profile']->email;
-                $changer_title = " delete the label Name: " . $previousData->name;
+                $changer_title = " deleted the inventory page Named: " . $previousData->name;
                 $trackIt = tracker::insert($changer_title, $changer_email, $changer_name);
                 if ($trackIt) {
                     Log::info('Addition to tracker table success');
@@ -156,7 +161,7 @@ class labelsController extends Controller
                 }
                 # Enter for changes tracker end
                 Log::info('Label Deleted ID: ', [$id]);
-                return redirect()->back()->with('success', 'Label has been deleted successfully');
+                return redirect()->back()->with('success', 'Entry has been deleted successfully');
             }
             Log::error('Error occured while deleting Label ID: ', [$id]);
             return redirect()->back()->with('error', 'An error occured !! Please try again !!');
@@ -189,7 +194,7 @@ class labelsController extends Controller
             $data['profile'] = dashboard::fetchProfile();
             $changer_name = $data['profile']->name;
             $changer_email = $data['profile']->email;
-            $changer_title = " assigned new labels to inventory item: " . $inventoryGet->itemName;
+            $changer_title = " assigned items to inventory page";
             $trackIt = tracker::insert($changer_title, $changer_email, $changer_name);
             if ($trackIt) {
                 Log::info('Addition to tracker table success');
@@ -198,7 +203,7 @@ class labelsController extends Controller
             }
             # Enter for changes tracker end
             Log::info('New label assingment created');
-            return redirect()->back()->with('success', 'Labels assigned to inventory items successfully');
+            return redirect()->back()->with('success', 'Entry assigned to inventory items successfully');
         } catch (\Exception $e) {
             Log::error('Exception in assign labels module: ' . $e->getMessage());
             return redirect()->back()->with('error', 'Something went wrong!! Please try again !');

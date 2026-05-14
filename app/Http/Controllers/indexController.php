@@ -9,7 +9,6 @@ use App\Helpers\Helper;
 class indexController extends Controller
 {
     public function index(){
-        $data['web']=DB::table('web_settings')->first();
         $data['category']=DB::table('category')->where('status',1)->get();
         $data['inventoryItemsCount']=DB::table('inventory')->count();
         # Deal with Spotlight
@@ -144,6 +143,7 @@ class indexController extends Controller
         return view('labels',$data);
     }
 
+    # ####################### Deprecated search function, IS RE-Useable
     public function search(){
         $data['web']=DB::table('web_settings')->first();
         if(request()->has('queryString')){

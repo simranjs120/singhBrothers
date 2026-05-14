@@ -109,7 +109,7 @@
                                     <td>
                                         <a href="{{url('/admin/delete-inventory/' . $row->id)}}"
                                             onclick="return confirm('Are you sure you want to delete this item?')">
-                                            <button type="button" class="btn btn-danger text-light">Delete</button>
+                                            <button type="button" class="btn btn-dark text-light">Delete</button>
                                         </a>
                                     </td>
                                 </tr>

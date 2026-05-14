@@ -165,7 +165,7 @@
                                                 <td>{{App\Helpers\Helper::timeStampProcessed($data['created_at'])}}</td>
                                                 <td>
                                                     <a href="{{url('admin/categories/delete-category/' . $data['id'])}}">
-                                                        <button class="btn btn-danger text-light">Delete</button>
+                                                        <button class="btn btn-dark text-light">Delete</button>
                                                     </a>
                                                 </td>
                                             </tr>

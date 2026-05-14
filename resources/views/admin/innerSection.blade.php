@@ -137,7 +137,7 @@
                         placeholder="Start Typing..." />
 
                     <label class="mt-2">Select section type <span class="asterik">*</span></label>
-                    <select class="form-control" style="color:black !important;" name="type" required>
+                    <select class="form-control"  name="type" required>
                         <option value="" selected disabled>--Select--</option>
                         <option value="spotlight">**Spotlight**</option>
                         <option value="star">Star</option>
@@ -146,7 +146,7 @@
                     </select>
 
                     <label class="mt-2">Need a button? <span class="asterik">*</span></label>
-                    <select class="form-control" style="color:black !important;" name="button" id="button-submit"
+                    <select class="form-control"  name="button" id="button-submit"
                         required>
                         <option value="" selected disabled>--Select--</option>
                         <option value="1">Yes</option>
@@ -158,7 +158,7 @@
                         id="url-submit" placeholder="Please enter full URL like https://www.google.com" />
 
                     <label class="mt-2">Select status</label>
-                    <select class="form-control" style="color:black !important;" name="status" required>
+                    <select class="form-control"  name="status" required>
                         <option value="1" selected>Active</option>
                         <option value="0">In-Active</option>
                     </select>
@@ -195,7 +195,7 @@
                         id="description" placeholder="Start Typing..." />
 
                     <label class="mt-2">Select section type <span class="asterik">*</span></label>
-                    <select class="form-control" style="color:black !important;" name="type" id="type" required>
+                    <select class="form-control"  name="type" id="type" required>
                         <option value="" selected disabled>--Select--</option>
                         <option value="spotlight">**Spotlight**</option>
                         <option value="star">Star</option>
@@ -204,7 +204,7 @@
                     </select>
 
                     <label class="mt-2">Need a button?</label>
-                    <select class="form-control" style="color:black !important;" id="button" name="button" required>
+                    <select class="form-control"  id="button" name="button" required>
                         <option value="" selected disabled>--Select--</option>
                         <option value="1">Yes</option>
                         <option value="0">No</option>

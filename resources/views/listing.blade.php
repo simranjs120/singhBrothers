@@ -1,4 +1,4 @@
-<x-header :web="$web" />
+<x-header/>
 <style>
     #header {
         background-color: black;

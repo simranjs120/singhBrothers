@@ -1,4 +1,4 @@
-<x-header :web="$web" />
+<x-header/>
 <style>
     .badge-spotlight {
         margin-bottom: 12px;

@@ -46,7 +46,7 @@ class labelsController extends Controller
             }
             $data = [
                 'name' => $name,
-                'url' => str_replace('/public/', "", Helper::props($uniqueKey)),
+                'url' => str_replace('/public/', "", Helper::props('/p/' . $uniqueKey)),
                 'unique_hash' => $uniqueKey,
                 'status' => $status,
                 'created_at' => Helper::timeStamp()

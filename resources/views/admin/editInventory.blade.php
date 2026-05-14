@@ -141,10 +141,13 @@
                                     value="{{$inventoryData->importantNote}}" />
                             </div>
                             <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
-                                <label class="mt-3">&nbsp;<b>Select Collection<span class="asterik">*</span></b></label>
+                                <label class="mt-3">&nbsp;<b>Select Product Collection<span class="asterik">*</span></b></label>
+                                <p class="text-muted small mb-2">
+                                    Choose the final path for this item, for example Frames / Italian / 3mm.
+                                </p>
                                 <select class="form-control" name="collection_id" style="color:black !important;"
                                     required>
-                                    <option selected disabled value="">--Select--</option>
+                                    <option selected disabled value="">-- Select collection path --</option>
                                     @foreach($collections as $row)
                                         @if($inventoryData->collection_id == $row->id)
                                             <option value="{{$row->id}}" selected>{{$row->collection}}</option>

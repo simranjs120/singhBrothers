@@ -13,6 +13,10 @@
         <div class="col-12">
             <h1 class="mb-1">Categories & Collections</h1>
             <p class="text-muted small mb-0 mt-2">Admin / Categories & Collections</p>
+            <p class="text-muted mb-0 mt-3">
+                Create your product structure here. Top-level categories become main product pages like
+                <b>/frames</b>. Sub-categories build collection paths like <b>frames / italian / 3mm</b>.
+            </p>
 
             <!-- Buttons -->
             <div class="d-flex gap-2 mt-3">
@@ -20,12 +24,12 @@
                 <button type="button"
                     class="py-2 px-4 fw-bold background-secondary text-dark border border-dark rounded-3"
                     data-bs-toggle="modal" data-bs-target="#categoryModal">
-                    + New Category
+                    + New Main Category
                 </button>
 
                 <button type="button" class="py-2 px-4 fw-bold btn btn-dark rounded-3" data-bs-toggle="modal"
                     data-bs-target="#subCategoryModal">
-                    + New Sub-Category
+                    + New Child Category
                 </button>
 
             </div>
@@ -41,12 +45,12 @@
                         <ul class="nav nav-pills gap-2 tabs-toggle" role="tablist">
                             <li class="nav-item">
                                 <a class="nav-link active text-dark px-3 py-2" data-bs-toggle="tab" href="#categories">
-                                    Categories
+                                    Main Categories
                                 </a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link text-dark px-3 py-2" data-bs-toggle="tab" href="#sub-categories">
-                                    Sub-categories
+                                    Child Categories
                                 </a>
                             </li>
                         </ul>
@@ -70,7 +74,11 @@
 
                         <!-- Categories -->
                         <div class="tab-pane fade show active" id="categories">
-                            <p class="mt-2 mb-3 fs-4">Here's the list of all your categories</p>
+                            <p class="mt-2 mb-1 fs-4">Main categories</p>
+                            <p class="text-muted">
+                                These are the first level of your product catalogue, for example Frames, Pins, Collages.
+                                Each active main category should have its own public page.
+                            </p>
 
                             <div class="table-box" style="overflow-x:auto;">
                                 <table class="table" id="datatable">
@@ -78,7 +86,8 @@
                                         <tr>
                                             <th>#</th>
                                             <th>Category ID</th>
-                                            <th>Category</th>
+                                            <th>Main Category</th>
+                                            <th>Public Page</th>
                                             <th>Created On</th>
                                             <th>Status</th>
                                             <th>Actions</th>
@@ -91,6 +100,7 @@
                                                 <td>{{$key + 1}}</td>
                                                 <td>{{$row->id}}</td>
                                                 <td>{{$row->category}}</td>
+                                                <td>{{$row->slug ? url($row->slug) : '--'}}</td>
                                                 <td>{{App\Helpers\Helper::timeStampProcessed($row->created_at)}}</td>
                                                 <td>
                                                     @if($row->status == 0)
@@ -108,7 +118,7 @@
                                                 </td>
                                                 <td>
                                                     <a href="{{url('admin/collections/' . $row->id)}}">
-                                                        <button class="py-2 px-2 fw-bold background-secondary text-dark border border-dark rounded-3">Collections</button>
+                                                        <button class="py-2 px-2 fw-bold background-secondary text-dark border border-dark rounded-3">View Collections</button>
                                                     </a>
                                                     <a href="{{url('admin/categories/delete-category/' . $row->id)}}">
                                                         <button class="btn btn-dark text-light"
@@ -124,15 +134,19 @@
 
                         <!-- Sub Categories -->
                         <div class="tab-pane fade" id="sub-categories">
-                            <p class="mt-2 mb-3 fs-4">Here's the list of all your sub-categories</p>
+                            <p class="mt-2 mb-1 fs-4">Child categories</p>
+                            <p class="text-muted">
+                                Use child categories to build nested product paths. Example: create Italian under Frames,
+                                then create 3mm under Italian to form Frames / Italian / 3mm.
+                            </p>
 
                             <div class="table-box" style="overflow-x:auto;">
                                 <table class="table" id="datatable-2">
                                     <thead>
                                         <tr>
                                             <th>#</th>
-                                            <th>Parent Category</th>
-                                            <th>Sub-Category</th>
+                                            <th>Parent</th>
+                                            <th>Child Category</th>
                                             <th>Category ID</th>
                                             <th>Status</th>
                                             <th>Created On</th>
@@ -191,13 +205,17 @@
         <div class="modal-content">
 
             <div class="modal-header">
-                <h5>Add Category</h5>
+                <h5>Add Main Category</h5>
             </div>
 
             <div class="modal-body">
                 <form action="{{route('add.category')}}" method="POST">
                     @csrf
-                    <input type="text" name="category" class="form-control" required placeholder="Enter category">
+                    <label>Main category name</label>
+                    <input type="text" name="category" class="form-control" required placeholder="Example: Frames">
+                    <p class="text-muted small mb-0 mt-2">
+                        This is the top level. It will be used for pages like /frames. Spaces will automatically become hyphens in the page URL.
+                    </p>
             </div>
 
             <div class="modal-footer">
@@ -216,22 +234,28 @@
         <div class="modal-content">
 
             <div class="modal-header">
-                <h5>Add Sub Category</h5>
+                <h5>Add Child Category</h5>
             </div>
 
             <div class="modal-body">
                 <form action="{{route('submit.sub-categories')}}" method="POST">
                     @csrf
 
+                    <label>Select parent category</label>
                     <select class="form-control" id="subCategorySelect" name="parent_id" required>
-                        <option disabled selected>--- Select Category ---</option>
+                        <option disabled selected>--- Select Parent ---</option>
                         @foreach($allCategoryData as $cat)
                             <option value="{{$cat->id}}">{{$cat->category}}</option>
                         @endforeach
                     </select>
 
+                    <label class="mt-2">Child category name</label>
                     <input type="text" name="category" class="form-control mt-2" required
-                        placeholder="Enter sub category">
+                        placeholder="Example: Italian or 3mm">
+                    <p class="text-muted small mb-0 mt-2">
+                        Choose Frames as parent and enter Italian to create Frames / Italian.
+                        Then choose Italian as parent and enter 3mm to create Frames / Italian / 3mm.
+                    </p>
             </div>
 
             <div class="modal-footer">

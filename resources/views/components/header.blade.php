@@ -37,6 +37,12 @@
 </head>
 
 <body>
+  @php
+    $navbarCategories = Illuminate\Support\Facades\DB::table('category')
+      ->where(['status' => 1, 'parent_id' => 0])
+      ->whereNotNull('slug')
+      ->get();
+  @endphp
 
   <!-- Bootstrap Navbar -->
   <header id="header" class="fixed-top bg-white shadow-sm border-bottom border-dark">
@@ -59,33 +65,19 @@
 
           <ul class="navbar-nav align-items-lg-center fw-bold">
 
-              <li class="nav-item">
-                <a class="nav-link text-dark" href="">Test</a>
-              </li>
+            <li class="nav-item">
+              <a class="nav-link text-dark" href="{{url('/')}}">Home</a>
+            </li>
 
+            @foreach($navbarCategories as $navbarCategory)
               <li class="nav-item">
-                <a class="nav-link text-dark" href="">Test</a>
+                <a class="nav-link text-dark" href="{{url($navbarCategory->slug)}}">{{$navbarCategory->category}}</a>
               </li>
-
-              <li class="nav-item">
-                <a class="nav-link text-dark" href="">Test</a>
-              </li>
-
-              <li class="nav-item">
-                <a class="nav-link text-dark" href="">Test</a>
-              </li>
-
-              <li class="nav-item">
-                <a class="nav-link text-dark" href="">Test</a>
-              </li>
-
-              <li class="nav-item">
-                <a class="nav-link text-dark" href="">Test</a>
-              </li>
+            @endforeach
 
             <!-- Contact Button -->
             <li class="nav-item ms-lg-3 mt-3 mt-lg-0 fw-normal mb-4 mb-lg-0">
-              <a href="#about" class="px-4 py-2 bg-dark text-light border border-0 rounded-3">Contact Us</a>
+              <a href="{{url('/#contact')}}" class="px-4 py-2 bg-dark text-light border border-0 rounded-3">Contact Us</a>
             </li>
 
           </ul>

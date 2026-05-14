@@ -9,12 +9,14 @@ use App\Helpers\Helper;
 class categoryModel extends Model
 {
     use HasFactory;
-    static function insertCategory($category,$parent_id){
-        $getCheck=DB::table("category")->where(['category'=>$category])->first();
+    static function insertCategory($category,$parent_id,$slug = null){
+        $slug = strtolower(preg_replace('/\s+/', '-', trim($slug ?: $category)));
+        $slug = preg_replace('/[^a-z0-9-]/', '', $slug);
+        $getCheck=DB::table("category")->where('category',$category)->orWhere('slug',$slug)->first();
         if($getCheck){
             return 2;
         } 
-            $insert=DB::table("category")->insert(['category'=>$category,'parent_id'=>$parent_id,'created_at'=>Helper::timeStamp()]);
+            $insert=DB::table("category")->insert(['category'=>$category,'slug'=>$slug,'parent_id'=>$parent_id,'created_at'=>Helper::timeStamp()]);
             if($insert){
                 return 1;
             } else {

@@ -10,6 +10,10 @@
         <div class="col-12">
             <h1 class="mb-1">View Collections</h1>
             <p class="text-muted small mb-0 mt-3">Admin / Categories & Collections / View Collections</p>
+            <p class="text-muted mb-0 mt-3">
+                Collections are the final paths created from your category tree. Assign one of these collections to an
+                inventory item so the item appears under the correct main category and child category.
+            </p>
         </div>
     </div>
 
@@ -22,13 +26,16 @@
                     <a href="javascript:history.back()" class="mb-4 text-decoration-none text-dark d-inline-flex align-items-center gap-2 fw-semibold">
                         <i class="bi bi-arrow-left"></i>Back
                     </a>
-                        <p class="fs-4">Here's the list of all your collections</p>
+                        <p class="fs-4 mb-1">Available collection paths</p>
+                        <p class="text-muted">
+                            Example: Frames / Italian / 3mm. When adding inventory, select the most specific collection.
+                        </p>
                         <div class="table-box" style="overflow-x:scroll !important;">
                             <table class="table" id="datatable" style="overflow-x:scroll;">
                                 <thead>
                                     <tr>
                                         <th scope="col">#</th>
-                                        <th scope="col">Collection</th>
+                                        <th scope="col">Collection Path</th>
                                         <th scope="col">Created On</th>
                                     </tr>
                                 </thead>

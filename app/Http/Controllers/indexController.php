@@ -106,16 +106,28 @@ class indexController extends Controller
     }
 
     public function fetchItems($inventory,$category,$sub){
-        $data['web']=DB::table('web_settings')->first();
         $data['item']=DB::table('inventory')->where('id',base64_decode($inventory))->first();
+        if(!$data['item']){
+            return abort(404);
+        }
         $data['relatedItems']=DB::table('inventory')
         ->where(['category_id'=>base64_decode($category),'status'=>1])
         ->where('id','!=',$data['item']->id)->take('3')->get();
         return view('listing',$data);
     }
+    public function categoryPage($categorySlug){
+        $category=DB::table('category')->where(['slug'=>$categorySlug,'parent_id'=>0,'status'=>1])->first();
+        if(!$category){
+            return abort(404);
+        }
+        $data['category']=$category;
+        $data['inventory']=DB::table('inventory')->where(['category_id'=>$category->id,'status'=>1])->get();
+        $data['collections']=DB::table('collections')->where('top_parent_id',$category->id)->get();
+        return view('categoryListing',$data);
+    }
     public function labelPage($key){
         $getLabel=DB::table('labels')->where('unique_hash',$key)->first();
-        if($getLabel->status==0){
+        if(!$getLabel || $getLabel->status==0){
             return abort(404);
         }
         $data['LabelName']=$getLabel->name;
@@ -139,13 +151,11 @@ class indexController extends Controller
             $result[]=$embedArray;
         }
         $data['inventory']=$result;
-        $data['web']=DB::table('web_settings')->first();
         return view('labels',$data);
     }
 
     # ####################### Deprecated search function, IS RE-Useable
     public function search(){
-        $data['web']=DB::table('web_settings')->first();
         if(request()->has('queryString')){
             $query=request()->get('queryString');
             $numberOfWords=$this->get_num_of_words($query);

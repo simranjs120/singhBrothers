@@ -40,7 +40,7 @@ class forgotPasswordController extends Controller
                 $message = "
                     Hi " . $fetchEmail->name . ",
                     <br><br>
-                    Here is your password reset Link: " . env('APP_URL') . "/reset-password/" . $fetchEmail->id . "/" . $fetchEmail->forgot_password_key . ".
+                    Here is your password reset Link: " . route('password.reset', ['id' => $fetchEmail->id, 'token' => $fetchEmail->forgot_password_key]) . ".
                     <br><br>
                     Kindly Reset your password by clicking on this link.
                     <br><br>
@@ -80,7 +80,7 @@ class forgotPasswordController extends Controller
         Log::info('Reset Password Request Started For User ID: ',[$userId]);
         try{
             DB::table('users')->where('id',$userId)->update(['password'=>$password,'forgot_password_key'=>$passwordKey]);
-            return redirect('/login')->with('success', env('PASSWORD_RESET_LINK_SUCCESSFULL'));
+            return redirect()->route('login')->with('success', env('PASSWORD_RESET_LINK_SUCCESSFULL'));
         } catch (Exception $exception){
             Log::error('Exception While Resetting Password: ',[$exception->getMessage()]);
         }

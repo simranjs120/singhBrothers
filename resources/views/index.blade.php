@@ -1,4 +1,44 @@
 <x-header/>
+<style>
+  #queryModal .modal-content {
+    background-color: var(--dark-color) !important;
+    border: 2px solid #fff;
+    border-radius: 10px;
+    color: #fff !important;
+  }
+
+  #queryModal .modal-header,
+  #queryModal .modal-footer {
+    border-color: #2a2a2a;
+  }
+
+  #queryModal .form-control,
+  #queryModal textarea {
+    background-color: var(--primary-color) !important;
+    border: 1px solid var(--secondary-color) !important;
+    color: #fff !important;
+  }
+
+  #queryModal .form-control::placeholder {
+    color: #aaa !important;
+  }
+
+  #queryModal .btn-primary {
+    background-color: var(--secondary-color) !important;
+    border: none !important;
+    color: #000 !important;
+    font-weight: 500;
+  }
+
+  #queryModal .btn-danger {
+    background-color: transparent !important;
+    border: 1px solid #fff !important;
+    color: #fff !important;
+  }
+</style>
+@php
+  $whatsappContact = preg_replace('/\D+/', '', env('WHATSAPP_CONTACT', '919811428583'));
+@endphp
 <!-- ======= Hero Section ======= -->
 <section id="hero" class="d-flex align-items-center justify-content-center">
   <div class="container">
@@ -96,7 +136,6 @@
           </div>
         </div>
       </div>
-
     </div>
   </div>
 </section>
@@ -183,81 +222,6 @@
 </div>
 
 
-<!-- ======= Featured Product Section ======= -->
-<section class="py-2">
-  <div class="container">
-
-    <!-- Title -->
-    <div class="mb-5">
-      <h2 class="fw-bold"><span class="background-secondary text-dark px-1">Best selling</span> item from our collection
-      </h2>
-    </div>
-
-    <div class="row align-items-center g-4">
-
-      <!-- Left Content -->
-      <div class="col-lg-6 order-2 order-lg-1">
-
-        <h3 class="fw-semibold mb-3">3D Frame Item</h3>
-
-        <!-- Badge -->
-        <span class="badge bg-danger mb-3">Festivity Sale</span>
-
-        <!-- Offer -->
-        <p class="mb-2">
-          Free Delivery till midnight, after that delivery charges will apply
-        </p>
-
-        <!-- Pricing -->
-        <div class="mb-2">
-          <span class="text-muted text-decoration-line-through me-2">₹2000</span>
-          <span class="fw-bold fs-4 text-dark">₹1000</span>
-        </div>
-
-        <!-- Urgency -->
-        <p class="text-danger fw-semibold mb-3">
-          Only Few Left Hurry!!
-        </p>
-
-        <!-- Description -->
-        <p class="text-muted">
-          Premium quality frame designed to enhance your interiors.
-          Crafted with precision and durable materials to give your memories a timeless look.
-        </p>
-
-        <!-- CTA -->
-        <div class="d-flex gap-3 flex-wrap">
-          <!-- WhatsApp Button -->
-          <a href="#"
-            class="d-inline-flex align-items-center gap-2 fw-bold px-4 py-2 rounded-3 text-white text-decoration-none"
-            style="background-color:#25D366;">
-
-            <i class="bi bi-whatsapp"></i>
-            Enquire on WhatsApp
-          </a>
-          <!-- Dark Button (Your Theme) -->
-          <a href="#" class="background-primary text-light border border-1 border-dark rounded-3 fw-normal px-4 py-2 text-decoration-none">
-            Request Callback
-          </a>
-        </div>
-
-      </div>
-
-      <!-- Right Image -->
-      <div class="col-lg-6 order-1 order-lg-2">
-
-        <img src="your-image.jpg" class="img-fluid rounded shadow" alt="Product Image"
-          style="max-height:400px; object-fit:cover;">
-
-      </div>
-
-    </div>
-  </div>
-</section>
-<div class="d-flex justify-content-center my-5">
-  <hr style="width:320px; height:2px; background-color:#C8A96A; border:none; opacity:1;">
-</div>
-
 <!-- ======= Categories Section ======= -->
 <section class="py-5">
   <div class="container">
@@ -268,238 +232,44 @@
       <p class="text-muted">Explore our range of products</p>
     </div>
 
+    @php
+      $categoryImages = [
+        'photo frames' => Helper::props('assets/img/portfolio/portfolio-1.jpg'),
+        'frames' => Helper::props('assets/img/portfolio/portfolio-2.jpg'),
+        'pins' => Helper::props('assets/img/portfolio/portfolio-3.jpg'),
+        'mouldings' => Helper::props('assets/img/portfolio/portfolio-4.jpg'),
+        'glass' => Helper::props('assets/img/portfolio/portfolio-5.jpg'),
+        'art' => Helper::props('assets/img/portfolio/portfolio-6.jpg'),
+        'art pieces' => Helper::props('assets/img/portfolio/portfolio-6.jpg'),
+      ];
+      $genericCategoryImage = Helper::props('assets/img/hero-img.png');
+    @endphp
+
     <!-- Grid -->
-    <div class="row">
-
-      <!-- Item -->
-      <div class="col-6 col-lg-3 col-md-6 col-12 mb-5 mb-lg-0">
-        <div class="d-flex flex-column align-items-center" style="transition:0.3s; cursor:pointer;"
-          onmouseover="this.style.transform='translateY(-6px) scale(1.03)'" onmouseout="this.style.transform='none'">
-
-          <!-- Circle Icon -->
-          <div class="d-flex align-items-center background-secondary justify-content-center rounded-circle mb-3"
-            style="width:100px; height:100px;">
-            <i class="bi bi-image fs-1 text-dark"></i>
-          </div>
-
-          <!-- Text -->
-          <p class="mb-0 fs-4 fw-bold">Photo Frames</p>
-        </div>
-      </div>
-
-      <!-- Item -->
-      <div class="col-6 col-lg-3 col-md-6 col-12 mb-5 mb-lg-0">
-        <div class="d-flex flex-column align-items-center" style="transition:0.3s; cursor:pointer;"
-          onmouseover="this.style.transform='translateY(-6px) scale(1.03)'" onmouseout="this.style.transform='none'">
-          <div class="d-flex align-items-center background-secondary justify-content-center rounded-circle mb-3"
-            style="width:100px; height:100px;">
-            <i class="bi bi-square fs-1 text-dark"></i>
-          </div>
-          <p class="mb-0 fs-4 fw-bold">Glass</p>
-        </div>
-      </div>
-
-      <!-- Item -->
-      <div class="col-6 col-lg-3 col-md-6 col-12 mb-5 mb-lg-0">
-        <div class="d-flex flex-column align-items-center" style="transition:0.3s; cursor:pointer;"
-          onmouseover="this.style.transform='translateY(-6px) scale(1.03)'" onmouseout="this.style.transform='none'">
-          <div class="d-flex align-items-center background-secondary justify-content-center rounded-circle mb-3"
-            style="width:100px; height:100px;">
-            <i class="bi bi-bounding-box fs-1 text-dark"></i>
-          </div>
-          <p class="mb-0 fs-4 fw-bold">Mouldings</p>
-        </div>
-      </div>
-
-      <!-- Item -->
-      <div class="col-6 col-lg-3 col-md-6 col-12 mb-5 mb-lg-0">
-        <div class="d-flex flex-column align-items-center" style="transition:0.3s; cursor:pointer;"
-          onmouseover="this.style.transform='translateY(-6px) scale(1.03)'" onmouseout="this.style.transform='none'">
-          <div class="d-flex align-items-center background-secondary justify-content-center rounded-circle mb-3"
-            style="width:100px; height:100px;">
-            <i class="bi bi-palette fs-1 text-dark"></i>
-          </div>
-          <p class="mb-0 fs-4 fw-bold">Art Pieces</p>
-        </div>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-
-<!-- ======= All Products Section ======= -->
-<section class="py-5 mt-2 mt-lg-5">
-  <div class="container">
-
-    <!-- Heading -->
-    <div class="mb-5">
-      <h2 class="fw-bold">Photo Frames</h2>
-    </div>
-
     <div class="row g-4">
-
-      <!-- CARD -->
-      <div class="col-lg-4 col-md-6">
-        <div class="card h-100 border-0 shadow-sm">
-
-          <!-- Image -->
-          <div class="bg-dark d-flex align-items-center justify-content-center" style="height:220px;">
-            <span class="text-white small">Image</span>
-          </div>
-
-          <div class="card-body">
-
-            <!-- Title -->
-            <h5 class="fw-semibold mb-2">3D Frame Item</h5>
-
-            <!-- Badge -->
-            <span class="badge bg-danger mb-2">Festivity Sale</span>
-
-            <!-- Description -->
-            <p class="text-muted small mb-2">
-              Free Delivery till midnight, after that delivery charges will apply
-            </p>
-
-            <!-- Price -->
-            <div class="mb-2">
-              <span class="text-muted text-decoration-line-through me-2">₹2000</span>
-              <span class="fw-bold text-dark">₹1000</span>
+      @foreach($category->where('parent_id', 0)->where('slug', '!=', null) as $categoryItem)
+        @php
+          $categoryName = strtolower(trim($categoryItem->category));
+          $categoryImage = $categoryImages[$categoryName] ?? $genericCategoryImage;
+        @endphp
+        <div class="col-12 col-sm-6 col-lg-3">
+          <a href="{{url($categoryItem->slug)}}" class="text-decoration-none text-dark">
+            <div class="card h-100 border border-dark border-opacity-10 shadow-sm overflow-hidden">
+              <img src="{{$categoryImage}}" class="card-img-top" alt="{{$categoryItem->category}}" style="height:190px; object-fit:cover;">
+              <div class="card-body text-start">
+                <h3 class="h5 fw-bold mb-0">{{$categoryItem->category}}</h3>
+              </div>
             </div>
-
-            <!-- Urgency -->
-            <p class="text-danger fw-semibold small mb-3">
-              Only Few Left Hurry!!
-            </p>
-
-            <!-- Button -->
-            <a href="#"
-              class="background-secondary text-dark border border-1 border-dark rounded-3 fw-bold px-4 py-2 text-decoration-none">
-              Ask Us
-            </a>
-
-          </div>
+          </a>
         </div>
-      </div>
-
-      <!-- CARD -->
-      <div class="col-lg-4 col-md-6">
-        <div class="card h-100 border-0 shadow-sm">
-
-          <div class="bg-dark d-flex align-items-center justify-content-center" style="height:220px;">
-            <span class="text-white small">Image</span>
-          </div>
-
-          <div class="card-body">
-            <h5 class="fw-semibold mb-2">Golden Frame</h5>
-
-            <span class="badge bg-danger mb-2">10% Off</span>
-
-            <p class="text-muted small mb-2">
-              Minimum order is 20 pieces
-            </p>
-
-            <div class="mb-2">
-              <span class="text-muted text-decoration-line-through me-2">₹500</span>
-              <span class="fw-bold text-dark">₹100</span>
-            </div>
-
-            <p class="text-danger fw-semibold small mb-3">
-              Diwali Sale
-            </p>
-
-            <a href="#"
-              class="background-secondary text-dark border border-1 border-dark rounded-3 fw-bold px-4 py-2 text-decoration-none">
-              Ask Us
-            </a>
-          </div>
-
-        </div>
-      </div>
-
-      <!-- CARD -->
-      <div class="col-lg-4 col-md-6">
-        <div class="card h-100 border-0 shadow-sm">
-
-          <div class="bg-dark d-flex align-items-center justify-content-center" style="height:220px;">
-            <span class="text-white small">Image</span>
-          </div>
-
-          <div class="card-body">
-            <h5 class="fw-semibold mb-2">Mix Photo Collage</h5>
-
-            <span class="badge bg-danger mb-2">Fresh Arrivals</span>
-
-            <p class="text-muted small mb-2">
-              Free Delivery till midnight, after that delivery charges will apply
-            </p>
-
-            <div class="mb-2">
-              <span class="text-muted text-decoration-line-through me-2">₹6000</span>
-              <span class="fw-bold text-dark">₹3000</span>
-            </div>
-
-            <p class="text-danger fw-semibold small mb-3">
-              20% off if 2 pieces are ordered
-            </p>
-
-            <a href="#"
-              class="background-secondary text-dark border border-1 border-dark rounded-3 fw-bold px-4 py-2 text-decoration-none">
-              Ask Us
-            </a>
-          </div>
-
-        </div>
-      </div>
+      @endforeach
 
     </div>
-
-    <!-- View All -->
-    <div class="text-center mt-5">
-      <a href="#"
-        class="background-secondary text-dark border border-1 border-dark rounded-3 fw-bold px-5 py-2 text-decoration-none">
-        View All Items
-      </a>
-    </div>
-
   </div>
 </section>
-
-
-
-
-
-
-
-
-
-
-
 
 
 <main id="main">
-  <!-- ======= About Section ======= -->
-  <section id="about" class="about">
-    <div class="container">
-
-      <div class="row">
-        <div class="col-lg-12 pt-4 pt-lg-0 order-2 order-lg-1 content text-center">
-          <h2 class="fw-bold" style="font-weight:900;"># Why we provide you not only with frames but picture perfect
-            memories. 🖼️</h2>
-          <p class="">
-            At Singh Brothers Frames, we specialize in crafting high-quality custom photo frames that preserve your
-            memories with elegance and style. From traditional to modern designs, we offer a wide range of materials,
-            sizes, and finishes to suit every taste. Whether it's for your home, office, or gifting needs, our expert
-            craftsmanship and attention to detail ensure your photos are showcased beautifully. We also provide photo
-            printing, canvas framing, and restoration services to complete your experience. With a commitment to quality
-            and customer satisfaction, we turn your special moments into timeless displays. Visit us today and frame
-            your story with care.
-          </p>
-        </div>
-      </div>
-
-    </div>
-  </section><!-- End About Section -->
 
   <!----------------------------------------------------------------Spotlight Section Start ------------------------------------------------------------------------------------>
   @if($inner_section_spotlight != "" && !empty(json_decode($inventory_section_spotlight)) && $inventoryItemsCount > 0)
@@ -514,7 +284,7 @@
     @endphp
     <section id="spotlight" class="spotlight">
       <div class="container">
-        <div class="text-center">
+        <div>
           <h2 class="spotlight-heading">{{$inner_section_spotlight->name}}</h2>
           <p>{{$inner_section_spotlight->description}}</p>
           <center>
@@ -553,61 +323,83 @@
   @endif
   <!----------------------------------------------------------------Dynamic Sections End ------------------------------------------------------------------------------------>
   <!-- ======= Counts Section ======= -->
-  <!-- <section id="counts" class="counts">
-    <div class="container">
+<section id="counts" class="counts">
+  <div class="container">
 
-      <div class="row no-gutters">
-        <div class="image col-xl-5 d-flex align-items-stretch justify-content-center justify-content-lg-start"></div>
-        <div class="col-xl-7 ps-4 ps-lg-5 pe-4 pe-lg-1 d-flex align-items-stretch">
-          <div class="content d-flex flex-column justify-content-center">
-            <h3>Voluptatem dignissimos provident quasi</h3>
-            <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
-              dolore magna aliqua. Duis aute irure dolor in reprehenderit
-            </p>
-            <div class="row">
-              <div class="col-md-6 d-md-flex align-items-md-stretch">
-                <div class="count-box">
-                  <i class="bi bi-emoji-smile"></i>
-                  <span data-purecounter-start="0" data-purecounter-end="65" data-purecounter-duration="2"
-                    class="purecounter"></span>
-                  <p><strong>Happy Clients</strong> consequuntur voluptas nostrum aliquid ipsam architecto ut.</p>
-                </div>
-              </div>
+    <div class="row no-gutters">
+      <div class="image col-xl-5 d-flex align-items-stretch justify-content-center justify-content-lg-start"></div>
 
-              <div class="col-md-6 d-md-flex align-items-md-stretch">
-                <div class="count-box">
-                  <i class="bi bi-journal-richtext"></i>
-                  <span data-purecounter-start="0" data-purecounter-end="85" data-purecounter-duration="2"
-                    class="purecounter"></span>
-                  <p><strong>Projects</strong> adipisci atque cum quia aspernatur totam laudantium et quia dere tan</p>
-                </div>
-              </div>
+      <div class="col-xl-7 ps-4 ps-lg-5 pe-4 pe-lg-1 d-flex align-items-stretch">
+        <div class="content d-flex flex-column justify-content-center">
 
-              <div class="col-md-6 d-md-flex align-items-md-stretch">
-                <div class="count-box">
-                  <i class="bi bi-clock"></i>
-                  <span data-purecounter-start="0" data-purecounter-end="35" data-purecounter-duration="4"
-                    class="purecounter"></span>
-                  <p><strong>Years of experience</strong> aut commodi quaerat modi aliquam nam ducimus aut voluptate non
-                    vel</p>
-                </div>
-              </div>
+          <h3>Preserving Your Precious Memories with Beautiful Frames</h3>
 
-              <div class="col-md-6 d-md-flex align-items-md-stretch">
-                <div class="count-box">
-                  <i class="bi bi-award"></i>
-                  <span data-purecounter-start="0" data-purecounter-end="20" data-purecounter-duration="4"
-                    class="purecounter"></span>
-                  <p><strong>Awards</strong> rerum asperiores dolor alias quo reprehenderit eum et nemo pad der</p>
-                </div>
+          <p>
+            We offer a wide collection of premium photo frames designed to turn your special moments into timeless memories.
+            From modern designs to classic wooden frames, we help you decorate your home and gift your loved ones with elegance.
+          </p>
+
+          <div class="row">
+
+            <div class="col-md-6 d-md-flex align-items-md-stretch">
+              <div class="count-box">
+                <i class="bi bi-emoji-smile"></i>
+
+                <span data-purecounter-start="0" data-purecounter-end="500"
+                  data-purecounter-duration="2" class="purecounter"></span>
+
+                <p>
+                  <strong>Happy Customers</strong> who trusted us to frame their beautiful memories with quality and care.
+                </p>
               </div>
             </div>
+
+            <div class="col-md-6 d-md-flex align-items-md-stretch">
+              <div class="count-box">
+                <i class="bi bi-images"></i>
+
+                <span data-purecounter-start="0" data-purecounter-end="1200"
+                  data-purecounter-duration="2" class="purecounter"></span>
+
+                <p>
+                  <strong>Frames Delivered</strong> in various styles, sizes, and custom designs for every occasion.
+                </p>
+              </div>
+            </div>
+
+            <div class="col-md-6 d-md-flex align-items-md-stretch">
+              <div class="count-box">
+                <i class="bi bi-clock-history"></i>
+
+                <span data-purecounter-start="0" data-purecounter-end="10"
+                  data-purecounter-duration="3" class="purecounter"></span>
+
+                <p>
+                  <strong>Years of Experience</strong> in crafting elegant photo frame solutions with attention to detail.
+                </p>
+              </div>
+            </div>
+
+            <div class="col-md-6 d-md-flex align-items-md-stretch">
+              <div class="count-box">
+                <i class="bi bi-award"></i>
+
+                <span data-purecounter-start="0" data-purecounter-end="50"
+                  data-purecounter-duration="3" class="purecounter"></span>
+
+                <p>
+                  <strong>Custom Designs</strong> created for weddings, birthdays, family portraits, and special gifts.
+                </p>
+              </div>
+            </div>
+
           </div>
         </div>
       </div>
     </div>
-  </section> -->
+
+  </div>
+</section>
   <!-- End Counts Section -->
 
   <!-- ======= Contact Section ======= -->
@@ -720,92 +512,56 @@
 <script>
 
   $(document).ready(function () {
-    <?php
-# Validate if spotlight section is not empty for any reason then only trigger the ajax.
-
-/* NOTE: If spotlight items are present, then we'll be initiating the function to fetch dynamic sections from SUCCESS of fetchSpotlightItems(),
-so that first spotlight items will be fetched then all dynamic sections will be fetched, Only motive is to make app efficient. */
-if ($inner_section_spotlight != "" && !empty(json_decode($inventory_section_spotlight)) && $inventoryItemsCount > 0) {
-    ?>
-    // Spotlight items
-    fetchSpotlightItems();
-    <?php
-} else {
-  # NOTE: If spotlight items section is not present, Not initiated from admin, function to fetch dynamic section would be triggered instantly. 
-    ?>
     fetchDynamicSections();
-    <?php
-}
-    ?>
   });
 
   function popProductModal(productName, e) {
-    $('#queryModal').modal('show');
+    if (e) {
+      e.preventDefault();
+    }
     $('.product-field').val(productName);
     $('#exampleModalLabel').text("Product: " + productName);
-    e.preventDefault();
+    var queryModal = new bootstrap.Modal(document.getElementById('queryModal'));
+    queryModal.show();
   }
 
-  <?php
-# Validate if spotlight section is not empty for any reason then only trigger the ajax.
-if ($inner_section_spotlight != "" && !empty(json_decode($inventory_section_spotlight)) && $inventoryItemsCount > 0) {
-    ?>
-  /************************************************** Fetch Spotlight content Start************************************************************/
-  function fetchSpotlightItems() {
-    const spotlightArray = [];
-    var spotlightCount ={{$spotlightCount}};
-    for (var s = 0; s < spotlightCount; s++) {
-      spotlightArray.push($('#inventory_item_' + s).val());
+  function productPriceHtml(item) {
+    var strikerPrice = item.strikerPrice ? "<span class='text-muted text-decoration-line-through me-2'>&#8377;" + item.strikerPrice + "</span>" : "";
+    return "<div class='mb-2'>" + strikerPrice + "<span class='fw-bold text-dark'>&#8377;" + item.actualPrice + "</span></div>";
+  }
+
+  function productCardHtml(item, imgPath, href) {
+    var offerBadge = item.offerBadge ? "<span class='badge bg-danger mb-2'>" + item.offerBadge + "</span>" : "";
+    var importantNote = item.importantNote ? "<p class='text-muted small mb-2'>" + item.importantNote + "</p>" : "";
+    var salePitch = item.salePitch ? "<p class='text-danger fw-semibold small mb-3'>" + item.salePitch + "</p>" : "";
+    var whatsAppText = encodeURIComponent("Hi, I want to ask about " + item.itemName);
+    var whatsAppUrl = "https://wa.me/{{$whatsappContact}}?text=" + whatsAppText;
+    var imageHtml = "<img src='" + imgPath + "/" + item.thumbnailimg + "' class='card-img-top' alt='Image could not be loaded' style='height:220px; object-fit:cover;'>";
+    var titleHtml = "<h5 class='fw-semibold mb-2 text-dark'>" + item.itemName + "</h5>";
+
+    if (href) {
+      imageHtml = "<a href='" + href + "'>" + imageHtml + "</a>";
+      titleHtml = "<a href='" + href + "' class='text-decoration-none'><h5 class='fw-semibold mb-2 text-dark'>" + item.itemName + "</h5></a>";
     }
 
-    // Ajax call to fetch inventory items based on IDs
-    $.ajax({
-      url: "{{url('admin/fetch-spotlight-item-from-id')}}",
-      method: 'GET',
-      dataType: 'json',
-      data: {
-        ids: spotlightArray
-      },
-      success: function (response) {
-        var imgPath = "{{Helper::props('admin/inventoryImages/')}}";
-        var count = response.countOfSpotlightInventory;
-        for (let i = 0; i <= count - 1; i++) {
-          var content =
-            "<div class='box p-3'>" +
-            "<div class='card'>" +
-            "<img src='" + imgPath + '/' + response.data[i].thumbnailimg + "' class='img-fluid p-2'/>" +
-            "<p style='text-align:left; margin-left:10px;'>" +
-            "<span class='badge badge-spotlight'>" + (response.data[i].offerBadge || '') + "</span>" +
-            "</p>" +
-            "<h4 class='spotlight-itemName'>" + response.data[i].itemName + "</h4>" +
-            "<p class='text-dark text-start' style='margin:0px 0px 0px 10px;'>" + (response.data[i].importantNote || '') + "</p>" +
-            "<h4 class='spotlight-pricetag'><s>" + (response.data[i].strikerPrice || '') + "</s> ₹" + response.data[i].actualPrice + "</h4>" +
-            "<h6 class='text-danger' style='font-weight:bold;text-align:left; padding-left:10px;'>" + (response.data[i].salePitch || '') + "</h6>" +
-            "<div class='d-flex'>" +
-            "<button type='button' class='btn btn-primary' onclick='return popProductModal(\"" + response.data[i].itemName + "\");' style='width:30%; margin:10px 0px 25px 10px;'>Ask Us</button>" +
-            "<br/><br/>" +
-            "</div>" +
-            "</div>" +
-            "</div>";
+    var card =
+      "<div class='card h-100 border border-dark border-opacity-10 shadow-sm overflow-hidden'>" +
+      imageHtml +
+      "<div class='card-body'>" +
+      titleHtml +
+      offerBadge +
+      importantNote +
+      productPriceHtml(item) +
+      salePitch +
+      "<div class='d-flex justify-content-start align-items-center gap-2 flex-wrap'>" +
+      "<button type='button' class='background-secondary text-dark border border-1 border-dark rounded-3 fw-bold px-4 py-2 redirectBlock' onclick='return popProductModal(\"" + item.itemName + "\");'>Ask Now</button>" +
+      "<a href='" + whatsAppUrl + "' target='_blank' class='d-inline-flex align-items-center gap-2 fw-bold px-4 py-2 rounded-3 text-white text-decoration-none border border-1 border-dark' style='background-color:#25D366;'><i class='bi bi-whatsapp'></i>Ask on WhatsApp</a>" +
+      "</div>" +
+      "</div>" +
+      "</div>";
 
-          // Append the content to HTML
-          $('.spotlight-render-here').append(content);
-        }
-
-        $(".loader-spotlight").hide();
-
-        // Trigger slick slider after the content has been loaded, Otherwise slick won't work if pre-initialised.
-        triggerSlickSlider();
-        fetchDynamicSections();
-      },
-      error: function (error) {
-        // alert(JSON.stringify(error));
-        alert("Fatal Error: Some content could not be loaded !!");
-      }
-    });
+    return card;
   }
-  /************************************************ Fetch Spotlight content End ************************************************************/
-  <?php } ?>
 
   <?php
 # Validate if dynamic section is not empty for any reason then only trigger the ajax.
@@ -826,10 +582,8 @@ if ($inner_sections != "" && !empty(json_decode($inventory_section_dynamic)) && 
         var imgPath = "{{Helper::props('admin/inventoryImages/')}}";
         var count = response.countOfDynamicItems;
         for (let i = 0; i <= count - 1; i++) {
-          // If section type is "Galaxy" start.
-          if (response.data[i].section_data.type == "galaxy" && response.data[i].inventory_ids.length != 0) {
-            // Render heading first because inside we've multiple items inside, but outside we only have 1 heading & description,
-            // We'll render the boxes inside this rendered ROW.
+          
+          if (response.data[i].section_data.type == "horizontal" && response.data[i].inventory_ids.length != 0) {
             var heading = "<div class='galaxy container mt-4'>" +
               "<div class='section-title'>" +
               "<h2 class='text-dark'>" + response.data[i].section_data.name + "</h2>" +
@@ -850,11 +604,13 @@ if ($inner_sections != "" && !empty(json_decode($inventory_section_dynamic)) && 
                 "<h6 class='text-dark mt-2'>" + (response.data[i].inventory_ids[g].importantNote || '') + "</h6>" +
                 "<h5 class='dynamic-amount text-dark mt-2'><s>" + (response.data[i].inventory_ids[g].strikerPrice || '') + "</s> ₹" + response.data[i].inventory_ids[g].actualPrice + "</h5>" +
                 "<h6 class='text-danger'><b>" + (response.data[i].inventory_ids[g].salePitch || '') + "</b></h6>" +
-                "<button type='button' class='btn btn-primary mt-2 redirectBlock' onclick='return popProductModal(\"" + response.data[i].inventory_ids[g].itemName + "\");'>Ask Us</button>" +
+                "<button type='button' class='btn btn-primary mt-2 redirectBlock' onclick='return popProductModal(\"" + response.data[i].inventory_ids[g].itemName + "\");'>Ask Now</button>" +
                 "</div>" +
                 "</a>" +
                 "</div>";
 
+              var itemHref = "{{env('APP_URL')}}/listing/" + btoa(response.data[i].inventory_ids[g].id) + "/" + btoa(response.data[i].inventory_ids[g].category_id) + "/" + btoa(response.data[i].inventory_ids[g].sub_category_id);
+              content = "<div class='col-lg-4 col-md-6 d-flex align-items-stretch p-2'>" + productCardHtml(response.data[i].inventory_ids[g], imgPath, itemHref) + "</div>";
               $('.render-dynamic-sections').children().last().find('.row').append(content);
             }
 
@@ -862,7 +618,7 @@ if ($inner_sections != "" && !empty(json_decode($inventory_section_dynamic)) && 
             var footer;
             if (response.data[i].section_data.button == 1) {
               footer = "</div><br/>" +
-                "<a href='" + response.data[i].section_data.url + "'><center><button type='button' class='btn btn-success btn-lg'>View all items <i class='bx bxs-right-arrow'></i></button></center></a>" +
+                "<div class='text-center'><a href='" + response.data[i].section_data.url + "' class='background-secondary text-dark border border-1 border-dark rounded-3 fw-bold px-5 py-2 text-decoration-none'>View More <i class='bi bi-arrow-right'></i></a></div>" +
                 "</div><br/><br/>";
             } else {
               footer = "</div>" +
@@ -878,11 +634,8 @@ if ($inner_sections != "" && !empty(json_decode($inventory_section_dynamic)) && 
               }
             });
           }
-          // If section type is "Galaxy" end.
-
-          // If setion type is "Star" start.
-          if (response.data[i].section_data.type == "star" && response.data[i].inventory_ids.length != 0) {
-            // Create the section heading
+          
+          if (response.data[i].section_data.type == "vertical" && response.data[i].inventory_ids.length != 0) {
             var heading = "<div class='star container mt-4'>" +
               "<div class='section-title'>" +
               "<h2 class='text-dark'>" + response.data[i].section_data.name + "</h2>" +
@@ -909,11 +662,13 @@ if ($inner_sections != "" && !empty(json_decode($inventory_section_dynamic)) && 
                 "<h5 class='dynamic-amount text-dark mt-2'><s>" + (response.data[i].inventory_ids[g].strikerPrice || '') + "</s> ₹" + response.data[i].inventory_ids[g].actualPrice + "</h5>" +
                 "<h6 class='text-danger'><b>" + (response.data[i].inventory_ids[g].salePitch || '') + "</b></h6>" +
                 "<p class='text-dark'>" + response.data[i].inventory_ids[g].itemDescription.substring(0, 400) + "...</p>" +
-                "<button type='button' class='btn btn-primary mt-2 redirectBlock' onclick='return popProductModal(\"" + response.data[i].inventory_ids[g].itemName + "\");'>Ask Us</button>" +
+                "<button type='button' class='btn btn-primary mt-2 redirectBlock' onclick='return popProductModal(\"" + response.data[i].inventory_ids[g].itemName + "\");'>Ask Now</button>" +
                 "</div>" +
                 "</div>" +
                 "</div>" +
                 "</a><br/><br/><br/><br/>";
+              var itemHref = "{{env('APP_URL')}}/listing/" + btoa(response.data[i].inventory_ids[g].id) + "/" + btoa(response.data[i].inventory_ids[g].category_id) + "/" + btoa(response.data[i].inventory_ids[g].sub_category_id);
+              content = "<div class='mb-4'>" + productCardHtml(response.data[i].inventory_ids[g], imgPath, itemHref) + "</div>";
               // Append content to the last row
               $('.render-dynamic-sections').children().last().find('.star-box').append(content);
             }
@@ -921,7 +676,7 @@ if ($inner_sections != "" && !empty(json_decode($inventory_section_dynamic)) && 
             var footer;
             if (response.data[i].section_data.button == 1) {
               footer = "</div>" +
-                "<a href='" + response.data[i].section_data.url + "'><center><button type='button' class='btn btn-success btn-lg' style='margin-top:-40px;'>View all items <i class='bx bxs-right-arrow'></i></button></center></a>" +
+                "<div class='text-center'><a href='" + response.data[i].section_data.url + "' class='background-secondary text-dark border border-1 border-dark rounded-3 fw-bold px-5 py-2 text-decoration-none'>View More <i class='bi bi-arrow-right'></i></a></div>" +
                 "</div><br/><br/><br/>";
             } else {
               footer = "</div>" +
@@ -936,71 +691,10 @@ if ($inner_sections != "" && !empty(json_decode($inventory_section_dynamic)) && 
               }
             });
           }
-          // Section type "Star" end.
 
-          // If section type "Nebula" start.
-          if (response.data[i].section_data.type == "nebula" && response.data[i].inventory_ids.length != 0) {
-            // Create the section heading
-            var heading = "<div class='nebula container mt-4'>" +
-              "<div class='section-title'>" +
-              "<h2 class='text-dark'>" + response.data[i].section_data.name + "</h2>" +
-              "<p class='text-dark'>" + (response.data[i].section_data.description || '') + "</p>" +
-              "</div>" +
-              "<div class='container nebula-slick'>";
-
-            // Append heading to the section
-            $('.render-dynamic-sections').append(heading);
-
-            // Loop through inventory items
-            for (var g = 0; g < response.data[i].inventory_ids.length; g++) { // Use < for length check
-              var content =
-                "<a href='{{env('APP_URL')}}/listing/" + btoa(response.data[i].inventory_ids[g].id) + "/" + btoa(response.data[i].inventory_ids[g].category_id) + "/" + btoa(response.data[i].inventory_ids[g].sub_category_id) + "'>" +
-                "<div class='member'>" +
-                "<div class='member-img'>" +
-                "<img src='" + imgPath + '/' + response.data[i].inventory_ids[g].thumbnailimg + "' class='img-fluid text-dark' alt='Image could not be loaded'>" +
-                "</div>" +
-                "<div class='member-info'>" +
-                "<h4>" + response.data[i].inventory_ids[g].itemName + "</h4>" +
-                "<span class='badge badge-spotlight'>" + (response.data[i].inventory_ids[g].offerBadge || '') + "</span>" +
-                "<h6 class='text-dark mt-2'>" + (response.data[i].inventory_ids[g].importantNote || '') + "</h6>" +
-                "<h5 class='dynamic-amount text-dark mt-2'><s>" + (response.data[i].inventory_ids[g].strikerPrice || '') + "</s> ₹" + response.data[i].inventory_ids[g].actualPrice + "</h5>" +
-                "<h6 class='text-danger'><b>" + (response.data[i].inventory_ids[g].salePitch || '') + "</b></h6>" +
-                "<button type='button' class='btn btn-primary mt-2 redirectBlock' onclick='return popProductModal(\"" + response.data[i].inventory_ids[g].itemName + "\");'>Ask Us</button>" +
-                "</div>" +
-                "</div>" +
-                "</a>";
-
-              // Append content to the last row
-              $('.render-dynamic-sections').children().last().find('.nebula-slick').append(content);
-            }
-
-            // Ending the ROW & div here as all the items are already rendered. validate if button is there
-            var footer;
-            if (response.data[i].section_data.button == 1) {
-              footer =
-                "<a href='" + response.data[i].section_data.url + "'><center><button type='button' class='btn btn-success btn-lg'>View all items <i class='bx bxs-right-arrow'></i></button></center></a>" +
-                "<br/><br/></div>" +
-                "</div><br/>";
-            } else {
-              footer = "</div>" +
-                "</div><br/>";
-            }
-
-            // Append footer
-            $('.render-dynamic-sections').append(footer);
-            // Prevent click inside on buttons in cards
-            $('.redirectBlock').on('click', function (e) {
-              if ($(e.target).is('.redirectBlock')) {
-                e.preventDefault();
-              }
-            });
-          }
-          // Section type "nebula" end.
         }
         $(".loader-sections").hide();
 
-        // Trigger slick slider after the content has been loaded, Otherwise slick won't work if pre-initialised.
-        triggerSlickSlider();
       },
       error: function (error) {
         // alert(JSON.stringify(error));
@@ -1010,73 +704,6 @@ if ($inner_sections != "" && !empty(json_decode($inventory_section_dynamic)) && 
   }
   /************************************************** Fetch dynamic content End ************************************************************/
   <?php } ?>
-
-
-  function triggerSlickSlider() {
-    $('.nebula-slick').slick({
-      infinite: true,
-      dots: false,
-      speed: 800,
-      autoplay: true,
-      autoplaySpeed: 2000,
-      prevArrow: false,
-      nextArrow: false,
-      slidesToShow: 3,
-      slidesToScroll: 1,
-      responsive: [
-        {
-          breakpoint: 994,
-          settings: {
-            slidesToShow: 2,
-            slidesToScroll: 1,
-          }
-        },
-        {
-          breakpoint: 768,
-          settings: {
-            slidesToShow: 1,
-            slidesToScroll: 1
-          }
-        }
-      ]
-    });
-    // $('.star-box').slick({
-    //   infinite: true,
-    //   dots: false,
-    //   speed: 1000,
-    //   autoplay: true,
-    //   autoplaySpeed: 2000,
-    //   prevArrow: false,
-    //   nextArrow: false,
-    //   slidesToShow: 1,
-    //   slidesToScroll: 1,
-    // });
-    $('.spotlight-render-here').slick({
-      infinite: true,
-      dots: false,
-      speed: 300,
-      autoplay: true,
-      autoplaySpeed: 2000,
-      prevArrow: false,
-      nextArrow: false,
-      slidesToShow: 3,
-      slidesToScroll: 1,
-      responsive: [
-        {
-          breakpoint: 994,
-          settings: {
-            slidesToShow: 2,
-            slidesToScroll: 1,
-          }
-        },
-        {
-          breakpoint: 768,
-          settings: {
-            slidesToShow: 1,
-            slidesToScroll: 1
-          }
-        }
-      ]
-    });
-  }
 </script>
+
+

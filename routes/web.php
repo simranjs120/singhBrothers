@@ -4,7 +4,6 @@ use App\Http\Controllers\inventoryController as inventory;
 use App\Http\Controllers\categoryController as category;
 use App\Http\Controllers\adminDashboardController as dashboard;
 use App\Http\Controllers\userProfileController as userProfile;
-use App\Http\Controllers\landingSectionController as landingSection;
 use App\Http\Controllers\indexController as index;
 use App\Http\Controllers\labelsController as labels;
 use App\Http\Controllers\innerSectionController as innerSection;
@@ -17,16 +16,9 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [index::class, 'index']);
 Route::get('listing/{inventory}/{category}/{sub}',[index::class,'fetchItems']);
 Route::get('p/{key}',[index::class,'labelPage']);
-Route::any('admin/fetch-spotlight-item-from-id', [index::class, 'fetchSpotlightItems']);
 Route::any('admin/fetch-dynamic-item-from-id', [index::class, 'fetchDynamicItems']);
 Route::get('search/{queryString?}',[index::class,'search']);
 Route::get('{categorySlug}',[index::class,'categoryPage']);
-
-
-# Cron job modules to auto enable/disable offers
-// Route::get('/autoEnable', [offers::class, 'autoEnable']);
-// Route::get('/autoDisable', [offers::class, 'autoDisable']);
-
 
 # Admin Modules
 Route::get('admin/dashboard',  [dashboard::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard');
@@ -44,25 +36,12 @@ Route::middleware('auth')->group(function () {
     Route::get('/admin/view-inventory/{id}', [inventory::class, 'viewInventory']);
     Route::get('/admin/change-inventory-status/{status}/{id}', [inventory::class, 'changeInventoryStatus']);
     Route::get('/admin/delete-inventory/{id}', [inventory::class, 'deleteInventory']);
-    
-    # Offers Module, Deprecating as of now.
-    // Route::get('/admin/offers', [offers::class, 'index']);
-    // Route::post('/admin/submitOffers', [offers::class, 'submitOffers'])->name('submit.offers');
-    // Route::post('/admin/editOffers', [offers::class, 'editOffers'])->name('edit.offers');
-    // Route::get('admin/change-offer-status/{status}/{id}', [offers::class, 'changeOfferStatus']);
-    // Route::get('admin/delete-offers/{id}', [offers::class, 'deleteOffers']);
 
     # Profile module
     Route::get('/admin/my-profile', [userProfile::class, 'index']);
     Route::post('/admin/my-profile', [userProfile::class, 'updateProfile'])->name('update.profile');
     Route::get('/admin/add-user', [userProfile::class, 'addNewUserRender']);
     Route::post('/admin/add-user', [userProfile::class, 'addNewUser'])->name('add.newUser');
-    
-    # Landing Section Module
-    Route::get('/admin/landing-section', [landingSection::class, 'index']);
-    Route::post('/admin/configureNavTab', [landingSection::class, 'configureNavTab'])->name('configure.tab');
-    Route::post('/admin/configureLandingHeadings', [landingSection::class, 'configureLandingHeadings'])->name('configure.headings');
-    Route::post('/admin/add-her-bg', [landingSection::class, 'heroBg'])->name('add.hero-bg');
 
     # Label section Module
     Route::get('/admin/labels', [labels::class, 'index']);

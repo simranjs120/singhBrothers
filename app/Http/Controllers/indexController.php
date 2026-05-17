@@ -46,29 +46,6 @@ class indexController extends Controller
         return view('index',$data);
     }
 
-    public function fetchSpotlightItems(Request $request){
-        $ids=$request->ids;
-        $countItems=count($ids);
-
-        $embedArray=[];
-        $result=[];
-        for($i=0;$i<$countItems;$i++){
-            $getInventory=DB::table('inventory')->where('id',$ids[$i])->first();
-            $embedArray['thumbnailimg']=$getInventory->thumbnailimg;
-            $embedArray['itemName']=$getInventory->itemName;
-            $embedArray['strikerPrice']=$getInventory->strikerPrice;
-            $embedArray['actualPrice']=$getInventory->actualPrice;
-            $embedArray['salePitch']=$getInventory->salePitch;
-            $embedArray['offerBadge']=$getInventory->offerBadge;
-            $embedArray['importantNote']=$getInventory->importantNote;
-            $result[]=$embedArray;
-        }
-        return json_encode([
-            'data'=>$result,
-            'countOfSpotlightInventory'=>count($result)
-        ]);
-    }
-
     public function fetchDynamicItems(Request $request){
         $array=json_decode($request->array);
         $incomingArray=[];

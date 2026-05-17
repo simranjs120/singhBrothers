@@ -22,7 +22,7 @@
       <div class="dropdown-menu w-100 shadow border-0" aria-labelledby="sidebarProfileDropdown">
         <a class="dropdown-item" href="{{url('/admin/my-profile')}}">My Profile</a>
         <a class="dropdown-item" href="{{url('/admin/add-user')}}">Add New User</a>
-        <form action="{{url('logout')}}" method="post">
+        <form action="{{route('logout')}}" method="post">
           @csrf
           <button class="dropdown-item" type="submit">Sign Out</button>
         </form>

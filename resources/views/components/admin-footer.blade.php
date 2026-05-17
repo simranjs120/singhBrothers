@@ -1,14 +1,45 @@
 </div>
 <!-- content-wrapper ends -->
+
 <!-- partial:partials/_footer.html -->
-<footer class="footer">
-  <div class="d-sm-flex justify-content-center justify-content-sm-between">
-    <span class="text-muted text-center text-sm-left d-block d-sm-inline-block">Designed by <a
-        href="https://www.sjuniq.com/" target="_blank">sjuniq</a> from Simranjeet Singh.</span>
-    <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center">Copyright © 2024. Singh Brothers Frames.</span>
+<footer class="footer border-top bg-white py-3 mt-4">
+  <div class="container-fluid">
+
+    <div class="d-flex flex-column flex-md-row align-items-center justify-content-between gap-2">
+
+      <!-- Left -->
+      <div class="text-center text-md-start">
+        <h6 class="mb-1 fw-semibold text-dark">
+          Singh Brothers Frames
+        </h6>
+
+        <p class="mb-0 text-muted small">
+          Premium photo frames crafted to preserve your beautiful memories.
+        </p>
+      </div>
+
+      <!-- Center -->
+      <div class="text-center">
+        
+      </div>
+
+      <!-- Right -->
+      <div class="text-center text-md-end">
+        <span class="text-bold fw-semibold small">
+          Designed & Developed by
+          <a href="https://www.sjunique.com/" target="_blank"
+            class="text-decoration-none fw-bold color-secondary">
+            SjUnique
+          </a>
+        </span>
+      </div>
+
+    </div>
+
   </div>
 </footer>
 <!-- partial -->
+
 </div>
 <!-- main-panel ends -->
 </div>

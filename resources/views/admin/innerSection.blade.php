@@ -139,10 +139,8 @@
                     <label class="mt-2">Select section type <span class="asterik">*</span></label>
                     <select class="form-control"  name="type" required>
                         <option value="" selected disabled>--Select--</option>
-                        <option value="spotlight">**Spotlight**</option>
-                        <option value="star">Star</option>
-                        <option value="galaxy">Galaxy</option>
-                        <option value="nebula">Nebula</option>
+                        <option value="horizontal">Horizontal List</option>
+                        <option value="vertical">Vertical List</option>
                     </select>
 
                     <label class="mt-2">Need a button? <span class="asterik">*</span></label>

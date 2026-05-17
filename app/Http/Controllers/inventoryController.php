@@ -44,87 +44,21 @@ class inventoryController extends Controller
     public function submitInventoryChanges(Request $request)
     {
         try {
+            $request->validate([
+                'thumbnailimg' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:6144',
+                'productimg1' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:6144',
+                'productimg2' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:6144',
+                'productimg3' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:6144',
+            ]);
             Log::info('Inventory edit request by User ID: ', [Auth::id()]);
-            $imageName = "";
-            $imageName1 = "";
-            $imageName2 = "";
-            $imageName3 = "";
-            Log::info('Inventory edit Request: ', [$request->except(['_token'])]);
+            Log::info('Inventory edit Request: ', [$request->except(['_token', 'thumbnailimg', 'productimg1', 'productimg2', 'productimg3'])]);
 
             $previousData = inventory::getInventoryWithId($request->id);
 
-            # Check if images are also changed, If yes, Delete the previous images first to avoid redundant data.
-            if ($request->thumbnailimg != "") {
-                # Delete the previous image
-                File::delete(public_path('admin/inventoryImages/') . $previousData->thumbnailimg);
-                # Thumbnail Image 
-                $thumbnailImageName = "thumbnail-img-" . time();
-                $imageName = $thumbnailImageName . '.' . $request->thumbnailimg->extension();
-                $moveThumbnailImg = $request->thumbnailimg->move(public_path('admin/inventoryImages'), $imageName);
-                if (!$moveThumbnailImg) {
-                    Log::error('Thumbnail EDIT ADDITION FAILED for Inventory EDIT ADDITION Request: ', [$request->except(['_token'])]);
-                    return redirect()->back()->with('error', 'Error: Request Rejected, Could not upload thumbnail image !!');
-                }
-                Log::info('Thumbnail EDIT ADDED for Inventory EDIT ADDITION Request: ', [$request->except(['_token'])]);
-            }
-            # If user has not edited any images, so that values should be the same as the previous ones, Setting default value before insert action.
-            else {
-                $imageName = $previousData->thumbnailimg;
-            }
-
-            if ($request->productimg1 != "") {
-                # Delete the previous image
-                File::delete(public_path('admin/inventoryImages/') . $previousData->productimg1);
-                # Product Image 1
-                $productImage1 = "product-img-1-" . time();
-                $imageName1 = $productImage1 . '.' . $request->productimg1->extension();
-                $moveProductImg1 = $request->productimg1->move(public_path('admin/inventoryImages'), $imageName1);
-                if (!$moveProductImg1) {
-                    Log::error('Product Image 1 FAILED for Inventory EDIT ADDITION Request: ', [$request->except(['_token'])]);
-                    return redirect()->back()->with('error', 'Error: Request Rejected, Could not upload product image 1 !!');
-                }
-                Log::info('Product Image 1 EDIT ADDED for Inventory EDIT ADDITION Request: ', [$request->except(['_token'])]);
-            }
-            # If user has not edited any images, so that values should be the same as the previous ones, Setting default value before insert action.
-            else {
-                $imageName1 = $previousData->productimg1;
-            }
-
-            if ($request->productimg2 != "") {
-                # Delete the previous image
-                File::delete(public_path('admin/inventoryImages/') . $previousData->productimg2);
-                # Product Image 2
-                $productImage2 = "product-img-2-" . time();
-                $imageName2 = $productImage2 . '.' . $request->productimg2->extension();
-                $moveProductImg2 = $request->productimg2->move(public_path('admin/inventoryImages'), $imageName2);
-                if (!$moveProductImg2) {
-                    Log::error('Product Image 2 FAILED for Inventory EDIT ADDITION Request: ', [$request->except(['_token'])]);
-                    return redirect()->back()->with('error', 'Error: Request Rejected, Could not upload product image 2 !!');
-                }
-                Log::info('Product Image 2 EDIT ADDED for Inventory EDIT ADDITION Request: ', [$request->except(['_token'])]);
-            }
-            # If user has not edited any images, so that values should be the same as the previous ones, Setting default value before insert action.
-            else {
-                $imageName2 = $previousData->productimg2;
-            }
-
-            if ($request->productimg3 != "") {
-                # Delete the previous image
-                File::delete(public_path('admin/inventoryImages/') . $previousData->productimg3);
-                # Product Image 3
-                $productImage3 = "product-img-3-" . time();
-                $imageName3 = $productImage3 . '.' . $request->productimg3->extension();
-                $moveProductImg3 = $request->productimg3->move(public_path('admin/inventoryImages'), $imageName3);
-                if (!$moveProductImg3) {
-                    Log::error('Product Image 3 FAILED for Inventory EDIT ADDITION Request: ', [$request->except(['_token'])]);
-                    return redirect()->back()->with('error', 'Error: Request Rejected, Could not upload product image 3 !!');
-                }
-                Log::info('Product Image 3 EDIT ADDED for Inventory EDIT ADDITION Request: ', [$request->except(['_token'])]);
-            }
-            # If user has not edited any images, so that values should be the same as the previous ones, Setting default value before insert action.
-            else {
-                $imageName3 = $previousData->productimg3;
-            }
+            $imageName = $this->uploadInventoryImage($request, 'thumbnailimg', 'thumbnail-img', $previousData->thumbnailimg);
+            $imageName1 = $this->uploadInventoryImage($request, 'productimg1', 'product-img-1', $previousData->productimg1);
+            $imageName2 = $this->uploadInventoryImage($request, 'productimg2', 'product-img-2', $previousData->productimg2);
+            $imageName3 = $this->uploadInventoryImage($request, 'productimg3', 'product-img-3', $previousData->productimg3);
 
 
             $getcateAndSubCat = inventory::getcateAndSubCat($request->collection_id);
@@ -168,6 +102,8 @@ class inventoryController extends Controller
             }
             Log::error('Error occured while updating inventory for payload: ', [$request->except(['_token'])]);
             return redirect()->back()->with('error', 'An error occured !! Please try again !!');
+        } catch (\Illuminate\Validation\ValidationException $e) {
+            throw $e;
         } catch (\Exception $e) {
             Log::error('Exception in submit inventory changes function: ' . $e->getMessage());
             return redirect()->back()->with('error', 'Something went wrong!! Please try again !');
@@ -178,60 +114,19 @@ class inventoryController extends Controller
     public function submitInventory(Request $request)
     {
         try {
+            $request->validate([
+                'thumbnailimg' => 'required|image|mimes:jpg,jpeg,png,webp|max:6144',
+                'productimg1' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:6144',
+                'productimg2' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:6144',
+                'productimg3' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:6144',
+            ]);
             Log::info('Inventory submit request by User ID: ', [Auth::id()]);
-            // These 3 variables are for 3 product images, Product images are optional, So declaring them here as blank value to avoid null exception.
-            $imageName1 = "";
-            $imageName2 = "";
-            $imageName3 = "";
+            Log::info('New Inventory Addition Request: ', [$request->except(['_token', 'thumbnailimg', 'productimg1', 'productimg2', 'productimg3'])]);
 
-            Log::info('New Inventory Addition Request: ', [$request->except(['_token'])]);
-
-            # Thumbnail Image 
-            $thumbnailImageName = "thumbnail-img-" . time();
-            $imageName = $thumbnailImageName . '.' . $request->thumbnailimg->extension();
-            $moveThumbnailImg = $request->thumbnailimg->move(public_path('admin/inventoryImages'), $imageName);
-            if (!$moveThumbnailImg) {
-                Log::error('Thumbnail addition FAILED for Inventory Addition Request: ', [$request->except(['_token'])]);
-                return redirect()->back()->with('error', 'Error: Request Rejected, Could not upload thumbnail image !!');
-            }
-            Log::info('Thumbnail added for Inventory Addition Request: ', [$request->except(['_token'])]);
-
-
-            if ($request->productimg1 != "") {
-                # Product Image 1
-                $productImage1 = "product-img-1-" . time();
-                $imageName1 = $productImage1 . '.' . $request->productimg1->extension();
-                $moveProductImg1 = $request->productimg1->move(public_path('admin/inventoryImages'), $imageName1);
-                if (!$moveProductImg1) {
-                    Log::error('Product Image 1 FAILED for Inventory Addition Request: ', [$request->except(['_token'])]);
-                    return redirect()->back()->with('error', 'Error: Request Rejected, Could not upload product image 1 !!');
-                }
-                Log::info('Product Image 1 added for Inventory Addition Request: ', [$request->except(['_token'])]);
-            }
-
-            if ($request->productimg2 != "") {
-                # Product Image 2
-                $productImage2 = "product-img-2-" . time();
-                $imageName2 = $productImage2 . '.' . $request->productimg2->extension();
-                $moveProductImg2 = $request->productimg2->move(public_path('admin/inventoryImages'), $imageName2);
-                if (!$moveProductImg2) {
-                    Log::error('Product Image 2 FAILED for Inventory Addition Request: ', [$request->except(['_token'])]);
-                    return redirect()->back()->with('error', 'Error: Request Rejected, Could not upload product image 2 !!');
-                }
-                Log::info('Product Image 2 added for Inventory Addition Request: ', [$request->except(['_token'])]);
-            }
-
-            if ($request->productimg3 != "") {
-                # Product Image 3
-                $productImage3 = "product-img-3-" . time();
-                $imageName3 = $productImage3 . '.' . $request->productimg3->extension();
-                $moveProductImg3 = $request->productimg3->move(public_path('admin/inventoryImages'), $imageName3);
-                if (!$moveProductImg3) {
-                    Log::error('Product Image 3 FAILED for Inventory Addition Request: ', [$request->except(['_token'])]);
-                    return redirect()->back()->with('error', 'Error: Request Rejected, Could not upload product image 3 !!');
-                }
-                Log::info('Product Image 3 added for Inventory Addition Request: ', [$request->except(['_token'])]);
-            }
+            $imageName = $this->uploadInventoryImage($request, 'thumbnailimg', 'thumbnail-img');
+            $imageName1 = $this->uploadInventoryImage($request, 'productimg1', 'product-img-1');
+            $imageName2 = $this->uploadInventoryImage($request, 'productimg2', 'product-img-2');
+            $imageName3 = $this->uploadInventoryImage($request, 'productimg3', 'product-img-3');
 
             $getcateAndSubCat = inventory::getcateAndSubCat($request->collection_id);
             $payload = [
@@ -275,10 +170,28 @@ class inventoryController extends Controller
             }
             Log::error('Error occured while creating inventory for payload: ', [$request->except(['_token'])]);
             return redirect()->back()->with('error', 'An error occured !! Please try again !!');
+        } catch (\Illuminate\Validation\ValidationException $e) {
+            throw $e;
         } catch (\Exception $e) {
             Log::error('Exception in submit inventory function: ' . $e->getMessage());
             return redirect()->back()->with('error', 'Something went wrong!! Please try again !');
         }
+    }
+
+    private function uploadInventoryImage(Request $request, string $field, string $prefix, string $previousImage = ""): string
+    {
+        if (!$request->hasFile($field)) {
+            return $previousImage;
+        }
+
+        $imageName = $prefix . '-' . uniqid() . '.' . $request->file($field)->extension();
+        $request->file($field)->move(public_path('admin/inventoryImages'), $imageName);
+
+        if ($previousImage !== "") {
+            File::delete(public_path('admin/inventoryImages/') . $previousImage);
+        }
+
+        return $imageName;
     }
 
     public function changeInventoryStatus($status, $id)
@@ -358,4 +271,3 @@ class inventoryController extends Controller
         return view('admin.viewInventory', $data);
     }
 }
-

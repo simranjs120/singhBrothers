@@ -85,7 +85,6 @@
                                     <thead>
                                         <tr>
                                             <th>#</th>
-                                            <th>Category ID</th>
                                             <th>Main Category</th>
                                             <th>Public Page</th>
                                             <th>Created On</th>
@@ -98,7 +97,6 @@
                                         @foreach($categoryData as $key => $row)
                                             <tr>
                                                 <td>{{$key + 1}}</td>
-                                                <td>{{$row->id}}</td>
                                                 <td>{{$row->category}}</td>
                                                 <td>{{$row->slug ? url($row->slug) : '--'}}</td>
                                                 <td>{{App\Helpers\Helper::timeStampProcessed($row->created_at)}}</td>
@@ -147,7 +145,6 @@
                                             <th>#</th>
                                             <th>Parent</th>
                                             <th>Child Category</th>
-                                            <th>Category ID</th>
                                             <th>Status</th>
                                             <th>Created On</th>
                                             <th>Actions</th>
@@ -161,7 +158,6 @@
                                                 <td>{{$key + 1}}</td>
                                                 <td>{{$data['parent']->category}}</td>
                                                 <td>{{$data['sub_category']}}</td>
-                                                <td>{{$data['id']}}</td>
                                                 <td>
                                                     @if($data['status'] == 0)
                                                         <a

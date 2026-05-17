@@ -55,7 +55,7 @@
                                 <img src="{{Helper::props('admin/inventoryImages') . '/' . $inventoryData->thumbnailimg}}"
                                     id="thumbnailpreview" class="img-fluid mb-3 mt-3" height="40%" width="40%"
                                     alt="Upload Image for Preview" />
-                                <input type="file" name="thumbnailimg" id="thumbnailimg" class="form-control"
+                                <input type="file" name="thumbnailimg" id="thumbnailimg" class="form-control" accept="image/jpeg,image/png,image/webp"
                                     @if($inventoryData->thumbnailimg == "") required @endif />
                             </div>
                             <div class="col-lg-3 col-md-6 col-sm-12 col-xs-12">
@@ -63,21 +63,21 @@
                                 <img src="{{Helper::props('admin/inventoryImages') . '/' . $inventoryData->productimg1}}"
                                     id="productpreview1" class="img-fluid mb-3 mt-3" height="40%" width="40%"
                                     alt="Upload Image for Preview" />
-                                <input type="file" name="productimg1" id="productimg1" class="form-control" />
+                                <input type="file" name="productimg1" id="productimg1" class="form-control" accept="image/jpeg,image/png,image/webp" />
                             </div>
                             <div class="col-lg-3 col-md-6 col-sm-12 col-xs-12">
                                 <label class="mt-3">&nbsp;<b>Product Image 2</b></label><br />
                                 <img src="{{Helper::props('admin/inventoryImages') . '/' . $inventoryData->productimg2}}"
                                     id="productpreview2" class="img-fluid mb-3 mt-3" height="40%" width="40%"
                                     alt="Upload Image for Preview" />
-                                <input type="file" name="productimg2" id="productimg2" class="form-control" />
+                                <input type="file" name="productimg2" id="productimg2" class="form-control" accept="image/jpeg,image/png,image/webp" />
                             </div>
                             <div class="col-lg-3 col-md-6 col-sm-12 col-xs-12">
                                 <label class="mt-3">&nbsp;<b>Product Image 3</b></label><br />
                                 <img src="{{Helper::props('admin/inventoryImages') . '/' . $inventoryData->productimg3}}"
                                     id="productpreview3" class="img-fluid mb-3 mt-3" height="40%" width="40%"
                                     alt="Upload Image for Preview" />
-                                <input type="file" name="productimg3" id="productimg3" class="form-control" />
+                                <input type="file" name="productimg3" id="productimg3" class="form-control" accept="image/jpeg,image/png,image/webp" />
                             </div>
                         </div>
 
@@ -158,7 +158,10 @@
                                 </select>
                             </div>
                             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 mt-5">
-                                <button type="submit" class="btn btn-sm py-2 px-4 fw-bold rounded-3 background-secondary text-dark border border-dark text-decoration-none">Submit</button>
+                                <button type="submit" id="inventorySubmitBtn" class="btn btn-sm py-2 px-4 fw-bold rounded-3 background-secondary text-dark border border-dark text-decoration-none">
+                                    <span class="submit-text">Submit</span>
+                                    <span class="spinner-border spinner-border-sm d-none submit-loader" aria-hidden="true"></span>
+                                </button>
                             </div>
                         </div>
                     </form>
@@ -171,23 +174,18 @@
 <script>
     $('.nav-category-inventory').addClass('active');
 
-    $('#inventory_form').submit(function (e) {
-        e.preventDefault();
-        Swal.fire({
-            position: "center",
-            icon: "info",
-            title: "<b>Please do not refresh the page, Site will auto-refresh...</b>",
-            background: 'white',
-            showConfirmButton: false,
-        });
-        $('#inventory_form').submit();
+    $('#inventory_form').on('submit', function () {
+        const submitBtn = $('#inventorySubmitBtn');
+        submitBtn.prop('disabled', true);
+        submitBtn.find('.submit-loader').removeClass('d-none');
+        submitBtn.find('.submit-text').text('Uploading...');
     })
 
     function fileSizeError() {
         Swal.fire({
             position: "center",
             icon: "error",
-            title: "<b>File size should not exceed more than 10 MB, Removing file !!</b>",
+            title: "<b>File size should not exceed more than 6 MB, Removing file !!</b>",
             showConfirmButton: false,
             background: 'white',
             timer: 3500
@@ -196,7 +194,8 @@
     // Check file sizes, if less than 10 MB set preview
     const thumbnailUpload = document.getElementById("thumbnailimg");
     thumbnailUpload.onchange = function () {
-        if (this.files[0].size > 10943040) {
+        if (!this.files.length) return;
+        if (this.files[0].size > 6291456) {
             fileSizeError();
             this.value = "";
         } else {
@@ -210,7 +209,8 @@
     // Check file sizes, if less than 10 MB set preview
     const productpreview1File = document.getElementById("productimg1");
     productpreview1File.onchange = function () {
-        if (this.files[0].size > 10943040) {
+        if (!this.files.length) return;
+        if (this.files[0].size > 6291456) {
             fileSizeError();
             this.value = "";
         } else {
@@ -224,7 +224,8 @@
     // Check file sizes, if less than 10 MB set preview
     const productpreview2File = document.getElementById("productimg2");
     productpreview2File.onchange = function () {
-        if (this.files[0].size > 10943040) {
+        if (!this.files.length) return;
+        if (this.files[0].size > 6291456) {
             fileSizeError();
             this.value = "";
         } else {
@@ -238,7 +239,8 @@
     // Check file sizes, if less than 10 MB set preview
     const productpreview3File = document.getElementById("productimg3");
     productpreview3File.onchange = function () {
-        if (this.files[0].size > 10943040) {
+        if (!this.files.length) return;
+        if (this.files[0].size > 6291456) {
             fileSizeError();
             this.value = "";
         } else {

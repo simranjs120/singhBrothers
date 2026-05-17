@@ -60,7 +60,7 @@
                                     <tr>
                                         <td>{{$key + 1}}</td>
 
-                                        <td><a href="{{url('admin/view-inventory/' . $row->id)}}">{{$row->itemName}}</a>
+                                        <td><a href="{{url('admin/view-inventory/' . $row->id)}}" class="text-decoration-none color-secondary fw-bold">{{$row->itemName}}</a>
                                         </td>
 
                                         <td>
@@ -122,9 +122,6 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLabel">Thumbnail Preview</h5>
-                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
             </div>
             <div class="modal-body">
                 <img src="#" class="img-fluid" id="popElement" alt=" Image couldn't be loaded" />

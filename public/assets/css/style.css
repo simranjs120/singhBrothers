@@ -776,9 +776,8 @@ section {
 }
 
 #footer .footer-brand img {
-  background: #fff;
   border-radius: 6px;
-  height: 76px;
+  height: 100px;
   padding: 8px 12px;
   width: auto;
 }

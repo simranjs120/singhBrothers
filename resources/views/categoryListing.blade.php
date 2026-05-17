@@ -27,31 +27,16 @@
         </div>
     </section>
 
-    @if(count($collections) > 0)
-        <section class="py-4 border-bottom">
-            <div class="container">
-                <div class="d-flex gap-2 flex-wrap">
-                    @foreach($collections as $collection)
-                        <span class="badge rounded-pill border border-dark text-dark px-3 py-2">{{$collection->collection}}</span>
-                    @endforeach
-                </div>
-            </div>
-        </section>
-    @endif
 
     <section class="py-5">
         <div class="container">
-            <div class="mb-4">
-                <h2 class="fw-bold"><span class="background-secondary text-dark px-1">{{$category->category}}</span> products</h2>
-                <p class="text-muted mb-0">Items are automatically shown here from the selected category.</p>
-            </div>
 
             @if(count($inventory) > 0)
                 <div class="row g-4">
                     @foreach($inventory as $row)
                         <div class="col-lg-4 col-md-6">
                             <a href="{{url('listing/' . base64_encode($row->id) . '/' . base64_encode($row->category_id) . '/' . base64_encode($row->sub_category_id))}}" class="text-decoration-none">
-                                <div class="card h-100 border-0 shadow-sm">
+                                <div class="card h-100 shadow-sm border border-1 border-dark">
                                     <img src="{{Helper::props('admin/inventoryImages') . '/' . $row->thumbnailimg}}" class="img-fluid p-2 category-product-img" alt="{{$row->itemName}}" />
                                     <div class="card-body">
                                         @if($row->offerBadge !== "")

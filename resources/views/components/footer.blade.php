@@ -22,7 +22,7 @@
         <div class="row g-4 g-lg-5">
           <div class="col-lg-4 col-md-6">
             <a class="footer-brand" href="{{url('/')}}">
-              <img src="{{Helper::props('assets/img/logo.png')}}" alt="Singh Brothers Frames">
+              <img src="{{Helper::props('assets/img/logo-dark.png')}}" alt="Singh Brothers Frames">
             </a>
             <p class="footer-about">
               Singh Brothers Frames crafts custom photo frames, glass work, mouldings, art pieces, and collage displays
